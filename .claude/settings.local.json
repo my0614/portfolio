@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(/Users/kimminyoung/Desktop/desktop-portfolio-studio-main/.gitignore:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(git rm:*)"
+    ]
+  }
+}
