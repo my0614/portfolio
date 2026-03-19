@@ -31,7 +31,7 @@ const AboutWindow = () => {
             ["Experience", "5년차"],
             ["Specialization", "ML/MLOps, Computer Vision"],
             ["Status", "Open for opportunities"],
-            ["OS Version", "Portfolio.v2025.1"],
+            ["OS Version", "Portfolio.v2026.1"],
           ].map(([key, value]) => (
             <div key={key} className="flex justify-between py-1.5 border-b border-foreground/[0.05]">
               <span className="text-muted-foreground">{key}</span>
