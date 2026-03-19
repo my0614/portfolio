@@ -4,9 +4,6 @@
 
 macOS 데스크탑 UI를 모티브로 제작한 인터랙티브 포트폴리오 웹사이트입니다.
 
-📧 premierckim@gmail.com
-🐙 [github.com/my0614](https://github.com/my0614)
-
 ---
 
 ## Tech Stack
