@@ -88,12 +88,12 @@ export default function Home() {
           </div>
 
           <div className="absolute top-1/2 left-12 -translate-y-1/2 max-w-md">
-            <p className="font-mono-code text-xs text-muted-foreground mb-2">System.version: 2024.1</p>
+            <p className="font-mono-code text-xs text-muted-foreground mb-2">System.version: 2025.1</p>
             <h1 className="text-3xl font-medium text-foreground/90 tracking-tight mb-3 text-balance">
-              Creative Developer
+              ML / MLOps Engineer
             </h1>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Building digital experiences with precision and care. Double-click to explore.
+              위성·드론·RTSP 영상 데이터 기반 End-to-End ML 파이프라인 구축 5년차. Double-click to explore.
             </p>
           </div>
 

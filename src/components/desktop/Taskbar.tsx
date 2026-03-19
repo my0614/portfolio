@@ -68,7 +68,7 @@ const Taskbar = ({ onOpenWindow }: TaskbarProps) => {
       {
         label: "Open GitHub",
         shortcut: "⌘G",
-        action: () => window.open("https://github.com", "_blank"),
+        action: () => window.open("https://github.com/my0614", "_blank"),
       },
       {
         label: "Full Screen",
