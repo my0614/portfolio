@@ -1,16 +1,16 @@
 'use client';
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Phone } from "lucide-react";
 
 const ContactWindow = () => {
   return (
     <div className="space-y-6">
-      <p className="text-sm text-muted-foreground">Drop me a line. I'd love to hear from you.</p>
+      <p className="text-sm text-muted-foreground">언제든지 연락주세요!</p>
 
       <div className="space-y-3">
         {[
-          { icon: Mail, label: "hello@example.com", href: "mailto:hello@example.com" },
-          { icon: Github, label: "github.com/username", href: "https://github.com" },
-          { icon: Linkedin, label: "linkedin.com/in/username", href: "https://linkedin.com" },
+          { icon: Phone, label: "010-3957-5034", href: "tel:010-3957-5034" },
+          { icon: Mail, label: "premierckim@gmail.com", href: "mailto:premierckim@gmail.com" },
+          { icon: Github, label: "github.com/my0614", href: "https://github.com/my0614" },
         ].map(({ icon: Icon, label, href }) => (
           <a
             key={label}
