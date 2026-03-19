@@ -1,11 +1,18 @@
 'use client';
+import Image from "next/image";
 
 const AboutWindow = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-          <span className="text-2xl">👩‍💻</span>
+        <div className="w-16 h-16 rounded-2xl overflow-hidden bg-primary/10 shrink-0">
+          <Image
+            src="/profile.png"
+            alt="김민영"
+            width={64}
+            height={64}
+            className="w-full h-full object-cover"
+          />
         </div>
         <div>
           <h2 className="text-lg font-medium text-foreground">김민영 | KIM MIN YOUNG</h2>
