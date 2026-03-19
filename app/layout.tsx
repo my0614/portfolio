@@ -10,8 +10,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "김민영 | ML / MLOps Engineer",
-  description: "위성·드론·RTSP 영상 데이터 기반 End-to-End ML 파이프라인 구축 5년차 개발자 김민영의 포트폴리오",
+  title: "김민영 ML / MLOps Engineer",
+  description: "데이터 수집부터 모델 개발, 배포 및 운영까지 이어지는 End-to-End ML 파이프라인 구축 5년차 개발자 김민영의 포트폴리오",
 };
 
 export default function RootLayout({
