@@ -24,7 +24,7 @@ interface WindowState {
 
 const windowConfigs: Record<string, Omit<WindowState, "id">> = {
   projects: { title: "Projects.dmg", component: <ProjectsWindow />, width: 640, height: 450, x: 150, y: 80 },
-  about: { title: "System Preferences", component: <AboutWindow />, width: 500, height: 480, x: 250, y: 100 },
+  about: { title: "System Preferences", component: <AboutWindow />, width: 500, height: 560, x: 250, y: 100 },
   contact: { title: "Mail.app", component: <ContactWindow />, width: 450, height: 520, x: 350, y: 60 },
   terminal: { title: "Terminal", component: <TerminalWindow />, width: 520, height: 360, x: 200, y: 120 },
 };
@@ -77,7 +77,7 @@ export default function Home() {
 
       {booted && (
         <>
-          <Taskbar />
+          <Taskbar onOpenWindow={openWindow} />
 
           <div className="absolute top-12 right-6 flex flex-col gap-1">
             <DesktopIcon icon={FolderOpen} label="Projects" onDoubleClick={() => openWindow("projects")} />
