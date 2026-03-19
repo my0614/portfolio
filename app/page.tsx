@@ -8,25 +8,19 @@ import Dock from "@/components/desktop/Dock";
 import DesktopIcon from "@/components/desktop/DesktopIcon";
 import Window from "@/components/desktop/Window";
 import ProjectsWindow from "@/components/desktop/windows/ProjectsWindow";
+import ProjectDetailWindow from "@/components/desktop/windows/ProjectDetailWindow";
 import AboutWindow from "@/components/desktop/windows/AboutWindow";
 import ContactWindow from "@/components/desktop/windows/ContactWindow";
 import TerminalWindow from "@/components/desktop/windows/TerminalWindow";
+import { projects } from "@/data/projects";
 
-interface WindowState {
-  id: string;
-  title: string;
-  component: React.ReactNode;
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-}
+type WinConfig = { title: string; width: number; height: number; x: number; y: number };
 
-const windowConfigs: Record<string, Omit<WindowState, "id">> = {
-  projects: { title: "Projects.dmg", component: <ProjectsWindow />, width: 640, height: 450, x: 150, y: 80 },
-  about: { title: "System Preferences", component: <AboutWindow />, width: 500, height: 560, x: 250, y: 100 },
-  contact: { title: "Mail.app", component: <ContactWindow />, width: 450, height: 520, x: 350, y: 60 },
-  terminal: { title: "Terminal", component: <TerminalWindow />, width: 520, height: 360, x: 200, y: 120 },
+const staticConfigs: Record<string, WinConfig> = {
+  projects: { title: "Projects.dmg", width: 660, height: 520, x: 150, y: 70 },
+  about:    { title: "System Preferences", width: 500, height: 560, x: 250, y: 100 },
+  contact:  { title: "Mail.app", width: 450, height: 520, x: 350, y: 60 },
+  terminal: { title: "Terminal", width: 520, height: 360, x: 200, y: 120 },
 };
 
 export default function Home() {
@@ -36,43 +30,64 @@ export default function Home() {
   const [minimized, setMinimized] = useState<Set<string>>(new Set());
 
   const openWindow = useCallback((id: string) => {
-    setMinimized((prev) => {
-      const next = new Set(prev);
-      next.delete(id);
-      return next;
-    });
-    setOpenWindows((prev) => (prev.includes(id) ? prev : [...prev, id]));
-    setZOrder((prev) => [...prev.filter((w) => w !== id), id]);
+    setMinimized(prev => { const n = new Set(prev); n.delete(id); return n; });
+    setOpenWindows(prev => prev.includes(id) ? prev : [...prev, id]);
+    setZOrder(prev => [...prev.filter(w => w !== id), id]);
   }, []);
 
   const closeWindow = useCallback((id: string) => {
-    setOpenWindows((prev) => prev.filter((w) => w !== id));
-    setZOrder((prev) => prev.filter((w) => w !== id));
+    setOpenWindows(prev => prev.filter(w => w !== id));
+    setZOrder(prev => prev.filter(w => w !== id));
   }, []);
 
   const minimizeWindow = useCallback((id: string) => {
-    setMinimized((prev) => new Set(prev).add(id));
+    setMinimized(prev => new Set(prev).add(id));
   }, []);
 
   const focusWindow = useCallback((id: string) => {
-    setZOrder((prev) => [...prev.filter((w) => w !== id), id]);
+    setZOrder(prev => [...prev.filter(w => w !== id), id]);
   }, []);
+
+  const openProjectDetail = useCallback((idx: number) => {
+    openWindow(`project-${idx}`);
+  }, [openWindow]);
+
+  const getConfig = (id: string): WinConfig | null => {
+    if (staticConfigs[id]) return staticConfigs[id];
+    if (id.startsWith("project-")) {
+      const idx = parseInt(id.split("-")[1]);
+      const p = projects[idx];
+      if (!p) return null;
+      return { title: p.title, width: 680, height: 640, x: 180 + idx * 28, y: 80 + idx * 20 };
+    }
+    return null;
+  };
+
+  const renderContent = (id: string) => {
+    if (id === "projects") return <ProjectsWindow onOpenDetail={openProjectDetail} />;
+    if (id === "about")    return <AboutWindow />;
+    if (id === "contact")  return <ContactWindow />;
+    if (id === "terminal") return <TerminalWindow />;
+    if (id.startsWith("project-")) {
+      const idx = parseInt(id.split("-")[1]);
+      return projects[idx] ? <ProjectDetailWindow project={projects[idx]} /> : null;
+    }
+    return null;
+  };
 
   const dockItems = [
     { id: "projects", icon: FolderOpen, label: "Projects" },
-    { id: "about", icon: User, label: "About" },
-    { id: "contact", icon: Mail, label: "Contact" },
-    { id: "terminal", icon: Terminal, label: "Terminal" },
+    { id: "about",    icon: User,       label: "About" },
+    { id: "contact",  icon: Mail,       label: "Contact" },
+    { id: "terminal", icon: Terminal,   label: "Terminal" },
   ];
-
-  const handleBootComplete = useCallback(() => setBooted(true), []);
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-background relative select-none">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-primary/[0.02]" />
 
       <AnimatePresence>
-        {!booted && <BootScreen onComplete={handleBootComplete} />}
+        {!booted && <BootScreen onComplete={() => setBooted(true)} />}
       </AnimatePresence>
 
       {booted && (
@@ -80,11 +95,11 @@ export default function Home() {
           <Taskbar onOpenWindow={openWindow} />
 
           <div className="absolute top-12 right-6 flex flex-col gap-1">
-            <DesktopIcon icon={FolderOpen} label="Projects" onDoubleClick={() => openWindow("projects")} />
-            <DesktopIcon icon={User} label="About Me" onDoubleClick={() => openWindow("about")} />
-            <DesktopIcon icon={Mail} label="Contact" onDoubleClick={() => openWindow("contact")} />
-            <DesktopIcon icon={Terminal} label="Terminal" onDoubleClick={() => openWindow("terminal")} />
-            <DesktopIcon icon={FileText} label="Resume.pdf" onDoubleClick={() => openWindow("about")} />
+            <DesktopIcon icon={FolderOpen} label="Projects"   onDoubleClick={() => openWindow("projects")} />
+            <DesktopIcon icon={User}       label="About Me"   onDoubleClick={() => openWindow("about")} />
+            <DesktopIcon icon={Mail}       label="Contact"    onDoubleClick={() => openWindow("contact")} />
+            <DesktopIcon icon={Terminal}   label="Terminal"   onDoubleClick={() => openWindow("terminal")} />
+            <DesktopIcon icon={FileText}   label="Resume.pdf" onDoubleClick={() => openWindow("about")} />
           </div>
 
           <div className="absolute top-1/2 left-12 -translate-y-1/2 max-w-md">
@@ -99,8 +114,10 @@ export default function Home() {
 
           <AnimatePresence>
             {openWindows.map((id) => {
-              const config = windowConfigs[id];
+              const config = getConfig(id);
               if (!config || minimized.has(id)) return null;
+              const content = renderContent(id);
+              if (!content) return null;
               return (
                 <Window
                   key={id}
@@ -115,14 +132,14 @@ export default function Home() {
                   onClose={() => closeWindow(id)}
                   onMinimize={() => minimizeWindow(id)}
                 >
-                  {config.component}
+                  {content}
                 </Window>
               );
             })}
           </AnimatePresence>
 
           <Dock
-            items={dockItems.map((item) => ({
+            items={dockItems.map(item => ({
               ...item,
               isActive: openWindows.includes(item.id) && !minimized.has(item.id),
             }))}
