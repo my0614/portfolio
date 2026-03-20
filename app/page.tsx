@@ -99,7 +99,7 @@ export default function Home() {
             <DesktopIcon icon={User}       label="About Me"   onDoubleClick={() => openWindow("about")} />
             <DesktopIcon icon={Mail}       label="Contact"    onDoubleClick={() => openWindow("contact")} />
             <DesktopIcon icon={Terminal}   label="Terminal"   onDoubleClick={() => openWindow("terminal")} />
-            <DesktopIcon icon={FileText}   label="Resume.pdf" onDoubleClick={() => openWindow("about")} />
+            <DesktopIcon icon={FileText}   label="Resume.pdf" onDoubleClick={() => window.open("https://www.notion.so/KIM-MIN-YOUNG-3283b3f7b2a680939014fcc816a94e04", "_blank")} />
           </div>
 
           <div className="absolute top-1/2 left-12 -translate-y-1/2 max-w-md">

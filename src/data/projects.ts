@@ -20,7 +20,7 @@ export const projects: Project[] = [
     company: "한컴인스페이스",
     summary: "MLOps 반복 작업 자동화 플랫폼. 지원 모델 3개 → 20개 이상 확장, 학습 대기 시간 대폭 감소.",
     tags: ["Python", "MMDetection", "Redis", "Docker", "K8s", "PostgreSQL", "PyTorch"],
-    year: "2024",
+    year: "2022 ~ 2024",
     sections: {
       현상: [
         "객체 탐지 모델마다 입력 포맷, 학습 방식, 출력 구조가 달라 모델별 로직을 개별 구현해야 하는 개발 비효율 발생",
@@ -52,7 +52,7 @@ export const projects: Project[] = [
     company: "한컴인스페이스",
     summary: "정찰 드론 기반 위협 객체 탐지 및 3D 가시화 시스템. mAP 61% → 75%, 네트워크 세팅 2시간 → 1분 이하.",
     tags: ["ROS", "Docker", "Faster R-CNN", "RealSense D435i", "PyTorch", "TCP", "UDP"],
-    year: "2024",
+    year: "2023 ~ 2025",
     sections: {
       현상: [
         "RGB/Depth ROS Topic 프레임 불일치로 실시간 거리 계산 정확도 저하",
@@ -69,7 +69,8 @@ export const projects: Project[] = [
         "배경 이미지 다양화 및 오탐/미탐 케이스 중심 데이터 보정 및 재학습",
         "Docker 환경 기반 ROS·AI 추론 시스템 배포 및 운영",
         "RealSense Depth 정보를 활용한 객체 좌표 계산 기능 구현, 거리 데이터를 ROS Topic으로 전송하여 3D 가시화 연동",
-        "UDP 소켓 통신 기반 객체 정보·탐지 이미지 전송 시스템 개발, 연결 끊김 시 자동 복구 로직 구현",
+        "UDP 소켓 통신 기반 객체 정보·탐지 이미지 전송 시스템 개발",
+        "연결 끊김 시 자동 복구 로직 구현",
         "네트워크 환경 자동 감지 및 IP 자동 세팅 로직 구현",
       ],
       성과: [
@@ -85,7 +86,7 @@ export const projects: Project[] = [
     company: "한컴인스페이스",
     summary: "EO/IR 센트리 카메라 기반 UAV 실시간 탐지·추적 및 모니터링 시스템. 주야간 안정적 탐지 성능 확보.",
     tags: ["Python", "RTSP", "YOLOv5", "MMDetection", "PyTorch"],
-    year: "2024",
+    year: "2024.06 ~ 2024.12",
     sections: {
       현상: [
         "EO/IR 카메라 특성상 EO·IR 이미지 도메인이 달라, 단일 모델로는 양쪽 환경 모두에서 안정적인 탐지 성능 확보 어려움",
@@ -111,7 +112,7 @@ export const projects: Project[] = [
     company: "(주)무무즈",
     summary: "핫딜 상품 신청~오픈 End-to-End 자동화. 등록 작업 4시간 → 2분 이내로 단축.",
     tags: ["Python", "Shopby API", "BigQuery", "Cron", "HTML Template"],
-    year: "2023",
+    year: "2025.12.15 ~ 2026.03.13",
     sections: {
       현상: [
         "파트너사 핫딜 상품 신청부터 오픈까지 수작업 프로세스로 운영 리소스 과다 소요",
@@ -141,7 +142,7 @@ export const projects: Project[] = [
     company: "(주)무무즈",
     summary: "배송 문의 자동 응답 시스템. CS 응답 지연 시간 80% 단축, 전체 문의의 약 1/3 자동 처리.",
     tags: ["Python", "Shopby API", "Sellmate API", "Batch"],
-    year: "2023",
+    year: "2025.12.15 ~ 2026.03.13",
     sections: {
       현상: [
         "취소→교환→반품→배송 순 처리 구조로 배송 문의 응답 지연 발생",
