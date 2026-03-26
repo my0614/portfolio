@@ -134,6 +134,7 @@ export default function Home() {
                   onFocus={() => focusWindow(id)}
                   onClose={() => closeWindow(id)}
                   onMinimize={() => minimizeWindow(id)}
+                  noPadding={id === "resume"}
                 >
                   {content}
                 </Window>

@@ -14,9 +14,10 @@ interface WindowProps {
   onFocus: () => void;
   onClose: () => void;
   onMinimize: () => void;
+  noPadding?: boolean;
 }
 
-const Window = ({ title, children, width = 600, height = 420, x = 100, y = 80, zIndex, onFocus, onClose, onMinimize }: WindowProps) => {
+const Window = ({ title, children, width = 600, height = 420, x = 100, y = 80, zIndex, onFocus, onClose, onMinimize, noPadding = false }: WindowProps) => {
   const [isMaximized, setIsMaximized] = useState(false);
 
   const screenW = typeof window !== "undefined" ? window.innerWidth : 1280;
@@ -108,7 +109,7 @@ const Window = ({ title, children, width = 600, height = 420, x = 100, y = 80, z
         </span>
       </div>
       {/* Content: no drag, clicks work freely */}
-      <div className="flex-1 overflow-y-auto p-6" onPointerDown={onFocus}>
+      <div className={`flex-1 overflow-hidden ${noPadding ? "" : "overflow-y-auto p-6"}`} onPointerDown={onFocus}>
         {children}
       </div>
     </motion.div>
