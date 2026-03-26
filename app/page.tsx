@@ -12,6 +12,7 @@ import ProjectDetailWindow from "@/components/desktop/windows/ProjectDetailWindo
 import AboutWindow from "@/components/desktop/windows/AboutWindow";
 import ContactWindow from "@/components/desktop/windows/ContactWindow";
 import TerminalWindow from "@/components/desktop/windows/TerminalWindow";
+import ResumeWindow from "@/components/desktop/windows/ResumeWindow";
 import { projects } from "@/data/projects";
 
 type WinConfig = { title: string; width: number; height: number; x: number; y: number };
@@ -21,6 +22,7 @@ const staticConfigs: Record<string, WinConfig> = {
   about:    { title: "System Preferences", width: 500, height: 560, x: 250, y: 100 },
   contact:  { title: "Mail.app", width: 450, height: 520, x: 350, y: 60 },
   terminal: { title: "Terminal", width: 520, height: 360, x: 200, y: 120 },
+  resume:   { title: "Resume.pdf", width: 720, height: 600, x: 160, y: 60 },
 };
 
 export default function Home() {
@@ -68,6 +70,7 @@ export default function Home() {
     if (id === "about")    return <AboutWindow />;
     if (id === "contact")  return <ContactWindow />;
     if (id === "terminal") return <TerminalWindow />;
+    if (id === "resume")   return <ResumeWindow />;
     if (id.startsWith("project-")) {
       const idx = parseInt(id.split("-")[1]);
       return projects[idx] ? <ProjectDetailWindow project={projects[idx]} /> : null;
@@ -99,7 +102,7 @@ export default function Home() {
             <DesktopIcon icon={User}       label="About Me"   onDoubleClick={() => openWindow("about")} />
             <DesktopIcon icon={Mail}       label="Contact"    onDoubleClick={() => openWindow("contact")} />
             <DesktopIcon icon={Terminal}   label="Terminal"   onDoubleClick={() => openWindow("terminal")} />
-            <DesktopIcon icon={FileText}   label="Resume.pdf" onDoubleClick={() => window.open("/resume.pdf", "_blank")} />
+            <DesktopIcon icon={FileText}   label="Resume.pdf" onDoubleClick={() => openWindow("resume")} />
           </div>
 
           <div className="absolute top-1/2 left-12 -translate-y-1/2 max-w-md">
