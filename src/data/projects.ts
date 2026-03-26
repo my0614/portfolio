@@ -5,6 +5,7 @@ export type Project = {
   summary: string;
   tags: string[];
   year: string;
+  images?: { src: string; caption?: string }[];
   sections: {
     현상: string[];
     원인: string[];
@@ -21,6 +22,10 @@ export const projects: Project[] = [
     summary: "MLOps 반복 작업 자동화 플랫폼. 지원 모델 3개 → 20개 이상 확장, 학습 대기 시간 대폭 감소.",
     tags: ["Python", "MMDetection", "Redis", "Docker", "K8s", "PostgreSQL", "PyTorch"],
     year: "2022 ~ 2024",
+    images: [
+      { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
+      { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
+    ],
     sections: {
       현상: [
         "객체 탐지 모델마다 입력 포맷, 학습 방식, 출력 구조가 달라 모델별 로직을 개별 구현해야 하는 개발 비효율 발생",
@@ -53,6 +58,9 @@ export const projects: Project[] = [
     summary: "정찰 드론 기반 위협 객체 탐지 및 3D 가시화 시스템. mAP 61% → 75%, 네트워크 세팅 2시간 → 1분 이하.",
     tags: ["ROS", "Docker", "Faster R-CNN", "RealSense D435i", "PyTorch", "TCP", "UDP"],
     year: "2023 ~ 2025",
+    images: [
+      { src: "/projects/drone-detection.png", caption: "실시간 위협 객체 탐지 (fire / bomb / oil)" },
+    ],
     sections: {
       현상: [
         "RGB/Depth ROS Topic 프레임 불일치로 실시간 거리 계산 정확도 저하",
@@ -113,6 +121,9 @@ export const projects: Project[] = [
     summary: "핫딜 상품 신청~오픈 End-to-End 자동화. 등록 작업 4시간 → 2분 이내로 단축.",
     tags: ["Python", "Shopby API", "BigQuery", "Cron", "HTML Template"],
     year: "2025.12.15 ~ 2026.03.13",
+    images: [
+      { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
+    ],
     sections: {
       현상: [
         "파트너사 핫딜 상품 신청부터 오픈까지 수작업 프로세스로 운영 리소스 과다 소요",

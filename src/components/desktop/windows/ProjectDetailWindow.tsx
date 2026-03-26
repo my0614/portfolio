@@ -1,4 +1,5 @@
 'use client';
+import Image from "next/image";
 import { Project } from "@/data/projects";
 
 const sectionConfig = [
@@ -28,6 +29,28 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
       </div>
 
       <div className="border-t border-foreground/[0.06]" />
+
+      {/* Images */}
+      {project.images && project.images.length > 0 && (
+        <div className="flex flex-col gap-3">
+          {project.images.map((img, i) => (
+            <div key={i} className="flex flex-col gap-1.5">
+              <div className="relative w-full rounded-lg overflow-hidden border border-foreground/[0.06] bg-foreground/[0.02]">
+                <Image
+                  src={img.src}
+                  alt={img.caption ?? `${project.title} 이미지 ${i + 1}`}
+                  width={640}
+                  height={360}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              {img.caption && (
+                <p className="text-[10px] text-muted-foreground text-center">{img.caption}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Sections */}
       {sectionConfig.map(({ key, label, accent }) => {
