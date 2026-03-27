@@ -8,7 +8,7 @@ const bootLines = [
   "Mounting filesystem... OK",
   "Network interface: connected",
   "GPU: Hardware accelerated",
-  "Portfolio v2024.1 loaded",
+  "Portfolio v2026.1 loaded",
   "Status: Open for opportunities",
   "",
   "Boot complete. Welcome.",
