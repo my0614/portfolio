@@ -20,7 +20,7 @@ export const projects: Project[] = [
     id: "dflow",
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
-    summary: "MLOps 반복 작업 자동화 플랫폼. 지원 모델 3개 → 20개 이상 확장, 학습 대기 시간 대폭 감소.",
+    summary: "MLOps 반복 작업 자동화 플랫폼.",
     tags: ["Python", "MMDetection", "Redis", "Docker", "K8s", "PostgreSQL", "PyTorch"],
     year: "2022 ~ 2024",
     images: [
@@ -56,11 +56,11 @@ export const projects: Project[] = [
     id: "drone",
     title: "민군겸용기술개발 R&D — 드론 탑재 실시간 객체 탐지",
     company: "한컴인스페이스",
-    summary: "정찰 드론 기반 위협 객체 탐지 및 3D 가시화 시스템. mAP 61% → 75%, 네트워크 세팅 2시간 → 1분 이하.",
+    summary: "정찰 드론 기반 위협 객체 탐지 및 3D 가시화 시스템.",
     tags: ["ROS", "Docker", "Faster R-CNN", "RealSense D435i", "PyTorch", "TCP", "UDP"],
     year: "2023 ~ 2025",
     images: [
-      { src: "/projects/drone-detection.png", caption: "실시간 위협 객체 탐지 (fire / bomb / oil)" },
+      { src: "/projects/drone-detection.png", caption: "실시간 위협 객체 6종 클래스" },
     ],
     sections: {
       현상: [
@@ -93,7 +93,7 @@ export const projects: Project[] = [
     id: "uav",
     title: "UAV 대공감시",
     company: "한컴인스페이스",
-    summary: "EO/IR 센트리 카메라 기반 UAV 실시간 탐지·추적 및 모니터링 시스템. 주야간 안정적 탐지 성능 확보.",
+    summary: "EO/IR 센트리 카메라 기반 UAV 실시간 탐지·추적 및 모니터링 시스템.",
     tags: ["Python", "RTSP", "YOLOv5", "MMDetection", "PyTorch"],
     year: "2024.06 ~ 2024.12",
     sections: {
@@ -119,13 +119,13 @@ export const projects: Project[] = [
     id: "hotdeal",
     title: "핫딜 자동화 시스템",
     company: "(주)무무즈",
-    summary: "핫딜 상품 신청~오픈 End-to-End 자동화. 등록 작업 4시간 → 2분 이내로 단축.",
-    tags: ["Python", "Shopby API", "BigQuery", "Cron", "HTML Template"],
-    year: "2025.12.15 ~ 2026.03.13",
+    summary: "핫딜 상품 신청~오픈 End-to-End 자동화.",
     images: [
-      { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
+    { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
     ],
     link: "https://moomooz.co.kr/product/hotdeal",
+    tags: ["Python", "Shopby API", "BigQuery", "Cron", "HTML Template"],
+    year: "2025.12.15 ~ 2026.03.13",
     sections: {
       현상: [
         "파트너사 핫딜 상품 신청부터 오픈까지 수작업 프로세스로 운영 리소스 과다 소요",
@@ -153,7 +153,7 @@ export const projects: Project[] = [
     id: "cs",
     title: "CS 문의 자동화",
     company: "(주)무무즈",
-    summary: "배송 문의 자동 응답 시스템. CS 응답 지연 시간 80% 단축, 전체 문의의 약 1/3 자동 처리.",
+    summary: "배송 문의 자동 응답 시스템.",
     tags: ["Python", "Shopby API", "Sellmate API", "Batch"],
     year: "2025.12.15 ~ 2026.03.13",
     sections: {
