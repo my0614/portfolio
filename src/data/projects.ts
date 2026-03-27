@@ -6,6 +6,7 @@ export type Project = {
   tags: string[];
   year: string;
   images?: { src: string; caption?: string }[];
+  link?: string;
   sections: {
     현상: string[];
     원인: string[];
@@ -124,6 +125,7 @@ export const projects: Project[] = [
     images: [
       { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
     ],
+    link: "https://moomooz.co.kr/product/hotdeal",
     sections: {
       현상: [
         "파트너사 핫딜 상품 신청부터 오픈까지 수작업 프로세스로 운영 리소스 과다 소요",

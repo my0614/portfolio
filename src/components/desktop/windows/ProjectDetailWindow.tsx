@@ -20,10 +20,20 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
         </div>
         <h2 className="text-[15px] font-semibold text-foreground/90 mb-2">{project.title}</h2>
         <p className="text-[12px] text-muted-foreground leading-relaxed">{project.summary}</p>
-        <div className="flex gap-1.5 flex-wrap mt-3">
+        <div className="flex items-center gap-2 flex-wrap mt-3">
           {project.tags.map((t) => (
             <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-primary/10 text-primary/80">{t}</span>
           ))}
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] px-2 py-0.5 rounded bg-foreground/[0.05] text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-colors"
+            >
+              🔗 {project.link.replace("https://", "")}
+            </a>
+          )}
         </div>
       </div>
 
