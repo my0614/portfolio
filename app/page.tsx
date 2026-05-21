@@ -143,7 +143,7 @@ export default function Home() {
             })}
           </AnimatePresence>
 
-          <div className="absolute bottom-20 left-6 z-50" style={{ overflow: "visible" }}>
+          <div className={`absolute bottom-20 left-6 z-50 transition-opacity duration-200 ${openWindows.some(id => !minimized.has(id)) ? "opacity-0 pointer-events-none" : "opacity-100"}`} style={{ overflow: "visible" }}>
             <div className="px-4 py-3 rounded-2xl bg-background/40 backdrop-blur-sm border border-foreground/[0.06]" style={{ overflow: "visible" }}>
               <p className="text-[10px] text-muted-foreground font-mono mb-2 tracking-wider uppercase">GitHub Contributions</p>
               <GitHubCalendar
