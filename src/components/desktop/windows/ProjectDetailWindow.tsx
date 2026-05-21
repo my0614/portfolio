@@ -39,6 +39,21 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
 
       <div className="border-t border-foreground/[0.06]" />
 
+      {/* Video */}
+      {project.video && (
+        <div className="flex flex-col gap-1.5">
+          <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-medium">Demo</p>
+          <div className="w-full rounded-lg overflow-hidden border border-foreground/[0.06] bg-foreground/[0.02]">
+            <video
+              src={project.video}
+              controls
+              playsInline
+              className="w-full h-auto block"
+            />
+          </div>
+        </div>
+      )}
+
       {/* Images */}
       {project.images && project.images.length > 0 && (
         <div className="flex flex-col gap-3">

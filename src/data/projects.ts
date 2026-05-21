@@ -6,6 +6,7 @@ export type Project = {
   tags: string[];
   year: string;
   images?: { src: string; caption?: string }[];
+  video?: string;
   link?: string;
   sections: {
     현상: string[];
@@ -153,35 +154,39 @@ export const projects: Project[] = [
     id: "yiyakmoya",
     title: "이약머약 (RX4U) — AI 알약 식별 서비스",
     company: "MS AI School 10기 | Team 4U",
-    summary: "스마트폰으로 알약을 찍기만 하면 Azure Custom Vision AI가 약물 정보·DUR·도핑 금지 여부까지 즉시 분석해주는 서비스.",
-    tags: ["Python", "FastAPI", "PostgreSQL", "Azure Custom Vision", "Azure VM", "Nginx", "JavaScript"],
+    summary: "Azure Custom Vision과 Azure SDK로 알약 이미지를 분류하고, Azure VM 위에 FastAPI 서버를 올려 사진 한 장으로 약물 정보·DUR·도핑 금지 여부를 즉시 제공하는 클라우드 기반 서비스.",
+    tags: ["Python", "FastAPI", "PostgreSQL", "Azure Custom Vision", "Azure SDK", "Azure VM", "Nginx"],
     year: "2026.05.08 ~ 2026.05.20",
-    link: "https://rx-for-you.koreacentral.cloudapp.azure.com/",
+    link: "https://eyakmeoyak.koreacentral.cloudapp.azure.com/",
+    video: "/projects/eyak.MOV",
+    images: [
+      { src: "/projects/performance_it3.png", caption: "Azure Custom Vision 모델 성능 지표 (Recall 97%)" },
+    ],
     sections: {
       현상: [
         "외형이 유사한 알약 오복용 사고 빈번 — 약화사고 손해배상 2,000만 원 사례, 운동선수 금지 성분 미인지로 올림픽 출전 박탈 사례 실재",
-        "고령자·정보 취약 계층은 약 봉투 분실 후 어떤 약인지 몰라 복용을 포기하거나 반복 문의",
-        "기존 서비스(약학정보원, 식약처 e약은요)는 약 이름·전문 용어를 알아야 검색 가능해 진입 장벽이 높고, DUR·도핑·병용금기 등 핵심 정보 부재",
+        "기존 서비스(약학정보원, 식약처 e약은요)는 약 이름·전문 용어를 알아야 검색 가능해 고령자·정보 취약 계층 진입 장벽 높음",
+        "AIhub 대용량 데이터(압축 3TB) Azure Blob Storage 업로드 시도 중 클라우드 비용 폭증으로 예산 초과, 이후 실험 제약 발생",
+        "공공 데이터 배경 다양성 부족(4종) → 학습 지표는 높지만 실사용 환경(탁자·손바닥 등)에서 Custom Vision 모델 인식 성능 심각하게 저하",
       ],
       원인: [
-        "AIhub 라벨링 데이터(압축 3TB) Azure Blob Storage 업로드 중 예산 초과, 후반 실험 제약 발생",
-        "자동 크롤링 데이터에 단종·구형 디자인 알약 이미지 혼입으로 데이터셋 오염",
-        "공공 데이터 배경 다양성 부족(4종) → 학습 지표는 높지만 실사용 환경(탁자·손바닥 등)에서 인식 성능 심각하게 저하(과적합)",
-        "복합 증강(회전·원근·노이즈·가림) 적용 시 알약 고유 각인·형태 훼손, 회전 범위 초과로 Bounding Box 이탈",
-        "배경 증강 재학습 후에도 이지엔6프로·지르텍정 등 일부 클래스 False Negative 지속",
+        "Azure Blob Storage 대용량 업로드에 따른 스토리지·트랜잭션 비용 미사전 검토",
+        "자동 크롤링 데이터에 단종·구형 디자인 이미지 혼입 → Custom Vision 학습 데이터 오염",
+        "복합 증강(회전·원근·노이즈·가림) 적용 시 알약 각인·형태 훼손, Bounding Box 이탈로 Custom Vision 학습 품질 저하",
+        "실사용 배경 데이터 없이 공공 데이터만으로 학습 → 도메인 갭으로 인한 과적합",
       ],
       해결: [
-        "스토리지 즉시 삭제 후 처방 통계·판매량·질환 카테고리 리서치로 실용 가치 높은 핵심 90종만 선별 수집 → 크롤링·전처리 리소스 절감",
-        "자동 크롤링 방식을 수동 크롤링으로 전환, 단종·오염 이미지 일괄 제거로 데이터셋 품질 확보",
-        "배경 제거 전처리로 객체(알약) 중심 학습 강화, 실사용 환경 배경 이미지 수집 후 Background Augmentation 추가 재학습",
-        "회전 범위 -45°~45° → -10°~10° 축소, 노이즈·가림 증강 제거로 객체 손상 없이 최소 다양성 확보",
-        "Recall 기준치 이하 취약 클래스 7종 선별 → 특징 강조 맞춤형 추가 증강으로 재현율 상향 평준화",
-        "FastAPI 비동기 구조로 AI 분석 지연 최소화, PostgreSQL JSONB + GIN 인덱스로 복잡한 약물 데이터 유연 처리, Nginx 리버스 프록시로 보안 강화",
+        "Azure Custom Vision(이미지 분류)으로 알약 90종 분류 모델 구축 — 색상·모양·각인을 종합 분석하는 엔터프라이즈급 AI 활용",
+        "Azure Python SDK(azure-cognitiveservices-vision-customvision)로 Custom Vision 예측 API 연동, FastAPI 비동기 엔드포인트와 통합해 평균 응답 2.4초 확보",
+        "Azure VM(Korea Central) 단일 서버에 FastAPI + PostgreSQL + Nginx 올인원 배포, Nginx 리버스 프록시로 외부 트래픽 처리 및 보안 강화",
+        "Blob Storage 즉시 삭제 후 처방 통계·판매량 기반으로 핵심 90종만 선별 수집 → 클라우드 비용 절감 및 모델 실용성 향상",
+        "수동 크롤링 전환으로 오염 데이터 제거, 배경 제거 전처리 + Background Augmentation으로 실사용 환경 재학습 → Custom Vision 실환경 성능 확보",
+        "회전 범위 -45°~45° → -10°~10° 축소·복합 증강 제거로 각인 보존, Recall 기준치 이하 취약 클래스 7종 맞춤 증강으로 재현율 상향 평준화",
       ],
       성과: [
-        "모델 재현율(Recall) 97% 달성 — 학습 데이터 3,773개, 분류 클래스 90종",
-        "평균 응답 시간 3초(AI 분석 2.4초) 확보, 2주 내 기획·개발·배포 풀스택 완성",
-        "사진 한 장으로 약물 정보·DUR·도핑 금지 여부·병용금기까지 제공, 정보 취약 계층·고령자 친화적 서비스 완성",
+        "Azure Custom Vision 모델 재현율(Recall) 97% 달성 — 학습 데이터 3,773개, 분류 클래스 90종",
+        "Azure SDK 기반 예측 API 연동으로 AI 분석 평균 2.4초, 전체 응답 3초 이내 확보",
+        "Azure VM 단일 환경에서 2주 내 기획·학습·배포 풀스택 완성, 사진 한 장으로 DUR·도핑·병용금기까지 제공하는 고령자 친화 서비스 출시",
       ],
     },
   },
