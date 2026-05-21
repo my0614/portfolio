@@ -14,15 +14,15 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-[10px] text-muted-foreground">{project.company}</span>
-          <span className="text-[10px] text-muted-foreground">·</span>
-          <span className="text-[10px] text-muted-foreground tabular-nums">{project.year}</span>
+          <span className="text-xs text-foreground/60">{project.company}</span>
+          <span className="text-xs text-foreground/40">·</span>
+          <span className="text-xs text-foreground/60 tabular-nums">{project.year}</span>
         </div>
-        <h2 className="text-[15px] font-semibold text-foreground/90 mb-2">{project.title}</h2>
-        <p className="text-[12px] text-muted-foreground leading-relaxed">{project.summary}</p>
+        <h2 className="text-base font-semibold text-foreground mb-2">{project.title}</h2>
+        <p className="text-[13px] text-foreground/65 leading-relaxed">{project.summary}</p>
         <div className="flex items-center gap-2 flex-wrap mt-3">
           {project.tags.map((t) => (
-            <span key={t} className="text-[10px] px-2 py-0.5 rounded bg-primary/10 text-primary/80">{t}</span>
+            <span key={t} className="text-[11px] px-2 py-0.5 rounded bg-primary/15 text-primary/90">{t}</span>
           ))}
           {project.link && (
             <a
@@ -53,7 +53,7 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
                 />
               </div>
               {img.caption && (
-                <p className="text-[10px] text-muted-foreground text-center">{img.caption}</p>
+                <p className="text-xs text-foreground/55 text-center">{img.caption}</p>
               )}
             </div>
           ))}
@@ -66,13 +66,13 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
         if (!items || items.length === 0) return null;
         return (
           <div key={key}>
-            <span className={`inline-block text-[9px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-3 ${accent}`}>
+            <span className={`inline-block text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-3 ${accent}`}>
               {label}
             </span>
             <ul className="flex flex-col gap-2">
               {items.map((item, i) => (
-                <li key={i} className="flex gap-2 text-[12px] text-muted-foreground leading-relaxed">
-                  <span className="shrink-0 opacity-40 font-medium">{i + 1}.</span>
+                <li key={i} className="flex gap-2 text-[13px] text-foreground/70 leading-relaxed">
+                  <span className="shrink-0 opacity-60 font-medium">{i + 1}.</span>
                   <span>{item}</span>
                 </li>
               ))}

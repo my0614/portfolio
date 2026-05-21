@@ -1,6 +1,12 @@
+@import "react-github-calendar/tooltips.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-activity-calendar__tooltip {
+  z-index: 9999 !important;
+  position: relative;
+}
 
 @layer base {
   :root {

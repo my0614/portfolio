@@ -2,6 +2,7 @@
 import { useState, useCallback } from "react";
 import { AnimatePresence } from "framer-motion";
 import { FolderOpen, User, Mail, Terminal, FileText } from "lucide-react";
+import { GitHubCalendar } from "react-github-calendar";
 import BootScreen from "@/components/desktop/BootScreen";
 import Taskbar from "@/components/desktop/Taskbar";
 import Dock from "@/components/desktop/Dock";
@@ -141,6 +142,29 @@ export default function Home() {
               );
             })}
           </AnimatePresence>
+
+          <div className="absolute bottom-20 left-6 z-50" style={{ overflow: "visible" }}>
+            <div className="px-4 py-3 rounded-2xl bg-background/40 backdrop-blur-sm border border-foreground/[0.06]" style={{ overflow: "visible" }}>
+              <p className="text-[10px] text-muted-foreground font-mono mb-2 tracking-wider uppercase">GitHub Contributions</p>
+              <GitHubCalendar
+                username="my0614"
+                colorScheme="dark"
+                fontSize={10}
+                blockSize={9}
+                blockMargin={3}
+                theme={{ dark: ["#2d2d3e", "#1e4080", "#3060c0", "#5090e8", "#88bbff"] }}
+                tooltips={{
+                  activity: {
+                    placement: "top",
+                    text: (activity) =>
+                      activity.count === 0
+                        ? "커밋 없음"
+                        : `${activity.date} — ${activity.count}개 커밋`,
+                  },
+                }}
+              />
+            </div>
+          </div>
 
           <Dock
             items={dockItems.map(item => ({

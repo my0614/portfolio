@@ -70,6 +70,7 @@ const AboutWindow = () => {
           ))}
         </div>
       </div>
+
     </div>
   );
 };

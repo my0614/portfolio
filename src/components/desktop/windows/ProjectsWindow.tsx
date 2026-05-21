@@ -15,13 +15,13 @@ export default function ProjectsWindow({ onOpenDetail }: Props) {
           className="p-4 rounded-lg bg-foreground/[0.03] border border-foreground/[0.05] hover:border-primary/30 hover:bg-foreground/[0.06] transition-all cursor-pointer"
         >
           <div className="flex items-center justify-between mb-1.5">
-            <h3 className="text-sm font-medium text-foreground/90">{p.title}</h3>
-            <span className="text-[10px] text-muted-foreground tabular-nums shrink-0 ml-2">{p.year}</span>
+            <h3 className="text-sm font-semibold text-foreground">{p.title}</h3>
+            <span className="text-xs text-foreground/60 tabular-nums shrink-0 ml-2">{p.year}</span>
           </div>
-          <p className="text-[11px] text-muted-foreground leading-relaxed mb-3">{p.summary}</p>
+          <p className="text-xs text-foreground/65 leading-relaxed mb-3">{p.summary}</p>
           <div className="flex gap-1.5 flex-wrap">
             {p.tags.map((t) => (
-              <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary/80">{t}</span>
+              <span key={t} className="text-[11px] px-1.5 py-0.5 rounded bg-primary/15 text-primary/90">{t}</span>
             ))}
           </div>
         </div>
