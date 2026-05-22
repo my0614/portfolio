@@ -161,7 +161,7 @@ export const projects: Project[] = [
     type: "team",
     title: "이약머약 — AI 알약 식별 서비스",
     company: "MS AI School 10기 | Team 4 U",
-    summary: "Recall 97% 달성, 사진 한 장으로 약물 정보·DUR·도핑 금지 여부를 즉시 제공하는 Azure Custom Vision 기반 알약 식별 서비스.",
+    summary: "성능지표 평균 97% 달성, 사진 한 장으로 약물 정보·DUR·도핑 금지 여부를 즉시 제공하는 Azure Custom Vision 기반 알약 식별 서비스.",
     tags: ["Python", "FastAPI", "PostgreSQL", "Azure Custom Vision", "Azure SDK", "Azure VM", "Fast API"],
     year: "2026.05.08 ~ 2026.05.20",
     link: "https://eyakmeoyak.koreacentral.cloudapp.azure.com/",
@@ -189,7 +189,7 @@ export const projects: Project[] = [
         "회전 범위 -45°~45° → -10°~10° 축소·복합 증강 제거로 각인 보존, Recall 기준치 이하 취약 클래스 7종 맞춤 증강으로 재현율 상향 평준화",
       ],
       성과: [
-        "Azure Custom Vision 모델 재현율(Recall) 97% 달성 — 학습 데이터 3,773개, 분류 클래스 90종",
+        "Azure Custom Vision 모델 성능지표 평균 97% 달성 — 학습 데이터 3,773개, 분류 클래스 90종",
         "Azure SDK 기반 예측 API 연동으로 AI 분석 평균 2.4초, 전체 응답 3초 이내 확보",
         "Azure VM 단일 환경에서 2주 내 기획·학습·배포 풀스택 완성, 사진 한 장으로 DUR·도핑·병용금기까지 제공하는 고령자 친화 서비스 출시",
       ],
