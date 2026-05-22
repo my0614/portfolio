@@ -19,7 +19,7 @@ import { projects } from "@/data/projects";
 type WinConfig = { title: string; width: number; height: number; x: number; y: number };
 
 const staticConfigs: Record<string, WinConfig> = {
-  projects: { title: "Projects.dmg", width: 660, height: 520, x: 150, y: 70 },
+  projects: { title: "Projects.dmg", width: 780, height: 600, x: 150, y: 60 },
   about:    { title: "System Preferences", width: 500, height: 560, x: 250, y: 100 },
   contact:  { title: "Mail.app", width: 450, height: 520, x: 350, y: 60 },
   terminal: { title: "Terminal", width: 520, height: 360, x: 200, y: 120 },

@@ -24,7 +24,7 @@ export const projects: Project[] = [
     type: "company",
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
-    summary: "MLOps 반복 작업 자동화 플랫폼.",
+    summary: "지원 모델 3개 → 20개 이상 확장, 학습 대기 시간을 하루 → 수십 분으로 단축한 사내 MLOps 자동화 플랫폼.",
     tags: ["Python", "MMDetection", "Redis", "Docker", "K8s", "PostgreSQL", "PyTorch"],
     year: "2022 ~ 2024",
     images: [
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     type: "company",
     title: "민군겸용기술개발 R&D — 드론 탑재 실시간 객체 탐지",
     company: "한컴인스페이스",
-    summary: "정찰 드론 기반 위협 객체 탐지 및 3D 가시화 시스템.",
+    summary: "객체 탐지 mAP 61% → 75% 달성, 네트워크 세팅 2시간 → 1분으로 단축한 정찰 드론 실시간 위협 탐지 및 3D 가시화 시스템.",
     tags: ["ROS", "Docker", "Faster R-CNN", "RealSense D435i", "PyTorch", "TCP", "UDP"],
     year: "2023 ~ 2025",
     images: [
@@ -99,7 +99,7 @@ export const projects: Project[] = [
     type: "company",
     title: "UAV 대공감시",
     company: "한컴인스페이스",
-    summary: "EO/IR 센트리 카메라 기반 UAV 실시간 탐지·추적 및 모니터링 시스템.",
+    summary: "EO/IR 도메인별 모델 분리 학습으로 주야간 안정적 탐지 성능을 확보한 UAV 실시간 탐지·추적 모니터링 시스템.",
     tags: ["Python", "RTSP", "YOLOv5", "MMDetection", "PyTorch"],
     year: "2024.06 ~ 2024.12",
     sections: {
@@ -126,7 +126,7 @@ export const projects: Project[] = [
     type: "company",
     title: "핫딜 자동화 시스템",
     company: "(주)무무즈",
-    summary: "핫딜 상품 신청~오픈 End-to-End 자동화.",
+    summary: "핫딜 등록 작업 평균 4시간 → 2분으로 단축, 파트너사 상품 신청부터 오픈까지 End-to-End 자동화.",
     images: [
     { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
     ],
@@ -161,7 +161,7 @@ export const projects: Project[] = [
     type: "team",
     title: "이약머약 — AI 알약 식별 서비스",
     company: "MS AI School 10기 | Team 4 U",
-    summary: "Azure Custom Vision으로 알약 이미지를 학습하고 분류하여 사진 한 장으로 약물 정보·DUR·도핑 금지 여부를 즉시 제공하는 클라우드 기반 서비스.",
+    summary: "Recall 97% 달성, 사진 한 장으로 약물 정보·DUR·도핑 금지 여부를 즉시 제공하는 Azure Custom Vision 기반 알약 식별 서비스.",
     tags: ["Python", "FastAPI", "PostgreSQL", "Azure Custom Vision", "Azure SDK", "Azure VM", "Fast API"],
     year: "2026.05.08 ~ 2026.05.20",
     link: "https://eyakmeoyak.koreacentral.cloudapp.azure.com/",
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     type: "company",
     title: "CS 문의 자동화",
     company: "(주)무무즈",
-    summary: "배송 문의 자동 응답 시스템.",
+    summary: "전체 CS 문의 1/3 자동 처리, 응답 지연 시간 80% 단축한 배송 문의 자동화 시스템.",
     tags: ["Python", "Shopby API", "Sellmate API", "Batch"],
     year: "2025.12.15 ~ 2026.03.13",
     sections: {
