@@ -6,6 +6,7 @@ const sectionConfig = [
   { key: "원인", label: "원인", accent: "bg-orange-500/10 text-orange-400" },
   { key: "해결", label: "대응 및 해결", accent: "bg-blue-500/10 text-blue-400" },
   { key: "성과", label: "성과 및 고찰", accent: "bg-green-500/10 text-green-400" },
+  { key: "회고", label: "회고 및 개선 방향", accent: "bg-purple-500/10 text-purple-400" },
 ] as const;
 
 export default function ProjectDetailWindow({ project }: { project: Project }) {

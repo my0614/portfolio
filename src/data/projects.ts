@@ -1,5 +1,6 @@
 export type Project = {
   id: string;
+  type: "company" | "team";
   title: string;
   company: string;
   summary: string;
@@ -13,12 +14,14 @@ export type Project = {
     원인: string[];
     해결: string[];
     성과: string[];
+    회고?: string[];
   };
 };
 
 export const projects: Project[] = [
   {
     id: "dflow",
+    type: "company",
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
     summary: "MLOps 반복 작업 자동화 플랫폼.",
@@ -55,6 +58,7 @@ export const projects: Project[] = [
   },
   {
     id: "drone",
+    type: "company",
     title: "민군겸용기술개발 R&D — 드론 탑재 실시간 객체 탐지",
     company: "한컴인스페이스",
     summary: "정찰 드론 기반 위협 객체 탐지 및 3D 가시화 시스템.",
@@ -92,6 +96,7 @@ export const projects: Project[] = [
   },
   {
     id: "uav",
+    type: "company",
     title: "UAV 대공감시",
     company: "한컴인스페이스",
     summary: "EO/IR 센트리 카메라 기반 UAV 실시간 탐지·추적 및 모니터링 시스템.",
@@ -118,6 +123,7 @@ export const projects: Project[] = [
   },
   {
     id: "hotdeal",
+    type: "company",
     title: "핫딜 자동화 시스템",
     company: "(주)무무즈",
     summary: "핫딜 상품 신청~오픈 End-to-End 자동화.",
@@ -152,6 +158,7 @@ export const projects: Project[] = [
   },
   {
     id: "yiyakmoya",
+    type: "team",
     title: "이약머약 — AI 알약 식별 서비스",
     company: "MS AI School 10기 | Team 4 U",
     summary: "Azure Custom Vision으로 알약 이미지를 학습하고 분류하여 사진 한 장으로 약물 정보·DUR·도핑 금지 여부를 즉시 제공하는 클라우드 기반 서비스.",
@@ -182,14 +189,21 @@ export const projects: Project[] = [
         "회전 범위 -45°~45° → -10°~10° 축소·복합 증강 제거로 각인 보존, Recall 기준치 이하 취약 클래스 7종 맞춤 증강으로 재현율 상향 평준화",
       ],
       성과: [
-        "Azure Custom Vision 모델 97% 달성 — 학습 데이터 3,773개, 분류 클래스 90종",
+        "Azure Custom Vision 모델 재현율(Recall) 97% 달성 — 학습 데이터 3,773개, 분류 클래스 90종",
         "Azure SDK 기반 예측 API 연동으로 AI 분석 평균 2.4초, 전체 응답 3초 이내 확보",
         "Azure VM 단일 환경에서 2주 내 기획·학습·배포 풀스택 완성, 사진 한 장으로 DUR·도핑·병용금기까지 제공하는 고령자 친화 서비스 출시",
+      ],
+      회고: [
+        "수익화 구조 및 비즈니스성이 부족하여 아쉬움 — 약국 SaaS(월 구독), 보험사 파트너십, 요양원 월정액 등 B2B 수익 모델을 초기부터 함께 설계했다면 서비스 방향이 더 뾰족했을 것",
+        "약국 카운터 옆에 하드웨어와 함께 서비스를 두는 비즈니스성 기획을 했다면 훨씬 확장성이 높았을 것 같음",
+        "클라우드 비용 사전 설계 미흡으로 초기 예산 초과 → 이후 실험 범위 제약, 인프라 비용 추정과 PoC 규모 결정을 먼저 하는 습관의 필요성을 체감",
+        "향후 보완 방향: 처방전 OCR 연동으로 '약 봉투 없이도 복약 관리' 확장 / 약국 5~10곳 파일럿 도입 후 피드백 기반 개선 / Flutter 크로스플랫폼으로 모바일 앱 출시",
       ],
     },
   },
   {
     id: "cs",
+    type: "company",
     title: "CS 문의 자동화",
     company: "(주)무무즈",
     summary: "배송 문의 자동 응답 시스템.",
