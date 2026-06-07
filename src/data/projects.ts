@@ -178,7 +178,7 @@ export const projects: Project[] = [
     title: "AI 기반 건강 위험 분석 및 맞춤형 건강 관리 서비스",
     company: "Team Prject",
     summary: "복약·건강·환경 데이터를 통합 분석하여 개인 맞춤형 건강 위험을 예측하는 서비스.",
-    tags: ["FastAPI", "OpenAI SDK", "OAuth 2.0", "Redis", "Azure SDK", "Azure VM", "Fast API"],
+    tags: ["FastAPI", "OpenAI SDK", "OAuth 2.0", "Redis", "WeasyPrint + Jinja2", "Pydantic","pytest"],
     year: "2026.05.08 ~ 2026.05.29",
     images: [
       { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" }
@@ -186,8 +186,16 @@ export const projects: Project[] = [
     sections: {
       핵심기술: [
         {
-          title: " DDD 기반 도메인 레이어 분리",
-          description: "uth·users·hospitals·medications·events 등 도메인별로 router → service → repository → model 레이어를 독립적으로 구성. 도메인 간 의존성을 최소화하고 기능 추가·변경 시 영향 범위를 해당 도메인으로 한정"
+          title: "FastMCP 기반 건강 데이터 Tool 서버 구축",
+          description: "건강 데이터 분석 로직을 MCP Tool로 표준화하여 LLM이 실시간 사용자 건강 데이터를 직접 조회·활용할 수 있는 AI Agent 연동 구조를 구축"
+        },
+        {
+          title: "DDD 기반 도메인 레이어 분리",
+          description: "auth·users·hospitals·medications·events 등 도메인별로 router → service → repository → model 레이어를 독립적으로 구성. 도메인 간 의존성을 최소화하고 기능 추가·변경 시 영향 범위를 해당 도메인으로 한정"
+        },
+        {
+          title: "3단계 멀티 레이어 캐시 (메모리 → Redis → OpenAI)",
+          description: "LLM 호출 비용·응답속도·장애 격리를 동시에 해결하기 위해 설계. 동일 위험 요소 팁은 하루 OpenAI 1회 호출로 제한"
         },
         {
           title: "Google / Kakao OAuth 2.0 + JWT",
@@ -203,9 +211,10 @@ export const projects: Project[] = [
         },
       ],
       구현포인트: [
+        "FastMCP로 MCP 서버 구현, 건강 지수·약물 안전도·환경 지수 3개 Tool 등록 및 AI 어시스턴트 연동",
         "DDD 기반 도메인별 레이어 분리 설계 및 도메인 8개 통합 테스트 작성 (정상·예외 케이스 포함)",
         "처방봉투 이미지 → OCR 파싱 → 병원명·처방일·약품명·용량·복용 시점 추출 → 복약 스케줄 즉시 자동 등록 파이프라인 구현",
-        "30분 주기 스캔으로 복약·병원예약·식사·수면·물·일지 6종 알람 발화 시각 계산, 인메모리 세트로 중복 등록 차단",
+        "L1 메모리(6h) → L2 Redis(자정) → L3 OpenAI 순으로 캐시 히트 처리, L2 히트 시 L1 자동 워밍업, Redis 장애 시 L3 폴백으로 서비스 중단 없음",
         "복약 이행률·컨디션 트렌드·약물 안전도·증상 추세·환경 지수 5요인 가중 합산 건강 지수 엔진 구현",
         "Redis 캐시 레이어로 건강 지수·날씨·병원·질병 검색 등 공공 API 중복 호출 방지",
         "WeasyPrint + Jinja2로 주간·월간·커스텀 기간별 건강 리포트 PDF 자동 생성"
