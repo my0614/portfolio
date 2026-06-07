@@ -13,7 +13,8 @@ export type Project = {
   sections: {
     핵심기술?: { title: string; description: string }[];
     구현포인트?: string[];
-    성과: string[];
+    성과?: string[];
+    기대효과?: string[];
     회고?: string[];
   };
 };
@@ -172,49 +173,44 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "yiyakmoya",
+    id: "PillCare",
     type: "team",
-    title: "이약머약 — AI 알약 식별 서비스",
-    company: "MS AI School 10기 | Team 4 U",
-    summary: "성능지표 평균 97% 달성, 사진 한 장으로 약물 정보·DUR·도핑 금지 여부를 즉시 제공하는 Azure Custom Vision 기반 알약 식별 서비스.",
+    title: "",
+    company: "Team Prject",
+    summary: "복약·건강·환경 데이터를 통합 분석하여 개인 맞춤형 건강 위험을 예측하는 서비스.",
     tags: ["Python", "FastAPI", "PostgreSQL", "Azure Custom Vision", "Azure SDK", "Azure VM", "Fast API"],
-    year: "2026.05.08 ~ 2026.05.20",
-    link: "https://eyakmeoyak.koreacentral.cloudapp.azure.com/",
-    video: "/projects/eyak.MOV",
+    year: "2026.05.08 ~ 2026.05.29",
     images: [
-      { src: "/projects/performance_it3.png", caption: "Azure Custom Vision 모델 성능 지표 (Recall 97%)" },
+      { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" }
     ],
     sections: {
       핵심기술: [
         {
-          title: "Azure Custom Vision 선택",
-          description: "2주 일정 내 모델 학습·배포가 목표. 자체 학습 인프라 없이 클라우드에서 색상·모양·각인을 종합 분석하는 엔터프라이즈 AI를 즉시 활용 가능한 구조 선택",
+          title: "Google / Kakao OAuth 2.0 + JWT",
+          description: "비밀번호 저장 없이 소셜 로그인만으로 온보딩, Provider 클래스 확장만으로 신규 소셜 로그인 추가가 가능한 인증 구조 확보",
         },
         {
-          title: "Background Augmentation 전략",
-          description: "공공 데이터 배경 4종만으로 학습 시 실사용 환경(탁자·손바닥 등)에서 심각한 도메인 갭 발생. 배경 제거 전처리 후 다양한 실사용 배경을 합성 증강하여 과적합 해소",
+          title: "OpenAI Vision API OCR",
+          description: "처방봉투 이미지에서 병원명·처방일·약품명·용량·복용 시점을 자동 파싱. 파싱 결과를 복약 스케줄에 즉시 등록해 수동 입력 단계 제거",
         },
         {
-          title: "회전 범위 제한 + 취약 클래스 맞춤 증강",
-          description: "복합 증강 적용 시 알약 각인·형태 훼손으로 Custom Vision 학습 품질 저하. 회전 범위 ±45° → ±10° 축소로 각인 보존, Recall 기준치 이하 7종만 선별해 맞춤 증강하여 재현율 상향 평준화",
+          title: "asyncio 기반 비동기 알람 스케줄러",
+          description: "Celery 등 별도 태스크 큐 없이 FastAPI lifespan에 통합, 인메모리 세트로 동일 알람 중복 등록 차단",
         },
       ],
       구현포인트: [
-        "Azure Python SDK로 Custom Vision 예측 API 연동, FastAPI 비동기 엔드포인트와 통합해 평균 응답 2.4초 확보",
-        "처방 통계·판매량 기반으로 핵심 90종만 선별 수집 → 클라우드 비용 절감 및 모델 실용성 향상",
-        "Azure VM(Korea Central) 단일 서버에 FastAPI + PostgreSQL + Nginx 올인원 배포, Nginx 리버스 프록시로 외부 트래픽 처리 및 보안 강화",
+        "처방봉투 이미지 → OCR 파싱 → 병원명·처방일·약품명·용량·복용 시점 추출 → 복약 스케줄 즉시 자동 등록 파이프라인 구현",
+        "30분 주기 스캔으로 복약·병원예약·식사·수면·물·일지 6종 알람 발화 시각 계산, 인메모리 세트로 중복 등록 차단",
+        "복약 이행률·컨디션 트렌드·약물 안전도·증상 추세·환경 지수 5요인 가중 합산 건강 지수 엔진 구현",
+        "Redis 캐시 레이어로 건강 지수·날씨·병원·질병 검색 등 공공 API 중복 호출 방지",
+        "WeasyPrint + Jinja2로 주간·월간·커스텀 기간별 건강 리포트 PDF 자동 생성"
       ],
-      성과: [
-        "Azure Custom Vision 모델 성능지표 평균 97% 달성 — 학습 데이터 3,773개, 분류 클래스 90종",
-        "Azure SDK 기반 예측 API 연동으로 AI 분석 평균 2.4초, 전체 응답 3초 이내 확보",
-        "Azure VM 단일 환경에서 2주 내 기획·학습·배포 풀스택 완성, 사진 한 장으로 DUR·도핑·병용금기까지 제공하는 고령자 친화 서비스 출시",
-      ],
-      회고: [
-        "수익화 구조 및 비즈니스성이 부족하여 아쉬움 — 약국 SaaS(월 구독), 보험사 파트너십, 요양원 월정액 등 B2B 수익 모델을 초기부터 함께 설계했다면 서비스 방향이 더 뾰족했을 것",
-        "약국 카운터 옆에 하드웨어와 함께 서비스를 두는 비즈니스성 기획을 했다면 훨씬 확장성이 높았을 것 같음",
-        "클라우드 비용 사전 설계 미흡으로 초기 예산 초과 → 이후 실험 범위 제약, 인프라 비용 추정과 PoC 규모 결정을 먼저 하는 습관의 필요성을 체감",
-        "향후 보완 방향: 처방전 OCR 연동으로 '약 봉투 없이도 복약 관리' 확장 / 약국 5~10곳 파일럿 도입 후 피드백 기반 개선 / Flutter 크로스플랫폼으로 모바일 앱 출시",
-      ],
+      기대효과: [
+        "복약 관리 디지털화로 고령자·만성질환자의 자가 건강 관리 접근성 향상",
+        "복약 이행률 개선을 통한 치료 효과 증대 및 의료비 절감 가능성 확보",
+        "건강 데이터 누적 기반의 개인화 리포트로 환자-의사 간 진료 커뮤니케이션 효율화",
+        "DUR 연계를 통한 복약 사고 예방으로 의료 안전망 보완 기여 가능"
+      ]
     },
   },
 ];

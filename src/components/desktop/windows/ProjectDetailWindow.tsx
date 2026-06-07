@@ -126,6 +126,23 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
         </div>
       )}
 
+      {/* 기대효과 */}
+      {project.sections.기대효과 && project.sections.기대효과.length > 0 && (
+        <div>
+          <span className="inline-block text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-3 bg-cyan-500/10 text-cyan-400">
+            기대효과
+          </span>
+          <ul className="flex flex-col gap-2">
+            {project.sections.기대효과.map((item, i) => (
+              <li key={i} className="flex gap-2 text-[13px] text-foreground/70 leading-relaxed">
+                <span className="shrink-0 opacity-60 font-medium">{i + 1}.</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* 회고 */}
       {project.sections.회고 && project.sections.회고.length > 0 && (
         <div>
