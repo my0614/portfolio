@@ -9,7 +9,13 @@
       "Bash(git push:*)",
       "Bash(npm install:*)",
       "Bash(npm run:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(ls /Users/kimminyoung/Desktop/*.md)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('main:', d.get\\('main'\\)\\); print\\('module:', d.get\\('module'\\)\\); print\\('exports:', json.dumps\\(d.get\\('exports', {}\\), indent=2\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('exports', {}\\), indent=2\\)\\)\")",
+      "Bash(npx playwright *)",
+      "Bash(node *)",
+      "Bash(npx tsc *)"
     ]
   }
 }

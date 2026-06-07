@@ -4,7 +4,7 @@ const TerminalWindow = () => {
   return (
     <div className="font-mono-code text-xs space-y-1 text-foreground/70">
       <div><span className="text-primary">~</span> whoami</div>
-      <div className="text-foreground/50">김민영 | ML 모델 개발 / MLOps 5년차 개발자</div>
+      <div className="text-foreground/50">김민영 ML 모델 개발 / MLOps 5년차 개발자</div>
       <div className="text-foreground/50">다양한 영상 데이터 기반 End-to-End ML 파이프라인 구축 경험</div>
       <div className="mt-3"><span className="text-primary">~</span> cat skills.json</div>
       <div className="text-foreground/50">{"{"}</div>
