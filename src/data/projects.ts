@@ -175,16 +175,20 @@ export const projects: Project[] = [
   {
     id: "PillCare",
     type: "team",
-    title: "",
+    title: "AI 기반 건강 위험 분석 및 맞춤형 건강 관리 서비스",
     company: "Team Prject",
     summary: "복약·건강·환경 데이터를 통합 분석하여 개인 맞춤형 건강 위험을 예측하는 서비스.",
-    tags: ["Python", "FastAPI", "PostgreSQL", "Azure Custom Vision", "Azure SDK", "Azure VM", "Fast API"],
+    tags: ["FastAPI", "OpenAI SDK", "OAuth 2.0", "Redis", "Azure SDK", "Azure VM", "Fast API"],
     year: "2026.05.08 ~ 2026.05.29",
     images: [
       { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" }
     ],
     sections: {
       핵심기술: [
+        {
+          title: " DDD 기반 도메인 레이어 분리",
+          description: "uth·users·hospitals·medications·events 등 도메인별로 router → service → repository → model 레이어를 독립적으로 구성. 도메인 간 의존성을 최소화하고 기능 추가·변경 시 영향 범위를 해당 도메인으로 한정"
+        },
         {
           title: "Google / Kakao OAuth 2.0 + JWT",
           description: "비밀번호 저장 없이 소셜 로그인만으로 온보딩, Provider 클래스 확장만으로 신규 소셜 로그인 추가가 가능한 인증 구조 확보",
@@ -199,6 +203,7 @@ export const projects: Project[] = [
         },
       ],
       구현포인트: [
+        "DDD 기반 도메인별 레이어 분리 설계 및 도메인 8개 통합 테스트 작성 (정상·예외 케이스 포함)",
         "처방봉투 이미지 → OCR 파싱 → 병원명·처방일·약품명·용량·복용 시점 추출 → 복약 스케줄 즉시 자동 등록 파이프라인 구현",
         "30분 주기 스캔으로 복약·병원예약·식사·수면·물·일지 6종 알람 발화 시각 계산, 인메모리 세트로 중복 등록 차단",
         "복약 이행률·컨디션 트렌드·약물 안전도·증상 추세·환경 지수 5요인 가중 합산 건강 지수 엔진 구현",
