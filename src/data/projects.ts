@@ -275,7 +275,7 @@ export const projects: Project[] = [
         },
         {
           title: "DDD 기반 도메인 레이어 설계",
-          description: "8개 도메인(auth · users · medications · hospitals · events 등) 각각 router → service → repository → model 독립 구성, 도메인 간 의존성 분리 · 영향 범위 한정",
+          description: "11개 도메인 · 15개 테이블, 각 도메인 router → service → repository → model 독립 구성, 도메인 간 의존성 분리 · 영향 범위 한정",
           points: [
             "도메인별 router → service → repository → model 레이어 독립 구성",
             "도메인 간 의존성 최소화, 기능 변경 시 영향 범위 한정",
