@@ -43,7 +43,7 @@ export const projects: Project[] = [
       기술: [
         {
           title: "OAuth 2.0 — Google Spreadsheet · Gmail 통합 자동화",
-          description: "이 프로젝트의 핵심은 OAuth 2.0 하나로 Google Spreadsheet와 Gmail을 동시에 연동한 것이다. Spreadsheet는 파트너사 신청 접수·상품 선별의 작업 공간으로, Gmail은 파트너사 계정별 결과 파일 발송 채널로 활용했다. 별도 UI 없이 기존 Google Workspace를 그대로 자동화 파이프라인으로 전환했다.",
+          description:  "OAuth 2.0 하나로 Google Spreadsheet(신청 접수·상품 선별)와 Gmail(파트너사별 결과 발송)을 하나의 파이프라인으로 연결. 별도 시스템 구축 없이 기존 Google Workspace를 자동화 파이프라인으로 전환.",
           points: [
             "OAuth 2.0 인증으로 Google Sheets API · Gmail API 동시 연동",
             "파트너사 계정별 신청 결과·선정 목록·오픈 일정을 파일로 생성 → Gmail 자동 발송",
@@ -52,7 +52,7 @@ export const projects: Project[] = [
         },
         {
           title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
-          description: "파트너사가 계정 기준으로 Spreadsheet에 상품을 신청하면, 스프레드시트 안에서 코드가 자동 실행되어 Shopby API와 상품명·상품번호를 매칭한다. 이후 할인율·가격 경쟁력·재고 수량에 가중치를 부여해 상위 200개를 선별하는 과정도 모두 스프레드시트 내에서 완결된다.",
+          description: "파트너사 신청 데이터를 Shopby API와 자동 매칭하고, 할인율·가격 경쟁력·재고 수량 가중치 스코어링으로 상위 200개를 선별. 신청 집계부터 선별 자동화 구현",
           points: [
             "Shopby API 연동으로 신청 상품의 상품명·상품번호 자동 매칭",
             "할인율·가격 경쟁력·재고 가중치 스코어링 → 상위 200개 자동 선별",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
         },
         {
           title: "AWS EC2 + cron 실행 환경 및 CI/CD",
-          description: "전체 자동화 코드는 AWS EC2 위에서 실행되며, cron으로 새벽 시간대 배치를 자동 실행해 핫딜 오픈 시각 정확도를 확보했다. Bitbucket Pipelines로 코드 push 시 테스트·빌드·배포를 자동화해 수동 배포를 완전히 제거했다.",
+          description: "AWS EC2에서 cron으로 새벽 배치를 자동 실행해 핫딜 오픈 시각 정확도를 확보. Bitbucket Pipelines로 push 시 테스트·빌드·EC2 배포까지 자동화해 수동 배포 완전 제거.",
           points: [
             "AWS EC2에서 Python 코드 실행, cron으로 새벽 배치 자동 스케줄링",
             "Bitbucket Pipelines: push → 테스트 → 빌드 → EC2 배포 자동화",
