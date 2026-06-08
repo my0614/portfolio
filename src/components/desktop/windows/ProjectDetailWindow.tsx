@@ -78,7 +78,14 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
           <span className="inline-block text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-3 bg-foreground/[0.06] text-foreground/60">
             기획 의도
           </span>
-          <p className="text-[13px] text-foreground/70 leading-relaxed">{project.sections.기획의도}</p>
+          <ul className="flex flex-col gap-1.5">
+            {project.sections.기획의도.map((item, i) => (
+              <li key={i} className="flex gap-2 text-[13px] text-foreground/70 leading-relaxed">
+                <span className="mt-[5px] shrink-0 w-1 h-1 rounded-full bg-foreground/30" />
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
