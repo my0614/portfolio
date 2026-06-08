@@ -4,6 +4,28 @@ import { Project } from "@/data/projects";
 export default function ProjectDetailWindow({ project }: { project: Project }) {
   return (
     <div className="flex flex-col gap-5">
+
+      {/* Images — 제목 위 */}
+      {project.images && project.images.length > 0 && (
+        <div className="flex flex-col gap-3">
+          {project.images.map((img, i) => (
+            <div key={i} className="flex flex-col gap-1.5">
+              <div className="w-full rounded-lg overflow-hidden border border-foreground/[0.06] bg-foreground/[0.02]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={img.src}
+                  alt={img.caption ?? `${project.title} 이미지 ${i + 1}`}
+                  className="w-full h-auto block"
+                />
+              </div>
+              {img.caption && (
+                <p className="text-xs text-foreground/55 text-center">{img.caption}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 mb-1">
@@ -50,62 +72,55 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
         </div>
       )}
 
-      {/* Images */}
-      {project.images && project.images.length > 0 && (
+      {/* 기획의도 */}
+      {project.sections.기획의도 && (
+        <div>
+          <span className="inline-block text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-3 bg-foreground/[0.06] text-foreground/60">
+            기획 의도
+          </span>
+          <p className="text-[13px] text-foreground/70 leading-relaxed">{project.sections.기획의도}</p>
+        </div>
+      )}
+
+      {/* 아키텍처 */}
+      {project.sections.아키텍처 && (
+        <div className="flex flex-col gap-1.5">
+          <span className="inline-block text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-1 bg-foreground/[0.06] text-foreground/60">
+            아키텍처
+          </span>
+          <div className="w-full rounded-lg overflow-hidden border border-foreground/[0.06] bg-foreground/[0.02]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={project.sections.아키텍처}
+              alt="아키텍처 다이어그램"
+              className="w-full h-auto block"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 기술 섹션 */}
+      {project.sections.기술 && project.sections.기술.length > 0 && (
         <div className="flex flex-col gap-3">
-          {project.images.map((img, i) => (
-            <div key={i} className="flex flex-col gap-1.5">
-              <div className="w-full rounded-lg overflow-hidden border border-foreground/[0.06] bg-foreground/[0.02]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={img.src}
-                  alt={img.caption ?? `${project.title} 이미지 ${i + 1}`}
-                  className="w-full h-auto block"
-                />
-              </div>
-              {img.caption && (
-                <p className="text-xs text-foreground/55 text-center">{img.caption}</p>
+          <span className="inline-block text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 w-fit">
+            기술 상세
+          </span>
+          {project.sections.기술.map((item, i) => (
+            <div key={i} className="p-4 rounded-lg bg-foreground/[0.03] border border-foreground/[0.05]">
+              <h3 className="text-[13px] font-semibold text-foreground mb-2">{item.title}</h3>
+              <p className="text-[12px] text-foreground/65 leading-relaxed">{item.description}</p>
+              {item.points && item.points.length > 0 && (
+                <ul className="mt-2.5 flex flex-col gap-1.5 border-t border-foreground/[0.05] pt-2.5">
+                  {item.points.map((point, j) => (
+                    <li key={j} className="flex gap-2 text-[12px] text-foreground/55 leading-relaxed">
+                      <span className="shrink-0 text-primary/50">·</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               )}
             </div>
           ))}
-        </div>
-      )}
-
-      {/* 핵심 기술 선택 이유 */}
-      {project.sections.핵심기술 && project.sections.핵심기술.length > 0 && (
-        <div>
-          <span className="inline-block text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-3 bg-amber-500/10 text-amber-400">
-            핵심 기술 선택 이유
-          </span>
-          <ul className="flex flex-col gap-3">
-            {project.sections.핵심기술.map((item, i) => (
-              <li key={i} className="flex gap-2 text-[13px] leading-relaxed">
-                <span className="shrink-0 opacity-60 font-medium">{i + 1}.</span>
-                <span className="text-foreground/70">
-                  <span className="font-semibold text-foreground/85">{item.title}</span>
-                  {" — "}
-                  {item.description}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* 구현 포인트 */}
-      {project.sections.구현포인트 && project.sections.구현포인트.length > 0 && (
-        <div>
-          <span className="inline-block text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded mb-3 bg-blue-500/10 text-blue-400">
-            구현 포인트
-          </span>
-          <ul className="flex flex-col gap-2">
-            {project.sections.구현포인트.map((item, i) => (
-              <li key={i} className="flex gap-2 text-[13px] text-foreground/70 leading-relaxed">
-                <span className="shrink-0 opacity-60 font-medium">{i + 1}.</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       )}
 
@@ -159,6 +174,7 @@ export default function ProjectDetailWindow({ project }: { project: Project }) {
           </ul>
         </div>
       )}
+
     </div>
   );
 }

@@ -11,8 +11,13 @@ export type Project = {
   video?: string;
   link?: string;
   sections: {
-    핵심기술?: { title: string; description: string }[];
-    구현포인트?: string[];
+    기획의도?: string;
+    기술?: {
+      title: string;
+      description: string;
+      points?: string[];
+    }[];
+    아키텍처?: string;
     성과?: string[];
     기대효과?: string[];
     회고?: string[];
@@ -26,41 +31,48 @@ export const projects: Project[] = [
     title: "핫딜 자동화 시스템",
     company: "(주)무무즈",
     summary: "핫딜 등록 작업 평균 4시간 → 2분으로 단축, 파트너사 상품 신청부터 오픈까지 End-to-End 자동화.",
-    description: "파트너사 상품 신청부터 등록·오픈까지 전 과정이 수작업으로 운영되던 핫딜 프로세스를 자동화",
     images: [
-    { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
+      { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
     ],
     link: "https://moomooz.co.kr/product/hotdeal",
-    tags: ["Python", "OAuth 2.0", "BigQuery", "Cron"],
+    tags: ["Python", "OAuth 2.0", "BigQuery", "Cron", "AWS EC2", "Bitbucket Pipelines"],
     year: "2025.12.15 ~ 2026.03.13",
     sections: {
-      핵심기술: [
+      아키텍처: "/projects/hotdeal-arch.svg",
+      기획의도: "MD 한 명이 하루 4시간 이상을 상품 선정·등록·파트너사 연락에 쏟고 있었다. 선정 기준도 담당자 경험에만 의존해 일관성이 없었고, 파트너사 알림도 수기 발송이라 누락이 잦았다. 반복 구조가 명확한 업무라는 점에서 파이프라인 자동화로 해결 가능하다고 판단했고, 상품 선정부터 Shopby 등록·오픈·파트너사 알림까지 전 과정을 자동화해 담당자가 기획과 판단에만 집중할 수 있는 구조를 만들었다.",
+      기술: [
         {
-          title: "핫딜 상품 랭킹 알고리즘 설계",
-          description: "할인율, 가격 경쟁력, 재고 수량 등을 가중치 기반으로 평가하여 핫딜 후보 상품을 자동 선별하는 스코어링 로직 설계",
+          title: "핫딜 상품 랭킹 알고리즘",
+          description: "담당자 감에 의존하던 상품 선정을 데이터 기반으로 전환했다. 할인율·가격 경쟁력·재고 수량에 항목별 가중치를 부여해 상품별 점수를 산출하고 상위 200개를 자동 선별한다. 선별 결과는 Shopby API를 통해 등록까지 이어지는 파이프라인으로 구성했다.",
+          points: [
+            "할인율·가격 경쟁력·재고 수량 → 가중치 스코어링 → 상위 200개 자동 선별",
+            "Shopby API 연동으로 선별 → 등록까지 파이프라인 자동화",
+            "선정 기준 일관성 확보, 수작업 검토 과정 제거",
+          ],
         },
         {
-          title: "OAuth 2.0 기반 파트너사별 메일 발송",
-          description: "파트너사별 인증 정보를 활용해 상품 등록 결과 및 선정 목록을 자동 발송하는 시스템을 구축하여 데이터 정합성을 확보하고 누락·오입력 리스크를 제거",
+          title: "OAuth 2.0 기반 파트너사 메일 자동화",
+          description: "파트너사별 인증 정보를 OAuth 2.0으로 관리하고, 상품 등록 결과와 선정 목록을 HTML 템플릿으로 각 파트너사에 개별 자동 발송한다. 수기 발송에서 발생하던 누락·오입력 리스크를 제거했다.",
+          points: [
+            "파트너사별 OAuth 2.0 인증 정보 관리 구조",
+            "HTML 템플릿 기반 개인화 메일 자동 생성 및 발송",
+            "누락·오입력 리스크 제거, 커뮤니케이션 자동화",
+          ],
         },
         {
           title: "Bitbucket Pipelines + AWS EC2 CI/CD",
-          description: "코드 푸시 시 테스트·빌드·배포가 자동 수행되도록 파이프라인 구축. 수동 배포 과정을 제거해 운영 안정성 확보 및 배포 리드타임 단축"
-        }
-      ],
-      구현포인트: [
-        "할인율·가격 경쟁력·재고 수량에 항목별 가중치를 부여해 상품별 점수를 산출하고, 상위 200개를 자동 선별해 Shopby 등록까지 이어지는 파이프라인 구축",
-        "OAuth 2.0 인증 기반으로 파트너사별 인증 정보를 관리하고, 상품 등록 결과·선정 목록을 HTML 템플릿으로 각 파트너사에 개별 자동 발송",
-        "Bitbucket Pipelines으로 push 이벤트 트리거 → 테스트·빌드·AWS EC2 배포까지 자동화, 브랜치별 배포 환경 분리로 운영 안정성 확보",
-        "cron 기반 스케줄러로 새벽 시간대 배치 자동 실행, 서버 리소스 효율화 및 오픈 시각 정확도 확보",
-        "BigQuery 기반 핫딜 등록·오픈 이력 적재 및 운영 데이터 조회 환경 구축",
+          description: "코드 push 시 테스트·빌드·배포가 자동 수행되도록 파이프라인을 구축했다. 브랜치별 배포 환경을 분리해 운영 안정성을 확보하고, 수동 배포 과정을 완전히 제거했다. cron 기반 스케줄러로 새벽 시간대 배치를 자동 실행해 오픈 시각 정확도도 확보했다.",
+          points: [
+            "push 이벤트 트리거 → 테스트 → 빌드 → AWS EC2 배포 자동화",
+            "브랜치별 배포 환경 분리 (dev / prod)",
+            "cron 기반 배치 자동 실행으로 새벽 시간대 오픈 정확도 확보",
+          ],
+        },
       ],
       성과: [
         "핫딜 등록 작업 시간 4시간 이상 → 2분 이내로 단축 (약 99% 감소)",
-        "상품 선정부터 등록·오픈·파트너사 알림까지 전 과정 자동화로 담당자 운영 리소스 절감",
-        "가중치 기반 랭킹 알고리즘 도입으로 상품 선정 기준 일관성 확보, 수작업 검토 과정 제거",
-        "OAuth 2.0 기반 파트너사별 자동 발송으로 누락·오입력 리스크 제거 및 커뮤니케이션 자동화",
-        "CI/CD 파이프라인 구축으로 수동 배포 제거, 배포 안정성 확보"
+        "상품 선정부터 등록·오픈·파트너사 알림까지 전 과정 자동화",
+        "BigQuery 기반 핫딜 이력 적재 및 운영 데이터 조회 환경 구축",
       ],
     },
   },
@@ -69,28 +81,39 @@ export const projects: Project[] = [
     type: "company",
     title: "CS 문의 자동화",
     company: "(주)무무즈",
-    summary: "주문 정보를 기반으로 반복적인 배송 문의를 자동 응답하여 CS 업무 부담을 줄이고 응답 지연을 최소화",
+    summary: "주문 정보를 기반으로 반복적인 배송 문의를 자동 응답하여 CS 업무 부담을 줄이고 응답 지연을 최소화.",
     tags: ["Python", "Shopby API", "Sellmate API", "Batch"],
     year: "2025.12.15 ~ 2026.03.13",
     sections: {
-      핵심기술: [
+      아키텍처: "/projects/cs-arch.svg",
+      기획의도: "전체 CS 문의의 상당수가 '배송이 언제 오나요?' 같은 단순 배송 문의였다. 사람이 직접 대응하다 보니 업무 시간 외에는 응답이 지연되고, 담당자 리소스가 반복 작업에 낭비되는 구조였다. 배송 문의 패턴은 주문번호·송장번호·배송 상태로 정형화되어 있어 AI 없이 규칙 기반만으로도 대부분의 케이스를 커버할 수 있다고 판단, 자동화 범위를 명확히 정의하고 구현했다.",
+      기술: [
         {
-          title: "규칙 기반 방식 선택",
-          description: "배송 문의 응답에 필요한 정보는 주문번호·송장번호·배송 상태·입고 예정일로 정형화되어 있음. LLM 도입 시 환각 리스크와 운영 비용이 크고, 규칙 기반으로도 대부분의 케이스를 커버 가능",
-        },
-        {
-          title: "배치 방식",
-          description: "실시간 웹훅 대신 일정 주기 배치로 미처리 문의를 일괄 조회. 구조가 단순하고 안정적이며 주말·야간에도 최신 배송 정보로 대응 가능"
+          title: "규칙 기반 자동 응답 설계",
+          description: "배송 문의 응답에 필요한 정보는 주문번호·송장번호·배송 상태·입고 예정일로 정형화되어 있다. LLM 도입 시 환각 리스크와 운영 비용이 크고, 규칙 기반으로도 대부분의 케이스를 커버 가능하다고 판단했다. 규칙 범위를 벗어난 케이스는 자동화에서 제외하고 CS 담당자에게 플래그 처리해 오답 발송 리스크를 원천 차단했다.",
+          points: [
+            "정형화된 배송 문의 패턴 분석 → 케이스별 응답 템플릿 설계",
+            "규칙 범위 외 케이스는 CS 담당자 플래그 처리, 오답 발송 방지",
+          ],
         },
         {
           title: "Shopby / Sellmate API 이중 연동",
-          description: "주문번호 기반으로 현재 배송 현황·송장번호·입고 예정일 등을 자동 조회해 응답 생성",
+          description: "주문 정보(Shopby)와 배송 현황(Sellmate)이 별도 API에 분리되어 있어 완전한 자동 응답을 위해 양 API를 동시 연동했다. 주문번호 기반으로 송장번호·배송 상태·입고 예정일을 자동 조회해 응답 메시지를 생성한다.",
+          points: [
+            "Shopby API: 주문 상품 정보·옵션 코드 조회",
+            "Sellmate API: 송장번호·현재 배송 상태·입고 예정일 조회",
+            "두 API 응답 매칭 → 배송 상태 판단 후 자동 응답 생성",
+          ],
         },
-      ],
-      구현포인트: [
-        "주문번호 기반 주문 상품 정보 자동 조회, 송장번호·상품 옵션 코드·입고 예정일 등을 조건으로 자동 응답 로직 구현",
-        "규칙 범위를 벗어난 케이스는 자동화 제외, CS 담당자에게 플래그 처리해 오답 발송 방지",
-        "배치 프로세스를 통해 일정 주기로 배송 상태 데이터 갱신, 주말·비업무 시간에도 대응 가능한 구조 확보",
+        {
+          title: "배치 스케줄러 기반 자동 처리",
+          description: "실시간 웹훅 대신 일정 주기 배치로 미처리 문의를 일괄 조회한다. 구조가 단순하고 안정적이며, 주말·야간에도 최신 배송 정보를 기반으로 24/7 무중단 대응이 가능하다.",
+          points: [
+            "일정 주기 배치로 미처리 문의 일괄 조회 및 자동 응답 처리",
+            "배송 상태 데이터 주기적 갱신으로 응답 정확도 유지",
+            "주말·비업무 시간 포함 24/7 무중단 운영",
+          ],
+        },
       ],
       성과: [
         "전체 CS 문의의 약 1/3 자동 처리",
@@ -105,35 +128,45 @@ export const projects: Project[] = [
     title: "민군겸용기술개발 R&D — 드론 탑재 실시간 객체 탐지",
     company: "한컴인스페이스",
     summary: "객체 탐지 mAP 61% → 75% 달성, 네트워크 세팅 2시간 → 1분으로 단축한 정찰 드론 실시간 위협 탐지 및 3D 가시화 시스템.",
-    description: "정찰 드론에 RGB + Depth 카메라를 탑재해 위협 객체를 실시간 탐지하고, 3D 좌표를 계산해 지상 관제 시스템으로 전송하는 End-to-End AI 시스템을 개발",
-    tags: ["ROS", "Docker", "Faster R-CNN", "RealSense D435i", ],
+    tags: ["ROS", "Docker", "Faster R-CNN", "RealSense D435i"],
     year: "2023 ~ 2025",
     images: [
       { src: "/projects/drone-detection.png", caption: "실시간 위협 객체 6종 클래스" },
     ],
     sections: {
-      핵심기술: [
+      아키텍처: "/projects/drone-arch.svg",
+      기획의도: "정찰 드론이 촬영한 영상을 지상으로 내려 분석하면 수 초의 시간 지연이 발생하고, 통신이 두절된 상황에서는 대응 자체가 불가능하다. 드론에 탑재된 엣지 컴퓨팅 자원으로 RGB + Depth 카메라를 동시에 운용해 위협 객체를 실시간으로 탐지하고, 2D 바운딩 박스를 3D 좌표로 변환해 지상 관제 시스템으로 전송하는 End-to-End 시스템을 설계했다. 민군겸용 기술 개발 과제로 KTL 시험 성적서 기준을 반드시 충족해야 했다.",
+      기술: [
         {
-          title: "ApproximateTimeSynchronizer 적용",
-          description: "두 카메라의 publish 주기가 달라 ExactTimeSynchronizer로는 매칭이 거의 안 됨. slop·queue size를 실측 기반으로 튜닝해 프레임 정합성 확보",
+          title: "RGB + Depth 카메라 프레임 동기화",
+          description: "RGB 카메라와 Depth 카메라의 publish 주기가 달라 ExactTimeSynchronizer로는 프레임 매칭이 거의 이루어지지 않았다. ApproximateTimeSynchronizer의 slop·queue size를 실제 하드웨어 publish 주기를 직접 측정해 튜닝했다. 동기화된 프레임에서 bounding box 중심 픽셀의 Depth 값을 읽고, RealSense intrinsic 파라미터로 3D 좌표를 계산한다.",
+          points: [
+            "ApproximateTimeSynchronizer: slop·queue size 실측 기반 튜닝으로 프레임 정합성 확보",
+            "Depth 픽셀 → RealSense intrinsic → 3D XYZ 좌표 변환 파이프라인",
+            "ROS Topic으로 3D 좌표 발행 → 지상 관제 시스템 실시간 가시화 연동",
+          ],
         },
         {
-          title: "Hard Negative Mining 기반 객체 검출 성능 개선",
-          description: "조도·고조도 환경 데이터 부족으로 오탐·미탐이 빈번하게 발생. 오탐·미탐 케이스를 수집하여 Hard Negative Mining을 수행하고, 배경 이미지 다양화 및 데이터 보강 재학습을 통해 현장 검출 성능 개선",
+          title: "Hard Negative Mining 기반 검출 성능 개선",
+          description: "조도 변화·부분 가림(Occlusion)·배경 유사 환경에서 오탐·미탐이 빈번하게 발생했다. 실제 오탐·미탐 케이스를 직접 수집·분석하고 Hard Negative Mining을 적용해 데이터셋을 강화했다. 배경 이미지 다양화와 맞춤 데이터 보강 재학습을 통해 현장 검출 성능을 끌어올렸다.",
+          points: [
+            "오탐·미탐 케이스 직접 수집 및 원인 분석 (조도·Occlusion·배경 유사성)",
+            "Hard Negative Mining으로 어려운 케이스를 데이터셋에 반영 후 재학습",
+            "mAP 61% → 75% (14%p 향상), KTL 시험 성적서 발급 완료",
+          ],
         },
         {
-          title: "네트워크 자동 감지·세팅",
-          description: "드론·환경마다 IP 수동 설정에 2시간 이상 소요. 환경 자동 감지 및 IP 자동 세팅 로직으로 설정 시간 2시간 → 1분 이하로 단축",
+          title: "네트워크 환경 자동 감지 및 설정",
+          description: "드론·현장 환경마다 IP를 수동으로 설정해야 해서 현장 세팅에 2시간 이상이 소요됐다. 프로세스 시작 시 네트워크 환경을 자동 탐지해 MASTER IP 및 드론 통신 설정을 동적으로 구성하는 자동 설정 로직을 구현했다.",
+          points: [
+            "환경 자동 감지 → MASTER IP·드론 통신 설정 자동 구성",
+            "네트워크 세팅 시간 2시간 이상 → 1분 이하로 단축",
+          ],
         },
-      ],
-      구현포인트: [
-        "동기화된 Depth 프레임에서 bounding box 중심 픽셀의 Depth 값을 읽고, RealSense intrinsic 파라미터로 3D 좌표 변환 → ROS Topic으로 발행해 가시화 연동",
-        "오탐·미탐 케이스를 직접 수집·분석하고, Hard Negative Mining을 통해 조도 변화·부분 가림(Occlusion)·배경 유사 객체 등 검출이 어려운 사례를 데이터셋에 반영하여 재학습 수행",
-        "프로세스 시작 시 네트워크 환경을 자동 탐지하여 MASTER IP 및 드론 통신 설정을 동적으로 구성하는 자동 설정 기능 구현",
       ],
       성과: [
-        "RGB/Depth 동기화로 프레임 정합성 확보, 거리 정확히 일치",
-        "객체 탐지 mAP 61% → 75% (14%p 향상) 달성, KTL 시험 성적서 목표 달성 및 성적서 발급 완료",
+        "객체 탐지 mAP 61% → 75% (14%p 향상), KTL 시험 성적서 목표 달성 및 발급 완료",
+        "RGB/Depth 동기화로 프레임 정합성 확보, 3D 좌표 거리 정확도 달성",
         "네트워크 세팅 시간 2시간 이상 → 1분 이하로 단축",
       ],
     },
@@ -144,7 +177,6 @@ export const projects: Project[] = [
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
     summary: "지원 모델 3개 → 20개 이상 확장, 학습 대기 시간을 하루 → 수십 분으로 단축한 사내 MLOps 자동화 플랫폼.",
-    description: "모델마다 학습 스크립트를 새로 짜야 하는 구조를 표준화하고, 멀티 GPU 환경에서 안정적으로 동작하는 학습·추론 파이프라인을 구축",
     tags: ["MMDetection", "Redis", "Docker", "K8s", "PostgreSQL", "PyTorch"],
     year: "2022 ~ 2024",
     images: [
@@ -152,24 +184,36 @@ export const projects: Project[] = [
       { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
     ],
     sections: {
-      핵심기술: [
+      아키텍처: "/projects/dflow-arch.svg",
+      기획의도: "새로운 딥러닝 모델을 사내에 도입할 때마다 학습 스크립트를 처음부터 새로 작성하고, GPU 할당도 수동으로 조율해야 했다. 지원 모델이 3개일 때는 감당 가능했지만, 모델 수가 늘수록 운영 부담이 선형으로 증가하는 구조였다. 학습 큐도 없어 요청이 몰리면 하루 이상 대기하는 상황이 반복됐다. MMDetection 기반 config 표준화와 Redis 큐 자동화로, 연구자가 코드가 아닌 실험에 집중할 수 있는 환경을 목표로 플랫폼을 설계했다.",
+      기술: [
         {
-          title: "MMDetection 도입",
-          description: "자체 추상화 레이어 대신 config 기반 선언적 구조를 선택. 신규 모델 추가 시 config 파일 하나만 작성하면 기존 파이프라인이 그대로 동작하도록 설계",
+          title: "MMDetection config 기반 모델 추상화",
+          description: "기존에는 모델마다 PyTorch 학습 루프를 직접 구현해야 해서 신규 모델 온보딩에 1~2주가 소요됐다. MMDetection의 config 기반 선언적 구조를 채택하면 모델 아키텍처·데이터셋·학습 파라미터를 config 파일 하나로 정의하고, 기존 파이프라인을 그대로 재사용할 수 있다. DINO·Co-DETR 등 transformer 계열 모델도 config 교체만으로 온보딩했다.",
+          points: [
+            "신규 모델 온보딩: 코드 수정 없이 config 파일 교체만으로 처리",
+            "model / dataset / schedule / runtime 4개 블록으로 학습 구성 표준화",
+            "온보딩 기간 1~2주 → 1일 이내로 단축",
+          ],
         },
         {
-          title: "Redis Queue",
-          description: "DB 폴링 방식은 다수 Worker Pod 환경에서 같은 job을 중복 처리하는 race condition 발생. BRPOP의 원자적 특성으로 분산 락 없이 순차 처리 보장",
+          title: "Redis BRPOP 기반 학습 작업 큐",
+          description: "DB 폴링 방식으로는 다수의 Worker Pod가 동시에 같은 job을 꺼내는 race condition이 발생했다. Redis의 BRPOP은 원자적 연산으로 한 번에 하나의 Worker만 job을 꺼낼 수 있어, 분산 락 없이 순차 처리를 보장한다. job_id 기반 Redis Hash로 상태(대기/실행 중/완료/실패)·GPU 번호·에러 로그를 중앙 관리해 실시간 진행 상태 API를 제공했다.",
+          points: [
+            "BRPOP: 원자적 pop으로 race condition 없는 작업 분배 보장",
+            "Redis Hash: job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API",
+            "작업 실패 시 에러 메시지 저장으로 디버깅 가능한 구조 확보",
+          ],
         },
         {
-          title: "GPU 분배 로직",
-          description: "Worker가 job을 꺼내기 전 nvidia-smi로 가용 메모리를 체크해 모델별 최소 요구량과 비교 후 배치. OOM으로 학습이 중단되는 문제 제거",
+          title: "nvidia-smi 기반 GPU 동적 분배",
+          description: "Worker가 job을 꺼낸 뒤 GPU가 이미 포화 상태면 OOM으로 학습이 중단되는 문제가 반복됐다. job 처리 전 nvidia-smi로 가용 메모리를 체크해 모델별 최소 요구량과 비교 후 배치한다. 조건을 만족하는 GPU가 없으면 job을 다시 큐에 반환해 메모리 여유가 생길 때까지 대기하는 구조로 OOM 장애를 제거했다.",
+          points: [
+            "nvidia-smi --query-gpu로 가용 메모리 실시간 조회",
+            "모델 config에 min_gpu_memory 정의, Worker가 조건 검증 후 GPU 할당",
+            "멀티 GPU OOM 장애 제거, 안정적 동시 학습 지원",
+          ],
         },
-      ],
-      구현포인트: [
-        "job_id 기반 Redis Hash로 상태(대기/실행 중/완료/실패), GPU 번호, 에러 로그를 중앙 관리 → 실시간 진행 상태 API 제공",
-        "신규 모델 온보딩 시 코드 수정 없이 config 교체만으로 처리 (DINO, Co-DETR 등 transformer 계열도 동일)",
-        "K8s + Docker 기반 컨테이너 환경으로 배포 및 운영, Pod 단위 스케일링으로 학습 요청 급증 시에도 안정적 처리",
       ],
       성과: [
         "지원 모델 수 3개 → 20개 이상",
@@ -182,55 +226,69 @@ export const projects: Project[] = [
     id: "PillCare",
     type: "team",
     title: "AI 기반 건강 위험 분석 및 맞춤형 건강 관리 서비스",
-    company: "Team Prject",
+    company: "Team Project",
     summary: "복약·건강·환경 데이터를 통합 분석하여 개인 맞춤형 건강 위험을 예측하는 서비스.",
-    tags: ["FastAPI", "OpenAI SDK", "OAuth 2.0", "Redis", "WeasyPrint + Jinja2", "Pydantic","pytest"],
+    tags: ["FastAPI", "OpenAI SDK", "OAuth 2.0", "Redis", "WeasyPrint", "Pydantic", "pytest"],
     year: "2026.05.08 ~ 2026.05.29",
     images: [
-      { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" }
+      { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" },
     ],
     sections: {
-      핵심기술: [
+      아키텍처: "/projects/pillcare-arch.svg",
+      기획의도: "복약 불이행으로 인한 치료 실패와 약물 부작용은 고령자·만성질환자에게 반복적으로 발생하지만, 기존 복약 관리 앱은 단순 알림 수준에 그친다. 처방봉투 사진 한 장으로 복약 스케줄을 자동 등록하고, 복약 이행률·약물 안전도·환경 지수를 통합 분석해 개인 맞춤형 건강 리스크를 사전에 감지하는 서비스를 기획했다. AI Agent가 실시간 건강 데이터를 직접 조회하는 MCP 구조까지 포함해, 단순 알림을 넘어 실질적인 건강 관리 플랫폼으로 확장하는 것이 목표였다.",
+      기술: [
         {
-          title: "FastMCP 기반 건강 데이터 Tool 서버 구축",
-          description: "건강 데이터 분석 로직을 MCP Tool로 표준화하여 LLM이 실시간 사용자 건강 데이터를 직접 조회·활용할 수 있는 AI Agent 연동 구조를 구축"
+          title: "FastMCP 기반 건강 데이터 MCP 서버",
+          description: "건강 데이터 분석 로직을 MCP Tool로 표준화해 LLM이 실시간 사용자 건강 데이터를 직접 조회·활용할 수 있는 AI Agent 연동 구조를 구축했다. 건강 지수·약물 안전도·환경 지수를 별도 Tool로 등록해 AI 어시스턴트가 컨텍스트에 맞게 호출할 수 있도록 설계했다.",
+          points: [
+            "FastMCP로 MCP 서버 구현, 건강 지수·약물 안전도·환경 지수 3개 Tool 등록",
+            "AI 어시스턴트가 실시간 사용자 건강 데이터를 직접 조회해 개인화 응답 생성",
+            "Tool 단위 분리로 유지보수성 및 기능 확장 용이",
+          ],
         },
         {
-          title: "DDD 기반 도메인 레이어 분리",
-          description: "auth·users·hospitals·medications·events 등 도메인별로 router → service → repository → model 레이어를 독립적으로 구성. 도메인 간 의존성을 최소화하고 기능 추가·변경 시 영향 범위를 해당 도메인으로 한정"
+          title: "DDD 기반 도메인 레이어 설계",
+          description: "auth·users·hospitals·medications·events 등 도메인별로 router → service → repository → model 레이어를 독립적으로 구성했다. 도메인 간 의존성을 최소화하고 기능 추가·변경 시 영향 범위를 해당 도메인으로 한정했다. 도메인 8개 통합 테스트를 작성해 정상·예외 케이스를 코드로 검증했다.",
+          points: [
+            "도메인별 router → service → repository → model 레이어 독립 구성",
+            "도메인 간 의존성 최소화, 기능 변경 시 영향 범위 한정",
+            "8개 도메인 통합 테스트 작성 (정상·예외 케이스 포함)",
+          ],
         },
         {
           title: "3단계 멀티 레이어 캐시 (메모리 → Redis → OpenAI)",
-          description: "LLM 호출 비용·응답속도·장애 격리를 동시에 해결하기 위해 설계. 동일 위험 요소 팁은 하루 OpenAI 1회 호출로 제한"
+          description: "LLM 호출 비용·응답 속도·장애 격리를 동시에 해결하기 위해 3단계 캐시를 설계했다. 동일 위험 요소 팁은 하루 OpenAI 1회 호출로 제한하고, L2 히트 시 L1을 자동 워밍업하며, Redis 장애 시에도 L3 폴백으로 서비스가 중단되지 않는다.",
+          points: [
+            "L1 인메모리(6h TTL) → L2 Redis(자정 초기화) → L3 OpenAI 순으로 캐시 히트 처리",
+            "L2 히트 시 L1 자동 워밍업으로 후속 요청 응답 속도 향상",
+            "Redis 장애 시 L3 폴백으로 서비스 무중단 보장",
+          ],
         },
         {
-          title: "Google / Kakao OAuth 2.0 + JWT",
-          description: "비밀번호 저장 없이 소셜 로그인만으로 온보딩, Provider 클래스 확장만으로 신규 소셜 로그인 추가가 가능한 인증 구조 확보",
-        },
-        {
-          title: "OpenAI Vision API OCR",
-          description: "처방봉투 이미지에서 병원명·처방일·약품명·용량·복용 시점을 자동 파싱. 파싱 결과를 복약 스케줄에 즉시 등록해 수동 입력 단계 제거",
+          title: "OpenAI Vision API 처방봉투 OCR",
+          description: "처방봉투 이미지에서 병원명·처방일·약품명·용량·복용 시점을 자동 파싱한다. 파싱 결과를 복약 스케줄에 즉시 등록해 수동 입력 단계를 완전히 제거했다.",
+          points: [
+            "처방봉투 이미지 업로드 → OCR 파싱 → 약품명·용량·복용 시점 자동 추출",
+            "파싱 결과를 복약 스케줄에 즉시 자동 등록, 수동 입력 단계 제거",
+            "구조화된 응답 포맷으로 파싱 결과 검증 및 오류 처리",
+          ],
         },
         {
           title: "asyncio 기반 비동기 알람 스케줄러",
-          description: "Celery 등 별도 태스크 큐 없이 FastAPI lifespan에 통합, 인메모리 세트로 동일 알람 중복 등록 차단",
+          description: "Celery 등 별도 태스크 큐 없이 FastAPI lifespan에 asyncio를 통합해 알람 스케줄러를 구현했다. 인메모리 세트로 동일 알람 중복 등록을 차단하고, 복약·병원예약·식사·수면·물·일지 6종 알람을 30분 주기로 스캔해 발화 시각을 계산한다.",
+          points: [
+            "FastAPI lifespan에 asyncio 스케줄러 통합, 별도 태스크 큐 불필요",
+            "30분 주기 스캔으로 6종 알람 발화 시각 계산",
+            "인메모리 세트로 동일 알람 중복 등록 차단",
+          ],
         },
-      ],
-      구현포인트: [
-        "FastMCP로 MCP 서버 구현, 건강 지수·약물 안전도·환경 지수 3개 Tool 등록 및 AI 어시스턴트 연동",
-        "DDD 기반 도메인별 레이어 분리 설계 및 도메인 8개 통합 테스트 작성 (정상·예외 케이스 포함)",
-        "처방봉투 이미지 → OCR 파싱 → 병원명·처방일·약품명·용량·복용 시점 추출 → 복약 스케줄 즉시 자동 등록 파이프라인 구현",
-        "L1 메모리(6h) → L2 Redis(자정) → L3 OpenAI 순으로 캐시 히트 처리, L2 히트 시 L1 자동 워밍업, Redis 장애 시 L3 폴백으로 서비스 중단 없음",
-        "복약 이행률·컨디션 트렌드·약물 안전도·증상 추세·환경 지수 5요인 가중 합산 건강 지수 엔진 구현",
-        "Redis 캐시 레이어로 건강 지수·날씨·병원·질병 검색 등 공공 API 중복 호출 방지",
-        "WeasyPrint + Jinja2로 주간·월간·커스텀 기간별 건강 리포트 PDF 자동 생성"
       ],
       기대효과: [
         "복약 관리 디지털화로 고령자·만성질환자의 자가 건강 관리 접근성 향상",
         "복약 이행률 개선을 통한 치료 효과 증대 및 의료비 절감 가능성 확보",
         "건강 데이터 누적 기반의 개인화 리포트로 환자-의사 간 진료 커뮤니케이션 효율화",
-        "DUR 연계를 통한 복약 사고 예방으로 의료 안전망 보완 기여 가능"
-      ]
+        "DUR 연계를 통한 복약 사고 예방으로 의료 안전망 보완 기여 가능",
+      ],
     },
   },
 ];
