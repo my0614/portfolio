@@ -82,6 +82,9 @@ export const projects: Project[] = [
     title: "CS 문의 자동화",
     company: "(주)무무즈",
     summary: "주문 정보를 기반으로 반복적인 배송 문의를 자동 응답하여 CS 업무 부담을 줄이고 응답 지연을 최소화.",
+    images: [
+      { src: "/projects/CS_자동화프로세스.png", caption: "CS 문의 자동화 프로세스" },
+    ],
     tags: ["Python", "Shopby API", "Sellmate API", "Batch"],
     year: "2025.12.15 ~ 2026.03.13",
     sections: {
