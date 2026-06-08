@@ -102,7 +102,7 @@ export const projects: Project[] = [
       기술: [
         {
           title: "규칙 기반 자동 응답 설계",
-          description: "배송 문의 응답에 필요한 정보는 주문번호·송장번호·배송 상태·입고 예정일로 정형화되어 있다. LLM 도입 시 환각 리스크와 운영 비용이 크고, 규칙 기반으로도 대부분의 케이스를 커버 가능하다고 판단했다. 규칙 범위를 벗어난 케이스는 자동화에서 제외하고 CS 담당자에게 플래그 처리해 오답 발송 리스크를 원천 차단했다.",
+          description: "배송 문의는 주문번호·송장번호·배송 상태로 정형화되어 있어 LLM 없이 규칙 기반만으로 대부분 커버 가능하다고 판단했다. 규칙 범위 외 케이스는 자동화에서 제외하고 CS 담당자 플래그로 분리해 오답 발송 리스크를 원천 차단했다.",
           points: [
             "정형화된 배송 문의 패턴 분석 → 케이스별 응답 템플릿 설계",
             "규칙 범위 외 케이스는 CS 담당자 플래그 처리, 오답 발송 방지",
@@ -156,7 +156,7 @@ export const projects: Project[] = [
       기술: [
         {
           title: "RGB + Depth 카메라 프레임 동기화",
-          description: "RGB 카메라와 Depth 카메라의 publish 주기가 달라 ExactTimeSynchronizer로는 프레임 매칭이 거의 이루어지지 않았다. ApproximateTimeSynchronizer의 slop·queue size를 실제 하드웨어 publish 주기를 직접 측정해 튜닝했다. 동기화된 프레임에서 bounding box 중심 픽셀의 Depth 값을 읽고, RealSense intrinsic 파라미터로 3D 좌표를 계산한다.",
+          description: "RGB/Depth 카메라의 publish 주기 차이로 ExactTimeSynchronizer 매칭이 불가능해, ApproximateTimeSynchronizer의 slop·queue size를 실측 기반으로 튜닝했다. 동기화된 프레임에서 bbox 중심 Depth를 추출하고 RealSense intrinsic으로 3D 좌표를 계산한다.",
           points: [
             "ApproximateTimeSynchronizer: slop·queue size 실측 기반 튜닝으로 프레임 정합성 확보",
             "Depth 픽셀 → RealSense intrinsic → 3D XYZ 좌표 변환 파이프라인",
@@ -165,7 +165,7 @@ export const projects: Project[] = [
         },
         {
           title: "Hard Negative Mining 기반 검출 성능 개선",
-          description: "조도 변화·부분 가림(Occlusion)·배경 유사 환경에서 오탐·미탐이 빈번하게 발생했다. 실제 오탐·미탐 케이스를 직접 수집·분석하고 Hard Negative Mining을 적용해 데이터셋을 강화했다. 배경 이미지 다양화와 맞춤 데이터 보강 재학습을 통해 현장 검출 성능을 끌어올렸다.",
+          description: "조도·Occlusion·배경 유사 환경의 오탐·미탐 케이스를 직접 수집·분석해 Hard Negative Mining으로 데이터셋을 강화했다. 재학습으로 mAP 61% → 75% 향상, KTL 시험 성적서 기준을 달성했다.",
           points: [
             "오탐·미탐 케이스 직접 수집 및 원인 분석 (조도·Occlusion·배경 유사성)",
             "Hard Negative Mining으로 어려운 케이스를 데이터셋에 반영 후 재학습",
@@ -210,7 +210,7 @@ export const projects: Project[] = [
       기술: [
         {
           title: "MMDetection config 기반 모델 추상화",
-          description: "기존에는 모델마다 PyTorch 학습 루프를 직접 구현해야 해서 신규 모델 온보딩에 1~2주가 소요됐다. MMDetection의 config 기반 선언적 구조를 채택하면 모델 아키텍처·데이터셋·학습 파라미터를 config 파일 하나로 정의하고, 기존 파이프라인을 그대로 재사용할 수 있다. DINO·Co-DETR 등 transformer 계열 모델도 config 교체만으로 온보딩했다.",
+          description: "모델마다 PyTorch 루프 직접 구현이 필요했던 구조를 MMDetection config 기반으로 전환해, 모델 아키텍처·데이터셋·파라미터를 config 파일 하나로 정의하고 파이프라인을 재사용했다. DINO·Co-DETR 등 transformer 계열도 config 교체만으로 온보딩, 1~2주 → 1일 이내로 단축했다.",
           points: [
             "신규 모델 온보딩: 코드 수정 없이 config 파일 교체만으로 처리",
             "model / dataset / schedule / runtime 4개 블록으로 학습 구성 표준화",
@@ -219,7 +219,7 @@ export const projects: Project[] = [
         },
         {
           title: "Redis BRPOP 기반 학습 작업 큐",
-          description: "DB 폴링 방식으로는 다수의 Worker Pod가 동시에 같은 job을 꺼내는 race condition이 발생했다. Redis의 BRPOP은 원자적 연산으로 한 번에 하나의 Worker만 job을 꺼낼 수 있어, 분산 락 없이 순차 처리를 보장한다. job_id 기반 Redis Hash로 상태(대기/실행 중/완료/실패)·GPU 번호·에러 로그를 중앙 관리해 실시간 진행 상태 API를 제공했다.",
+          description: "DB 폴링 방식의 race condition을 Redis BRPOP 원자적 연산으로 해결해 분산 락 없이 Worker 간 순차 처리를 보장한다. Redis Hash로 job 상태·GPU 번호·에러 로그를 중앙 관리해 실시간 진행 상태 API를 제공했다.",
           points: [
             "BRPOP: 원자적 pop으로 race condition 없는 작업 분배 보장",
             "Redis Hash: job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API",
@@ -228,7 +228,7 @@ export const projects: Project[] = [
         },
         {
           title: "nvidia-smi 기반 GPU 동적 분배",
-          description: "Worker가 job을 꺼낸 뒤 GPU가 이미 포화 상태면 OOM으로 학습이 중단되는 문제가 반복됐다. job 처리 전 nvidia-smi로 가용 메모리를 체크해 모델별 최소 요구량과 비교 후 배치한다. 조건을 만족하는 GPU가 없으면 job을 다시 큐에 반환해 메모리 여유가 생길 때까지 대기하는 구조로 OOM 장애를 제거했다.",
+          description: "job 처리 전 nvidia-smi로 가용 메모리를 체크해 모델별 최소 요구량과 비교 후 GPU를 할당한다. 조건 미충족 시 job을 큐에 반환해 메모리 여유가 생길 때까지 대기하는 구조로 OOM 장애를 제거했다.",
           points: [
             "nvidia-smi --query-gpu로 가용 메모리 실시간 조회",
             "모델 config에 min_gpu_memory 정의, Worker가 조건 검증 후 GPU 할당",
@@ -275,7 +275,7 @@ export const projects: Project[] = [
         },
         {
           title: "DDD 기반 도메인 레이어 설계",
-          description: "auth·users·hospitals·medications·events 등 도메인별로 router → service → repository → model 레이어를 독립적으로 구성했다. 도메인 간 의존성을 최소화하고 기능 추가·변경 시 영향 범위를 해당 도메인으로 한정했다. 도메인 8개 통합 테스트를 작성해 정상·예외 케이스를 코드로 검증했다.",
+          description: "도메인별로 router → service → repository → model 레이어를 독립 구성해 의존성을 최소화하고 기능 변경 시 영향 범위를 해당 도메인으로 한정했다. 8개 도메인 통합 테스트로 정상·예외 케이스를 코드로 검증했다.",
           points: [
             "도메인별 router → service → repository → model 레이어 독립 구성",
             "도메인 간 의존성 최소화, 기능 변경 시 영향 범위 한정",
