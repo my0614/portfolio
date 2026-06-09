@@ -221,11 +221,11 @@ section { position: relative; }
 .detail-bar .dt-title { font-size: 16px; font-weight: 700; opacity: 0; transition: opacity .25s; }
 .detail-bar.scrolled .dt-title { opacity: 1; }
 .detail-close {
-  width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--border);
-  background: var(--surface); cursor: pointer; color: var(--text); display: grid; place-items: center;
+  width: 36px; height: 36px; border-radius: 50%; border: none;
+  background: transparent; cursor: pointer; color: var(--text-3); display: grid; place-items: center;
   transition: all .2s;
 }
-.detail-close:hover { background: var(--bg-gray); }
+.detail-close:hover { background: var(--bg-gray); color: var(--text); }
 .detail-inner { max-width: 860px; margin: 0 auto; padding: 56px 24px 100px; }
 
 .dt-hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
