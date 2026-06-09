@@ -49,7 +49,7 @@ export const PROFILE: ProfileData = {
   roleShort: "ML / MLOps",
   photo: "/profile.png",
   intro: [
-    "위성영상 및 다양한 영상 데이터를 활용해 ML 모델을 개발하고, 실제 서비스 환경에 적용하기 위한 MLOps 파이프라인을 구축·운영한 5년 차 개발자입니다.",
+    "이커머스 도메인에서 데이터 파이프라인 구축부터 모델 학습·서빙·인프라 운영까지 End-to-End를 직접 담당해온 5년 차 ML 엔지니어입니다.",
     "RealSense 카메라, 드론 영상, 항공 영상, RTSP 영상 등 다양한 영상 데이터를 다루며 데이터 수집부터 모델 개발, 배포·운영까지 이어지는 End-to-End ML 파이프라인 구축에 강점을 가지고 있습니다.",
   ],
   systemInfo: [
