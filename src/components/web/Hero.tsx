@@ -23,6 +23,9 @@ export function Hero() {
             <a className="btn btn-primary" href="#projects">
               프로젝트 보기 <Icon name="arrow" size={18} stroke={2.2} />
             </a>
+            <a className="btn btn-ghost" href="/projects/김민영_이력서.pdf" download>
+              이력서 다운로드 <Icon name="download" size={18} stroke={2.2} />
+            </a>
             <a className="btn btn-ghost" href="#contact">연락하기</a>
           </div>
         </div>
