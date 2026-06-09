@@ -85,7 +85,7 @@ export const PROJECTS: ProjectData[] = [
     thumb: "/projects/hotdeal-app.png",
     image: { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
     link: "https://moomooz.co.kr/product/hotdeal",
-    tags: ["Python", "OAuth 2.0", "Google Sheets API", "Gmail API", "Shopby API", "AWS EC2", "Cron", "Bitbucket Pipelines"],
+    tags: ["OAuth 2.0", "Google Sheets API", "Gmail API", "Shopby API", "AWS EC2", "Bitbucket Pipelines", "Cron", "Python"],
     year: "2025.12 ~ 2026.03",
     metrics: [
       { value: "2분", label: "등록 작업 시간", from: "4시간+" },
@@ -144,7 +144,7 @@ export const PROJECTS: ProjectData[] = [
     summary: "주문 정보를 기반으로 반복적인 배송 문의를 자동 응답하여 CS 업무 부담을 줄이고 응답 지연을 최소화.",
     thumb: "/projects/CS_자동화프로세스.png",
     image: { src: "/projects/CS_자동화프로세스.png", caption: "CS 문의 자동화 프로세스" },
-    tags: ["Python", "Shopby API", "Sellmate API", "Batch"],
+    tags: ["Shopby API", "Sellmate API", "Batch", "Python"],
     year: "2025.12 ~ 2026.03",
     metrics: [
       { value: "1/3", label: "문의 자동 처리" },
@@ -204,7 +204,7 @@ export const PROJECTS: ProjectData[] = [
     summary: "객체 탐지 mAP 61% → 75% 달성, 네트워크 세팅 2시간 → 1분으로 단축한 정찰 드론 실시간 위협 탐지 및 3D 가시화 시스템.",
     thumb: "/projects/drone-detection.png",
     image: { src: "/projects/drone-detection.png", caption: "실시간 위협 객체 6종 클래스" },
-    tags: ["ROS", "Docker", "Faster R-CNN", "RealSense D435i"],
+    tags: ["Faster R-CNN", "ROS", "RealSense D435i", "Docker"],
     year: "2023 ~ 2025",
     metrics: [
       { value: "75%", label: "객체 탐지 mAP", from: "61%" },
@@ -264,7 +264,7 @@ export const PROJECTS: ProjectData[] = [
     thumb: "/projects/dflow-training-ui.png",
     image: { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
     image2: { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
-    tags: ["MMDetection", "Redis", "Docker", "K8s", "PostgreSQL", "PyTorch"],
+    tags: ["MMDetection", "Redis", "K8s", "PyTorch", "Docker", "PostgreSQL"],
     year: "2022 ~ 2024",
     metrics: [
       { value: "20+", label: "지원 모델 수", from: "3개" },
@@ -324,7 +324,7 @@ export const PROJECTS: ProjectData[] = [
     summary: "복약·건강·환경 데이터를 통합 분석하여 개인 맞춤형 건강 위험을 예측하는 서비스. 처방봉투 사진 한 장으로 복약 스케줄을 자동 등록.",
     thumb: "/projects/pillcare_thum.webp",
     image: { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" },
-    tags: ["FastAPI", "OpenAI SDK", "OAuth 2.0", "Redis", "WeasyPrint", "Pydantic", "pytest"],
+    tags: ["FastAPI", "OpenAI SDK", "Redis", "OAuth 2.0", "Pydantic", "WeasyPrint", "pytest"],
     year: "2026.05",
     metrics: [
       { value: "11", label: "도메인 설계", from: "15 테이블" },
@@ -406,7 +406,7 @@ export const PROJECTS: ProjectData[] = [
     thumb: "/projects/Dearme1.png",
     image: { src: "/projects/Dearme1.png", caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅" },
     image2: { src: "/projects/Dearme2.png", caption: "감정 분석 결과 · GPT-4o 생성 편지" },
-    tags: ["Python", "FastAPI", "React", "Azure Speech", "Azure OpenAI GPT-4o", "APScheduler", "SQLite"],
+    tags: ["Azure Speech", "Azure OpenAI GPT-4o", "FastAPI", "APScheduler", "React", "SQLite", "Python"],
     year: "2026.06",
     metrics: [
       { value: "Azure", label: "Speech · OpenAI 연동" },
