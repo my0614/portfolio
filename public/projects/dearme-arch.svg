@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 530">
+  <defs>
+    <marker id="a" viewBox="0 0 10 6" refX="9" refY="3" markerWidth="6" markerHeight="6" orient="auto">
+      <polygon points="0,0 10,3 0,6" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="900" height="530" fill="#0d0d0d"/>
+
+  <text x="450" y="26" font-family="system-ui,sans-serif" font-size="11" fill="#334155" text-anchor="middle" letter-spacing="3">DEAR ME · AI TIMECAPSULE ARCHITECTURE</text>
+
+  <!-- User / React App -->
+  <rect x="350" y="44" width="200" height="46" rx="6" fill="#0f1829" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="450" y="64" font-family="system-ui,sans-serif" font-size="12" fill="#93c5fd" font-weight="600" text-anchor="middle">User / React App</text>
+  <text x="450" y="80" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">음성 녹음 · 편지 수신 · QR 카드</text>
+
+  <line x1="450" y1="90" x2="450" y2="110" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- FastAPI Backend -->
+  <rect x="300" y="112" width="300" height="46" rx="6" fill="#1c1400" stroke="#854d0e" stroke-width="1.5"/>
+  <text x="450" y="134" font-family="system-ui,sans-serif" font-size="12" fill="#fbbf24" font-weight="600" text-anchor="middle">FastAPI Backend</text>
+  <text x="450" y="150" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">음성 데이터 수신 · API 라우팅 · 인증</text>
+
+  <!-- FastAPI → STT (left) -->
+  <line x1="360" y1="158" x2="190" y2="200" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <!-- FastAPI → APScheduler (right) -->
+  <line x1="540" y1="158" x2="710" y2="200" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ===== LEFT: 음성 처리 파이프라인 ===== -->
+
+  <!-- Azure Speech STT -->
+  <rect x="40" y="202" width="300" height="54" rx="6" fill="#0a1a0a" stroke="#166534" stroke-width="1.5"/>
+  <text x="190" y="222" font-family="system-ui,sans-serif" font-size="11" fill="#4ade80" font-weight="600" text-anchor="middle">Azure Speech STT</text>
+  <text x="190" y="238" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">음성 스트림 → 실시간 텍스트 변환</text>
+  <text x="190" y="250" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">한국어 음성 인식</text>
+
+  <line x1="190" y1="256" x2="190" y2="292" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- GPT-4o -->
+  <rect x="40" y="294" width="300" height="64" rx="6" fill="#1c1400" stroke="#854d0e" stroke-width="1.5"/>
+  <text x="190" y="315" font-family="system-ui,sans-serif" font-size="11" fill="#fbbf24" font-weight="600" text-anchor="middle">Azure OpenAI GPT-4o</text>
+  <text x="190" y="331" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">감정 분석 · 핵심 키워드 추출</text>
+  <text x="190" y="347" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">미래의 나에게 보내는 편지 자동 생성</text>
+
+  <line x1="190" y1="358" x2="190" y2="394" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- Azure Speech TTS -->
+  <rect x="40" y="396" width="300" height="54" rx="6" fill="#0a1a0a" stroke="#166534" stroke-width="1.5"/>
+  <text x="190" y="416" font-family="system-ui,sans-serif" font-size="11" fill="#4ade80" font-weight="600" text-anchor="middle">Azure Speech TTS</text>
+  <text x="190" y="432" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">편지 텍스트 → 음성 합성 · 낭독 재생</text>
+  <text x="190" y="444" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">QR 카드 생성 · 저장</text>
+
+  <!-- TTS → SQLite -->
+  <line x1="190" y1="450" x2="330" y2="476" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ===== RIGHT: 스케줄 발송 파이프라인 ===== -->
+
+  <!-- APScheduler -->
+  <rect x="560" y="202" width="300" height="54" rx="6" fill="#160828" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="710" y="222" font-family="system-ui,sans-serif" font-size="11" fill="#c4b5fd" font-weight="600" text-anchor="middle">APScheduler</text>
+  <text x="710" y="238" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">FastAPI lifespan 통합</text>
+  <text x="710" y="250" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">지정 날짜 발송 예약 · 주기 스캔</text>
+
+  <line x1="710" y1="256" x2="710" y2="292" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- 자동 발송 채널 -->
+  <rect x="560" y="294" width="300" height="100" rx="6" fill="#0f1829" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="710" y="316" font-family="system-ui,sans-serif" font-size="11" fill="#93c5fd" font-weight="600" text-anchor="middle">자동 발송 채널</text>
+
+  <rect x="576" y="326" width="120" height="24" rx="4" fill="#0d1a0d" stroke="#166534" stroke-width="1"/>
+  <text x="636" y="342" font-family="system-ui,sans-serif" font-size="9" fill="#4ade80" text-anchor="middle">카카오톡 Webhook</text>
+
+  <rect x="724" y="326" width="120" height="24" rx="4" fill="#0d1a0d" stroke="#166534" stroke-width="1"/>
+  <text x="784" y="342" font-family="system-ui,sans-serif" font-size="9" fill="#4ade80" text-anchor="middle">Discord Webhook</text>
+
+  <rect x="576" y="358" width="120" height="24" rx="4" fill="#0d1a0d" stroke="#166534" stroke-width="1"/>
+  <text x="636" y="374" font-family="system-ui,sans-serif" font-size="9" fill="#4ade80" text-anchor="middle">이메일 (SMTP)</text>
+
+  <rect x="724" y="358" width="120" height="24" rx="4" fill="#0d1a0d" stroke="#166534" stroke-width="1"/>
+  <text x="784" y="374" font-family="system-ui,sans-serif" font-size="9" fill="#4ade80" text-anchor="middle">QR 카드 출력</text>
+
+  <!-- Delivery → SQLite -->
+  <line x1="710" y1="394" x2="570" y2="476" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ===== SQLite (shared) ===== -->
+  <rect x="280" y="478" width="340" height="38" rx="6" fill="#140820" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="450" y="497" font-family="system-ui,sans-serif" font-size="12" fill="#c4b5fd" font-weight="600" text-anchor="middle">SQLite</text>
+  <text x="450" y="511" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">편지 · 감정 기록 · 발송 예약 · 발송 이력</text>
+</svg>

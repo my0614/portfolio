@@ -28,6 +28,7 @@ function ProjectCard({ p, idx, onOpenDetail }: { p: typeof projects[0]; idx: num
 export default function ProjectsWindow({ onOpenDetail }: Props) {
   const companyProjects = projects.filter((p) => p.type === "company");
   const teamProjects = projects.filter((p) => p.type === "team");
+  const personalProjects = projects.filter((p) => p.type === "personal");
 
   return (
     <div className="flex flex-col gap-6">
@@ -45,6 +46,16 @@ export default function ProjectsWindow({ onOpenDetail }: Props) {
       <div className="flex flex-col gap-3">
         <h2 className="text-xs uppercase tracking-wider text-foreground/70 font-semibold">Team Projects</h2>
         {teamProjects.map((p) => (
+          <ProjectCard key={p.id} p={p} idx={projects.indexOf(p)} onOpenDetail={onOpenDetail} />
+        ))}
+      </div>
+
+      <div className="border-t border-foreground/[0.06]" />
+
+      {/* Personal Projects */}
+      <div className="flex flex-col gap-3">
+        <h2 className="text-xs uppercase tracking-wider text-foreground/70 font-semibold">Personal Projects</h2>
+        {personalProjects.map((p) => (
           <ProjectCard key={p.id} p={p} idx={projects.indexOf(p)} onOpenDetail={onOpenDetail} />
         ))}
       </div>

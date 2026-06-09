@@ -1,6 +1,6 @@
 export type Project = {
   id: string;
-  type: "company" | "team";
+  type: "company" | "team" | "personal";
   title: string;
   company: string;
   summary: string;
@@ -315,6 +315,60 @@ export const projects: Project[] = [
         "복약 이행률 개선을 통한 치료 효과 증대 및 의료비 절감 가능성 확보",
         "건강 데이터 누적 기반의 개인화 리포트로 환자-의사 간 진료 커뮤니케이션 효율화",
         "DUR 연계를 통한 복약 사고 예방으로 의료 안전망 보완 기여 가능",
+      ],
+    },
+  },
+  {
+    id: "dear-me",
+    type: "personal",
+    title: "Dear Me",
+    company: "Personal Project",
+    summary: "오늘의 감정을 말로 기록하면 AI가 미래의 나에게 보내는 편지를 써주고 TTS로 낭독해주는 AI 타임캡슐 서비스.",
+    tags: ["Python", "FastAPI", "React", "Azure Speech", "Azure OpenAI GPT-4o", "APScheduler", "SQLite"],
+    year: "2026.06",
+    sections: {
+      아키텍처: "/projects/dearme-arch.svg",
+      기획의도: [
+        "바쁜 일상 속에서 감정과 생각을 기록하고 되돌아볼 기회 부족",
+        "기존 일기 서비스는 텍스트 작성 부담이 크고 기록 보관에만 집중",
+        "음성 기록만으로 AI가 미래의 나에게 보내는 편지 자동 생성",
+        "TTS 기반 편지 낭독 및 QR 카드 저장으로 특별한 회고 경험 제공",
+        "지정한 날짜에 카카오톡·Discord·이메일로 자동 전달하여 과거와 미래의 나를 연결",
+      ],
+      기술: [
+        {
+          title: "Azure Speech SDK — STT · TTS 파이프라인",
+          description: "Azure Speech STT로 음성 녹음 → 텍스트 변환, GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독 — 입력부터 출력까지 음성 End-to-End",
+          points: [
+            "Azure Speech STT: 음성 녹음 스트림을 실시간으로 텍스트 변환",
+            "Azure Speech TTS: 생성된 편지를 자연스러운 음성으로 합성·재생",
+            "STT → GPT-4o → TTS 단일 파이프라인으로 음성 입출력 완결",
+          ],
+        },
+        {
+          title: "Azure OpenAI GPT-4o — 감정 분석 및 편지 생성",
+          description: "STT 변환 텍스트에서 감정·맥락을 추출하고 '미래의 나에게' 형식의 편지 자동 생성, 지정 날짜·수신 채널을 반영한 개인화 메시지 작성",
+          points: [
+            "감정 분석: 음성 텍스트에서 감정 상태·핵심 키워드 추출",
+            "편지 생성: 감정과 맥락을 바탕으로 미래의 나에게 보내는 편지 형식으로 작성",
+            "지정 발송일·채널(카카오톡·Discord·이메일)을 컨텍스트에 반영한 개인화 메시지",
+          ],
+        },
+        {
+          title: "APScheduler 기반 자동 발송 스케줄러",
+          description: "사용자가 지정한 날짜에 카카오톡·Discord·이메일 채널로 편지 자동 발송, FastAPI 내장 실행으로 별도 태스크 큐 없이 운영",
+          points: [
+            "APScheduler를 FastAPI lifespan에 통합, 별도 인프라 없이 스케줄 관리",
+            "발송 채널별 Webhook·API 연동 (카카오톡·Discord·이메일) 분기 처리",
+            "SQLite에 편지·발송 예약·상태 저장, 발송 완료 후 이력 기록",
+          ],
+        },
+      ],
+      기대효과: [
+        "음성 입력만으로 기록 부담 없이 감정 일기 습관 형성 가능",
+        "AI 생성 편지와 TTS 낭독으로 미래의 자신과 감성적으로 연결되는 회고 경험 제공",
+        "QR 카드 출력·다채널 자동 발송으로 디지털 타임캡슐을 실물과 메신저 모두에서 수령",
+        "텍스트 중심 일기 서비스와 차별화된 음성 기반 감정 아카이빙 플랫폼 가능성",
       ],
     },
   },
