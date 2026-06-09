@@ -272,15 +272,16 @@ section { position: relative; }
 .dt-result-row p { font-size: 16.5px; line-height: 1.6; color: var(--text); font-weight: 500; }
 
 /* ===== about ===== */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-.about-skills { display: flex; flex-direction: column; gap: 22px; }
-.skill-group { display: flex; flex-direction: column; gap: 0; }
-.skill-group + .skill-group { margin-top: 18px; }
-.skill-group .sg-label { font-size: 13px; font-weight: 800; color: var(--text-4); margin-bottom: 10px; letter-spacing: .02em; }
-.info-list { display: flex; flex-direction: column; }
-.info-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border-soft); }
-.info-row .ik { font-size: 14.5px; color: var(--text-3); font-weight: 600; font-family: ui-monospace, monospace; }
-.info-row .iv { font-size: 14.5px; color: var(--text); font-weight: 600; }
+.about-bio { max-width: 100%; }
+.about-col-label { font-size: 11px; font-weight: 800; color: var(--text-4); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 20px; }
+.about-skills { display: flex; flex-direction: column; gap: 14px; }
+.skill-group-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.skill-group-row .sg-label { font-size: 11px; font-weight: 800; color: var(--text-4); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; min-width: 80px; }
+.info-list { display: flex; flex-direction: column; gap: 0; }
+.info-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; }
+.info-row .ik { font-size: 12.5px; color: var(--text-4); font-weight: 600; font-family: ui-monospace, monospace; white-space: nowrap; }
+.info-row .ik-line { flex: 1; height: 1px; background: var(--border-soft); }
+.info-row .iv { font-size: 13px; color: var(--text-2); font-weight: 600; white-space: nowrap; }
 
 /* ===== contact ===== */
 .contact { background: var(--bg-soft); border-top: 1px solid var(--border-soft); }
@@ -317,7 +318,7 @@ textarea.field { resize: vertical; min-height: 120px; line-height: 1.55; }
   .hero h1 { font-size: 44px; }
   .impact-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
   .proj-grid { grid-template-columns: 1fr; }
-  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .dt-metrics { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .sec-title { font-size: 30px; }
