@@ -45,7 +45,7 @@ export type ProfileData = {
 export const PROFILE: ProfileData = {
   name: "김민영",
   nameEn: "KIM MIN YOUNG",
-  role: "ML 모델 개발 · MLOps 개발자",
+  role: "MLOps/Backend · MLOps 개발자",
   roleShort: "ML / MLOps",
   photo: "/profile.png",
   intro: [
@@ -398,7 +398,7 @@ export const PROJECTS: ProjectData[] = [
   {
     id: "dear-me",
     type: "personal",
-    title: "Dear Me",
+    title: "Dear Me,",
     subtitle: "AI 음성 타임캡슐",
     company: "Personal Project",
     initial: "D",
