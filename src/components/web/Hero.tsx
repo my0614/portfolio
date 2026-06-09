@@ -15,7 +15,7 @@ export function Hero() {
             5년차 · ML / MLOps Engineer
           </div>
           <h1 className="reveal" style={{ transitionDelay: '.05s' }}>
-            영상 데이터로<br />문제를 푸는<br /><span className="accent">{PROFILE.name}</span>입니다
+            안녕하세요,<br />{PROFILE.role.split(' · ')[0]} 개발자<br /><span className="accent">{PROFILE.name}</span>입니다
           </h1>
           <p className="hero-role reveal" style={{ transitionDelay: '.1s' }}>{PROFILE.role}</p>
           <p className="hero-intro reveal" style={{ transitionDelay: '.14s' }}>{PROFILE.intro[0]}</p>
