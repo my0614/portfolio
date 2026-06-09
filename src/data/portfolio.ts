@@ -68,7 +68,6 @@ export const PROFILE: ProfileData = {
     { category: "Else", skills: ["Git", "Jira"] },
   ],
   contact: [
-    { kind: "phone", label: "010-3957-5034", href: "tel:010-3957-5034" },
     { kind: "mail", label: "premierckim@gmail.com", href: "mailto:premierckim@gmail.com" },
     { kind: "github", label: "github.com/my0614", href: "https://github.com/my0614" },
   ],
