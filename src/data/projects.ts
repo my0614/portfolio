@@ -326,6 +326,11 @@ export const projects: Project[] = [
     summary: "오늘의 감정을 말로 기록하면 AI가 미래의 나에게 보내는 편지를 써주고 TTS로 낭독해주는 AI 타임캡슐 서비스.",
     tags: ["Python", "FastAPI", "React", "Azure Speech", "Azure OpenAI GPT-4o", "APScheduler", "SQLite"],
     year: "2026.06",
+    images: [
+      { src: "/projects/Dearme1.png", caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅" },
+      { src: "/projects/Dearme2.png", caption: "감정 분석 결과 · GPT-4o 생성 편지" },
+      { src: "/projects/Dearme3.png", caption: "QR 카드 저장 · 발송 날짜 및 채널 선택" },
+    ],
     sections: {
       아키텍처: "/projects/dearme-arch.svg",
       기획의도: [
