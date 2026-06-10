@@ -83,6 +83,36 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
             <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 8, textAlign: 'center' }}>{pr.image.caption}</div>
           )}
         </div>
+        {pr.image2 && (
+          <div className="pad rise" style={{ animationDelay: '.22s', paddingBottom: 8 }}>
+            <div style={{ borderRadius: 16, overflow: 'hidden', background: 'var(--bg-gray)' }}>
+              <img src={pr.image2.src} alt="" style={{ width: '100%', display: 'block' }} />
+            </div>
+            {pr.image2.caption && (
+              <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 8, textAlign: 'center' }}>{pr.image2.caption}</div>
+            )}
+          </div>
+        )}
+        {pr.image3 && (
+          <div className="pad rise" style={{ animationDelay: '.26s', paddingBottom: 8 }}>
+            <div style={{ borderRadius: 16, overflow: 'hidden', background: 'var(--bg-gray)' }}>
+              <img src={pr.image3.src} alt="" style={{ width: '100%', display: 'block' }} />
+            </div>
+            {pr.image3.caption && (
+              <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 8, textAlign: 'center' }}>{pr.image3.caption}</div>
+            )}
+          </div>
+        )}
+        {pr.image4 && (
+          <div className="pad rise" style={{ animationDelay: '.30s', paddingBottom: 8 }}>
+            <div style={{ borderRadius: 16, overflow: 'hidden', background: 'var(--bg-gray)' }}>
+              <img src={pr.image4.src} alt="" style={{ width: '100%', display: 'block' }} />
+            </div>
+            {pr.image4.caption && (
+              <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 8, textAlign: 'center' }}>{pr.image4.caption}</div>
+            )}
+          </div>
+        )}
 
         <div className="divider" style={{ marginTop: 18 }} />
 

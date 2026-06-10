@@ -30,7 +30,7 @@ export const projects: Project[] = [
     type: "company",
     title: "핫딜 자동화 시스템",
     company: "(주)무무즈",
-    summary: "OAuth 2.0으로 Google Spreadsheet·Gmail을 연동해 파트너사 신청부터 결과 메일 발송까지 전 과정을 자동화, 핫딜 등록 작업 4시간 → 2분으로 단축.",
+    summary: "단독 최저가 상품을 빠르게 발굴하고 경쟁사보다 먼저 프로모션을 진행하기 위해 구축한 핫딜 운영 자동화 시스템. 파트너사 신청부터 상품 선정, 등록, 결과 메일 발송까지의 업무를 자동화하여 운영 시간을 단축하고, 더 많은 핫딜을 안정적으로 운영할 수 있는 환경을 구축했습니다.",
     images: [
       { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
     ],
@@ -85,7 +85,7 @@ export const projects: Project[] = [
     type: "company",
     title: "CS 문의 자동화",
     company: "(주)무무즈",
-    summary: "주문 정보를 기반으로 반복적인 배송 문의를 자동 응답하여 CS 업무 부담을 줄이고 응답 지연을 최소화.",
+    summary: "반복적인 배송 문의로 인해 상담 인력이 단순 응대에 집중되는 문제를 해결하고자 구축한 CS 자동화 시스템. 주문 정보를 기반으로 문의를 자동 분류·응답하여 고객 응답 시간을 단축하고 상담 인력이 고부가가치 업무에 집중할 수 있도록 지원했습니다.",
     images: [
       { src: "/projects/CS_자동화프로세스.png", caption: "CS 문의 자동화 프로세스" },
     ],
@@ -139,7 +139,7 @@ export const projects: Project[] = [
     type: "company",
     title: "민군겸용기술개발 R&D — 드론 탑재 실시간 객체 탐지",
     company: "한컴인스페이스",
-    summary: "객체 탐지 mAP 61% → 75% 달성, 네트워크 세팅 2시간 → 1분으로 단축한 정찰 드론 실시간 위협 탐지 및 3D 가시화 시스템.",
+    summary: "전쟁 지역, 붕괴 위험이 있는 터널, 저조도 환경 등 사람이 직접 접근하기 어려운 위험 지역을 안전하게 탐색하기 위해 개발한 드론 기반 객체 탐지 시스템. 드론 영상에서 위협 객체를 실시간으로 탐지하고 3D 좌표로 시각화하여 현장 상황을 원격으로 파악할 수 있도록 지원했습니다.",
     tags: ["ROS", "Docker", "Faster R-CNN", "RealSense D435i"],
     year: "2023 ~ 2025",
     images: [
@@ -193,7 +193,7 @@ export const projects: Project[] = [
     type: "company",
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
-    summary: "지원 모델 3개 → 20개 이상 확장, 학습 대기 시간을 하루 → 수십 분으로 단축한 사내 MLOps 자동화 플랫폼.",
+    summary: "ML 모델 개발 과정에서 반복적으로 발생하는 학습 환경 구축, 자원 할당, 성능 검증 문제를 해결하기 위해 구축한 MLOps 플랫폼. 학습 작업 큐 관리, GPU 자원 분배, 성능 평가를 자동화하여 실험 재현성을 높이고 모델 개발 생산성을 향상시켰습니다. ",
     tags: ["MMDetection", "Redis", "Docker", "K8s", "PostgreSQL", "PyTorch"],
     year: "2022 ~ 2024",
     images: [

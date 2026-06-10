@@ -111,6 +111,18 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
             {pr.image2.caption && <div className="dt-cap">{pr.image2.caption}</div>}
           </>
         )}
+        {pr.image3 && (
+          <>
+            <div className="dt-hero-img" style={{ marginTop: 16 }}><img src={pr.image3.src} alt="" /></div>
+            {pr.image3.caption && <div className="dt-cap">{pr.image3.caption}</div>}
+          </>
+        )}
+        {pr.image4 && (
+          <>
+            <div className="dt-hero-img" style={{ marginTop: 16 }}><img src={pr.image4.src} alt="" /></div>
+            {pr.image4.caption && <div className="dt-cap">{pr.image4.caption}</div>}
+          </>
+        )}
 
         <div className="dt-section">
           <div className="dt-sec-head">

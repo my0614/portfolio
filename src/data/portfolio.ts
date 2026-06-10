@@ -17,6 +17,8 @@ export type ProjectData = {
   thumb: string;
   image: { src: string; caption?: string };
   image2?: { src: string; caption?: string };
+  image3?: { src: string; caption?: string };
+  image4?: { src: string; caption?: string };
   link?: string;
   tags: string[];
   year: string;
@@ -80,7 +82,7 @@ export const PROJECTS: ProjectData[] = [
     title: "핫딜 자동화 시스템",
     company: "(주)무무즈",
     initial: "무",
-    summary: "OAuth 2.0으로 Google Spreadsheet·Gmail을 연동해 파트너사 신청부터 결과 메일 발송까지 전 과정을 자동화, 핫딜 등록 작업을 4시간 → 2분으로 단축.",
+    summary: "단독 최저가 상품을 빠르게 발굴하고 경쟁사보다 먼저 프로모션을 진행하기 위해 구축한 핫딜 운영 자동화 시스템. 파트너사 신청부터 상품 선정, 등록, 결과 메일 발송까지의 업무를 자동화하여 운영 시간을 단축하고, 더 많은 핫딜을 안정적으로 운영할 수 있는 환경을 구축했습니다.",
     thumb: "/projects/hotdeal-app.png",
     image: { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
     link: "https://moomooz.co.kr/product/hotdeal",
@@ -140,7 +142,7 @@ export const PROJECTS: ProjectData[] = [
     title: "CS 문의 자동화",
     company: "(주)무무즈",
     initial: "무",
-    summary: "주문 정보를 기반으로 반복적인 배송 문의를 자동 응답하여 CS 업무 부담을 줄이고 응답 지연을 최소화.",
+    summary: "반복적인 배송 문의로 인해 상담 인력이 단순 응대에 집중되는 문제를 해결하고자 구축한 CS 자동화 시스템. 주문 정보를 기반으로 문의를 자동 분류·응답하여 고객 응답 시간을 단축하고 상담 인력이 고부가가치 업무에 집중할 수 있도록 지원했습니다.",
     thumb: "/projects/cs-main.png",
     image: { src: "/projects/cs-main.png", caption: "CS 문의 자동화 시스템 개요" },
     image2: { src: "/projects/CS_자동화프로세스.png", caption: "CS 문의 자동화 프로세스" },
@@ -201,7 +203,7 @@ export const PROJECTS: ProjectData[] = [
     subtitle: "민군겸용기술개발 R&D",
     company: "한컴인스페이스",
     initial: "한",
-    summary: "객체 탐지 mAP 61% → 75% 달성, 네트워크 세팅 2시간 → 1분으로 단축한 정찰 드론 실시간 위협 탐지 및 3D 가시화 시스템.",
+    summary: "전쟁 지역, 붕괴 위험이 있는 터널, 저조도 환경 등 사람이 직접 접근하기 어려운 위험 지역을 안전하게 탐색하기 위해 개발한 드론 기반 객체 탐지 시스템. 드론 영상에서 위협 객체를 실시간으로 탐지하고 3D 좌표로 시각화하여 현장 상황을 원격으로 파악할 수 있도록 지원했습니다.",
     thumb: "/projects/drone-detection.png",
     image: { src: "/projects/drone-detection.png", caption: "실시간 위협 객체 6종 클래스" },
     tags: ["Faster R-CNN", "ROS", "RealSense D435i", "Docker"],
@@ -260,7 +262,7 @@ export const PROJECTS: ProjectData[] = [
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
     initial: "한",
-    summary: "지원 모델 3개 → 20개 이상 확장, 학습 대기 시간을 하루 → 수십 분으로 단축한 사내 MLOps 자동화 플랫폼.",
+    summary: "ML 모델 개발 과정에서 반복적으로 발생하는 학습 환경 구축, 자원 할당, 성능 검증 문제를 해결하기 위해 구축한 MLOps 플랫폼. 학습 작업 큐 관리, GPU 자원 분배, 성능 평가를 자동화하여 실험 재현성을 높이고 모델 개발 생산성을 향상시켰습니다.",
     thumb: "/projects/dflow-training-ui.png",
     image: { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
     image2: { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
@@ -321,7 +323,7 @@ export const PROJECTS: ProjectData[] = [
     subtitle: "AI 기반 건강 위험 분석 서비스",
     company: "Team Project",
     initial: "P",
-    summary: "복약·건강·환경 데이터를 통합 분석하여 개인 맞춤형 건강 위험을 예측하는 서비스. 처방봉투 사진 한 장으로 복약 스케줄을 자동 등록.",
+    summary: "복약·건강·환경 데이터를 통합 분석하여 개인 맞춤형 건강 위험을 예측하는 서비스.",
     thumb: "/projects/pillcare_thum.webp",
     image: { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" },
     tags: ["FastAPI", "OpenAI SDK", "Redis", "OAuth 2.0", "Pydantic", "WeasyPrint", "pytest"],
@@ -402,10 +404,12 @@ export const PROJECTS: ProjectData[] = [
     subtitle: "AI 음성 타임캡슐",
     company: "Personal Project",
     initial: "D",
-    summary: "Azure Speech STT/TTS · Azure OpenAI GPT-4o를 연동해 음성으로 기록하면 AI가 미래의 나에게 편지를 생성·낭독하는 타임캡슐 서비스.",
-    thumb: "/projects/Dearme1.png",
-    image: { src: "/projects/Dearme1.png", caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅" },
-    image2: { src: "/projects/Dearme2.png", caption: "감정 분석 결과 · GPT-4o 생성 편지" },
+    summary: "오늘의 감정을 말로 기록하면 AI가 미래의 나에게 보내는 편지를 써주고 TTS로 낭독해주는 AI 타임캡슐 서비스.",
+    thumb: "/projects/Dearme0.png",
+    image: { src: "/projects/Dearme0.png", caption: "Dear Me 서비스 소개" },
+    image2: { src: "/projects/Dearme1.png", caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅" },
+    image3: { src: "/projects/Dearme2.png", caption: "감정 분석 결과 · GPT-4o 생성 편지" },
+    image4: { src: "/projects/Dearme3.png", caption: "QR 카드 저장 · 발송 날짜 및 채널 선택" },
     tags: ["Azure Speech", "Azure OpenAI GPT-4o", "FastAPI", "APScheduler", "React", "SQLite", "Python"],
     year: "2026.06",
     metrics: [
