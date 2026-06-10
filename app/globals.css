@@ -286,11 +286,11 @@ section { position: relative; }
 /* ===== github contributions ===== */
 .gh-contrib { display: flex; flex-direction: column; gap: 8px; }
 .gh-months-row { overflow: hidden; }
-.gh-grid { display: flex; gap: 3px; overflow-x: auto; padding-bottom: 2px; }
-.gh-week { display: flex; flex-direction: column; gap: 3px; }
+.gh-grid { display: flex; gap: 3px; width: 100%; }
+.gh-week { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
 .gh-day {
-  width: 12px; height: 12px; border-radius: 2px; cursor: default;
-  flex: none; transition: opacity .12s, outline .12s;
+  width: 100%; aspect-ratio: 1; border-radius: 2px; cursor: default;
+  transition: opacity .12s, outline .12s;
 }
 .gh-day:hover { opacity: .7; }
 .gh-day.sel { outline: 2px solid var(--accent); outline-offset: 1px; }
@@ -317,9 +317,12 @@ section { position: relative; }
 .contact-ico { width: 46px; height: 46px; border-radius: 13px; background: var(--accent-bg); color: var(--accent); display: grid; place-items: center; flex: none; }
 .contact-card .cc-kind { font-size: 12px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: .04em; }
 .contact-card .cc-label { font-size: 16px; font-weight: 600; margin-top: 3px; }
+.contact-form { display: flex; flex-direction: column; gap: 12px; }
+.contact-textarea { resize: none; min-height: 160px; }
+.contact-btn { width: 100%; }
 .field { width: 100%; padding: 15px 17px; font-size: 15.5px; font-family: inherit; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; transition: border-color .2s; }
 .field:focus { border-color: var(--accent); }
-textarea.field { resize: vertical; min-height: 120px; line-height: 1.55; }
+textarea.field { line-height: 1.55; }
 
 /* ===== footer ===== */
 .footer { padding: 48px 0; border-top: 1px solid var(--border); }

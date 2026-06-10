@@ -35,13 +35,13 @@ export function ContactSection() {
             ))}
           </div>
           <form
-            className="reveal"
-            style={{ transitionDelay: '.08s', display: 'flex', flexDirection: 'column', gap: 12 }}
+            className="contact-form reveal"
+            style={{ transitionDelay: '.08s' }}
             onSubmit={(e) => { e.preventDefault(); setSent(true); setTimeout(() => setSent(false), 2400); }}
           >
             <input className="field" placeholder="회신 받을 이메일" type="email" required />
-            <textarea className="field" placeholder="전하고 싶은 메시지를 남겨주세요" required />
-            <button className="btn btn-primary" type="submit" style={{ alignSelf: 'flex-start' }}>
+            <textarea className="field contact-textarea" placeholder="전하고 싶은 메시지를 남겨주세요" required />
+            <button className="btn btn-primary contact-btn" type="submit">
               {sent ? '전송되었어요 ✓' : '메시지 보내기'}
             </button>
           </form>

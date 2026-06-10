@@ -10,8 +10,6 @@ interface Contribution {
 const LIGHT = ['#ebedf0', '#c5dffe', '#7ab8fc', '#3182f6', '#1b64da'];
 const DARK  = ['#1e2530', '#16243d', '#1e3a6e', '#2d5db8', '#4d94ff'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const CELL = 12;
-const GAP  = 3;
 
 export function GitHubContributions({ username }: { username: string }) {
   const [data, setData] = useState<Contribution[]>([]);
@@ -52,15 +50,13 @@ export function GitHubContributions({ username }: { username: string }) {
     }
   });
 
-  const step = CELL + GAP;
-
   return (
     <div className="gh-contrib">
       <div className="gh-months-row" style={{ position: 'relative', height: 16 }}>
         {monthLabels.map((m, i) => (
           <span
             key={i}
-            style={{ position: 'absolute', left: m.col * step, fontSize: 10, color: 'var(--text-4)', fontWeight: 600, letterSpacing: '.04em', textTransform: 'uppercase' }}
+            style={{ position: 'absolute', left: `${(m.col / weeks.length) * 100}%`, fontSize: 10, color: 'var(--text-4)', fontWeight: 600, letterSpacing: '.04em', textTransform: 'uppercase' }}
           >
             {m.label}
           </span>
