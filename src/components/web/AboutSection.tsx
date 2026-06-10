@@ -33,7 +33,12 @@ export function AboutSection() {
           </div>
         </div>
 
-        <div className="about-skills reveal" style={{ transitionDelay: '.12s' }}>
+        <div className="reveal" style={{ transitionDelay: '.12s', marginBottom: 40 }}>
+          <div className="about-col-label">GitHub Activity</div>
+          <GitHubContributions username="my0614" />
+        </div>
+
+        <div className="about-skills reveal" style={{ transitionDelay: '.18s' }}>
           <div className="about-col-label">Tech Stack</div>
           {PROFILE.skills.map(g => (
             <div className="skill-group-row" key={g.category}>
@@ -43,11 +48,6 @@ export function AboutSection() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="reveal" style={{ transitionDelay: '.18s', marginTop: 40 }}>
-          <div className="about-col-label">GitHub Activity</div>
-          <GitHubContributions username="my0614" />
         </div>
       </div>
     </section>
