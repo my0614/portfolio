@@ -2,6 +2,7 @@
 import React from 'react';
 import { PROFILE } from '@/data/portfolio';
 import { useReveal } from './hooks';
+import { GitHubContributions } from './GitHubContributions';
 
 export function AboutSection() {
   const ref = useReveal();
@@ -42,6 +43,11 @@ export function AboutSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="reveal" style={{ transitionDelay: '.18s', marginTop: 40 }}>
+          <div className="about-col-label">GitHub Activity</div>
+          <GitHubContributions username="my0614" />
         </div>
       </div>
     </section>
