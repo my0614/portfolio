@@ -73,18 +73,18 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
   return (
     <div className="detail open" ref={scRef}>
       <div className={'detail-bar' + (scrolled ? ' scrolled' : '')}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px', width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <button className="detail-close" onClick={onClose} aria-label="close">
-              <Icon name="close" size={22} />
-            </button>
-            <span className="dt-title">{pr.title}</span>
+        <div style={{ display: 'flex', alignItems: 'center', padding: '0 32px', width: '100%', position: 'relative' }}>
+          <span className="dt-title">{pr.title}</span>
+          <button className="detail-close" onClick={onClose} aria-label="close" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+            <Icon name="close" size={22} />
+          </button>
+          <div style={{ marginLeft: 'auto' }}>
+            {pr.link && (
+              <a className="btn btn-ghost btn-sm" href={pr.link} target="_blank" rel="noreferrer">
+                <Icon name="link" size={16} /> 서비스
+              </a>
+            )}
           </div>
-          {pr.link && (
-            <a className="btn btn-ghost btn-sm" href={pr.link} target="_blank" rel="noreferrer">
-              <Icon name="link" size={16} /> 서비스
-            </a>
-          )}
         </div>
       </div>
       <div className="detail-inner">

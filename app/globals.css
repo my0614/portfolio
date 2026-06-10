@@ -150,13 +150,6 @@ section { position: relative; }
 }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ===== impact strip ===== */
-.impact { background: var(--bg-soft); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
-.impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.impact-card { padding: 4px; }
-.impact-val { font-size: 36px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--text); display: flex; align-items: center; gap: 4px; white-space: nowrap; }
-.impact-val .arrow { color: var(--accent); margin: 0 1px; }
-.impact-label { font-size: 14.5px; color: var(--text-2); font-weight: 600; margin-top: 8px; }
 
 /* ===== chips ===== */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -272,6 +265,7 @@ section { position: relative; }
 .dt-result-row p { font-size: 16.5px; line-height: 1.6; color: var(--text); font-weight: 500; }
 
 /* ===== about ===== */
+#about { background: var(--bg-soft); }
 .about-bio { max-width: 100%; }
 .about-col-label { font-size: 11px; font-weight: 800; color: var(--text-4); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 20px; }
 .about-skills { display: flex; flex-direction: column; gap: 14px; }
@@ -341,7 +335,6 @@ textarea.field { line-height: 1.55; }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-photo { max-width: 320px; }
   .hero h1 { font-size: 44px; }
-  .impact-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
   .proj-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .dt-metrics { grid-template-columns: 1fr; }
@@ -353,6 +346,4 @@ textarea.field { line-height: 1.55; }
   .hero { padding-top: 120px; }
   .hero h1 { font-size: 36px; }
   .sec-pad { padding: 64px 0; }
-  .impact-grid { grid-template-columns: 1fr 1fr; }
-  .impact-val { font-size: 32px; }
 }

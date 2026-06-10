@@ -263,9 +263,10 @@ export const PROJECTS: ProjectData[] = [
     company: "한컴인스페이스",
     initial: "한",
     summary: "ML 모델 개발 과정에서 반복적으로 발생하는 학습 환경 구축, 자원 할당, 성능 검증 문제를 해결하기 위해 구축한 MLOps 플랫폼. 학습 작업 큐 관리, GPU 자원 분배, 성능 평가를 자동화하여 실험 재현성을 높이고 모델 개발 생산성을 향상시켰습니다.",
-    thumb: "/projects/dflow-training-ui.png",
-    image: { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
-    image2: { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
+    thumb: "/projects/dflow0.png",
+    image: { src: "/projects/dflow0.png", caption: "사내 MLOps 플랫폼 DFLOW" },
+    image2: { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
+    image3: { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
     tags: ["MMDetection", "Redis", "K8s", "PyTorch", "Docker", "PostgreSQL"],
     year: "2022 ~ 2024",
     metrics: [

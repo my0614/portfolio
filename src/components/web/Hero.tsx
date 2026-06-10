@@ -4,6 +4,8 @@ import { PROFILE } from '@/data/portfolio';
 import { Icon } from '@/components/phone/Icon';
 import { useReveal } from './hooks';
 
+
+
 export function Hero() {
   const ref = useReveal();
   return (
@@ -39,26 +41,3 @@ export function Hero() {
   );
 }
 
-export function Impact() {
-  const ref = useReveal();
-  const stats = [
-    { v: <><span>4시간</span><span className="arrow">→</span><span>2분</span></>, label: '핫딜 등록 작업 시간' },
-    { v: <><span>61</span><span className="arrow">→</span><span>75%</span></>, label: '드론 객체 탐지 mAP' },
-    { v: <><span>3</span><span className="arrow">→</span><span>20+</span></>, label: 'DFLOW 지원 모델 수' },
-    { v: <>24/7</>, label: 'CS 자동 응답 운영' },
-  ];
-  return (
-    <section className="impact sec-pad-sm">
-      <div className="container" ref={ref as React.RefObject<HTMLDivElement>}>
-        <div className="impact-grid">
-          {stats.map((s, i) => (
-            <div className="impact-card reveal" key={i} style={{ transitionDelay: i * 0.06 + 's' }}>
-              <div className="impact-val">{s.v}</div>
-              <div className="impact-label">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}

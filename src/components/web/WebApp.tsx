@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useCallback, useEffect } from 'react';
 import { Nav } from './Nav';
-import { Hero, Impact } from './Hero';
+import { Hero } from './Hero';
 import { ProjectsSection, ProjectDetailWeb } from './ProjectsSection';
 import { AboutSection } from './AboutSection';
 import { ContactSection, Footer } from './ContactSection';
@@ -37,9 +37,8 @@ export function WebApp() {
       <Nav theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Hero />
-        <Impact />
-        <ProjectsSection onOpen={openProject} />
         <AboutSection />
+        <ProjectsSection onOpen={openProject} />
         <ContactSection />
       </main>
       <Footer />
