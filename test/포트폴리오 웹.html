@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>김민영 · ML/MLOps Engineer</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<link rel="stylesheet" href="web.css" />
+<script>
+  // restore theme before paint
+  (function () {
+    try { var t = localStorage.getItem("portfolio-theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data.js"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="web-projects.jsx"></script>
+<script type="text/babel" src="web-sections.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+function Nav({ theme, toggleTheme, onResume }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const P = window.PROFILE;
+  return (
+    <nav className={"nav" + (scrolled ? " scrolled" : "")}>
+      <div className="container">
+        <a className="nav-brand" href="#top"><span className="dot"></span>{P.name}<span style={{ color: "var(--text-4)", fontWeight: 600, fontSize: 14 }}>.dev</span></a>
+        <div className="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">프로젝트</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div className="nav-actions">
+          <button className="btn btn-weak btn-sm" onClick={onResume}><Icon name="download" size={16} stroke={2} /> 이력서</button>
+          <button className="icon-toggle" onClick={toggleTheme} aria-label="theme">
+            <Icon name={theme === "dark" ? "sun" : "moon"} size={19} stroke={1.9} />
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+function App() {
+  const [theme, setTheme] = useState(document.documentElement.getAttribute("data-theme") || "light");
+  const [detail, setDetail] = useState(null);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("portfolio-theme", next); } catch (e) {}
+  };
+
+  const openProject = (id) => { setDetail(id); document.body.style.overflow = "hidden"; };
+  const closeProject = () => { setDetail(null); document.body.style.overflow = ""; };
+
+  const onResume = () => { window.print(); };
+
+  return (
+    <React.Fragment>
+      <Nav theme={theme} toggleTheme={toggleTheme} onResume={onResume} />
+      <main>
+        <Hero />
+        <Impact />
+        <ProjectsSection onOpen={openProject} />
+        <About />
+        <Contact />
+      </main>
+      <Footer />
+      {detail && <ProjectDetailWeb id={detail} onClose={closeProject} />}
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

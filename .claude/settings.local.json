@@ -15,7 +15,25 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('exports', {}\\), indent=2\\)\\)\")",
       "Bash(npx playwright *)",
       "Bash(node *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(npx next *)",
+      "Skill(run)",
+      "Bash(npm run *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(kill 43302)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(kill 46468)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/projects/cs-main.png)",
+      "Bash(lsof -ti:3000)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(kill 69041 *)",
+      "Bash(git -C /Users/kimminyoung/Desktop/desktop-portfolio-studio-main status)",
+      "Bash(git -C /Users/kimminyoung/Desktop/desktop-portfolio-studio-main diff)",
+      "Bash(git *)",
+      "Bash(kill 98940)",
+      "Bash(curl -s \"https://github-contributions-api.jogruber.de/v4/my0614?y=last\")",
+      "Bash(CLAUDE_CODE_TMPDIR=/tmp grep *)"
     ]
   }
 }

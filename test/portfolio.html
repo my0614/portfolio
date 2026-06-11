@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>김민영 · ML/MLOps Portfolio</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="stage">
+  <div class="phone">
+    <div class="notch"></div>
+    <div id="root"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data.js"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="screens-main.jsx"></script>
+<script type="text/babel" src="screens-detail.jsx"></script>
+<script type="text/babel" src="screens-misc.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useCallback } = React;
+
+const ACCENTS = {
+  "Toss Blue": { accent: "#3182f6", dark: "#1b64da", bg: "#e8f2ff" },
+  "Ink": { accent: "#202632", dark: "#0b0e14", bg: "#eef0f3" },
+  "Teal": { accent: "#00b39a", dark: "#009281", bg: "#e0f6f1" },
+};
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "Toss Blue",
+  "radius": "\uc18c\ud504\ud2b8",
+  "backdrop": true
+}/*EDITMODE-END*/;
+
+const TABS = [
+  { key: "home", label: "홈", icon: "home" },
+  { key: "projects", label: "프로젝트", icon: "grid" },
+  { key: "about", label: "About", icon: "user" },
+  { key: "contact", label: "연락", icon: "mail" },
+];
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [tab, setTab] = useState("home");
+  const [detail, setDetail] = useState(null);
+  const [detailOpen, setDetailOpen] = useState(false);
+
+  useEffect(() => {
+    const a = ACCENTS[t.accent] || ACCENTS["Toss Blue"];
+    const r = document.documentElement.style;
+    r.setProperty("--accent", a.accent);
+    r.setProperty("--accent-dark", a.dark);
+    r.setProperty("--accent-bg", a.bg);
+    const soft = t.radius === "둥글게";
+    r.setProperty("--r-card", soft ? "26px" : "20px");
+    r.setProperty("--r-btn", soft ? "18px" : "14px");
+    document.body.style.background = t.backdrop
+      ? "radial-gradient(1200px 600px at 50% -10%, #eef2f7 0%, #e5eaf0 45%, #dfe4ec 100%)"
+      : "#ffffff";
+  }, [t.accent, t.radius, t.backdrop]);
+
+  const openProject = useCallback((id) => {
+    setDetail(id);
+    setTimeout(() => setDetailOpen(true), 20);
+  }, []);
+  const goBack = useCallback(() => {
+    setDetailOpen(false);
+    setTimeout(() => setDetail(null), 340);
+  }, []);
+  const goTab = useCallback((t) => { setTab(t); }, []);
+
+  let screen;
+  if (tab === "home") screen = <HomeScreen key="home" openProject={openProject} goTab={goTab} />;
+  else if (tab === "projects") screen = <ProjectsScreen key="projects" openProject={openProject} />;
+  else if (tab === "about") screen = <AboutScreen key="about" goTab={goTab} />;
+  else screen = <ContactScreen key="contact" />;
+
+  return (
+    <React.Fragment>
+      <StatusBar />
+      <div className="viewport">{screen}</div>
+      <div className="tabbar">
+        {TABS.map(t => (
+          <button key={t.key} className={"tab" + (tab === t.key ? " active" : "")} onClick={() => { setTab(t.key); }}>
+            <Icon name={t.icon} size={24} stroke={tab === t.key ? 2.3 : 1.9} />
+            <span>{t.label}</span>
+          </button>
+        ))}
+      </div>
+      {detail && (
+        <div className={"detail-layer" + (detailOpen ? " open" : "")}>
+          <ProjectDetail id={detail} goBack={goBack} />
+        </div>
+      )}
+      {ReactDOM.createPortal(
+        <TweaksPanel title="Tweaks">
+          <TweakSection label="브랜드" />
+          <TweakColor label="포인트 컬러" value={ACCENTS[t.accent].accent}
+            options={[ACCENTS["Toss Blue"].accent, ACCENTS["Ink"].accent, ACCENTS["Teal"].accent]}
+            onChange={(v) => setTweak("accent", Object.keys(ACCENTS).find(k => ACCENTS[k].accent === v) || "Toss Blue")} />
+          <TweakRadio label="모서리" value={t.radius} options={["소프트", "둥글게"]}
+            onChange={(v) => setTweak("radius", v)} />
+          <TweakSection label="화면" />
+          <TweakToggle label="배경 음영" value={t.backdrop} onChange={(v) => setTweak("backdrop", v)} />
+        </TweaksPanel>,
+        document.body
+      )}
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+</script><script>
+(function () {
+  function fitPhone() {
+    var phone = document.querySelector(".phone");
+    if (!phone) return;
+    var s = Math.min((window.innerWidth - 24) / 390, (window.innerHeight - 24) / 844, 1.12);
+    phone.style.transformOrigin = "center center";
+    phone.style.transform = "scale(" + s + ")";
+  }
+  window.addEventListener("resize", fitPhone);
+  window.addEventListener("load", fitPhone);
+  fitPhone();
+  setTimeout(fitPhone, 60);
+})();
+</script>
+</body>
+</html>

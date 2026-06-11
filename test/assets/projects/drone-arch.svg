@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380">
+  <defs>
+    <marker id="a" viewBox="0 0 10 6" refX="9" refY="3" markerWidth="6" markerHeight="6" orient="auto">
+      <polygon points="0,0 10,3 0,6" fill="#475569"></polygon>
+    </marker>
+  </defs>
+  <rect width="860" height="380" fill="#0d0d0d"></rect>
+  <text x="430" y="26" font-family="system-ui,sans-serif" font-size="11" fill="#334155" text-anchor="middle" letter-spacing="3">DRONE · REALTIME OBJECT DETECTION ARCHITECTURE</text>
+
+  
+  <rect x="20" y="80" width="150" height="60" rx="6" fill="#0f1829" stroke="#1d4ed8" stroke-width="1.5"></rect>
+  <text x="95" y="104" font-family="system-ui,sans-serif" font-size="11" fill="#93c5fd" font-weight="600" text-anchor="middle">RGB Camera</text>
+  <text x="95" y="120" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">Intel RealSense</text>
+  <text x="95" y="132" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">컬러 프레임 publish</text>
+
+  
+  <rect x="20" y="200" width="150" height="60" rx="6" fill="#0f1829" stroke="#1d4ed8" stroke-width="1.5"></rect>
+  <text x="95" y="224" font-family="system-ui,sans-serif" font-size="11" fill="#93c5fd" font-weight="600" text-anchor="middle">Depth Camera</text>
+  <text x="95" y="240" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">Intel RealSense D435i</text>
+  <text x="95" y="252" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">뎁스 프레임 publish</text>
+
+  
+  <line x1="170" y1="110" x2="220" y2="155" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+  <line x1="170" y1="230" x2="220" y2="195" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="220" y="140" width="170" height="60" rx="6" fill="#1c1400" stroke="#854d0e" stroke-width="1.5"></rect>
+  <text x="305" y="162" font-family="system-ui,sans-serif" font-size="10" fill="#fbbf24" font-weight="600" text-anchor="middle">Approx Time</text>
+  <text x="305" y="176" font-family="system-ui,sans-serif" font-size="10" fill="#fbbf24" font-weight="600" text-anchor="middle">Synchronizer</text>
+  <text x="305" y="192" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">slop · queue size 튜닝</text>
+
+  
+  <line x1="390" y1="170" x2="428" y2="170" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="430" y="140" width="150" height="60" rx="6" fill="#0a1a0a" stroke="#166534" stroke-width="1.5"></rect>
+  <text x="505" y="162" font-family="system-ui,sans-serif" font-size="11" fill="#4ade80" font-weight="600" text-anchor="middle">Faster R-CNN</text>
+  <text x="505" y="178" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">위협 객체 탐지</text>
+  <text x="505" y="192" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">6종 클래스 분류</text>
+
+  
+  <line x1="580" y1="170" x2="618" y2="170" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="620" y="140" width="170" height="60" rx="6" fill="#1c1400" stroke="#854d0e" stroke-width="1.5"></rect>
+  <text x="705" y="162" font-family="system-ui,sans-serif" font-size="11" fill="#fbbf24" font-weight="600" text-anchor="middle">3D 좌표 계산</text>
+  <text x="705" y="178" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">BBox 중심 Depth 추출</text>
+  <text x="705" y="192" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">intrinsic → XYZ 변환</text>
+
+  
+  <line x1="705" y1="200" x2="705" y2="268" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="590" y="270" width="230" height="50" rx="6" fill="#140820" stroke="#6d28d9" stroke-width="1.5"></rect>
+  <text x="705" y="292" font-family="system-ui,sans-serif" font-size="11" fill="#c4b5fd" font-weight="600" text-anchor="middle">ROS Topic 발행</text>
+  <text x="705" y="308" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">3D 위치 좌표 → 지상 관제 시스템 전송</text>
+
+  
+  <line x1="590" y1="295" x2="448" y2="295" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="220" y="270" width="226" height="50" rx="6" fill="#0f1829" stroke="#1d4ed8" stroke-width="1.5"></rect>
+  <text x="333" y="292" font-family="system-ui,sans-serif" font-size="11" fill="#93c5fd" font-weight="600" text-anchor="middle">지상 관제 시스템</text>
+  <text x="333" y="308" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">실시간 3D 가시화 · 위협 경보</text>
+
+  
+  <rect x="20" y="310" width="180" height="50" rx="6" fill="#1a0a00" stroke="#7c2d12" stroke-width="1" stroke-dasharray="4,2"></rect>
+  <text x="110" y="330" font-family="system-ui,sans-serif" font-size="10" fill="#fb923c" font-weight="600" text-anchor="middle">Hard Negative Mining</text>
+  <text x="110" y="346" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">오탐·미탐 수집 → 재학습</text>
+  <text x="110" y="358" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">mAP 61% → 75%</text>
+  <line x1="200" y1="335" x2="430" y2="175" stroke="#7c2d12" stroke-width="1" stroke-dasharray="4,2"></line>
+</svg>

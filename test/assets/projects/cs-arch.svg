@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+  <defs>
+    <marker id="a" viewBox="0 0 10 6" refX="9" refY="3" markerWidth="6" markerHeight="6" orient="auto">
+      <polygon points="0,0 10,3 0,6" fill="#475569"></polygon>
+    </marker>
+  </defs>
+  <rect width="800" height="440" fill="#0d0d0d"></rect>
+  <text x="400" y="26" font-family="system-ui,sans-serif" font-size="11" fill="#334155" text-anchor="middle" letter-spacing="3">CS 문의 자동화 · BATCH AUTOMATION ARCHITECTURE</text>
+
+  
+  <rect x="280" y="48" width="240" height="50" rx="6" fill="#0f1829" stroke="#1d4ed8" stroke-width="1.5"></rect>
+  <text x="400" y="70" font-family="system-ui,sans-serif" font-size="12" fill="#93c5fd" font-weight="600" text-anchor="middle">Shopby — CS 문의 접수</text>
+  <text x="400" y="86" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">고객 배송 문의 신규 등록</text>
+  <line x1="400" y1="98" x2="400" y2="118" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="255" y="120" width="290" height="50" rx="6" fill="#1c1400" stroke="#854d0e" stroke-width="1.5"></rect>
+  <text x="400" y="142" font-family="system-ui,sans-serif" font-size="12" fill="#fbbf24" font-weight="600" text-anchor="middle">Python 배치 스캐너</text>
+  <text x="400" y="158" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">주기적 미처리 문의 일괄 조회 (24/7)</text>
+
+  
+  <line x1="320" y1="170" x2="200" y2="210" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+  <line x1="480" y1="170" x2="600" y2="210" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="60" y="212" width="280" height="54" rx="6" fill="#0f1829" stroke="#1d4ed8" stroke-width="1.5"></rect>
+  <text x="200" y="234" font-family="system-ui,sans-serif" font-size="11" fill="#93c5fd" font-weight="600" text-anchor="middle">Shopby API</text>
+  <text x="200" y="250" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">주문번호 · 상품 정보 · 옵션 코드 조회</text>
+  <text x="200" y="264" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">입고 예정일</text>
+
+  
+  <rect x="460" y="212" width="280" height="54" rx="6" fill="#0f1829" stroke="#1d4ed8" stroke-width="1.5"></rect>
+  <text x="600" y="234" font-family="system-ui,sans-serif" font-size="11" fill="#93c5fd" font-weight="600" text-anchor="middle">Sellmate API</text>
+  <text x="600" y="250" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">송장번호 · 현재 배송 상태 조회</text>
+  <text x="600" y="264" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">배송 현황 매칭</text>
+
+  
+  <line x1="200" y1="266" x2="310" y2="308" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+  <line x1="600" y1="266" x2="490" y2="308" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="255" y="310" width="290" height="50" rx="6" fill="#1c1400" stroke="#854d0e" stroke-width="1.5"></rect>
+  <text x="400" y="332" font-family="system-ui,sans-serif" font-size="12" fill="#fbbf24" font-weight="600" text-anchor="middle">규칙 판단 엔진</text>
+  <text x="400" y="348" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">배송 상태 조건 분기 · 응답 템플릿 선택</text>
+
+  
+  <line x1="320" y1="360" x2="190" y2="392" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+  <line x1="480" y1="360" x2="610" y2="392" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"></line>
+
+  
+  <rect x="60" y="394" width="260" height="36" rx="6" fill="#0a1a0a" stroke="#166534" stroke-width="1.5"></rect>
+  <text x="190" y="410" font-family="system-ui,sans-serif" font-size="11" fill="#4ade80" font-weight="600" text-anchor="middle">자동 응답 발송</text>
+  <text x="190" y="424" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">규칙 커버 케이스 → 즉시 자동 처리</text>
+
+  
+  <rect x="480" y="394" width="260" height="36" rx="6" fill="#1a0820" stroke="#7c2d92" stroke-width="1.5"></rect>
+  <text x="610" y="410" font-family="system-ui,sans-serif" font-size="11" fill="#e879f9" font-weight="600" text-anchor="middle">담당자 플래그</text>
+  <text x="610" y="424" font-family="system-ui,sans-serif" font-size="9" fill="#475569" text-anchor="middle">규칙 범위 외 → 오답 발송 차단</text>
+</svg>
