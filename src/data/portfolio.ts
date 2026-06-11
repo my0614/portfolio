@@ -311,28 +311,45 @@ export const PROJECTS: ProjectData[] = [
     image: { src: "/projects/dflow0.png", caption: "사내 MLOps 플랫폼 DFLOW" },
     image2: { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
     image3: { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
-    tags: ["MMDetection", "Redis", "K8s", "PyTorch", "Docker", "PostgreSQL"],
+    tags: ["MMDetection", "MMYOLO", "GOD", "Redis", "K8s", "PyTorch", "Docker", "PostgreSQL", "ONNX"],
     year: "2022 ~ 2024",
     metrics: [
       { value: "20+", label: "지원 모델 수", from: "3개" },
       { value: "1일", label: "신규 모델 온보딩", from: "1~2주" },
-      { value: "0", label: "멀티 GPU OOM 장애" },
+      { value: "K8s", label: "전 컴포넌트 파드 운영" },
     ],
     sections: {
       arch: "/projects/dflow-arch.svg",
       intent: [
         "모델 도입 시마다 학습 스크립트 처음부터 작성, GPU 할당도 수동 조율 — 반복 비용 과다",
-        "모델 수 증가 → 운영 부담 선형 증가, 학습 큐 없음 → 요청 집중 시 대기 하루 이상",
-        "MMDetection config 표준화 + Redis 큐 자동화로 연구자가 실험에 집중할 수 있는 환경 구축",
+        "YOLO · Faster R-CNN · RetinaNet 등 모델마다 인터페이스가 달라 신규 모델 추가 시 연동 작업이 매번 필요한 비효율 구조",
+        "학습 큐 없음 → 요청 집중 시 대기 하루 이상, 모델 수 증가 → 운영 부담 선형 증가",
+        "GOD · MMDetection · MMYOLO 공통 인터페이스 표준화 + Redis 큐·K8s 파드 자동화로 연구자가 실험에 집중할 수 있는 환경 구축",
       ],
       tech: [
         {
-          title: "MMDetection config 기반 모델 추상화",
-          description: "모델마다 PyTorch 루프 직접 구현 → MMDetection config 기반 전환, 신규 모델 온보딩 1~2주 → 1일 이내",
+          title: "3개 프레임워크 공통 인터페이스 추상화",
+          description:
+            "GOD · MMDetection · MMYOLO 프레임워크별로 상이한 학습 인터페이스를 " +
+            "단일 공통 구조로 추상화. 신규 모델 추가 시 인터페이스 재구현 없이 config 교체만으로 온보딩",
           points: [
-            "신규 모델 온보딩: 코드 수정 없이 config 파일 교체만으로 처리",
-            "model / dataset / schedule / runtime 4개 블록으로 학습 구성 표준화",
-            "온보딩 기간 1~2주 → 1일 이내로 단축",
+            "YOLO · Faster R-CNN · RetinaNet 등 모델별 상이한 인터페이스 → 공통 추상화 레이어 설계",
+            "GOD · MMDetection · MMYOLO 3개 프레임워크를 단일 ML 백엔드 인터페이스로 통합",
+            "전이학습·초기학습 선택, 학습 파라미터 주입을 공통 API로 표준화",
+            "신규 모델 온보딩: 코드 수정 없이 config 파일 교체만으로 처리, 1~2주 → 1일 이내",
+            "지원 모델 수 3개 → 20개 이상으로 확장",
+          ],
+        },
+        {
+          title: "사용자 입력 기반 config 자동 생성 파이프라인",
+          description:
+            "사용자가 UI에서 입력한 학습 파라미터·모델·데이터셋 정보를 받아 " +
+            "프레임워크별 공통 config 파일을 자동 생성·수정 후 학습 실행까지 연결하는 파이프라인 구현",
+          points: [
+            "사용자 입력(모델 선택·파라미터·데이터셋·전이학습 여부)을 API로 수신",
+            "수신 정보 기반으로 MMDetection · MMYOLO · GOD 공통 config 자동 생성·수정",
+            "config 완성 → Redis 큐 등록 → Worker 학습 실행까지 자동 연결",
+            "학습 완료 후 weights 다운로드 및 ONNX 변환 기능 제공",
           ],
         },
         {
@@ -353,11 +370,25 @@ export const PROJECTS: ProjectData[] = [
             "멀티 GPU OOM 장애 제거, 안정적 동시 학습 지원",
           ],
         },
+        {
+          title: "실시간 학습 모니터링 및 성능 비교 시스템",
+          description:
+            "학습 진행률·버전·성능 지표를 실시간으로 시각화하고, " +
+            "여러 모델의 성능 지표를 사용자가 직접 선택·비교할 수 있는 모니터링 UI 구현",
+          points: [
+            "학습 진행률 실시간 표시 (Connected → Preparing → Training 상태 관리)",
+            "버전 관리: 학습 이력·파라미터·성능 지표를 버전별로 기록·조회",
+            "mAP · Loss 등 원하는 성능 지표 선택 후 모델 간 비교 기능",
+            "Redis Hash로 job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API 제공",
+          ],
+        },
       ],
       result: [
-        "지원 모델 수 3개 → 20개 이상",
-        "신규 모델 온보딩 1~2주 → 1일 이내",
-        "멀티 GPU OOM 장애 제거, 학습 대기 시간 하루 → 자동 순차 처리로 대폭 단축",
+        "GOD · MMDetection · MMYOLO 공통 인터페이스 추상화로 지원 모델 수 3개 → 20개 이상 확장",
+        "신규 모델 온보딩 1~2주 → 1일 이내 (config 교체만으로 처리)",
+        "멀티 GPU OOM 장애 제거, 학습 대기 하루 → Redis 큐 자동 순차 처리로 대폭 단축",
+        "K8s initContainer + restartPolicy로 전 컴포넌트 장애 자동 복구 및 기동 순서 보장",
+        "학습 완료 모델 weights 다운로드 및 ONNX 변환 파이프라인 제공",
       ],
     },
   },
