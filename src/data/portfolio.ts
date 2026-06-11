@@ -131,6 +131,8 @@ export const PROJECTS: ProjectData[] = [
             "AWS EC2에서 Python 코드 실행, cron으로 새벽 배치 자동 스케줄링",
             "Bitbucket Pipelines: push → 테스트 → 빌드 → EC2 배포 자동화",
             "브랜치별 배포 환경 분리 (dev / prod)",
+            "cron 실행 중 오류 발생 시 Slack Incoming Webhook으로 즉시 알림 발송",
+            "배치 완료 후 정상·실패 건수 요약 메시지 Slack Incoming Webhook으로 자동 발송 → MD·개발팀이 스케줄링 실행 결과 실시간 확인 가능",
           ],
         },
       ],
@@ -160,36 +162,41 @@ export const PROJECTS: ProjectData[] = [
       { value: "24/7", label: "무중단 운영" },
     ],
     sections: {
-      arch: "/projects/cs-arch.svg",
       intent: [
-        "전체 CS의 상당수가 배송 현황을 묻는 단순 반복 문의 — 담당자 리소스가 낭비되는 구조",
+        "쉐어러 3명 + CS 파트 1명, 총 4인이 1:1 게시판을 직접 응대 — 배송 문의 비중이 높아 담당자 리소스의 상당 부분이 단순 반복 업무에 소모되는 구조",
         "업무 시간 외 응답 지연으로 고객 불만 누적, 주말·야간 공백 발생",
         "배송 문의는 주문번호·송장번호·배송 상태로 정형화 → LLM 없이 규칙 기반만으로 대부분 커버 가능",
         "자동화 범위를 명확히 정의하고, 범위 외 케이스는 플래그로 분리해 오답 발송 리스크 차단",
       ],
       tech: [
         {
-          title: "규칙 기반 자동 응답 설계",
-          description: "배송 문의 패턴 정형화 → LLM 없이 규칙 기반만으로 대부분 커버, 범위 외 케이스는 플래그 분리로 오답 발송 차단",
+          title: "이중 API 응답 기반 케이스 분기 설계",
+          description:
+            "Shopby(주문) · Sellmate(재고/배송) 두 API 응답을 매칭하여 상품코드·송장번호 유무 조합으로 3가지 케이스를 분기, 케이스별 HTML 템플릿을 자동 선택해 Shopby answer API로 등록",
           points: [
-            "정형화된 배송 문의 패턴 분석 → 케이스별 응답 템플릿 설계",
-            "규칙 범위 외 케이스는 CS 담당자 플래그 처리, 오답 발송 방지",
+            "상품코드 X / 송장번호 O → 1-2일 내 출고 안내 템플릿",
+            "상품코드 O / 송장번호 O → 입고예정일 안내 템플릿 (남대문/리오더)",
+            "상품코드 O / 송장번호 X → 기본 배송 안내 템플릿",
+            "두 조건 모두 없는 케이스는 자동 처리 제외 → 담당자 플래그 분리, 오답 발송 차단",
+            "입고예정일 데이터 유효성 검증 — 과거 날짜 등록된 케이스 감지 시 기본 배송 안내로 자동 fallback",
           ],
         },
         {
           title: "Shopby / Sellmate API 이중 연동",
-          description: "주문(Shopby) · 배송(Sellmate) 분리 API 동시 연동, 주문번호 기반으로 송장·배송 상태·입고 예정일 자동 조회",
+          description:
+            "주문(Shopby) · 배송(Sellmate) 분리 API를 동시 연동. API 인증 정보(systemkey, mallkey, auth token)는 코드에서 분리해 JSON config 파일로 관리",
           points: [
-            "Shopby API: 주문 상품 정보·옵션 코드 조회",
-            "Sellmate API: 송장번호·현재 배송 상태·입고 예정일 조회",
-            "두 API 응답 매칭 → 배송 상태 판단 후 자동 응답 생성",
+            "Shopby API: 문의 목록 조회(/inquiries) → 주문 상세 조회(/orders) → 답변 등록(/inquiries/{id}/answer)",
+            "Sellmate API: 주문 조회(/order) → 상품 옵션 조회(/products, variants_id 추출) → 입고예정일 조회(/stock-schedule)",
+            "두 API 응답 매칭 → 상품코드·송장번호 조합으로 케이스 판단 후 자동 응답 생성",
+            "API 인증 정보(systemkey, mallkey, auth token)를 코드에서 분리하여 JSON config 파일로 관리",
           ],
         },
         {
           title: "배치 스케줄러 기반 자동 처리",
           description: "웹훅 대신 주기 배치로 미처리 문의 일괄 조회, 주말·야간 포함 24/7 무중단 자동 처리",
           points: [
-            "일정 주기 배치로 미처리 문의 일괄 조회 및 자동 응답 처리",
+            "cron 기반 스케줄러로 1시간 주기 배송 문의 일괄 수집 및 자동 응답 처리",
             "배송 상태 데이터 주기적 갱신으로 응답 정확도 유지",
             "주말·비업무 시간 포함 24/7 무중단 운영",
           ],
