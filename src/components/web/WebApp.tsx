@@ -25,11 +25,24 @@ export function WebApp() {
   const openProject = useCallback((id: string) => {
     setDetail(id);
     document.body.style.overflow = 'hidden';
+    history.pushState({ detail: id }, '');
   }, []);
 
   const closeProject = useCallback(() => {
     setDetail(null);
     document.body.style.overflow = '';
+    if (history.state?.detail) history.back();
+  }, []);
+
+  useEffect(() => {
+    const onPopState = (e: PopStateEvent) => {
+      if (!e.state?.detail) {
+        setDetail(null);
+        document.body.style.overflow = '';
+      }
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   return (

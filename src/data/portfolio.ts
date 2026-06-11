@@ -97,26 +97,31 @@ export const PROJECTS: ProjectData[] = [
       arch: "/projects/hotdeal-arch.svg",
       intent: [
         "핫딜 신청 집계·상품 선정·등록·결과 공유까지 MD가 하루 4시간 이상 수작업으로 처리",
-        "파트너사 계정별로 결과 파일을 만들어 Gmail로 개별 발송하는 과정이 반복적이고 누락이 잦았음",
-        "OAuth 2.0으로 Google Spreadsheet와 Gmail을 하나의 파이프라인으로 연결해 전 과정 자동화",
+        "매 회차마다 파트너사 계정별 결과 파일을 수작업 생성 후 개별 발송 — 누락·오발송이 반복되며 운영 신뢰도 리스크로 이어짐",
+        "별도 시스템 구축 없이 이미 사용 중인 Google Workspace를 자동화 인프라로 전환, OAuth 2.0으로 Spreadsheet·Gmail을 단일 파이프라인으로 연결해 전 과정 자동화",
       ],
       tech: [
         {
           title: "OAuth 2.0 — Google Spreadsheet · Gmail 통합 자동화",
-          description: "OAuth 2.0 하나로 Google Spreadsheet · Gmail을 단일 파이프라인으로 연결, 기존 Google Workspace를 자동화 인프라로 전환",
+          description:
+            "InstalledAppFlow 기반 OAuth 2.0으로 Gmail · Sheets · Drive 3개 API를 단일 토큰으로 인증, " +
+            "Refresh Token 자동 재발급으로 배치 실행 중 인증 단절 없는 무중단 파이프라인 구축",
           points: [
-            "OAuth 2.0 인증으로 Google Sheets API · Gmail API 동시 연동",
-            "파트너사 계정별 신청 결과·선정 목록·오픈 일정을 파일로 생성 → Gmail 자동 발송",
-            "별도 시스템 구축 없이 Google Workspace를 자동화 파이프라인으로 활용",
+            "Gmail · Sheets · Drive 멀티 스코프를 단일 credential로 통합 인증",
+            "Refresh Token 만료 감지 → 자동 재발급 로직으로 새벽 배치 중 인증 단절 방지",
+            "MIMEMultipart 기반 발송 모듈 직접 설계 — HTML 템플릿 치환 · CID 인라인 이미지 · 파일 첨부 단일 클래스로 캡슐화",
+            "BCC 일괄 발송으로 파트너사 간 수신자 정보 노출 차단",
           ],
         },
         {
           title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
-          description: "Shopby API로 신청 상품 자동 매칭, 할인율·가격·재고 가중치 스코어링 → 상위 200개 선별",
+          description:
+            "Shopby API로 신청 상품 자동 매칭, 당회차 실제 등록 상품 비율 기반 동적 가중치 스코어링으로 상위 200개 자동 선별",
           points: [
             "Shopby API 연동으로 신청 상품의 상품명·상품번호 자동 매칭",
-            "할인율·가격 경쟁력·재고 가중치 스코어링 → 상위 200개 자동 선별",
-            "신청 집계부터 선별까지 Spreadsheet 내에서 완결",
+            "할인율·가격 경쟁력·재고 수량 3개 지표를 당회차 실제 등록 상품 비율 기반으로 가중치 산정",
+            "고정 기준값 대신 회차별 실제 데이터를 반영한 동적 스코어링으로 상위 200개 자동 선별",
+            "신청 집계부터 선별까지 Spreadsheet 내에서 완결, 별도 DB 없이 운영",
           ],
         },
         {
@@ -133,6 +138,7 @@ export const PROJECTS: ProjectData[] = [
         "핫딜 등록 작업 시간 4시간 이상 → 2분 이내로 단축 (약 99% 감소)",
         "파트너사 계정별 결과 파일 메일 발송 자동화로 누락·오입력 리스크 제거",
         "상품 선정부터 등록·오픈·파트너사 알림까지 전 과정 무인 자동화",
+        "별도 메일링 SaaS·인프라 도입 없이 Google Workspace만으로 자동화 파이프라인 구현",
       ],
     },
   },
