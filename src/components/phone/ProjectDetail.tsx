@@ -174,6 +174,20 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
                     ))}
                   </div>
                 )}
+                {t.images && (
+                  <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    {t.images.map((img, k) => (
+                      <div key={k}>
+                        <div style={{ borderRadius: 16, overflow: 'hidden', background: 'var(--bg-gray)' }}>
+                          <img src={img.src} alt="" style={{ width: '100%', display: 'block' }} />
+                        </div>
+                        {img.caption && (
+                          <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 6, textAlign: 'center' }}>{img.caption}</div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>

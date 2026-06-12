@@ -4,6 +4,7 @@ export type TechItem = {
   title: string;
   description: string;
   points?: string[];
+  images?: { src: string; caption?: string }[];
 };
 
 export type ProjectData = {
@@ -309,8 +310,6 @@ export const PROJECTS: ProjectData[] = [
     summary: "AI 모델 개발 과정에서 반복적으로 발생하는 데이터 라벨링, 학습 환경 구축, GPU 자원 관리, 성능 검증, 모델 배포 준비 과정을 표준화하기 위해 통합 MLOps 플랫폼을 구축했습니다. 데이터셋 관리부터 학습 작업 스케줄링, 실험 추적, 성능 평가, ONNX 모델 추출까지 End-to-End 파이프라인을 제공하여 개발 효율성과 모델 품질 관리 체계를 강화했습니다.",
     thumb: "/projects/dflow0.png",
     image: { src: "/projects/dflow0.png", caption: "사내 MLOps 플랫폼 DFLOW" },
-    image2: { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
-    image3: { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
     tags: ["MMDetection", "MMYOLO", "GOD", "Redis", "K8s", "PyTorch", "Docker", "PostgreSQL", "ONNX"],
     year: "2022 ~ 2024",
     metrics: [
@@ -348,6 +347,10 @@ export const PROJECTS: ProjectData[] = [
             "Redis Hash: job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API",
             "작업 실패 시 에러 메시지 저장으로 디버깅 가능한 구조 확보",
           ],
+          images: [
+            { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
+            { src: "/projects/dflow_error.png", caption: "학습 작업 에러 로그 확인" },
+          ],
         },
         {
           title: "실시간 학습 모니터링 및 사용자 기능",
@@ -361,6 +364,10 @@ export const PROJECTS: ProjectData[] = [
             "원하는 성능 지표 선택 후 모델 간 수치 비교 기능",
             "버전 관리: 학습 이력·파라미터·성능 지표를 버전별로 기록·조회",
             "프로젝트별 그룹 생성 + 비밀번호 인증 기반 접근 제어로 다중 프로젝트 환경 데이터 격리 지원",
+          ],
+          images: [
+            { src: "/projects/dflow_predict.png", caption: "학습 완료 weight 기반 자동 라벨링" },
+            { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
           ],
         },
         {
@@ -382,6 +389,9 @@ export const PROJECTS: ProjectData[] = [
             "수신 정보 기반으로 MMDetection · MMYOLO · GOD 공통 config 자동 생성·수정",
             "config 완성 → Redis 큐 등록 → Worker 학습 실행까지 자동 연결",
             "학습 완료 후 weights 다운로드 및 ONNX 변환 기능 제공",
+          ],
+          images: [
+            { src: "/projects/dflow_addmodel.png", caption: "모델 선택 및 학습 파라미터 입력 UI" },
           ],
         },
       ],

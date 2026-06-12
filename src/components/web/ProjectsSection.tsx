@@ -178,6 +178,16 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
                     ))}
                   </div>
                 )}
+                {t.images && (
+                  <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {t.images.map((img, k) => (
+                      <div key={k}>
+                        <div className="dt-hero-img" style={{ marginTop: 0 }}><img src={img.src} alt="" /></div>
+                        {img.caption && <div className="dt-cap">{img.caption}</div>}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
