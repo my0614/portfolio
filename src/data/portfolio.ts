@@ -102,6 +102,17 @@ export const PROJECTS: ProjectData[] = [
       ],
       tech: [
         {
+          title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
+          description:
+            "Shopby API로 신청 상품 자동 매칭, 당회차 실제 등록 상품 비율 기반 동적 가중치 스코어링으로 상위 200개 자동 선별",
+          points: [
+            "고정 기준값 대신 회차별 실제 데이터를 반영한 동적 스코어링으로 상위 200개 자동 선별",
+            "할인율·가격 경쟁력·재고 수량 3개 지표를 당회차 실제 등록 상품 비율 기반으로 가중치 산정",
+            "Shopby API 연동으로 신청 상품의 상품명·상품번호 자동 매칭",
+            "신청 집계부터 선별까지 Spreadsheet 내에서 완결, 별도 DB 없이 운영",
+          ],
+        },
+        {
           title: "OAuth 2.0 — Google Spreadsheet · Gmail 통합 자동화",
           description:
             "InstalledAppFlow 기반 OAuth 2.0으로 Gmail · Sheets · Drive 3개 API를 단일 토큰으로 인증, " +
@@ -111,17 +122,6 @@ export const PROJECTS: ProjectData[] = [
             "Refresh Token 만료 감지 → 자동 재발급 로직으로 새벽 배치 중 인증 단절 방지",
             "MIMEMultipart 기반 발송 모듈 직접 설계 — HTML 템플릿 치환 · CID 인라인 이미지 · 파일 첨부 단일 클래스로 캡슐화",
             "BCC 일괄 발송으로 파트너사 간 수신자 정보 노출 차단",
-          ],
-        },
-        {
-          title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
-          description:
-            "Shopby API로 신청 상품 자동 매칭, 당회차 실제 등록 상품 비율 기반 동적 가중치 스코어링으로 상위 200개 자동 선별",
-          points: [
-            "Shopby API 연동으로 신청 상품의 상품명·상품번호 자동 매칭",
-            "할인율·가격 경쟁력·재고 수량 3개 지표를 당회차 실제 등록 상품 비율 기반으로 가중치 산정",
-            "고정 기준값 대신 회차별 실제 데이터를 반영한 동적 스코어링으로 상위 200개 자동 선별",
-            "신청 집계부터 선별까지 Spreadsheet 내에서 완결, 별도 DB 없이 운영",
           ],
         },
         {
@@ -250,24 +250,24 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
         {
-          title: "RGB + Depth 카메라 프레임 동기화",
-          description: "RGB/Depth publish 주기 차이 → ApproximateTimeSynchronizer slop·queue size 실측 튜닝, bbox 중심 Depth → RealSense intrinsic으로 3D 좌표 변환",
-          points: [
-            "ApproximateTimeSynchronizer: slop·queue size 실측 기반 튜닝으로 프레임 정합성 확보",
-            "Depth 픽셀 → RealSense intrinsic → 3D XYZ 좌표 변환 파이프라인",
-            "ROS Topic으로 3D 좌표 발행 → 지상 관제 시스템 실시간 가시화 연동",
-          ],
-        },
-        {
           title: "위협 객체 6종 데이터셋 구축 및 희소 클래스 보완",
           description:
             "다양한 환경(조도·각도·거리)에서 위협 객체 6종 약 2,000장 수집·라벨링. " +
             "폭발물 등 실사 데이터 확보가 어려운 클래스는 Augmentation 및 목업 데이터셋으로 보완",
           points: [
-            "위협 객체 6종 클래스 정의, 다양한 촬영 환경에서 약 2,000장 수집 및 라벨링",
             "폭발물 클래스: 실사 데이터 희소 → Augmentation(회전·밝기·노이즈) + 목업 데이터셋 생성으로 클래스 불균형 보완",
-            "Occlusion 대응 — 객체가 절반 이상 가려진 케이스도 탐지되도록 라벨링 기준 수정",
             "비탐지 클래스 추가 — 오탐 방지를 위해 탐지 대상 외 객체를 background 클래스로 명시적 학습",
+            "Occlusion 대응 — 객체가 절반 이상 가려진 케이스도 탐지되도록 라벨링 기준 수정",
+            "위협 객체 6종 클래스 정의, 다양한 촬영 환경에서 약 2,000장 수집 및 라벨링",
+          ],
+        },
+        {
+          title: "RGB + Depth 카메라 프레임 동기화",
+          description: "RGB/Depth publish 주기 차이 → ApproximateTimeSynchronizer slop·queue size 실측 튜닝, bbox 중심 Depth → RealSense intrinsic으로 3D 좌표 변환",
+          points: [
+            "Depth 픽셀 → RealSense intrinsic → 3D XYZ 좌표 변환 파이프라인",
+            "ApproximateTimeSynchronizer: slop·queue size 실측 기반 튜닝으로 프레임 정합성 확보",
+            "ROS Topic으로 3D 좌표 발행 → 지상 관제 시스템 실시간 가시화 연동",
           ],
         },
         {
@@ -276,9 +276,9 @@ export const PROJECTS: ProjectData[] = [
             "실제 터널 환경 테스트에서 저조도·빛번짐 오탐 이슈 발견 → " +
             "원인별 데이터 확보 및 재학습으로 대응. 데이터셋 2,000장 → 6,000~7,000장으로 확장",
           points: [
+            "mAP 61% → 75% (14%p 향상), KTL 시험 성적서 발급 기준 달성",
             "이슈 1 — 저조도 환경: 터널 내 조도 저하로 추론 성능 급락 → 고조도/저조도 환경 데이터 추가 확보, 총 6,000~7,000장으로 확장 재학습",
             "이슈 2 — 플래시 빛번짐 오탐: 빛번짐을 객체로 오인식 → 빛번짐 패턴을 배경 이미지로 추가 학습하여 오탐률 감소",
-            "mAP 61% → 75% (14%p 향상), KTL 시험 성적서 발급 기준 달성",
           ],
         },
         {
@@ -306,7 +306,7 @@ export const PROJECTS: ProjectData[] = [
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
     initial: "한",
-    summary: "ML 모델 개발 과정에서 반복적으로 발생하는 학습 환경 구축, 자원 할당, 성능 검증 문제를 해결하기 위해 구축한 MLOps 플랫폼. 학습 작업 큐 관리, GPU 자원 분배, 성능 평가를 자동화하여 실험 재현성을 높이고 모델 개발 생산성을 향상시켰습니다.",
+    summary: "AI 모델 개발 과정에서 반복적으로 발생하는 데이터 라벨링, 학습 환경 구축, GPU 자원 관리, 성능 검증, 모델 배포 준비 과정을 표준화하기 위해 통합 MLOps 플랫폼을 구축했습니다. 데이터셋 관리부터 학습 작업 스케줄링, 실험 추적, 성능 평가, ONNX 모델 추출까지 End-to-End 파이프라인을 제공하여 개발 효율성과 모델 품질 관리 체계를 강화했습니다.",
     thumb: "/projects/dflow0.png",
     image: { src: "/projects/dflow0.png", caption: "사내 MLOps 플랫폼 DFLOW" },
     image2: { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
@@ -328,7 +328,7 @@ export const PROJECTS: ProjectData[] = [
       ],
       tech: [
         {
-          title: "3개 프레임워크 공통 인터페이스 추상화",
+          title: "GOD(General Object Detection): YOLO · Faster R-CNN · RetinaNet ML 백엔드 직접 구현 — MMDetection · MMYOLO와 동일한 공통 인터페이스로 추상화",
           description:
             "GOD · MMDetection · MMYOLO 프레임워크별로 상이한 학습 인터페이스를 " +
             "단일 공통 구조로 추상화. 신규 모델 추가 시 인터페이스 재구현 없이 config 교체만으로 온보딩",
@@ -338,6 +338,38 @@ export const PROJECTS: ProjectData[] = [
             "전이학습·초기학습 선택, 학습 파라미터 주입을 공통 API로 표준화",
             "신규 모델 온보딩: 코드 수정 없이 config 파일 교체만으로 처리, 1~2주 → 1일 이내",
             "지원 모델 수 3개 → 20개 이상으로 확장",
+          ],
+        },
+        {
+          title: "Redis BRPOP 기반 학습 작업 큐",
+          description: "DB 폴링 race condition → Redis BRPOP 원자적 연산으로 해결, Redis Hash로 job 상태·GPU·에러 로그 중앙 관리",
+          points: [
+            "BRPOP: 원자적 pop으로 race condition 없는 작업 분배 보장",
+            "Redis Hash: job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API",
+            "작업 실패 시 에러 메시지 저장으로 디버깅 가능한 구조 확보",
+          ],
+        },
+        {
+          title: "실시간 학습 모니터링 및 사용자 기능",
+          description:
+            "학습 진행률·버전·성능 지표를 실시간으로 시각화하고, " +
+            "자동 라벨링·모델 비교·프로젝트 접근 제어 등 end-to-end 사용자 기능 제공",
+          points: [
+            "학습 완료 weight로 자동 라벨링 실행 — 수동 라벨링 비용 절감 및 재학습 사이클 단축",
+            "학습 진행률 실시간 표시 (Connected → Preparing → Training 상태 관리)",
+            "학습 결과 성능 지표(mAP · Loss 등) 그래프 시각화 대시보드 제공",
+            "원하는 성능 지표 선택 후 모델 간 수치 비교 기능",
+            "버전 관리: 학습 이력·파라미터·성능 지표를 버전별로 기록·조회",
+            "프로젝트별 그룹 생성 + 비밀번호 인증 기반 접근 제어로 다중 프로젝트 환경 데이터 격리 지원",
+          ],
+        },
+        {
+          title: "nvidia-smi 기반 GPU 동적 분배",
+          description: "job 처리 전 nvidia-smi로 가용 메모리 체크 → 모델 요구량 비교 후 GPU 할당, 조건 미충족 시 재큐잉으로 OOM 제거",
+          points: [
+            "nvidia-smi --query-gpu로 가용 메모리 실시간 조회",
+            "모델 config에 min_gpu_memory 정의, Worker가 조건 검증 후 GPU 할당",
+            "멀티 GPU OOM 장애 제거, 안정적 동시 학습 지원",
           ],
         },
         {
@@ -352,43 +384,13 @@ export const PROJECTS: ProjectData[] = [
             "학습 완료 후 weights 다운로드 및 ONNX 변환 기능 제공",
           ],
         },
-        {
-          title: "Redis BRPOP 기반 학습 작업 큐",
-          description: "DB 폴링 race condition → Redis BRPOP 원자적 연산으로 해결, Redis Hash로 job 상태·GPU·에러 로그 중앙 관리",
-          points: [
-            "BRPOP: 원자적 pop으로 race condition 없는 작업 분배 보장",
-            "Redis Hash: job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API",
-            "작업 실패 시 에러 메시지 저장으로 디버깅 가능한 구조 확보",
-          ],
-        },
-        {
-          title: "nvidia-smi 기반 GPU 동적 분배",
-          description: "job 처리 전 nvidia-smi로 가용 메모리 체크 → 모델 요구량 비교 후 GPU 할당, 조건 미충족 시 재큐잉으로 OOM 제거",
-          points: [
-            "nvidia-smi --query-gpu로 가용 메모리 실시간 조회",
-            "모델 config에 min_gpu_memory 정의, Worker가 조건 검증 후 GPU 할당",
-            "멀티 GPU OOM 장애 제거, 안정적 동시 학습 지원",
-          ],
-        },
-        {
-          title: "실시간 학습 모니터링 및 성능 비교 시스템",
-          description:
-            "학습 진행률·버전·성능 지표를 실시간으로 시각화하고, " +
-            "여러 모델의 성능 지표를 사용자가 직접 선택·비교할 수 있는 모니터링 UI 구현",
-          points: [
-            "학습 진행률 실시간 표시 (Connected → Preparing → Training 상태 관리)",
-            "버전 관리: 학습 이력·파라미터·성능 지표를 버전별로 기록·조회",
-            "mAP · Loss 등 원하는 성능 지표 선택 후 모델 간 비교 기능",
-            "Redis Hash로 job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API 제공",
-          ],
-        },
       ],
       result: [
         "GOD · MMDetection · MMYOLO 공통 인터페이스 추상화로 지원 모델 수 3개 → 20개 이상 확장",
         "신규 모델 온보딩 1~2주 → 1일 이내 (config 교체만으로 처리)",
         "멀티 GPU OOM 장애 제거, 학습 대기 하루 → Redis 큐 자동 순차 처리로 대폭 단축",
         "K8s initContainer + restartPolicy로 전 컴포넌트 장애 자동 복구 및 기동 순서 보장",
-        "학습 완료 모델 weights 다운로드 및 ONNX 변환 파이프라인 제공",
+        "학습 완료 모델 weights 다운로드 및 ONNX 변환 파이프라인 제공"
       ],
     },
   },
@@ -429,15 +431,6 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
         {
-          title: "DDD 기반 도메인 레이어 설계",
-          description: "11개 도메인 · 15개 테이블, 각 도메인 router → service → repository → model 독립 구성, 도메인 간 의존성 분리 · 영향 범위 한정",
-          points: [
-            "도메인별 router → service → repository → model 레이어 독립 구성",
-            "도메인 간 의존성 최소화, 기능 변경 시 영향 범위 한정",
-            "8개 도메인 통합 테스트 작성 (정상·예외 케이스 포함)",
-          ],
-        },
-        {
           title: "3단계 멀티 레이어 캐시 (메모리 → Redis → OpenAI)",
           description: "LLM 비용·속도·장애 격리를 위한 3단계 캐시 설계, L2 히트 시 L1 자동 워밍업 · Redis 장애 시 OpenAI 폴백으로 무중단 보장",
           points: [
@@ -453,6 +446,15 @@ export const PROJECTS: ProjectData[] = [
             "처방봉투 이미지 업로드 → OCR 파싱 → 약품명·용량·복용 시점 자동 추출",
             "파싱 결과를 복약 스케줄에 즉시 자동 등록, 수동 입력 단계 제거",
             "구조화된 응답 포맷으로 파싱 결과 검증 및 오류 처리",
+          ],
+        },
+        {
+          title: "DDD 기반 도메인 레이어 설계",
+          description: "11개 도메인 · 15개 테이블, 각 도메인 router → service → repository → model 독립 구성, 도메인 간 의존성 분리 · 영향 범위 한정",
+          points: [
+            "도메인별 router → service → repository → model 레이어 독립 구성",
+            "도메인 간 의존성 최소화, 기능 변경 시 영향 범위 한정",
+            "8개 도메인 통합 테스트 작성 (정상·예외 케이스 포함)",
           ],
         },
         {
@@ -507,17 +509,17 @@ export const PROJECTS: ProjectData[] = [
           title: "Azure Speech SDK — STT · TTS 파이프라인",
           description: "Azure Speech STT로 음성 녹음 → 텍스트 변환, GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독 — 입력부터 출력까지 음성 End-to-End",
           points: [
+            "STT → GPT-4o → TTS 단일 파이프라인으로 음성 입출력 완결",
             "Azure Speech STT: 음성 녹음 스트림을 실시간으로 텍스트 변환",
             "Azure Speech TTS: 생성된 편지를 자연스러운 음성으로 합성·재생",
-            "STT → GPT-4o → TTS 단일 파이프라인으로 음성 입출력 완결",
           ],
         },
         {
           title: "Azure OpenAI GPT-4o — 감정 분석 및 편지 생성",
           description: "STT 변환 텍스트에서 감정·맥락을 추출하고 '미래의 나에게' 형식의 편지 자동 생성",
           points: [
-            "감정 분석: 음성 텍스트에서 감정 상태·핵심 키워드 추출",
             "편지 생성: 감정과 맥락을 바탕으로 미래의 나에게 보내는 편지 형식으로 작성",
+            "감정 분석: 음성 텍스트에서 감정 상태·핵심 키워드 추출",
             "지정 발송일·채널(카카오톡·Discord·이메일)을 컨텍스트에 반영한 개인화 메시지",
           ],
         },
