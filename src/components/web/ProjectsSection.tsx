@@ -73,17 +73,17 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
   return (
     <div className="detail open" ref={scRef}>
       <div className={'detail-bar' + (scrolled ? ' scrolled' : '')}>
-        <div style={{ display: 'flex', alignItems: 'center', padding: '0 32px', width: '100%', position: 'relative' }}>
+        <div style={{ maxWidth: 860, margin: '0 auto', width: '100%', padding: '0 24px', display: 'flex', alignItems: 'center', height: '100%', position: 'relative' }}>
           <span className="dt-title">{pr.title}</span>
-          <button className="detail-close" onClick={onClose} aria-label="close" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-            <Icon name="close" size={22} />
-          </button>
-          <div style={{ marginLeft: 'auto' }}>
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
             {pr.link && (
               <a className="btn btn-ghost btn-sm" href={pr.link} target="_blank" rel="noreferrer">
                 <Icon name="link" size={16} /> 서비스
               </a>
             )}
+            <button className="detail-close" onClick={onClose} aria-label="close">
+              <Icon name="close" size={22} />
+            </button>
           </div>
         </div>
       </div>
