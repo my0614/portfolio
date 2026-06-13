@@ -188,6 +188,34 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
                     ))}
                   </div>
                 )}
+                {t.table && (
+                  <div style={{ marginTop: 14, borderRadius: 14, overflow: 'hidden', border: '1px solid var(--border)' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                      <thead>
+                        <tr style={{ background: 'var(--bg-gray)' }}>
+                          {t.table.headers.map((h, k) => (
+                            <th key={k} style={{ padding: '9px 12px', fontSize: 11, fontWeight: 700, color: 'var(--text-3)', letterSpacing: '.05em', textAlign: k === 0 ? 'left' : 'center', borderBottom: '1px solid var(--border)' }}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {t.table.rows.map((row, k) => (
+                          <tr key={k} style={{ background: row.highlight ? 'var(--accent-bg)' : 'transparent', borderBottom: k < t.table!.rows.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                            {row.cells.map((cell, j) => (
+                              <td key={j} style={{
+                                padding: '9px 12px',
+                                fontSize: 12.5,
+                                fontWeight: j === 0 ? 700 : 400,
+                                textAlign: j === 0 ? 'left' : 'center',
+                                color: row.highlight ? 'var(--accent)' : j === row.cells.length - 1 ? 'var(--text-3)' : 'var(--text-2)',
+                              }}>{cell}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             ))}
           </div>

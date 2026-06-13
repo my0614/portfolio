@@ -5,6 +5,10 @@ export type TechItem = {
   description: string;
   points?: string[];
   images?: { src: string; caption?: string }[];
+  table?: {
+    headers: string[];
+    rows: { cells: string[]; highlight?: boolean }[];
+  };
 };
 
 export type ProjectData = {
@@ -239,16 +243,24 @@ export const PROJECTS: ProjectData[] = [
         {
           title: "모델 비교 평가 및 Faster R-CNN 선정",
           description:
-            "Faster R-CNN · YOLOv5 · RetinaNet 3종을 오탐률·추론 속도 기준으로 비교 평가. " +
-            "드론 실시간 영상 추론 환경에서 오탐이 미탐보다 치명적인 프로젝트 특성상 " +
-            "정밀도(Precision) 우선 기준으로 Faster R-CNN 최종 선정",
+            "Faster R-CNN · YOLOv5 · YOLOv7 · RetinaNet 4종을 Precision·추론 속도 기준으로 비교 평가. " +
+            "드론 실시간 영상 추론 환경에서 오탐이 미탐보다 치명적인 프로젝트 특성상 Precision을 최우선 기준으로 삼아 Faster R-CNN 최종 선정.",
           points: [
             "평가 기준 1 — 오탐률: 위협 오인식은 현장 대응 오류로 직결 → Precision 최우선",
             "평가 기준 2 — 추론 속도: 드론 탑재 엣지 환경에서 실시간 처리 가능 여부 검증",
-            "YOLOv5: 속도 우수하나 소형 객체 오탐률 높음",
-            "RetinaNet: Focal Loss로 클래스 불균형 강점, 추론 속도 한계",
-            "Faster R-CNN: 정밀도·속도 균형 최적 → 최종 선정",
+            "YOLOv5 · YOLOv7 탈락: 속도(~80 / ~59 FPS)는 우수하나 Precision 58~59%로 오탐률이 허용 기준 초과",
+            "RetinaNet 탈락: Precision 96.8%로 수치상 최고이나 ~17 FPS로 실시간 처리 임계치 미달",
+            "Faster R-CNN 선정: Precision 95%, ~12.5 FPS로 정밀도·실시간성 모두 임계치 충족. RetinaNet과 Precision 차이는 1.8%p로 근소하나, 속도 요건을 충족하는 모델 중 가장 높은 Precision 달성으로 최종 선정",
           ],
+          table: {
+            headers: ['모델', 'Precision', 'FPS', '결과'],
+            rows: [
+              { cells: ['YOLOv5', '58%', '~80', '탈락'] },
+              { cells: ['YOLOv7', '59%', '~59', '탈락'] },
+              { cells: ['RetinaNet', '96.8%', '~17', '탈락'] },
+              { cells: ['Faster R-CNN', '95%', '~12.5', '선정'], highlight: true },
+            ],
+          },
         },
         {
           title: "위협 객체 6종 데이터셋 구축 및 희소 클래스 보완",
@@ -279,17 +291,29 @@ export const PROJECTS: ProjectData[] = [
           points: [
             "mAP 61% → 75% (14%p 향상), KTL 시험 성적서 발급 기준 달성",
             "이슈 1 — 저조도 환경: 터널 내 조도 저하로 추론 성능 급락 → 고조도/저조도 환경 데이터 추가 확보, 총 6,000~7,000장으로 확장 재학습",
-            "이슈 2 — 플래시 빛번짐 오탐: 빛번짐을 객체로 오인식 → 빛번짐 패턴을 배경 이미지로 추가 학습하여 오탐률 감소",
+            "이슈 2 — 플래시 빛번짐 오탐: 빛번짐을 객체로 오인식, 특히 bomb 클래스 Precision 56.5%(FP 127건)로 집중 발생 → 빛번짐 패턴을 배경 이미지로 추가 학습하여 오탐률 감소",
+            "이슈 3 — injured_person 탐지 누락: Recall 60.4%(FN 44건)으로 가장 낮은 검출률 → Occlusion·저조도 환경 데이터 보강으로 대응",
           ],
+          table: {
+            headers: ['클래스', 'Precision', 'Recall', 'AP@0.5'],
+            rows: [
+              { cells: ['bomb',           '56.5%', '76.7%', '70.2%'] },
+              { cells: ['exit',           '72.9%', '73.8%', '73.1%'] },
+              { cells: ['fire',           '89.3%', '87.9%', '86.8%'], highlight: true },
+              { cells: ['injured_person', '87.0%', '60.4%', '59.2%'] },
+              { cells: ['oil',            '77.7%', '75.9%', '73.9%'] },
+              { cells: ['person',         '78.1%', '76.1%', '72.2%'] },
+            ],
+          },
         },
         {
           title: "다중 드론 환경 네트워크 자동 감지 및 설정",
           description:
             "운용 드론 2대, 현장마다 투입 드론이 바뀌는 환경에서 수동 IP 설정에 2시간 이상 소요 → " +
-            "프로세스 시작 시 네트워크 환경 자동 감지·동적 구성으로 세팅 시간 1분 이내로 단축",
+            "컨테이너 시작 시 네트워크 인터페이스 자동 감지·동적 구성으로 세팅 시간 1분 이내로 단축.",
           points: [
-            "드론 2대 운용 — 현장마다 투입 드론이 달라져 매번 수동 IP 재설정이 필요한 구조",
-            "프로세스 시작 시 네트워크 환경 자동 감지 → MASTER IP·드론별 통신 설정 동적 구성",
+            "자동 감지 방식: hostname -I로 현재 IP 확인, 서브넷(192.168.100.x) 기반으로 실환경/테스트 환경 판별 → ip link show로 이더넷·USB 이더넷 인터페이스 자동 탐지 후 이중 네트워크(드론 통신망·GCS 통신망) 동적 구성",
+            "ROS_MASTER_URI 동적 설정: GCS에서 UDP로 START_RGB <master_ip> / START_DEPTH <master_ip> 명령 수신 시 ROS_MASTER_URI를 런타임에 주입, 드론 교체 시 재빌드 없이 즉시 연결",
             "네트워크 세팅 시간 2시간 이상 → 1분 이하로 단축",
           ],
         },
