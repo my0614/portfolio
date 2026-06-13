@@ -133,19 +133,52 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
         <div className="divider" />
 
         {/* intent */}
-        <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
-          <SectionHead label="WHY" title="기획 의도" />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            {s.intent.map((t, i) => (
-              <div key={i} style={{ display: 'flex', gap: 12 }}>
-                <div style={{ flex: 'none', width: 22, height: 22, borderRadius: 99, background: 'var(--accent-bg)', color: 'var(--accent-dark)', fontSize: 12, fontWeight: 800, display: 'grid', placeItems: 'center', marginTop: 1 }}>
-                  {i + 1}
+        {s.intent && s.intent.length > 0 && (
+          <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
+            <SectionHead label="WHY" title="기획 의도" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              {s.intent.map((t, i) => (
+                <div key={i} style={{ display: 'flex', gap: 12 }}>
+                  <div style={{ flex: 'none', width: 22, height: 22, borderRadius: 99, background: 'var(--accent-bg)', color: 'var(--accent-dark)', fontSize: 12, fontWeight: 800, display: 'grid', placeItems: 'center', marginTop: 1 }}>
+                    {i + 1}
+                  </div>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.6, color: 'var(--text-2)' }}>{t}</p>
                 </div>
-                <p style={{ fontSize: 14.5, lineHeight: 1.6, color: 'var(--text-2)' }}>{t}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
+
+        {s.flow && (
+          <>
+            <div className="divider" />
+            <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
+              <SectionHead label="FLOW" title="프로젝트 흐름" />
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 0 }}>
+                {s.flow.map((step, i) => (
+                  <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ width: '100%', background: 'var(--bg-gray)', border: '1px solid var(--border)', borderRadius: 14, padding: '14px 16px' }}>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>
+                        <span style={{ color: 'var(--accent)', fontFamily: 'ui-monospace, monospace', fontSize: 12, fontWeight: 800, marginRight: 7 }}>
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        {step.title}
+                      </div>
+                      <p style={{ fontSize: 12.5, lineHeight: 1.6, color: 'var(--text-2)', margin: 0 }}>
+                        {step.description}
+                      </p>
+                    </div>
+                    {i < s.flow!.length - 1 && (
+                      <div style={{ width: 1, height: 20, background: 'var(--border)', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div style={{ width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '6px solid var(--border)', marginTop: 14 }} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
 
         <div className="divider" />
 

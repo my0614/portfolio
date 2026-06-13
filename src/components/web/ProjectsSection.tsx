@@ -140,20 +140,54 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
           </div>
         </div>
 
-        <div className="dt-section">
-          <div className="dt-sec-head">
-            <div className="dt-sec-eyebrow">WHY</div>
-            <div className="dt-sec-title">기획 의도</div>
+        {s.intent && s.intent.length > 0 && (
+          <div className="dt-section">
+            <div className="dt-sec-head">
+              <div className="dt-sec-eyebrow">WHY</div>
+              <div className="dt-sec-title">기획 의도</div>
+            </div>
+            <div className="dt-intent">
+              {s.intent.map((t, i) => (
+                <div className="dt-intent-row" key={i}>
+                  <div className="dt-intent-num">{i + 1}</div>
+                  <p>{t}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="dt-intent">
-            {s.intent.map((t, i) => (
-              <div className="dt-intent-row" key={i}>
-                <div className="dt-intent-num">{i + 1}</div>
-                <p>{t}</p>
-              </div>
-            ))}
+        )}
+
+        {s.flow && (
+          <div className="dt-section">
+            <div className="dt-sec-head">
+              <div className="dt-sec-eyebrow">FLOW</div>
+              <div className="dt-sec-title">프로젝트 흐름</div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 }}>
+              {s.flow.map((step, i) => (
+                <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                  <div style={{ width: '100%', background: 'var(--bg-gray)', border: '1px solid var(--border)', borderRadius: 16, padding: '20px 24px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
+                      <span style={{ flex: 'none', fontSize: 13, fontWeight: 800, color: 'var(--accent)', fontFamily: 'ui-monospace, monospace' }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)' }}>{step.title}</div>
+                    </div>
+                    <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--text-2)', margin: 0, paddingLeft: 23 }}>
+                      {step.description}
+                    </p>
+                  </div>
+                  {i < s.flow!.length - 1 && (
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '6px 0' }}>
+                      <div style={{ width: 1, height: 14, background: 'var(--border)' }} />
+                      <div style={{ width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '7px solid var(--border)' }} />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="dt-section">
           <div className="dt-sec-head">

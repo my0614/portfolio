@@ -30,7 +30,8 @@ export type ProjectData = {
   metrics: Metric[];
   sections: {
     arch?: string;
-    intent: string[];
+    intent?: string[];
+    flow?: { title: string; description: string }[];
     tech: TechItem[];
     result?: string[];
     expect?: string[];
@@ -218,7 +219,7 @@ export const PROJECTS: ProjectData[] = [
     id: "drone",
     type: "company",
     title: "드론 탑재 실시간 객체 탐지",
-    subtitle: "민군겸용기술개발 R&D",
+    subtitle: "보안기관 R&D",
     company: "한컴인스페이스",
     initial: "한",
     summary: "전쟁 지역, 붕괴 위험이 있는 터널, 저조도 환경 등 사람이 직접 접근하기 어려운 위험 지역을 안전하게 탐색하기 위해 개발한 드론 기반 객체 탐지 시스템. 드론 영상에서 위협 객체를 실시간으로 탐지하고 3D 좌표로 시각화하여 현장 상황을 원격으로 파악할 수 있도록 지원했습니다.",
@@ -233,11 +234,42 @@ export const PROJECTS: ProjectData[] = [
     ],
     sections: {
       arch: "/projects/drone-arch.svg",
-      intent: [
-        "영상을 지상으로 내려 분석하면 수 초 지연 발생, 통신 두절 시 대응 자체 불가",
-        "드론 탑재 엣지 자원으로 RGB + Depth 카메라를 동시 운용해 현장에서 즉시 탐지",
-        "2D 바운딩 박스 → 3D 좌표 변환 후 지상 관제 시스템으로 실시간 전송하는 End-to-End 구조",
-        "민군겸용 기술 개발 과제 — KTL 시험 성적서 기준 달성이 필수 조건",
+      flow: [
+        {
+          title: "드론 배치 및 네트워크 자동 구성",
+          description:
+            "hostname -I로 현재 IP 확인 후 서브넷(192.168.100.x) 기반으로 실환경/테스트 환경 자동 판별. " +
+            "ip link show로 이더넷·USB 이더넷 인터페이스를 스캔하여 드론 통신망·GCS 통신망을 이중으로 동적 구성. " +
+            "GCS에서 UDP로 START_RGB <master_ip> / START_DEPTH <master_ip> 명령 수신 시 ROS_MASTER_URI를 런타임에 주입 → " +
+            "드론 교체 시 컨테이너 재빌드 없이 1분 이내 즉시 연결",
+        },
+        {
+          title: "RGB + Depth 카메라 프레임 동기화",
+          description:
+            "RGB 카메라와 RealSense D435i Depth 카메라의 publish 주기 차이를 " +
+            "ApproximateTimeSynchronizer slop·queue size 실측 튜닝으로 보정. " +
+            "두 스트림을 단일 콜백으로 수신하여 RGB 추론과 Depth 좌표 변환이 같은 타임스탬프 기준에서 처리되도록 정합",
+        },
+        {
+          title: "Faster R-CNN 위협 객체 실시간 추론",
+          description:
+            "동기화된 RGB 이미지로 위협 객체 6종 실시간 탐지 (Precision 95%, ~12.5 FPS). " +
+            "오탐이 현장 대응 오류로 직결되는 환경 특성상 Precision 최우선으로 선정된 모델 적용. " +
+            "탐지된 bbox 중심 좌표를 다음 단계 3D 계산으로 전달",
+        },
+        {
+          title: "bbox → 3D 좌표 변환",
+          description:
+            "탐지된 bbox 중심 픽셀의 Depth값을 RealSense D435i intrinsic 파라미터(fx, fy, cx, cy)로 역투영하여 " +
+            "실제 XYZ 좌표 산출. RGB 추론 결과와 동일 타임스탬프의 Depth 프레임을 사용하여 좌표 정합성 보장",
+        },
+        {
+          title: "지상 관제 시스템 전송 및 가시화",
+          description:
+            "추론 결과 이미지와 3D 좌표를 각각 별도 ROS Topic으로 발행. " +
+            "지상 관제 시스템(GCS)이 실시간 수신하여 위협 객체 위치를 3D 포인터로 가시화 → " +
+            "운용자가 드론 영상과 공간 좌표를 동시에 확인하여 현장 대응",
+        },
       ],
       tech: [
         {
@@ -275,15 +307,6 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
         {
-          title: "RGB + Depth 카메라 프레임 동기화",
-          description: "RGB/Depth publish 주기 차이 → ApproximateTimeSynchronizer slop·queue size 실측 튜닝, bbox 중심 Depth → RealSense intrinsic으로 3D 좌표 변환",
-          points: [
-            "Depth 픽셀 → RealSense intrinsic → 3D XYZ 좌표 변환 파이프라인",
-            "ApproximateTimeSynchronizer: slop·queue size 실측 기반 튜닝으로 프레임 정합성 확보",
-            "ROS Topic으로 3D 좌표 발행 → 지상 관제 시스템 실시간 가시화 연동",
-          ],
-        },
-        {
           title: "실환경 테스트 기반 반복 성능 개선",
           description:
             "실제 터널 환경 테스트에서 저조도·빛번짐 오탐 이슈 발견 → " +
@@ -305,17 +328,6 @@ export const PROJECTS: ProjectData[] = [
               { cells: ['person',         '78.1%', '76.1%', '72.2%'] },
             ],
           },
-        },
-        {
-          title: "다중 드론 환경 네트워크 자동 감지 및 설정",
-          description:
-            "운용 드론 2대, 현장마다 투입 드론이 바뀌는 환경에서 수동 IP 설정에 2시간 이상 소요 → " +
-            "컨테이너 시작 시 네트워크 인터페이스 자동 감지·동적 구성으로 세팅 시간 1분 이내로 단축.",
-          points: [
-            "자동 감지 방식: hostname -I로 현재 IP 확인, 서브넷(192.168.100.x) 기반으로 실환경/테스트 환경 판별 → ip link show로 이더넷·USB 이더넷 인터페이스 자동 탐지 후 이중 네트워크(드론 통신망·GCS 통신망) 동적 구성",
-            "ROS_MASTER_URI 동적 설정: GCS에서 UDP로 START_RGB <master_ip> / START_DEPTH <master_ip> 명령 수신 시 ROS_MASTER_URI를 런타임에 주입, 드론 교체 시 재빌드 없이 즉시 연결",
-            "네트워크 세팅 시간 2시간 이상 → 1분 이하로 단축",
-          ],
         },
       ],
       result: [
