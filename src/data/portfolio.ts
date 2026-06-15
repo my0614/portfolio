@@ -233,7 +233,6 @@ export const PROJECTS: ProjectData[] = [
       { value: "KTL", label: "시험 성적서 발급" },
     ],
     sections: {
-      arch: "/projects/drone-arch.svg",
       flow: [
         {
           title: "드론 배치 및 네트워크 자동 구성",
@@ -258,7 +257,7 @@ export const PROJECTS: ProjectData[] = [
             "탐지된 bbox 중심 좌표를 다음 단계 3D 계산으로 전달",
         },
         {
-          title: "bbox → 3D 좌표 변환",
+          title: "Depth 역투영 기반 실세계 3D 좌표 복원",
           description:
             "탐지된 bbox 중심 픽셀의 Depth값을 RealSense D435i intrinsic 파라미터(fx, fy, cx, cy)로 역투영하여 " +
             "실제 XYZ 좌표 산출. RGB 추론 결과와 동일 타임스탬프의 Depth 프레임을 사용하여 좌표 정합성 보장",
@@ -331,9 +330,11 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
-        "객체 탐지 mAP 61% → 75% (14%p 향상), KTL 시험 성적서 목표 달성 및 발급 완료",
-        "RGB/Depth 동기화로 프레임 정합성 확보, 3D 좌표 거리 정확도 달성",
-        "네트워크 세팅 시간 2시간 이상 → 1분 이하로 단축",
+        "객체 탐지 mAP 61% → 75% (14%p 향상), KTL 시험 성적서 발급 기준 달성",
+        "Faster R-CNN 선정 (Precision 95%, ~12.5 FPS) — 4종 모델 비교 평가 후 오탐 최소화 기준으로 채택",
+        "데이터셋 2,000장 → 6,000~7,000장 확장, 저조도·빛번짐·Occlusion 실환경 이슈 3건 원인별 대응",
+        "RGB/Depth 동기화 기반 실시간 3D 좌표 복원 — GCS에서 위협 객체 위치를 3D 포인터로 확인",
+        "네트워크 세팅 시간 2시간 이상 → 1분 이하 단축 (자동 감지·ROS_MASTER_URI 동적 주입)",
       ],
     },
   },
@@ -343,7 +344,7 @@ export const PROJECTS: ProjectData[] = [
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
     initial: "한",
-    summary: "AI 모델 개발 과정에서 반복적으로 발생하는 데이터 라벨링, 학습 환경 구축, GPU 자원 관리, 성능 검증, 모델 배포 준비 과정을 표준화하기 위해 통합 MLOps 플랫폼을 구축했습니다. 데이터셋 관리부터 학습 작업 스케줄링, 실험 추적, 성능 평가, ONNX 모델 추출까지 End-to-End 파이프라인을 제공하여 개발 효율성과 모델 품질 관리 체계를 강화했습니다.",
+    summary: "AI 모델 개발 과정에서 반복적으로 발생하는 데이터 라벨링, 학습 환경 구축, GPU 자원 관리, 성능 검증, 모델 배포 준비 과정을 표준화하기 위해 통합 MLOps 플랫폼을 구축했습니다. 데이터셋 관리부터 학습 작업 스케줄링, 학습 추적, 성능 평가, ONNX 모델 추출까지 End-to-End 파이프라인을 제공하여 개발 효율성과 모델 품질 관리 체계를 강화했습니다.",
     thumb: "/projects/dflow0.png",
     image: { src: "/projects/dflow0.png", caption: "사내 MLOps 플랫폼 DFLOW" },
     tags: ["MMDetection", "MMYOLO", "GOD", "Redis", "K8s", "PyTorch", "Docker", "PostgreSQL", "ONNX"],
@@ -354,12 +355,44 @@ export const PROJECTS: ProjectData[] = [
       { value: "K8s", label: "전 컴포넌트 파드 운영" },
     ],
     sections: {
-      arch: "/projects/dflow-arch.svg",
-      intent: [
-        "모델 도입 시마다 학습 스크립트 처음부터 작성, GPU 할당도 수동 조율 — 반복 비용 과다",
-        "YOLO · Faster R-CNN · RetinaNet 등 모델마다 인터페이스가 달라 신규 모델 추가 시 연동 작업이 매번 필요한 비효율 구조",
-        "학습 큐 없음 → 요청 집중 시 대기 하루 이상, 모델 수 증가 → 운영 부담 선형 증가",
-        "GOD · MMDetection · MMYOLO 공통 인터페이스 표준화 + Redis 큐·K8s 파드 자동화로 연구자가 실험에 집중할 수 있는 환경 구축",
+      flow: [
+        {
+          title: "데이터셋 Import 및 버전 관리",
+          description:
+            "외부 스토리지·로컬에서 이미지·영상 데이터를 플랫폼으로 업로드. " +
+            "데이터셋 단위로 버전을 관리하여 학습 간 데이터 추적 가능",
+        },
+        {
+          title: "라벨링 작업 진행",
+          description:
+            "Label Studio 기반 웹 라벨링 환경에서 Bounding Box·Polygon 등 어노테이션 작업. " +
+            "학습 완료된 weight로 자동 라벨링(Pre-annotation)을 적용해 반복 작업 시간 단축. " +
+            "완료된 라벨링 결과는 COCO·YOLO 등 포맷으로 Export 가능",
+        },
+        {
+          title: "모델 선택 및 학습 작업 등록",
+          description:
+            "GOD · MMDetection · MMYOLO 중 모델과 프레임워크를 선택하고 학습 파라미터(epoch, batch size, lr 등)를 UI에서 입력. " +
+            "작업은 Redis BRPOP 기반 큐에 적재되어 GPU 가용 시점에 순차 처리",
+        },
+        {
+          title: "학습 실행 및 실시간 상태 모니터링",
+          description:
+            "K8s 파드로 학습 작업 실행. UI에서 Connected → Preparing → Training 상태를 실시간으로 확인하고, " +
+            "에러 발생 시 로그를 즉시 확인 가능. MLflow로 학습별 하이퍼파라미터·loss·메트릭 자동 기록",
+        },
+        {
+          title: "성능 지표 시각화 및 모델 비교",
+          description:
+            "학습 완료 후 Precision · Recall · mAP 등 성능 지표를 대시보드에서 시각화. " +
+            "학습 간 성능 그래프를 비교하여 최적 모델 선정",
+        },
+        {
+          title: "Weights Export",
+          description:
+            "선정된 모델의 weight를 PyTorch(.pt) · TensorFlow(.pb) · ONNX(.onnx) 3가지 포맷으로 변환·추출. " +
+            "추출된 모델은 배포 파이프라인 또는 자동 라벨링 Pre-annotation으로 즉시 활용 가능",
+        },
       ],
       tech: [
         {
@@ -432,11 +465,11 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
-        "GOD · MMDetection · MMYOLO 공통 인터페이스 추상화로 지원 모델 수 3개 → 20개 이상 확장",
-        "신규 모델 온보딩 1~2주 → 1일 이내 (config 교체만으로 처리)",
-        "멀티 GPU OOM 장애 제거, 학습 대기 하루 → Redis 큐 자동 순차 처리로 대폭 단축",
-        "K8s initContainer + restartPolicy로 전 컴포넌트 장애 자동 복구 및 기동 순서 보장",
-        "학습 완료 모델 weights 다운로드 및 ONNX 변환 파이프라인 제공"
+        "지원 모델 수 3개 → 20개 이상 확장, 신규 모델 온보딩 1~2주 → 1일 이내 (config 교체만으로 처리)",
+        "멀티 GPU OOM 장애 제거, 학습 대기 하루 이상 → Redis 큐 자동 순차 처리로 해소",
+        "라벨링 결과 COCO·YOLO 포맷 export + 자동 라벨링(Pre-annotation) 연계로 라벨링 사이클 단축",
+        "학습 완료 weights PyTorch(.pt) · TensorFlow(.pb) · ONNX(.onnx) 3포맷 export 지원",
+        "데이터 import → 라벨링 → 학습 → 성능 평가 → weights export 전 과정 단일 플랫폼에서 완결",
       ],
     },
   },
