@@ -100,7 +100,7 @@ export const PROJECTS: ProjectData[] = [
       { value: "무인", label: "전 과정 자동화" },
     ],
     sections: {
-      arch: "/projects/hotdeal-arch.svg",
+      arch: "/projects/hotdeal_ar.png",
       intent: [
         "핫딜 신청 집계·상품 선정·등록·결과 공유까지 MD가 하루 4시간 이상 수작업으로 처리",
         "매 회차마다 파트너사 계정별 결과 파일을 수작업 생성 후 개별 발송 — 누락·오발송이 반복되며 운영 신뢰도 리스크로 이어짐",
