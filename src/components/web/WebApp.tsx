@@ -25,7 +25,7 @@ export function WebApp() {
   const openProject = useCallback((id: string) => {
     setDetail(id);
     document.body.style.overflow = 'hidden';
-    history.pushState({ detail: id }, '');
+    history.pushState({ detail: id }, '', '?project=' + id);
   }, []);
 
   const closeProject = useCallback(() => {
@@ -35,8 +35,18 @@ export function WebApp() {
   }, []);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('project');
+    if (projectId) {
+      setDetail(projectId);
+      document.body.style.overflow = 'hidden';
+    }
+
     const onPopState = (e: PopStateEvent) => {
-      if (!e.state?.detail) {
+      if (e.state?.detail) {
+        setDetail(e.state.detail);
+        document.body.style.overflow = 'hidden';
+      } else {
         setDetail(null);
         document.body.style.overflow = '';
       }

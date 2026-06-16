@@ -260,7 +260,7 @@ export const PROJECTS: ProjectData[] = [
           title: "Depth 역투영 기반 실세계 3D 좌표 복원",
           description:
             "탐지된 bbox 중심 픽셀의 Depth값을 RealSense D435i intrinsic 파라미터(fx, fy, cx, cy)로 역투영하여 " +
-            "실제 XYZ 좌표 산출. RGB 추론 결과와 동일 타임스탬프의 Depth 프레임을 사용하여 좌표 정합성 보장",
+            "객체 실제 좌표 산출. RGB 추론 결과와 동일 타임스탬프의 Depth 프레임을 사용하여 좌표 정합성 보장",
         },
         {
           title: "지상 관제 시스템 전송 및 가시화",
@@ -491,7 +491,7 @@ export const PROJECTS: ProjectData[] = [
       { value: "MCP", label: "AI Agent 연동" },
     ],
     sections: {
-      arch: "/projects/pillcare-arch.svg",
+      arch: "/projects/pillcare_ar.png",
       intent: [
         "복약 불이행으로 인한 치료 실패·부작용이 고령자·만성질환자에게 반복적으로 발생",
         "기존 복약 앱은 단순 알림 수준 — 개인 맞춤 건강 리스크 감지는 없음",
@@ -567,7 +567,7 @@ export const PROJECTS: ProjectData[] = [
     image2: { src: "/projects/Dearme1.png", caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅" },
     image3: { src: "/projects/Dearme2.png", caption: "감정 분석 결과 · GPT-4o 생성 편지" },
     image4: { src: "/projects/Dearme3.png", caption: "QR 카드 저장 · 발송 날짜 및 채널 선택" },
-    tags: ["Azure Speech", "Azure OpenAI GPT-4o", "FastAPI", "APScheduler", "React", "SQLite", "Python"],
+    tags: ["Azure Speech", "Azure OpenAI GPT-4o", "FastAPI", "APScheduler", "Kakao OAuth 2.0", "카카오 알림톡", "React", "SQLite", "Python"],
     year: "2026.06",
     metrics: [
       { value: "Azure", label: "Speech · OpenAI 연동" },
@@ -575,7 +575,7 @@ export const PROJECTS: ProjectData[] = [
       { value: "TTS", label: "AI 편지 낭독" },
     ],
     sections: {
-      arch: "/projects/dearme-arch.svg",
+      arch: "/projects/dearme_ar.png",
       intent: [
         "바쁜 일상 속에서 감정과 생각을 기록하고 되돌아볼 기회 부족",
         "기존 일기 서비스는 텍스트 작성 부담이 크고 기록 보관에만 집중",
@@ -603,20 +603,29 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
         {
-          title: "APScheduler 기반 자동 발송 스케줄러",
-          description: "사용자가 지정한 날짜에 카카오톡·Discord·이메일 채널로 편지 자동 발송, FastAPI 내장 실행으로 별도 태스크 큐 없이 운영",
+          title: "카카오 OAuth 2.0 · 알림톡 연동",
+          description: "카카오 OAuth 2.0 소셜 로그인으로 별도 회원가입 없이 인증 처리, 카카오 알림톡 비즈니스 API로 지정 날짜에 편지 자동 발송",
           points: [
-            "APScheduler를 FastAPI lifespan에 통합, 별도 인프라 없이 스케줄 관리",
-            "발송 채널별 Webhook·API 연동 (카카오톡·Discord·이메일) 분기 처리",
-            "SQLite에 편지·발송 예약·상태 저장, 발송 완료 후 이력 기록",
+            "카카오 OAuth 2.0: 인가 코드 흐름으로 액세스 토큰 발급 및 사용자 프로필 조회, 자체 회원 DB와 연동하여 세션 관리",
+            "카카오 알림톡: 비즈니스 채널 연동 후 템플릿 기반 메시지로 편지 내용 발송 — 카카오톡 미설치 환경에서도 SMS 대체 발송",
+            "채널별 발송 로직 분리 (알림톡·Discord Webhook·이메일) — 실패 시 채널 이력에 에러 상태 기록",
+          ],
+        },
+        {
+          title: "APScheduler — 경량 스케줄러 선택 이유",
+          description: "Celery + Redis 대신 APScheduler를 선택한 핵심 이유는 단일 프로세스 내 통합 — 브로커·워커 인프라 없이 FastAPI lifespan에 직접 내장하여 운영 복잡도를 최소화",
+          points: [
+            "개인 프로젝트 규모에서 Redis + Celery 스택은 오버엔지니어링 — APScheduler로 동일 기능을 단일 프로세스에서 구현",
+            "SQLiteJobStore로 예약 정보 영속화, 서버 재시작 시 스케줄 자동 복구 — 별도 메시지 큐 없이 durability 확보",
+            "발송 빈도가 최대 1일 1회 수준으로 낮아 경량 스케줄러로 처리량 충분, FastAPI lifespan 이벤트에 통합하여 앱 생명주기와 동기화",
           ],
         },
       ],
       expect: [
-        "음성 입력만으로 기록 부담 없이 감정 일기 습관 형성 가능",
-        "AI 생성 편지와 TTS 낭독으로 미래의 자신과 감성적으로 연결되는 회고 경험 제공",
-        "QR 카드 출력·다채널 자동 발송으로 디지털 타임캡슐을 실물과 메신저 모두에서 수령",
-        "텍스트 중심 일기 서비스와 차별화된 음성 기반 감정 아카이빙 플랫폼 가능성",
+        "카카오 OAuth 2.0 소셜 로그인 도입으로 자체 인증 구현 없이 보안 인증 처리 — 회원가입 마찰 제거 및 개발 공수 절감",
+        "APScheduler + SQLiteJobStore 조합으로 Redis·Celery 없이 예약 발송 durability 확보 — 단일 프로세스로 운영 인프라 최소화",
+        "알림톡 미수신 시 SMS 자동 대체 발송으로 발송 신뢰성 확보, 채널별 에러 이력 기록으로 장애 추적 가능",
+        "STT → GPT-4o → TTS End-to-End 파이프라인 단일화로 음성 입력부터 편지 낭독까지 외부 의존성 없이 Azure 단일 스택으로 완결",
       ],
     },
   },
