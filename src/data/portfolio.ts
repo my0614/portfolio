@@ -355,6 +355,7 @@ export const PROJECTS: ProjectData[] = [
       { value: "K8s", label: "전 컴포넌트 파드 운영" },
     ],
     sections: {
+      arch: "/projects/dflow_ar.png",
       flow: [
         {
           title: "데이터셋 Import 및 버전 관리",
