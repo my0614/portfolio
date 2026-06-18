@@ -233,6 +233,7 @@ export const PROJECTS: ProjectData[] = [
       { value: "KTL", label: "시험 성적서 발급" },
     ],
     sections: {
+      arch: "/projects/drone_arch.png",
       flow: [
         {
           title: "드론 배치 및 네트워크 자동 구성",
@@ -316,6 +317,9 @@ export const PROJECTS: ProjectData[] = [
             "이슈 2 — 플래시 빛번짐 오탐: 빛번짐을 객체로 오인식, 특히 bomb 클래스 Precision 56.5%(FP 127건)로 집중 발생 → 빛번짐 패턴을 배경 이미지로 추가 학습하여 오탐률 감소",
             "이슈 3 — injured_person 탐지 누락: Recall 60.4%(FN 44건)으로 가장 낮은 검출률 → Occlusion·저조도 환경 데이터 보강으로 대응",
           ],
+          images: [
+            { src: "/projects/drone_result.png", caption: "클래스별 성능 지표 (Precision · Recall · AP@0.5)" },
+          ],
           table: {
             headers: ['클래스', 'Precision', 'Recall', 'AP@0.5'],
             rows: [
@@ -355,7 +359,7 @@ export const PROJECTS: ProjectData[] = [
       { value: "K8s", label: "전 컴포넌트 파드 운영" },
     ],
     sections: {
-      arch: "/projects/dflow_ar.png",
+      arch: "/projects/dflow_ar2.png",
       flow: [
         {
           title: "데이터셋 Import 및 버전 관리",
