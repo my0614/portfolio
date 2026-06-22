@@ -163,6 +163,7 @@ export const PROJECTS: ProjectData[] = [
       { value: "24/7", label: "무중단 운영" },
     ],
     sections: {
+      arch: "/projects/CS_자동화프로세스.png",
       tech: [
         {
           title: "이중 API 응답 기반 케이스 분기 설계",
