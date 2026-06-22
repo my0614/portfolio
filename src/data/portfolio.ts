@@ -490,7 +490,7 @@ export const PROJECTS: ProjectData[] = [
     summary: "사용자의 복약 이력, 건강 지표, 생활 환경 데이터를 통합 분석하여 잠재적인 건강 위험을 조기에 예측하기 위해 개발한 서비스. 멀티모달 데이터를 기반으로 개인 맞춤형 건강 인사이트를 제공하고 예방 중심의 건강 관리를 지원했습니다.",
     thumb: "/projects/pillcare_thum.webp",
     image: { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" },
-    tags: ["FastAPI", "OpenAI SDK", "Redis", "OAuth 2.0", "Pydantic", "WeasyPrint", "pytest"],
+    tags: ["FastAPI", "FastMCP", "OpenAI SDK", "Redis", "OAuth 2.0", "Pydantic", "WeasyPrint", "pytest"],
     year: "2026.05",
     metrics: [
       { value: "11", label: "도메인 설계", from: "15 테이블" },
