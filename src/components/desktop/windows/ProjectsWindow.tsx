@@ -1,5 +1,5 @@
 'use client';
-import { projects } from "@/data/projects";
+import { PROJECTS as projects } from "@/data/portfolio";
 
 interface Props {
   onOpenDetail: (idx: number) => void;
