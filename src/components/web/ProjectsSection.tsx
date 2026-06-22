@@ -250,6 +250,16 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
           </div>
         )}
 
+        {s.arch && (
+          <div className="dt-section">
+            <div className="dt-sec-head">
+              <div className="dt-sec-eyebrow">SYSTEM</div>
+              <div className="dt-sec-title">아키텍처</div>
+            </div>
+            <div className="dt-arch"><img src={s.arch} alt="아키텍처 다이어그램" /></div>
+          </div>
+        )}
+
         <div className="dt-section">
           <div className="dt-sec-head">
             <div className="dt-sec-eyebrow">HOW</div>
@@ -315,16 +325,6 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
             ))}
           </div>
         </div>
-
-        {s.arch && (
-          <div className="dt-section">
-            <div className="dt-sec-head">
-              <div className="dt-sec-eyebrow">SYSTEM</div>
-              <div className="dt-sec-title">아키텍처</div>
-            </div>
-            <div className="dt-arch"><img src={s.arch} alt="아키텍처 다이어그램" /></div>
-          </div>
-        )}
 
         {pr.link && (
           <div style={{ marginTop: 56 }}>

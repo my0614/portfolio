@@ -103,6 +103,28 @@ export const PROJECTS: ProjectData[] = [
     ],
     sections: {
       arch: "/projects/hotdeal_ar.png",
+      flow: [
+        {
+          title: "파트너사 핫딜 신청 집계",
+          description: "파트너사가 Google Spreadsheet에 신청 상품을 입력하면 배치가 신청 목록을 자동 수집",
+        },
+        {
+          title: "Shopby API 상품 매칭 및 랭킹 선별",
+          description: "신청 상품을 Shopby API로 매칭하여 할인율·가격 경쟁력·재고 수량 기반 동적 스코어링으로 상위 200개 자동 선별",
+        },
+        {
+          title: "핫딜 자동 등록",
+          description: "선별된 상품을 Shopby 핫딜 등록 API로 자동 등록, 수동 입력 없이 전 과정 완결",
+        },
+        {
+          title: "파트너사별 결과 메일 자동 발송",
+          description: "계정별 결과 파일 자동 생성 후 Gmail API로 개별 발송, BCC 처리로 수신자 정보 노출 차단",
+        },
+        {
+          title: "Slack 실행 결과 알림",
+          description: "배치 완료 후 정상·실패 건수 요약을 Slack Webhook으로 자동 발송, 오류 발생 시 즉시 알림",
+        },
+      ],
       tech: [
         {
           title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
@@ -164,6 +186,24 @@ export const PROJECTS: ProjectData[] = [
     ],
     sections: {
       arch: "/projects/CS_자동화프로세스.png",
+      flow: [
+        {
+          title: "배송 문의 일괄 수집",
+          description: "cron 스케줄러가 1시간 주기로 Shopby API를 통해 미처리 배송 문의 목록을 자동 수집",
+        },
+        {
+          title: "주문·배송 상태 조회",
+          description: "Shopby(주문)·Sellmate(배송) 이중 API를 호출해 상품코드·송장번호·입고예정일 정보를 매칭",
+        },
+        {
+          title: "케이스 분기 판단",
+          description: "상품코드·송장번호 유무 조합으로 3가지 케이스 분기, 자동 처리 불가 케이스는 담당자 플래그로 분리",
+        },
+        {
+          title: "템플릿 자동 선택 및 답변 등록",
+          description: "케이스에 맞는 HTML 템플릿을 자동 선택 후 Shopby answer API로 답변 등록, 주말·야간 포함 24/7 무중단 처리",
+        },
+      ],
       tech: [
         {
           title: "이중 API 응답 기반 케이스 분기 설계",
@@ -479,6 +519,28 @@ export const PROJECTS: ProjectData[] = [
     ],
     sections: {
       arch: "/projects/pillcare_ar.png",
+      flow: [
+        {
+          title: "처방봉투 OCR → 복약 스케줄 자동 등록",
+          description: "처방봉투 사진 업로드 → OpenAI Vision API로 약품명·용량·복용 시점 자동 추출 → 복약 스케줄 즉시 등록",
+        },
+        {
+          title: "복약·건강 데이터 기록",
+          description: "복약 이행 여부, 건강 지표(혈압·혈당 등), 생활 환경 데이터를 지속 누적 기록",
+        },
+        {
+          title: "AI Agent 실시간 건강 분석",
+          description: "FastMCP 서버의 건강 지수·약물 안전도·환경 지수 Tool을 AI Agent가 직접 호출해 개인화 건강 인사이트 생성",
+        },
+        {
+          title: "멀티 레이어 캐시 처리",
+          description: "L1 인메모리 → L2 Redis → L3 OpenAI 순으로 캐시 히트 처리, 비용 절감 및 응답 속도 최적화",
+        },
+        {
+          title: "알람 스케줄러 → 알림 발송",
+          description: "asyncio 스케줄러가 30분 주기로 복약·병원·식사·수면·물·일지 6종 알람을 스캔하여 적시에 푸시 알림 발송",
+        },
+      ],
       intent: [
         "복약 불이행으로 인한 치료 실패·부작용이 고령자·만성질환자에게 반복적으로 발생",
         "기존 복약 앱은 단순 알림 수준 — 개인 맞춤 건강 리스크 감지는 없음",
@@ -563,6 +625,28 @@ export const PROJECTS: ProjectData[] = [
     ],
     sections: {
       arch: "/projects/dearme_ar.png",
+      flow: [
+        {
+          title: "음성 녹음 → STT 텍스트 변환",
+          description: "사용자가 음성으로 하루를 기록하면 Azure Speech STT가 실시간으로 텍스트로 변환",
+        },
+        {
+          title: "감정 분석 · 키워드 추출",
+          description: "GPT-4o가 음성 텍스트에서 감정 상태·핵심 키워드를 분석하여 오늘의 감정 리포트 생성",
+        },
+        {
+          title: "RAG로 과거 일기 컨텍스트 주입",
+          description: "ChromaDB에서 과거 일기 유사도 검색(k=3) → 검색 결과를 프롬프트에 주입해 서사적 맥락이 담긴 개인화 편지 생성",
+        },
+        {
+          title: "TTS 편지 낭독 · QR 카드 저장",
+          description: "GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독, QR 카드로 저장하여 미래의 나에게 전달할 타임캡슐 완성",
+        },
+        {
+          title: "발송 날짜 예약 · 멀티채널 자동 전달",
+          description: "APScheduler가 지정한 날짜에 카카오 알림톡·Discord·이메일 중 선택한 채널로 편지를 자동 발송",
+        },
+      ],
       intent: [
         "바쁜 일상 속에서 감정과 생각을 기록하고 되돌아볼 기회 부족",
         "기존 일기 서비스는 텍스트 작성 부담이 크고 기록 보관에만 집중",

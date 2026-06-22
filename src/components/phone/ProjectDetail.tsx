@@ -199,6 +199,19 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
           </>
         )}
 
+        {/* architecture */}
+        {s.arch && (
+          <>
+            <div className="divider" />
+            <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
+              <SectionHead label="SYSTEM" title="아키텍처" />
+              <div style={{ background: 'var(--bg-gray)', borderRadius: 16, padding: 16 }}>
+                <img src={s.arch} alt="아키텍처 다이어그램" style={{ width: '100%', display: 'block' }} />
+              </div>
+            </div>
+          </>
+        )}
+
         <div className="divider" />
 
         {/* tech */}
@@ -273,20 +286,6 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
           </div>
         </div>
 
-        <div className="divider" />
-
-        {/* architecture */}
-        {s.arch && (
-          <>
-            <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
-              <SectionHead label="SYSTEM" title="아키텍처" />
-              <div style={{ background: 'var(--bg-gray)', borderRadius: 16, padding: 16 }}>
-                <img src={s.arch} alt="아키텍처 다이어그램" style={{ width: '100%', display: 'block' }} />
-              </div>
-            </div>
-            <div className="divider" />
-          </>
-        )}
 
         {pr.link && (
           <div className="pad" style={{ paddingBottom: 36 }}>
