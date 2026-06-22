@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { PROJECTS, ProjectData } from '@/data/portfolio';
 import { Icon } from '@/components/phone/Icon';
 import { useReveal } from './hooks';
+import ProjectThumb from '@/components/ProjectThumb';
 
 function ImageGallery({ images }: { images: { src: string; caption?: string }[] }) {
   const [current, setCurrent] = useState(0);
@@ -78,7 +79,7 @@ function ProjectCard({ pr, onOpen, idx }: { pr: ProjectData; onOpen: (id: string
       onClick={() => onOpen(pr.id)}
     >
       <div className="proj-thumb">
-        <img src={pr.thumb} alt="" loading="lazy" />
+        <ProjectThumb project={pr} style={{ height: '100%' }} />
       </div>
       <div className="proj-body">
         <div className="proj-meta">

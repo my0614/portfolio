@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { PROJECTS } from '@/data/portfolio';
 import { AppBar } from './AppBar';
 import { useScrolled, useReveal } from './hooks';
+import ProjectThumb from '@/components/ProjectThumb';
 
 interface ProjectsScreenProps {
   openProject: (id: string) => void;
@@ -54,8 +55,8 @@ export function ProjectsScreen({ openProject }: ProjectsScreenProps) {
               style={{ animationDelay: (i * 0.05) + 's', border: '1px solid var(--border)', background: '#fff', borderRadius: 'var(--r-card)', padding: 0, overflow: 'hidden', cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit' }}
               onClick={() => openProject(pr.id)}
             >
-              <div style={{ height: 150, background: 'var(--bg-gray)', overflow: 'hidden' }}>
-                <img src={pr.thumb} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ height: 150, overflow: 'hidden' }}>
+                <ProjectThumb project={pr} style={{ height: 150 }} />
               </div>
               <div style={{ padding: '16px 18px 18px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
