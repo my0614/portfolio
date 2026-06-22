@@ -102,6 +102,37 @@ img { display: block; max-width: 100%; }
 }
 .icon-toggle:hover { color: var(--text); border-color: var(--text-4); }
 
+.nav-hamburger {
+  display: none;
+  width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 11px;
+  background: var(--surface); cursor: pointer; color: var(--text-2);
+  place-items: center; transition: color .2s, border-color .2s;
+}
+.nav-hamburger:hover { color: var(--text); border-color: var(--text-4); }
+
+.nav-mobile {
+  position: absolute; top: 100%; left: 0; right: 0;
+  background: var(--nav-bg);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom: 1px solid var(--border);
+  display: none; flex-direction: column;
+  padding: 8px 0 16px;
+}
+.nav-mobile.open {
+  display: flex;
+  animation: navMobileIn .22s cubic-bezier(.16,.84,.44,1) both;
+}
+@keyframes navMobileIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+.nav-mobile a {
+  padding: 15px 24px; font-size: 16px; font-weight: 600; color: var(--text-2);
+  transition: color .15s, background .15s;
+}
+.nav-mobile a:hover { color: var(--text); background: var(--bg-gray); }
+
 /* ===== buttons ===== */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -339,6 +370,7 @@ textarea.field { line-height: 1.55; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .dt-metrics { grid-template-columns: 1fr; }
   .nav-links { display: none; }
+  .nav-hamburger { display: grid; }
   .sec-title { font-size: 30px; }
   .dt-title-lg { font-size: 32px; }
 }

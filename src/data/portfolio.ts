@@ -59,6 +59,7 @@ export const PROFILE: ProfileData = {
   intro: [
     "이커머스 도메인에서 데이터 파이프라인 구축부터 모델 학습·서빙·인프라 운영까지 End-to-End를 직접 담당해온 5년 차 ML 엔지니어입니다.",
     "RealSense 카메라, 드론 영상, 항공 영상, RTSP 영상 등 다양한 영상 데이터를 다루며 데이터 수집부터 모델 개발, 배포·운영까지 이어지는 End-to-End ML 파이프라인 구축에 강점을 가지고 있습니다.",
+    "Azure OpenAI GPT-4o API 연동 및 LangChain LCEL 기반 RAG 파이프라인을 직접 설계·구현한 경험이 있습니다. ChromaDB 벡터 스토어와 HuggingFace 임베딩을 활용한 개인화 RAG 시스템, 감정 분석·편지 생성을 위한 프롬프트 엔지니어링까지 LLM 서비스 개발 전반을 실 서비스 수준에서 경험했습니다.",
   ],
   systemInfo: [
     ["Location", "Seoul, South Korea"],
@@ -68,6 +69,7 @@ export const PROFILE: ProfileData = {
   ],
   skills: [
     { category: "Language", skills: ["Python", "C"] },
+    { category: "LLM/AI", skills: ["LangChain", "Azure OpenAI", "RAG", "ChromaDB", "Prompt Engineering"] },
     { category: "Framework", skills: ["PyTorch", "Flask", "FastAPI", "Label Studio", "MLflow"] },
     { category: "Database", skills: ["PostgreSQL", "Redis"] },
     { category: "Infra", skills: ["Docker", "Kubernetes"] },
@@ -572,7 +574,7 @@ export const PROJECTS: ProjectData[] = [
     image2: { src: "/projects/Dearme1.png", caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅" },
     image3: { src: "/projects/Dearme2.png", caption: "감정 분석 결과 · GPT-4o 생성 편지" },
     image4: { src: "/projects/Dearme3.png", caption: "QR 카드 저장 · 발송 날짜 및 채널 선택" },
-    tags: ["Azure Speech", "Azure OpenAI GPT-4o", "FastAPI", "APScheduler", "Kakao OAuth 2.0", "카카오 알림톡", "React", "SQLite", "Python"],
+    tags: ["Azure Speech", "Azure OpenAI GPT-4o", "LangChain", "RAG", "FastAPI", "APScheduler", "Kakao OAuth 2.0", "카카오 알림톡", "React", "SQLite", "Python"],
     year: "2026.06",
     metrics: [
       { value: "Azure", label: "Speech · OpenAI 연동" },
@@ -589,6 +591,18 @@ export const PROJECTS: ProjectData[] = [
         "지정한 날짜에 카카오톡·Discord·이메일로 자동 전달하여 과거와 미래의 나를 연결",
       ],
       tech: [
+        {
+          title: "LangChain LCEL + RAG — LLM 서비스 상용화 및 개인화 파이프라인",
+          description: "Azure OpenAI GPT-4o를 단발성 API 호출이 아닌 STT→감정분석→RAG 컨텍스트 주입→편지 생성→TTS로 이어지는 End-to-End 실서비스 파이프라인으로 통합. LangChain LCEL로 프롬프트·LLM·파서를 선언형 체인으로 구성하고 RAG 리트리버를 결합하여 사용자별 맥락이 반영된 응답을 생성하는 구조를 직접 설계",
+          points: [
+            "LLM API 상용화: GPT-4o를 카카오 OAuth 인증·알림톡/Discord/이메일 멀티채널 발송·APScheduler 예약 발송과 결합해 단발 호출이 아닌 운영 가능한 서비스 구조로 완결",
+            "LangChain LCEL 체인 설계: ChatPromptTemplate | AzureChatOpenAI | StrOutputParser — 프롬프트·LLM·파서 단계를 | 연산자로 연결, 각 컴포넌트를 독립적으로 교체 가능한 구조로 설계",
+            "RAG 파이프라인: ChromaDB에 과거 일기를 벡터로 저장 → 신규 작성 시 유사도 검색(k=3) → 검색 결과를 프롬프트 컨텍스트로 동적 주입해 감정 흐름과 서사적 맥락이 반영된 생성 결과 확보",
+            "프롬프트 엔지니어링: 감정·맥락·발송채널 정보를 컨텍스트로 결합해 목적에 맞는 개인화 메시지를 생성하도록 프롬프트 설계",
+            "비용 최적화: HuggingFace AutoTokenizer + AutoModel로 Mean Pooling + L2 정규화 임베딩을 직접 구현, langchain_core.embeddings.Embeddings 상속으로 LangChain 생태계 호환 유지하며 임베딩 API 비용 Zero화",
+            "계정별 벡터 격리: ChromaDB 메타데이터에 kakao_id 저장 → 필터링 검색으로 멀티유저 환경에서 데이터 분리 확보 — 향후 LangGraph 기반 멀티스텝 에이전트로 확장 가능한 구조로 설계",
+          ],
+        },
         {
           title: "Azure Speech SDK — STT · TTS 파이프라인",
           description: "Azure Speech STT로 음성 녹음 → 텍스트 변환, GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독 — 입력부터 출력까지 음성 End-to-End",
@@ -611,9 +625,21 @@ export const PROJECTS: ProjectData[] = [
           title: "카카오 OAuth 2.0 · 알림톡 연동",
           description: "카카오 OAuth 2.0 소셜 로그인으로 별도 회원가입 없이 인증 처리, 카카오 알림톡 비즈니스 API로 지정 날짜에 편지 자동 발송",
           points: [
-            "카카오 OAuth 2.0: 인가 코드 흐름으로 액세스 토큰 발급 및 사용자 프로필 조회, 자체 회원 DB와 연동하여 세션 관리",
+            "카카오 OAuth 2.0: 인가 코드 흐름으로 액세스 토큰 발급 → /v2/user/me 호출로 사용자 프로필 조회 → users 테이블 저장 후 세션 관리",
             "카카오 알림톡: 비즈니스 채널 연동 후 템플릿 기반 메시지로 편지 내용 발송 — 카카오톡 미설치 환경에서도 SMS 대체 발송",
             "채널별 발송 로직 분리 (알림톡·Discord Webhook·이메일) — 실패 시 채널 이력에 에러 상태 기록",
+          ],
+        },
+        {
+          title: "일기 캘린더 · 날짜별 조회 REST API",
+          description: "DiaryCalendar.jsx 월별 달력에 작성일을 금색 점으로 시각화, 날짜 클릭 시 그날 편지·감정·키워드를 즉시 조회 — /api/me · /api/calendar · /api/diary/{date} 3개 엔드포인트 설계",
+          points: [
+            "DiaryCalendar.jsx: 월별 달력 UI, 일기가 작성된 날짜에 금색 점 표시로 기록 현황 시각화",
+            "날짜 클릭 → /api/diary/{date} 호출로 해당 날짜 편지·감정·키워드 목록 즉시 조회",
+            "헤더 유저바: 닉네임 뱃지 + 캘린더 버튼 + 로그아웃 우측 상단 고정",
+            "/api/me: 세션 기반 로그인 유저 정보 반환",
+            "/api/calendar: 월별 날짜별 일기 건수 반환 → 달력 금색 점 렌더링에 활용",
+            "/api/diary/{date}: 특정 날짜 일기 목록 반환 → 날짜별 상세 조회 지원",
           ],
         },
         {
