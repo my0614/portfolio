@@ -1,8 +1,71 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { PROJECTS, ProjectData } from '@/data/portfolio';
 import { Icon } from '@/components/phone/Icon';
 import { useReveal } from './hooks';
+
+function ImageGallery({ images }: { images: { src: string; caption?: string }[] }) {
+  const [current, setCurrent] = useState(0);
+
+  const prev = useCallback(() => setCurrent(i => Math.max(0, i - 1)), []);
+  const next = useCallback(() => setCurrent(i => Math.min(images.length - 1, i + 1)), [images.length]);
+
+  return (
+    <div style={{ marginTop: 36 }}>
+      <div style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', border: '1px solid var(--border-soft)', background: 'var(--bg-gray)' }}>
+        <img src={images[current].src} alt="" style={{ width: '100%', display: 'block' }} />
+
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prev}
+              disabled={current === 0}
+              style={{
+                position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)',
+                width: 36, height: 36, borderRadius: '50%', border: 'none', cursor: 'pointer',
+                background: 'rgba(0,0,0,0.45)', color: '#fff', display: 'grid', placeItems: 'center',
+                opacity: current === 0 ? 0.25 : 1, transition: 'opacity .2s',
+              }}
+            >
+              <Icon name="back" size={18} />
+            </button>
+            <button
+              onClick={next}
+              disabled={current === images.length - 1}
+              style={{
+                position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%) scaleX(-1)',
+                width: 36, height: 36, borderRadius: '50%', border: 'none', cursor: 'pointer',
+                background: 'rgba(0,0,0,0.45)', color: '#fff', display: 'grid', placeItems: 'center',
+                opacity: current === images.length - 1 ? 0.25 : 1, transition: 'opacity .2s',
+              }}
+            >
+              <Icon name="back" size={18} />
+            </button>
+          </>
+        )}
+      </div>
+
+      {images.length > 1 && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, marginTop: 12 }}>
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              style={{
+                width: i === current ? 20 : 7, height: 7, borderRadius: 99,
+                border: 'none', background: i === current ? 'var(--accent)' : 'var(--border)',
+                cursor: 'pointer', padding: 0, transition: 'all .25s',
+              }}
+            />
+          ))}
+        </div>
+      )}
+      {images[current].caption && (
+        <div className="dt-cap" style={{ marginTop: 8 }}>{images[current].caption}</div>
+      )}
+    </div>
+  );
+}
 
 type FilterKey = 'all' | 'company' | 'team' | 'personal';
 const SEGS: [FilterKey, string][] = [['all', '전체'], ['company', '회사'], ['team', '팀'], ['personal', '개인']];
@@ -102,27 +165,7 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
           {pr.tags.map(t => <span key={t} className="chip">{t}</span>)}
         </div>
 
-        <div className="dt-hero-img"><img src={pr.image.src} alt="" /></div>
-        {pr.image.caption && <div className="dt-cap">{pr.image.caption}</div>}
-
-        {pr.image2 && (
-          <>
-            <div className="dt-hero-img" style={{ marginTop: 16 }}><img src={pr.image2.src} alt="" /></div>
-            {pr.image2.caption && <div className="dt-cap">{pr.image2.caption}</div>}
-          </>
-        )}
-        {pr.image3 && (
-          <>
-            <div className="dt-hero-img" style={{ marginTop: 16 }}><img src={pr.image3.src} alt="" /></div>
-            {pr.image3.caption && <div className="dt-cap">{pr.image3.caption}</div>}
-          </>
-        )}
-        {pr.image4 && (
-          <>
-            <div className="dt-hero-img" style={{ marginTop: 16 }}><img src={pr.image4.src} alt="" /></div>
-            {pr.image4.caption && <div className="dt-cap">{pr.image4.caption}</div>}
-          </>
-        )}
+        <ImageGallery images={[pr.image, ...(pr.image2 ? [pr.image2] : []), ...(pr.image3 ? [pr.image3] : []), ...(pr.image4 ? [pr.image4] : [])]} />
 
         <div className="dt-section">
           <div className="dt-sec-head">

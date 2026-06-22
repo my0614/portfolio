@@ -259,6 +259,7 @@ section { position: relative; }
 .dt-subtitle { font-size: 16px; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
 .dt-summary { font-size: 18px; color: var(--text-2); line-height: 1.7; margin-top: 20px; }
 .dt-hero-img { margin-top: 36px; border-radius: 20px; overflow: hidden; background: var(--bg-gray); border: 1px solid var(--border-soft); }
+.dt-hero-img img { width: 100%; display: block; }
 .dt-cap { font-size: 13px; color: var(--text-3); text-align: center; margin-top: 12px; }
 
 .dt-section { margin-top: 64px; }
