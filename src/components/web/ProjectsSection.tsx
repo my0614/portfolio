@@ -183,6 +183,23 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
           </div>
         </div>
 
+        {(s.result ?? s.expect ?? []).length > 0 && (
+          <div className="dt-section">
+            <div className="dt-sec-head">
+              <div className="dt-sec-eyebrow">RESULT</div>
+              <div className="dt-sec-title">{s.expect ? '기대 효과' : '성과'}</div>
+            </div>
+            <div className="dt-result">
+              {(s.result ?? s.expect ?? []).map((t, i) => (
+                <div className="dt-result-row" key={i}>
+                  <Icon name="check" size={20} stroke={2.4} />
+                  <p>{t}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {s.intent && s.intent.length > 0 && (
           <div className="dt-section">
             <div className="dt-sec-head">
@@ -307,21 +324,6 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
             <div className="dt-arch"><img src={s.arch} alt="아키텍처 다이어그램" /></div>
           </div>
         )}
-
-        <div className="dt-section">
-          <div className="dt-sec-head">
-            <div className="dt-sec-eyebrow">RESULT</div>
-            <div className="dt-sec-title">{s.expect ? '기대 효과' : '성과'}</div>
-          </div>
-          <div className="dt-result">
-            {(s.result ?? s.expect ?? []).map((t, i) => (
-              <div className="dt-result-row" key={i}>
-                <Icon name="check" size={20} stroke={2.4} />
-                <p>{t}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {pr.link && (
           <div style={{ marginTop: 56 }}>

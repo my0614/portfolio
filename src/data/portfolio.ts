@@ -103,11 +103,6 @@ export const PROJECTS: ProjectData[] = [
     ],
     sections: {
       arch: "/projects/hotdeal_ar.png",
-      intent: [
-        "핫딜 신청 집계·상품 선정·등록·결과 공유까지 MD가 하루 4시간 이상 수작업으로 처리",
-        "매 회차마다 파트너사 계정별 결과 파일을 수작업 생성 후 개별 발송 — 누락·오발송이 반복되며 운영 신뢰도 리스크로 이어짐",
-        "별도 시스템 구축 없이 이미 사용 중인 Google Workspace를 자동화 인프라로 전환, OAuth 2.0으로 Spreadsheet·Gmail을 단일 파이프라인으로 연결해 전 과정 자동화",
-      ],
       tech: [
         {
           title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
@@ -145,9 +140,7 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
-        "핫딜 등록 작업 시간 4시간 이상 → 2분 이내로 단축 (약 99% 감소)",
         "파트너사 계정별 결과 파일 메일 발송 자동화로 누락·오입력 리스크 제거",
-        "상품 선정부터 등록·오픈·파트너사 알림까지 전 과정 무인 자동화",
         "별도 메일링 SaaS·인프라 도입 없이 Google Workspace만으로 자동화 파이프라인 구현",
       ],
     },
@@ -170,12 +163,6 @@ export const PROJECTS: ProjectData[] = [
       { value: "24/7", label: "무중단 운영" },
     ],
     sections: {
-      intent: [
-        "쉐어러 3명 + CS 파트 1명, 총 4인이 1:1 게시판을 직접 응대 — 배송 문의 비중이 높아 담당자 리소스의 상당 부분이 단순 반복 업무에 소모되는 구조",
-        "업무 시간 외 응답 지연으로 고객 불만 누적, 주말·야간 공백 발생",
-        "배송 문의는 주문번호·송장번호·배송 상태로 정형화 → LLM 없이 규칙 기반만으로 대부분 커버 가능",
-        "자동화 범위를 명확히 정의하고, 범위 외 케이스는 플래그로 분리해 오답 발송 리스크 차단",
-      ],
       tech: [
         {
           title: "이중 API 응답 기반 케이스 분기 설계",
@@ -209,11 +196,6 @@ export const PROJECTS: ProjectData[] = [
             "주말·비업무 시간 포함 24/7 무중단 운영",
           ],
         },
-      ],
-      result: [
-        "전체 CS 문의의 약 1/3 자동 처리",
-        "응답 지연 시간 80% 단축",
-        "주말·비업무 시간 포함 24/7 무중단 운영",
       ],
     },
   },
@@ -336,11 +318,9 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
-        "객체 탐지 mAP 61% → 75% (14%p 향상), KTL 시험 성적서 발급 기준 달성",
         "Faster R-CNN 선정 (Precision 95%, ~12.5 FPS) — 4종 모델 비교 평가 후 오탐 최소화 기준으로 채택",
         "데이터셋 2,000장 → 6,000~7,000장 확장, 저조도·빛번짐·Occlusion 실환경 이슈 3건 원인별 대응",
         "RGB/Depth 동기화 기반 실시간 3D 좌표 복원 — GCS에서 위협 객체 위치를 3D 포인터로 확인",
-        "네트워크 세팅 시간 2시간 이상 → 1분 이하 단축 (자동 감지·ROS_MASTER_URI 동적 주입)",
       ],
     },
   },
@@ -472,7 +452,6 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
-        "지원 모델 수 3개 → 20개 이상 확장, 신규 모델 온보딩 1~2주 → 1일 이내 (config 교체만으로 처리)",
         "멀티 GPU OOM 장애 제거, 학습 대기 하루 이상 → Redis 큐 자동 순차 처리로 해소",
         "라벨링 결과 COCO·YOLO 포맷 export + 자동 라벨링(Pre-annotation) 연계로 라벨링 사이클 단축",
         "학습 완료 weights PyTorch(.pt) · TensorFlow(.pb) · ONNX(.onnx) 3포맷 export 지원",

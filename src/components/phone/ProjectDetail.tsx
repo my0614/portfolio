@@ -130,6 +130,25 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
           </div>
         </div>
 
+        {(s.result ?? s.expect ?? []).length > 0 && (
+          <>
+            <div className="divider" />
+            <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
+              <SectionHead label="RESULT" title={s.expect ? '기대 효과' : '성과'} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {(s.result ?? s.expect ?? []).map((t, i) => (
+                  <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <span style={{ flex: 'none', marginTop: 2, color: 'var(--green)' }}>
+                      <Icon name="check" size={18} stroke={2.6} />
+                    </span>
+                    <p style={{ fontSize: 14.5, lineHeight: 1.6, color: 'var(--text)', fontWeight: 500 }}>{t}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
         <div className="divider" />
 
         {/* intent */}
@@ -268,21 +287,6 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
             <div className="divider" />
           </>
         )}
-
-        {/* result / expect */}
-        <div className="pad" style={{ paddingTop: 28, paddingBottom: 32 }}>
-          <SectionHead label="RESULT" title={s.expect ? '기대 효과' : '성과'} />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {(s.result ?? s.expect ?? []).map((t, i) => (
-              <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                <span style={{ flex: 'none', marginTop: 2, color: 'var(--green)' }}>
-                  <Icon name="check" size={18} stroke={2.6} />
-                </span>
-                <p style={{ fontSize: 14.5, lineHeight: 1.6, color: 'var(--text)', fontWeight: 500 }}>{t}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {pr.link && (
           <div className="pad" style={{ paddingBottom: 36 }}>
