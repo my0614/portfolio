@@ -371,6 +371,78 @@ export const PROJECTS: ProjectData[] = [
     },
   },
   {
+    id: "uav",
+    type: "company",
+    title: "EO/IR 센트리 카메라 기반 UAV 실시간 탐지·추적 및 모니터링 시스템",
+    subtitle: "군보안기관 R&D",
+    company: "한컴인스페이스",
+    initial: "한",
+    summary: "EO·IR 이중 도메인 환경에서 소형 UAV를 실시간으로 탐지·추적하기 위해 구축한 모니터링 시스템. 도메인별 모델 분리 학습과 소형 객체 특화 최적화를 통해 주야간 모두에서 안정적인 탐지 성능을 확보하고, Kubernetes 6개 파드 기반 RTSP 병렬 스트리밍으로 복수 카메라 실시간 처리 환경을 구현했습니다.",
+    thumb: "/projects/hancom-logo.png",
+    image: { src: "/projects/hancom-logo.png", caption: "군보안사업으로 실제 서비스 이미지는 공개할 수 없습니다." },
+    tags: ["YOLOv5", "Kubernetes", "Docker", "RTSP", "Python", "PyTorch"],
+    year: "2024.06 ~ 2024.12",
+    metrics: [
+      { value: "EO/IR", label: "도메인별 모델 분리" },
+      { value: "6채널", label: "실시간 병렬 처리" },
+      { value: "K8s", label: "파드 기반 운영" },
+    ],
+    sections: {
+      flow: [
+        {
+          title: "RTSP 스트림 수신 — 6채널 병렬 처리",
+          description: "Kubernetes 6개 파드가 각각 EO·IR 카메라의 RTSP 스트림을 독립적으로 수신, 카메라별 장애가 타 파드에 영향을 미치지 않도록 격리",
+        },
+        {
+          title: "도메인 판별 및 모델 라우팅",
+          description: "수신 스트림의 도메인(EO·IR)에 따라 각각 최적화된 YOLO 모델로 라우팅, 도메인 혼용 없이 독립 추론",
+        },
+        {
+          title: "실시간 UAV 탐지 및 추적",
+          description: "도메인별 YOLO 모델이 프레임 단위로 소형 UAV를 탐지, 탐지 결과를 추적 알고리즘과 연계해 연속적인 객체 추적 수행",
+        },
+        {
+          title: "탐지 결과 모니터링 시스템 전송",
+          description: "탐지·추적 결과를 실시간으로 모니터링 시스템에 전달, 운용자가 전 채널 상황을 통합 화면에서 확인",
+        },
+      ],
+      tech: [
+        {
+          title: "K8s 6파드 기반 RTSP 병렬 스트림 처리",
+          description: "Kubernetes 위에 파드 6개를 배포하여 EO·IR 카메라별 RTSP 스트림을 독립 파드에서 병렬 수신·추론. Docker 이미지로 모델·런타임 환경을 통일하여 파드 간 일관성 확보",
+          points: [
+            "파드별 RTSP 스트림 독립 수신으로 단일 카메라 장애가 전체 시스템에 미치는 영향 차단",
+            "Docker 이미지로 YOLO 모델·의존성 패키징, 파드 재시작 시 동일 환경 즉시 복원",
+            "Kubernetes 리소스 제한 설정으로 파드 간 GPU·CPU 자원 경합 방지",
+          ],
+        },
+        {
+          title: "EO/IR 도메인별 YOLO 모델 분리 학습",
+          description: "EO·IR 이미지를 단일 데이터셋으로 학습 시 IR 환경에서 새·항공기 오탐이 빈번하게 발생하는 문제를 도메인별 데이터셋 분리 및 독립 학습으로 해결",
+          points: [
+            "EO/IR 도메인별 데이터셋 분리 구축, 오탐 케이스 및 다양한 배경 이미지를 추가 학습하여 UAV 고유 패턴 학습",
+            "IR 모델: 새·항공기 등 비객체 오탐 케이스를 background 클래스로 명시적 학습하여 오탐 빈도 감소",
+            "EO 모델: 주간 다양한 조도·각도 환경 데이터 확보로 배경 유사 객체 탐지율 향상",
+          ],
+        },
+        {
+          title: "소형 UAV 특화 모델 최적화",
+          description: "원거리 소형 UAV는 표준 앵커 설정과 입력 해상도에서 탐지율이 저하되는 문제를 고해상도 입력·소형 객체 특화 앵커·데이터 증강으로 개선",
+          points: [
+            "고해상도 입력 적용으로 원거리 소형 객체 특징 보존 및 탐지율 향상",
+            "소형 객체 특화 앵커 설정 조정으로 작은 바운딩 박스 예측 정확도 개선",
+            "mosaic·확대 crop 등 데이터 증강 기법으로 소형 객체 학습 샘플 다양성 확보",
+          ],
+        },
+      ],
+      result: [
+        "EO/IR 환경별 최적화로 주야간 모두에서 안정적인 탐지 성능 확보, IR 오탐 발생 빈도 감소",
+        "소형 UAV 탐지율 향상 및 미탐 케이스 감소, 원거리 소형 객체에 대한 모델 탐지 신뢰도 개선",
+        "6개 파드 병렬 처리로 복수 카메라 실시간 탐지 환경 구현, 단일 파드 장애 시에도 나머지 채널 정상 운영",
+      ],
+    },
+  },
+  {
     id: "dflow",
     type: "company",
     title: "사내 MLOps 플랫폼 DFLOW",

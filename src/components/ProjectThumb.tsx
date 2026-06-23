@@ -1,12 +1,13 @@
 import { ProjectData } from '@/data/portfolio';
 
 const ACCENTS: Record<string, string> = {
-  hotdeal:   '#f97316',
-  cs:        '#3b82f6',
-  drone:     '#a855f7',
+  hotdeal:   '#3b82f6',
+  cs:        '#6366f1',
+  drone:     '#8b5cf6',
+  uav:       '#a78bfa',
   dflow:     '#06b6d4',
-  pillcare:  '#10b981',
-  'dear-me': '#f59e0b',
+  pillcare:  '#0ea5e9',
+  'dear-me': '#818cf8',
 };
 
 const COMPANY_LOGOS: Record<string, string> = {
