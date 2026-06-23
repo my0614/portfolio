@@ -69,17 +69,40 @@ export const PROFILE: ProfileData = {
   ],
   skills: [
     { category: "Language", skills: ["Python", "C"] },
-    { category: "LLM/AI", skills: ["LangChain", "Azure OpenAI", "RAG", "ChromaDB", "Prompt Engineering"] },
-    { category: "Framework", skills: ["PyTorch", "Flask", "FastAPI", "Label Studio", "MLflow"] },
+    {
+      category: "LLM/AI",
+      skills: [
+        "LangChain",
+        "Azure OpenAI",
+        "RAG",
+        "ChromaDB",
+        "Prompt Engineering",
+      ],
+    },
+    {
+      category: "Framework",
+      skills: ["PyTorch", "Flask", "FastAPI", "Label Studio", "MLflow"],
+    },
     { category: "Database", skills: ["PostgreSQL", "Redis"] },
     { category: "Infra", skills: ["Docker", "Kubernetes"] },
     { category: "Cloud", skills: ["Azure", "AWS EC2"] },
-    { category: "Models", skills: ["YOLOv5", "Faster R-CNN", "RetinaNet", "MMDetection", "MambaCD"] },
+    {
+      category: "Models",
+      skills: ["YOLOv5", "Faster R-CNN", "RetinaNet", "MMDetection", "MambaCD"],
+    },
     { category: "Else", skills: ["Git", "Jira"] },
   ],
   contact: [
-    { kind: "mail", label: "premierckim@gmail.com", href: "mailto:premierckim@gmail.com" },
-    { kind: "github", label: "github.com/my0614", href: "https://github.com/my0614" },
+    {
+      kind: "mail",
+      label: "premierckim@gmail.com",
+      href: "mailto:premierckim@gmail.com",
+    },
+    {
+      kind: "github",
+      label: "github.com/my0614",
+      href: "https://github.com/my0614",
+    },
   ],
 };
 
@@ -90,11 +113,24 @@ export const PROJECTS: ProjectData[] = [
     title: "핫딜 자동화 시스템",
     company: "(주)무무즈",
     initial: "무",
-    summary: "단독 최저가 상품을 빠르게 발굴하고 경쟁사보다 먼저 프로모션을 진행하기 위해 구축한 핫딜 운영 자동화 시스템. 파트너사 신청부터 상품 선정, 등록, 결과 메일 발송까지의 업무를 자동화하여 운영 시간을 단축하고, 더 많은 핫딜을 안정적으로 운영할 수 있는 환경을 구축했습니다.",
+    summary:
+      "단독 최저가 상품을 빠르게 발굴하고 경쟁사보다 먼저 프로모션을 진행하기 위해 구축한 핫딜 운영 자동화 시스템. 파트너사 신청부터 상품 선정, 등록, 결과 메일 발송까지의 업무를 자동화하여 운영 시간을 단축하고, 더 많은 핫딜을 안정적으로 운영할 수 있는 환경을 구축했습니다.",
     thumb: "/projects/hotdeal-app.png",
-    image: { src: "/projects/hotdeal-app.png", caption: "무무즈 핫딜 오픈 화면" },
+    image: {
+      src: "/projects/hotdeal-app.png",
+      caption: "무무즈 핫딜 오픈 화면",
+    },
     link: "https://moomooz.co.kr/product/hotdeal",
-    tags: ["OAuth 2.0", "Google Sheets API", "Gmail API", "Shopby API", "AWS EC2", "Bitbucket Pipelines", "Cron", "Python"],
+    tags: [
+      "OAuth 2.0",
+      "Google Sheets API",
+      "Gmail API",
+      "Shopby API",
+      "AWS EC2",
+      "Bitbucket Pipelines",
+      "Cron",
+      "Python",
+    ],
     year: "2025.12 ~ 2026.03",
     metrics: [
       { value: "2분", label: "등록 작업 시간", from: "4시간+" },
@@ -106,23 +142,28 @@ export const PROJECTS: ProjectData[] = [
       flow: [
         {
           title: "파트너사 핫딜 신청 집계",
-          description: "파트너사가 Google Spreadsheet에 신청 상품을 입력하면 배치가 신청 목록을 자동 수집",
+          description:
+            "파트너사가 Google Spreadsheet에 신청 상품을 입력하면 배치가 신청 목록을 자동 수집",
         },
         {
           title: "Shopby API 상품 매칭 및 랭킹 선별",
-          description: "신청 상품을 Shopby API로 매칭하여 할인율·가격 경쟁력·재고 수량 기반 동적 스코어링으로 상위 200개 자동 선별",
+          description:
+            "신청 상품을 Shopby API로 매칭하여 할인율·가격 경쟁력·재고 수량 기반 동적 스코어링으로 상위 200개 자동 선별",
         },
         {
           title: "핫딜 자동 등록",
-          description: "선별된 상품을 Shopby 핫딜 등록 API로 자동 등록, 수동 입력 없이 전 과정 완결",
+          description:
+            "선별된 상품을 Shopby 핫딜 등록 API로 자동 등록, 수동 입력 없이 전 과정 완결",
         },
         {
           title: "파트너사별 결과 메일 자동 발송",
-          description: "계정별 결과 파일 자동 생성 후 Gmail API로 개별 발송, BCC 처리로 수신자 정보 노출 차단",
+          description:
+            "계정별 결과 파일 자동 생성 후 Gmail API로 개별 발송, BCC 처리로 수신자 정보 노출 차단",
         },
         {
           title: "Slack 실행 결과 알림",
-          description: "배치 완료 후 정상·실패 건수 요약을 Slack Webhook으로 자동 발송, 오류 발생 시 즉시 알림",
+          description:
+            "배치 완료 후 정상·실패 건수 요약을 Slack Webhook으로 자동 발송, 오류 발생 시 즉시 알림",
         },
       ],
       tech: [
@@ -151,7 +192,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "AWS EC2 + cron 실행 환경 및 CI/CD",
-          description: "EC2에서 cron 배치 자동 실행, Bitbucket Pipelines로 push → 테스트 → EC2 배포 완전 자동화",
+          description:
+            "EC2에서 cron 배치 자동 실행, Bitbucket Pipelines로 push → 테스트 → EC2 배포 완전 자동화",
           points: [
             "AWS EC2에서 Python 코드 실행, cron으로 새벽 배치 자동 스케줄링",
             "Bitbucket Pipelines: push → 테스트 → 빌드 → EC2 배포 자동화",
@@ -173,10 +215,17 @@ export const PROJECTS: ProjectData[] = [
     title: "CS 문의 자동화",
     company: "(주)무무즈",
     initial: "무",
-    summary: "반복적인 배송 문의로 인해 상담 인력이 단순 응대에 집중되는 문제를 해결하고자 구축한 CS 자동화 시스템. 주문 정보를 기반으로 문의를 자동 분류·응답하여 고객 응답 시간을 단축하고 상담 인력이 고부가가치 업무에 집중할 수 있도록 지원했습니다.",
+    summary:
+      "반복적인 배송 문의로 인해 상담 인력이 단순 응대에 집중되는 문제를 해결하고자 구축한 CS 자동화 시스템. 주문 정보를 기반으로 문의를 자동 분류·응답하여 고객 응답 시간을 단축하고 상담 인력이 고부가가치 업무에 집중할 수 있도록 지원했습니다.",
     thumb: "/projects/cs-main.png",
-    image: { src: "/projects/cs-main.png", caption: "CS 문의 자동화 시스템 개요" },
-    image2: { src: "/projects/cs-process.png", caption: "CS 문의 자동화 프로세스" },
+    image: {
+      src: "/projects/cs-main.png",
+      caption: "CS 문의 자동화 시스템 개요",
+    },
+    image2: {
+      src: "/projects/cs-process.png",
+      caption: "CS 문의 자동화 프로세스",
+    },
     tags: ["Shopby API", "Sellmate API", "Batch", "Python"],
     year: "2025.12 ~ 2026.03",
     metrics: [
@@ -194,19 +243,23 @@ export const PROJECTS: ProjectData[] = [
       flow: [
         {
           title: "배송 문의 일괄 수집",
-          description: "cron 스케줄러가 1시간 주기로 Shopby API를 통해 미처리 배송 문의 목록을 자동 수집",
+          description:
+            "cron 스케줄러가 1시간 주기로 Shopby API를 통해 미처리 배송 문의 목록을 자동 수집",
         },
         {
           title: "주문·배송 상태 조회",
-          description: "Shopby(주문)·Sellmate(배송) 이중 API를 호출해 상품코드·송장번호·입고예정일 정보를 매칭",
+          description:
+            "Shopby(주문)·Sellmate(배송) 이중 API를 호출해 상품코드·송장번호·입고예정일 정보를 매칭",
         },
         {
           title: "케이스 분기 판단",
-          description: "상품코드·송장번호 유무 조합으로 3가지 케이스 분기, 자동 처리 불가 케이스는 담당자 플래그로 분리",
+          description:
+            "상품코드·송장번호 유무 조합으로 3가지 케이스 분기, 자동 처리 불가 케이스는 담당자 플래그로 분리",
         },
         {
           title: "템플릿 자동 선택 및 답변 등록",
-          description: "케이스에 맞는 HTML 템플릿을 자동 선택 후 Shopby answer API로 답변 등록, 주말·야간 포함 24/7 무중단 처리",
+          description:
+            "케이스에 맞는 HTML 템플릿을 자동 선택 후 Shopby answer API로 답변 등록, 주말·야간 포함 24/7 무중단 처리",
         },
       ],
       tech: [
@@ -235,7 +288,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "배치 스케줄러 기반 자동 처리",
-          description: "웹훅 대신 주기 배치로 미처리 문의 일괄 조회, 주말·야간 포함 24/7 무중단 자동 처리",
+          description:
+            "웹훅 대신 주기 배치로 미처리 문의 일괄 조회, 주말·야간 포함 24/7 무중단 자동 처리",
           points: [
             "cron 기반 스케줄러로 1시간 주기 배송 문의 일괄 수집 및 자동 응답 처리",
             "배송 상태 데이터 주기적 갱신으로 응답 정확도 유지",
@@ -252,9 +306,13 @@ export const PROJECTS: ProjectData[] = [
     subtitle: "보안기관 R&D",
     company: "한컴인스페이스",
     initial: "한",
-    summary: "전쟁 지역, 붕괴 위험이 있는 터널, 저조도 환경 등 사람이 직접 접근하기 어려운 위험 지역을 안전하게 탐색하기 위해 개발한 드론 기반 객체 탐지 시스템. 드론 영상에서 위협 객체를 실시간으로 탐지하고 3D 좌표로 시각화하여 현장 상황을 원격으로 파악할 수 있도록 지원했습니다.",
+    summary:
+      "전쟁 지역, 붕괴 위험이 있는 터널, 저조도 환경 등 사람이 직접 접근하기 어려운 위험 지역을 안전하게 탐색하기 위해 개발한 드론 기반 객체 탐지 시스템. 드론 영상에서 위협 객체를 실시간으로 탐지하고 3D 좌표로 시각화하여 현장 상황을 원격으로 파악할 수 있도록 지원했습니다.",
     thumb: "/projects/drone-detection.png",
-    image: { src: "/projects/drone-detection.png", caption: "실시간 위협 객체 6종 클래스" },
+    image: {
+      src: "/projects/drone-detection.png",
+      caption: "실시간 위협 객체 6종 클래스",
+    },
     tags: ["Faster R-CNN", "ROS", "RealSense D435i", "Docker"],
     year: "2023 ~ 2025",
     metrics: [
@@ -315,12 +373,15 @@ export const PROJECTS: ProjectData[] = [
             "Faster R-CNN 선정: Precision 95%, ~12.5 FPS로 정밀도·실시간성 모두 임계치 충족. RetinaNet과 Precision 차이는 1.8%p로 근소하나, 속도 요건을 충족하는 모델 중 가장 높은 Precision 달성으로 최종 선정",
           ],
           table: {
-            headers: ['모델', 'Precision', 'FPS', '결과'],
+            headers: ["모델", "Precision", "FPS", "결과"],
             rows: [
-              { cells: ['YOLOv5', '58%', '~80', '탈락'] },
-              { cells: ['YOLOv7', '59%', '~59', '탈락'] },
-              { cells: ['RetinaNet', '96.8%', '~17', '탈락'] },
-              { cells: ['Faster R-CNN', '95%', '~12.5', '선정'], highlight: true },
+              { cells: ["YOLOv5", "58%", "~80", "탈락"] },
+              { cells: ["YOLOv7", "59%", "~59", "탈락"] },
+              { cells: ["RetinaNet", "96.8%", "~17", "탈락"] },
+              {
+                cells: ["Faster R-CNN", "95%", "~12.5", "선정"],
+                highlight: true,
+              },
             ],
           },
         },
@@ -348,17 +409,20 @@ export const PROJECTS: ProjectData[] = [
             "이슈 3 — injured_person 탐지 누락: Recall 60.4%(FN 44건)으로 가장 낮은 검출률 → Occlusion·저조도 환경 데이터 보강으로 대응",
           ],
           images: [
-            { src: "/projects/drone_result.png", caption: "클래스별 성능 지표 (Precision · Recall · AP@0.5)" },
+            {
+              src: "/projects/drone_result.png",
+              caption: "클래스별 성능 지표 (Precision · Recall · AP@0.5)",
+            },
           ],
           table: {
-            headers: ['클래스', 'Precision', 'Recall', 'AP@0.5'],
+            headers: ["클래스", "Precision", "Recall", "AP@0.5"],
             rows: [
-              { cells: ['bomb',           '56.5%', '76.7%', '70.2%'] },
-              { cells: ['exit',           '72.9%', '73.8%', '73.1%'] },
-              { cells: ['fire',           '89.3%', '87.9%', '86.8%'], highlight: true },
-              { cells: ['injured_person', '87.0%', '60.4%', '59.2%'] },
-              { cells: ['oil',            '77.7%', '75.9%', '73.9%'] },
-              { cells: ['person',         '78.1%', '76.1%', '72.2%'] },
+              { cells: ["bomb", "56.5%", "76.7%", "70.2%"] },
+              { cells: ["exit", "72.9%", "73.8%", "73.1%"] },
+              { cells: ["fire", "89.3%", "87.9%", "86.8%"], highlight: true },
+              { cells: ["injured_person", "87.0%", "60.4%", "59.2%"] },
+              { cells: ["oil", "77.7%", "75.9%", "73.9%"] },
+              { cells: ["person", "78.1%", "76.1%", "72.2%"] },
             ],
           },
         },
@@ -374,12 +438,16 @@ export const PROJECTS: ProjectData[] = [
     id: "uav",
     type: "company",
     title: "EO/IR 센트리 카메라 기반 UAV 실시간 탐지·추적 및 모니터링 시스템",
-    subtitle: "군보안기관 R&D",
+    subtitle: "군보안기관",
     company: "한컴인스페이스",
     initial: "한",
-    summary: "EO·IR 이중 도메인 환경에서 소형 UAV를 실시간으로 탐지·추적하기 위해 구축한 모니터링 시스템. 도메인별 모델 분리 학습과 소형 객체 특화 최적화를 통해 주야간 모두에서 안정적인 탐지 성능을 확보하고, Kubernetes 6개 파드 기반 RTSP 병렬 스트리밍으로 복수 카메라 실시간 처리 환경을 구현했습니다.",
+    summary:
+      "EO·IR 이중 도메인 환경에서 소형 UAV를 실시간으로 탐지·추적하기 위해 구축한 모니터링 시스템. 도메인별 모델 분리 학습과 소형 객체 특화 최적화를 통해 주야간 모두에서 안정적인 탐지 성능을 확보하고, Kubernetes 6개 파드 기반 RTSP 병렬 스트리밍으로 복수 카메라 실시간 처리 환경을 구현했습니다.",
     thumb: "/projects/hancom-logo.png",
-    image: { src: "/projects/hancom-logo.png", caption: "군보안사업으로 실제 서비스 이미지는 공개할 수 없습니다." },
+    image: {
+      src: "/projects/hancom-logo.png",
+      caption: "군보안사업으로 실제 서비스 이미지는 공개할 수 없습니다.",
+    },
     tags: ["YOLOv5", "Kubernetes", "Docker", "RTSP", "Python", "PyTorch"],
     year: "2024.06 ~ 2024.12",
     metrics: [
@@ -391,25 +459,30 @@ export const PROJECTS: ProjectData[] = [
       flow: [
         {
           title: "RTSP 스트림 수신 — 6채널 병렬 처리",
-          description: "Kubernetes 6개 파드가 각각 EO·IR 카메라의 RTSP 스트림을 독립적으로 수신, 카메라별 장애가 타 파드에 영향을 미치지 않도록 격리",
+          description:
+            "Kubernetes 6개 파드가 각각 EO·IR 카메라의 RTSP 스트림을 독립적으로 수신, 카메라별 장애가 타 파드에 영향을 미치지 않도록 격리",
         },
         {
           title: "도메인 판별 및 모델 라우팅",
-          description: "수신 스트림의 도메인(EO·IR)에 따라 각각 최적화된 YOLO 모델로 라우팅, 도메인 혼용 없이 독립 추론",
+          description:
+            "수신 스트림의 도메인(EO·IR)에 따라 각각 최적화된 YOLO 모델로 라우팅, 도메인 혼용 없이 독립 추론",
         },
         {
           title: "실시간 UAV 탐지 및 추적",
-          description: "도메인별 YOLO 모델이 프레임 단위로 소형 UAV를 탐지, 탐지 결과를 추적 알고리즘과 연계해 연속적인 객체 추적 수행",
+          description:
+            "도메인별 YOLO 모델이 프레임 단위로 소형 UAV를 탐지, 탐지 결과를 추적 알고리즘과 연계해 연속적인 객체 추적 수행",
         },
         {
           title: "탐지 결과 모니터링 시스템 전송",
-          description: "탐지·추적 결과를 실시간으로 모니터링 시스템에 전달, 운용자가 전 채널 상황을 통합 화면에서 확인",
+          description:
+            "탐지·추적 결과를 실시간으로 모니터링 시스템에 전달, 운용자가 전 채널 상황을 통합 화면에서 확인",
         },
       ],
       tech: [
         {
           title: "K8s 6파드 기반 RTSP 병렬 스트림 처리",
-          description: "Kubernetes 위에 파드 6개를 배포하여 EO·IR 카메라별 RTSP 스트림을 독립 파드에서 병렬 수신·추론. Docker 이미지로 모델·런타임 환경을 통일하여 파드 간 일관성 확보",
+          description:
+            "Kubernetes 위에 파드 6개를 배포하여 EO·IR 카메라별 RTSP 스트림을 독립 파드에서 병렬 수신·추론. Docker 이미지로 모델·런타임 환경을 통일하여 파드 간 일관성 확보",
           points: [
             "파드별 RTSP 스트림 독립 수신으로 단일 카메라 장애가 전체 시스템에 미치는 영향 차단",
             "Docker 이미지로 YOLO 모델·의존성 패키징, 파드 재시작 시 동일 환경 즉시 복원",
@@ -418,7 +491,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "EO/IR 도메인별 YOLO 모델 분리 학습",
-          description: "EO·IR 이미지를 단일 데이터셋으로 학습 시 IR 환경에서 새·항공기 오탐이 빈번하게 발생하는 문제를 도메인별 데이터셋 분리 및 독립 학습으로 해결",
+          description:
+            "EO·IR 이미지를 단일 데이터셋으로 학습 시 IR 환경에서 새·항공기 오탐이 빈번하게 발생하는 문제를 도메인별 데이터셋 분리 및 독립 학습으로 해결",
           points: [
             "EO/IR 도메인별 데이터셋 분리 구축, 오탐 케이스 및 다양한 배경 이미지를 추가 학습하여 UAV 고유 패턴 학습",
             "IR 모델: 새·항공기 등 비객체 오탐 케이스를 background 클래스로 명시적 학습하여 오탐 빈도 감소",
@@ -427,7 +501,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "소형 UAV 특화 모델 최적화",
-          description: "원거리 소형 UAV는 표준 앵커 설정과 입력 해상도에서 탐지율이 저하되는 문제를 고해상도 입력·소형 객체 특화 앵커·데이터 증강으로 개선",
+          description:
+            "원거리 소형 UAV는 표준 앵커 설정과 입력 해상도에서 탐지율이 저하되는 문제를 고해상도 입력·소형 객체 특화 앵커·데이터 증강으로 개선",
           points: [
             "고해상도 입력 적용으로 원거리 소형 객체 특징 보존 및 탐지율 향상",
             "소형 객체 특화 앵커 설정 조정으로 작은 바운딩 박스 예측 정확도 개선",
@@ -448,10 +523,21 @@ export const PROJECTS: ProjectData[] = [
     title: "사내 MLOps 플랫폼 DFLOW",
     company: "한컴인스페이스",
     initial: "한",
-    summary: "AI 모델 개발 과정에서 반복적으로 발생하는 데이터 라벨링, 학습 환경 구축, GPU 자원 관리, 성능 검증, 모델 배포 준비 과정을 표준화하기 위해 통합 MLOps 플랫폼을 구축했습니다. 데이터셋 관리부터 학습 작업 스케줄링, 학습 추적, 성능 평가, ONNX 모델 추출까지 End-to-End 파이프라인을 제공하여 개발 효율성과 모델 품질 관리 체계를 강화했습니다.",
+    summary:
+      "AI 모델 개발 과정에서 반복적으로 발생하는 데이터 라벨링, 학습 환경 구축, GPU 자원 관리, 성능 검증, 모델 배포 준비 과정을 표준화하기 위해 통합 MLOps 플랫폼을 구축했습니다. 데이터셋 관리부터 학습 작업 스케줄링, 학습 추적, 성능 평가, ONNX 모델 추출까지 End-to-End 파이프라인을 제공하여 개발 효율성과 모델 품질 관리 체계를 강화했습니다.",
     thumb: "/projects/dflow0.png",
     image: { src: "/projects/dflow0.png", caption: "사내 MLOps 플랫폼 DFLOW" },
-    tags: ["MMDetection", "MMYOLO", "GOD", "Redis", "K8s", "PyTorch", "Docker", "PostgreSQL", "ONNX"],
+    tags: [
+      "MMDetection",
+      "MMYOLO",
+      "GOD",
+      "Redis",
+      "K8s",
+      "PyTorch",
+      "Docker",
+      "PostgreSQL",
+      "ONNX",
+    ],
     year: "2022 ~ 2024",
     metrics: [
       { value: "20+", label: "지원 모델 수", from: "3개" },
@@ -501,7 +587,8 @@ export const PROJECTS: ProjectData[] = [
       ],
       tech: [
         {
-          title: "GOD(General Object Detection): YOLO · Faster R-CNN · RetinaNet ML 백엔드 직접 구현 — MMDetection · MMYOLO와 동일한 공통 인터페이스로 추상화",
+          title:
+            "GOD(General Object Detection): YOLO · Faster R-CNN · RetinaNet ML 백엔드 직접 구현 — MMDetection · MMYOLO와 동일한 공통 인터페이스로 추상화",
           description:
             "GOD · MMDetection · MMYOLO 프레임워크별로 상이한 학습 인터페이스를 " +
             "단일 공통 구조로 추상화. 신규 모델 추가 시 인터페이스 재구현 없이 config 교체만으로 온보딩",
@@ -515,15 +602,22 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "Redis BRPOP 기반 학습 작업 큐",
-          description: "DB 폴링 race condition → Redis BRPOP 원자적 연산으로 해결, Redis Hash로 job 상태·GPU·에러 로그 중앙 관리",
+          description:
+            "DB 폴링 race condition → Redis BRPOP 원자적 연산으로 해결, Redis Hash로 job 상태·GPU·에러 로그 중앙 관리",
           points: [
             "BRPOP: 원자적 pop으로 race condition 없는 작업 분배 보장",
             "Redis Hash: job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API",
             "작업 실패 시 에러 메시지 저장으로 디버깅 가능한 구조 확보",
           ],
           images: [
-            { src: "/projects/dflow-training-ui.png", caption: "모델 학습 상태 관리 (Connected → Preparing → Training)" },
-            { src: "/projects/dflow_error.png", caption: "학습 작업 에러 로그 확인" },
+            {
+              src: "/projects/dflow-training-ui.png",
+              caption: "모델 학습 상태 관리 (Connected → Preparing → Training)",
+            },
+            {
+              src: "/projects/dflow_error.png",
+              caption: "학습 작업 에러 로그 확인",
+            },
           ],
         },
         {
@@ -540,13 +634,20 @@ export const PROJECTS: ProjectData[] = [
             "프로젝트별 그룹 생성 + 비밀번호 인증 기반 접근 제어로 다중 프로젝트 환경 데이터 격리 지원",
           ],
           images: [
-            { src: "/projects/dflow_predict.png", caption: "학습 완료 weight 기반 자동 라벨링" },
-            { src: "/projects/dflow-performance.png", caption: "모델 성능 평가 대시보드" },
+            {
+              src: "/projects/dflow_predict.png",
+              caption: "학습 완료 weight 기반 자동 라벨링",
+            },
+            {
+              src: "/projects/dflow-performance.png",
+              caption: "모델 성능 평가 대시보드",
+            },
           ],
         },
         {
           title: "nvidia-smi 기반 GPU 동적 분배",
-          description: "job 처리 전 nvidia-smi로 가용 메모리 체크 → 모델 요구량 비교 후 GPU 할당, 조건 미충족 시 재큐잉으로 OOM 제거",
+          description:
+            "job 처리 전 nvidia-smi로 가용 메모리 체크 → 모델 요구량 비교 후 GPU 할당, 조건 미충족 시 재큐잉으로 OOM 제거",
           points: [
             "nvidia-smi --query-gpu로 가용 메모리 실시간 조회",
             "모델 config에 min_gpu_memory 정의, Worker가 조건 검증 후 GPU 할당",
@@ -565,7 +666,10 @@ export const PROJECTS: ProjectData[] = [
             "학습 완료 후 weights 다운로드 및 ONNX 변환 기능 제공",
           ],
           images: [
-            { src: "/projects/dflow_addmodel.png", caption: "모델 선택 및 학습 파라미터 입력 UI" },
+            {
+              src: "/projects/dflow_addmodel.png",
+              caption: "모델 선택 및 학습 파라미터 입력 UI",
+            },
           ],
         },
       ],
@@ -584,10 +688,23 @@ export const PROJECTS: ProjectData[] = [
     subtitle: "AI 기반 건강 위험 분석 서비스",
     company: "Team Project",
     initial: "P",
-    summary: "사용자의 복약 이력, 건강 지표, 생활 환경 데이터를 통합 분석하여 잠재적인 건강 위험을 조기에 예측하기 위해 개발한 서비스. 멀티모달 데이터를 기반으로 개인 맞춤형 건강 인사이트를 제공하고 예방 중심의 건강 관리를 지원했습니다.",
+    summary:
+      "사용자의 복약 이력, 건강 지표, 생활 환경 데이터를 통합 분석하여 잠재적인 건강 위험을 조기에 예측하기 위해 개발한 서비스. 멀티모달 데이터를 기반으로 개인 맞춤형 건강 인사이트를 제공하고 예방 중심의 건강 관리를 지원했습니다.",
     thumb: "/projects/pillcare_thum.webp",
-    image: { src: "/projects/pillcare_thum.webp", caption: "PillCare 서비스 화면" },
-    tags: ["FastAPI", "FastMCP", "OpenAI SDK", "Redis", "OAuth 2.0", "Pydantic", "WeasyPrint", "pytest"],
+    image: {
+      src: "/projects/pillcare_thum.webp",
+      caption: "PillCare 서비스 화면",
+    },
+    tags: [
+      "FastAPI",
+      "FastMCP",
+      "OpenAI SDK",
+      "Redis",
+      "OAuth 2.0",
+      "Pydantic",
+      "WeasyPrint",
+      "pytest",
+    ],
     year: "2026.05",
     metrics: [
       { value: "11", label: "도메인 설계", from: "15 테이블" },
@@ -599,23 +716,28 @@ export const PROJECTS: ProjectData[] = [
       flow: [
         {
           title: "처방봉투 OCR → 복약 스케줄 자동 등록",
-          description: "처방봉투 사진 업로드 → OpenAI Vision API로 약품명·용량·복용 시점 자동 추출 → 복약 스케줄 즉시 등록",
+          description:
+            "처방봉투 사진 업로드 → OpenAI Vision API로 약품명·용량·복용 시점 자동 추출 → 복약 스케줄 즉시 등록",
         },
         {
           title: "복약·건강 데이터 기록",
-          description: "복약 이행 여부, 건강 지표(혈압·혈당 등), 생활 환경 데이터를 지속 누적 기록",
+          description:
+            "복약 이행 여부, 건강 지표(혈압·혈당 등), 생활 환경 데이터를 지속 누적 기록",
         },
         {
           title: "AI Agent 실시간 건강 분석",
-          description: "FastMCP 서버의 건강 지수·약물 안전도·환경 지수 Tool을 AI Agent가 직접 호출해 개인화 건강 인사이트 생성",
+          description:
+            "FastMCP 서버의 건강 지수·약물 안전도·환경 지수 Tool을 AI Agent가 직접 호출해 개인화 건강 인사이트 생성",
         },
         {
           title: "멀티 레이어 캐시 처리",
-          description: "L1 인메모리 → L2 Redis → L3 OpenAI 순으로 캐시 히트 처리, 비용 절감 및 응답 속도 최적화",
+          description:
+            "L1 인메모리 → L2 Redis → L3 OpenAI 순으로 캐시 히트 처리, 비용 절감 및 응답 속도 최적화",
         },
         {
           title: "알람 스케줄러 → 알림 발송",
-          description: "asyncio 스케줄러가 30분 주기로 복약·병원·식사·수면·물·일지 6종 알람을 스캔하여 적시에 푸시 알림 발송",
+          description:
+            "asyncio 스케줄러가 30분 주기로 복약·병원·식사·수면·물·일지 6종 알람을 스캔하여 적시에 푸시 알림 발송",
         },
       ],
       intent: [
@@ -628,7 +750,8 @@ export const PROJECTS: ProjectData[] = [
       tech: [
         {
           title: "FastMCP 기반 건강 데이터 MCP 서버",
-          description: "건강 데이터 분석 로직을 MCP Tool로 표준화, AI 어시스턴트가 실시간 건강 데이터 직접 조회 · 개인화 응답 생성",
+          description:
+            "건강 데이터 분석 로직을 MCP Tool로 표준화, AI 어시스턴트가 실시간 건강 데이터 직접 조회 · 개인화 응답 생성",
           points: [
             "FastMCP로 MCP 서버 구현, 건강 지수·약물 안전도·환경 지수 3개 Tool 등록",
             "AI 어시스턴트가 실시간 사용자 건강 데이터를 직접 조회해 개인화 응답 생성",
@@ -637,7 +760,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "3단계 멀티 레이어 캐시 (메모리 → Redis → OpenAI)",
-          description: "LLM 비용·속도·장애 격리를 위한 3단계 캐시 설계, L2 히트 시 L1 자동 워밍업 · Redis 장애 시 OpenAI 폴백으로 무중단 보장",
+          description:
+            "LLM 비용·속도·장애 격리를 위한 3단계 캐시 설계, L2 히트 시 L1 자동 워밍업 · Redis 장애 시 OpenAI 폴백으로 무중단 보장",
           points: [
             "L1 인메모리(6h TTL) → L2 Redis(자정 초기화) → L3 OpenAI 순으로 캐시 히트 처리",
             "L2 히트 시 L1 자동 워밍업으로 후속 요청 응답 속도 향상",
@@ -646,7 +770,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "OpenAI Vision API 처방봉투 OCR",
-          description: "처방봉투 이미지 → OpenAI Vision API 파싱 → 약품명·용량·복용 시점 추출, 복약 스케줄 자동 등록",
+          description:
+            "처방봉투 이미지 → OpenAI Vision API 파싱 → 약품명·용량·복용 시점 추출, 복약 스케줄 자동 등록",
           points: [
             "처방봉투 이미지 업로드 → OCR 파싱 → 약품명·용량·복용 시점 자동 추출",
             "파싱 결과를 복약 스케줄에 즉시 자동 등록, 수동 입력 단계 제거",
@@ -655,7 +780,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "DDD 기반 도메인 레이어 설계",
-          description: "11개 도메인 · 15개 테이블, 각 도메인 router → service → repository → model 독립 구성, 도메인 간 의존성 분리 · 영향 범위 한정",
+          description:
+            "11개 도메인 · 15개 테이블, 각 도메인 router → service → repository → model 독립 구성, 도메인 간 의존성 분리 · 영향 범위 한정",
           points: [
             "도메인별 router → service → repository → model 레이어 독립 구성",
             "도메인 간 의존성 최소화, 기능 변경 시 영향 범위 한정",
@@ -664,7 +790,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "asyncio 기반 비동기 알람 스케줄러",
-          description: "FastAPI lifespan에 asyncio 스케줄러 통합, 30분 주기로 복약·병원·식사·수면·물·일지 6종 알람 스캔 · 중복 차단",
+          description:
+            "FastAPI lifespan에 asyncio 스케줄러 통합, 30분 주기로 복약·병원·식사·수면·물·일지 6종 알람 스캔 · 중복 차단",
           points: [
             "FastAPI lifespan에 asyncio 스케줄러 통합, 별도 태스크 큐 불필요",
             "30분 주기 스캔으로 6종 알람 발화 시각 계산",
@@ -687,13 +814,35 @@ export const PROJECTS: ProjectData[] = [
     subtitle: "AI 음성 타임캡슐",
     company: "Personal Project",
     initial: "D",
-    summary: "바쁜 일상 속에서 쉽게 잊히는 감정과 순간들을 기록하고 미래의 자신에게 전달하기 위해 개발한 서비스. 음성으로 남긴 하루의 이야기를 AI가 편지 형태로 재구성하고, TTS를 통해 미래의 내가 직접 듣는 듯한 타임캡슐 경험을 제공합니다.",
+    summary:
+      "바쁜 일상 속에서 쉽게 잊히는 감정과 순간들을 기록하고 미래의 자신에게 전달하기 위해 개발한 서비스. 음성으로 남긴 하루의 이야기를 AI가 편지 형태로 재구성하고, TTS를 통해 미래의 내가 직접 듣는 듯한 타임캡슐 경험을 제공합니다.",
     thumb: "/projects/Dearme0.png",
     image: { src: "/projects/Dearme0.png", caption: "Dear Me 서비스 소개" },
-    image2: { src: "/projects/Dearme1.png", caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅" },
-    image3: { src: "/projects/Dearme2.png", caption: "감정 분석 결과 · GPT-4o 생성 편지" },
-    image4: { src: "/projects/Dearme3.png", caption: "QR 카드 저장 · 발송 날짜 및 채널 선택" },
-    tags: ["Azure Speech", "Azure OpenAI GPT-4o", "LangChain", "RAG", "FastAPI", "APScheduler", "Kakao OAuth 2.0", "카카오 알림톡", "React", "SQLite", "Python"],
+    image2: {
+      src: "/projects/Dearme1.png",
+      caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅",
+    },
+    image3: {
+      src: "/projects/Dearme2.png",
+      caption: "감정 분석 결과 · GPT-4o 생성 편지",
+    },
+    image4: {
+      src: "/projects/Dearme3.png",
+      caption: "QR 카드 저장 · 발송 날짜 및 채널 선택",
+    },
+    tags: [
+      "Azure Speech",
+      "Azure OpenAI GPT-4o",
+      "LangChain",
+      "RAG",
+      "FastAPI",
+      "APScheduler",
+      "Kakao OAuth 2.0",
+      "카카오 알림톡",
+      "React",
+      "SQLite",
+      "Python",
+    ],
     year: "2026.06",
     metrics: [
       { value: "Azure", label: "Speech · OpenAI 연동" },
@@ -705,23 +854,28 @@ export const PROJECTS: ProjectData[] = [
       flow: [
         {
           title: "음성 녹음 → STT 텍스트 변환",
-          description: "사용자가 음성으로 하루를 기록하면 Azure Speech STT가 실시간으로 텍스트로 변환",
+          description:
+            "사용자가 음성으로 하루를 기록하면 Azure Speech STT가 실시간으로 텍스트로 변환",
         },
         {
           title: "감정 분석 · 키워드 추출",
-          description: "GPT-4o가 음성 텍스트에서 감정 상태·핵심 키워드를 분석하여 오늘의 감정 리포트 생성",
+          description:
+            "GPT-4o가 음성 텍스트에서 감정 상태·핵심 키워드를 분석하여 오늘의 감정 리포트 생성",
         },
         {
           title: "RAG로 과거 일기 컨텍스트 주입",
-          description: "ChromaDB에서 과거 일기 유사도 검색(k=3) → 검색 결과를 프롬프트에 주입해 서사적 맥락이 담긴 개인화 편지 생성",
+          description:
+            "ChromaDB에서 과거 일기 유사도 검색(k=3) → 검색 결과를 프롬프트에 주입해 서사적 맥락이 담긴 개인화 편지 생성",
         },
         {
           title: "TTS 편지 낭독 · QR 카드 저장",
-          description: "GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독, QR 카드로 저장하여 미래의 나에게 전달할 타임캡슐 완성",
+          description:
+            "GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독, QR 카드로 저장하여 미래의 나에게 전달할 타임캡슐 완성",
         },
         {
           title: "발송 날짜 예약 · 멀티채널 자동 전달",
-          description: "APScheduler가 지정한 날짜에 카카오 알림톡·Discord·이메일 중 선택한 채널로 편지를 자동 발송",
+          description:
+            "APScheduler가 지정한 날짜에 카카오 알림톡·Discord·이메일 중 선택한 채널로 편지를 자동 발송",
         },
       ],
       intent: [
@@ -733,8 +887,10 @@ export const PROJECTS: ProjectData[] = [
       ],
       tech: [
         {
-          title: "LangChain LCEL + RAG — LLM 서비스 상용화 및 개인화 파이프라인",
-          description: "Azure OpenAI GPT-4o를 단발성 API 호출이 아닌 STT→감정분석→RAG 컨텍스트 주입→편지 생성→TTS로 이어지는 End-to-End 실서비스 파이프라인으로 통합. LangChain LCEL로 프롬프트·LLM·파서를 선언형 체인으로 구성하고 RAG 리트리버를 결합하여 사용자별 맥락이 반영된 응답을 생성하는 구조를 직접 설계",
+          title:
+            "LangChain LCEL + RAG — LLM 서비스 상용화 및 개인화 파이프라인",
+          description:
+            "Azure OpenAI GPT-4o를 단발성 API 호출이 아닌 STT→감정분석→RAG 컨텍스트 주입→편지 생성→TTS로 이어지는 End-to-End 실서비스 파이프라인으로 통합. LangChain LCEL로 프롬프트·LLM·파서를 선언형 체인으로 구성하고 RAG 리트리버를 결합하여 사용자별 맥락이 반영된 응답을 생성하는 구조를 직접 설계",
           points: [
             "LLM API 상용화: GPT-4o를 카카오 OAuth 인증·알림톡/Discord/이메일 멀티채널 발송·APScheduler 예약 발송과 결합해 단발 호출이 아닌 운영 가능한 서비스 구조로 완결",
             "LangChain LCEL 체인 설계: ChatPromptTemplate | AzureChatOpenAI | StrOutputParser — 프롬프트·LLM·파서 단계를 | 연산자로 연결, 각 컴포넌트를 독립적으로 교체 가능한 구조로 설계",
@@ -746,7 +902,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "Azure Speech SDK — STT · TTS 파이프라인",
-          description: "Azure Speech STT로 음성 녹음 → 텍스트 변환, GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독 — 입력부터 출력까지 음성 End-to-End",
+          description:
+            "Azure Speech STT로 음성 녹음 → 텍스트 변환, GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독 — 입력부터 출력까지 음성 End-to-End",
           points: [
             "STT → GPT-4o → TTS 단일 파이프라인으로 음성 입출력 완결",
             "Azure Speech STT: 음성 녹음 스트림을 실시간으로 텍스트 변환",
@@ -755,7 +912,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "Azure OpenAI GPT-4o — 감정 분석 및 편지 생성",
-          description: "STT 변환 텍스트에서 감정·맥락을 추출하고 '미래의 나에게' 형식의 편지 자동 생성",
+          description:
+            "STT 변환 텍스트에서 감정·맥락을 추출하고 '미래의 나에게' 형식의 편지 자동 생성",
           points: [
             "편지 생성: 감정과 맥락을 바탕으로 미래의 나에게 보내는 편지 형식으로 작성",
             "감정 분석: 음성 텍스트에서 감정 상태·핵심 키워드 추출",
@@ -764,7 +922,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "카카오 OAuth 2.0 · 알림톡 연동",
-          description: "카카오 OAuth 2.0 소셜 로그인으로 별도 회원가입 없이 인증 처리, 카카오 알림톡 비즈니스 API로 지정 날짜에 편지 자동 발송",
+          description:
+            "카카오 OAuth 2.0 소셜 로그인으로 별도 회원가입 없이 인증 처리, 카카오 알림톡 비즈니스 API로 지정 날짜에 편지 자동 발송",
           points: [
             "카카오 OAuth 2.0: 인가 코드 흐름으로 액세스 토큰 발급 → /v2/user/me 호출로 사용자 프로필 조회 → users 테이블 저장 후 세션 관리",
             "카카오 알림톡: 비즈니스 채널 연동 후 템플릿 기반 메시지로 편지 내용 발송 — 카카오톡 미설치 환경에서도 SMS 대체 발송",
@@ -773,7 +932,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "일기 캘린더 · 날짜별 조회 REST API",
-          description: "DiaryCalendar.jsx 월별 달력에 작성일을 금색 점으로 시각화, 날짜 클릭 시 그날 편지·감정·키워드를 즉시 조회 — /api/me · /api/calendar · /api/diary/{date} 3개 엔드포인트 설계",
+          description:
+            "DiaryCalendar.jsx 월별 달력에 작성일을 금색 점으로 시각화, 날짜 클릭 시 그날 편지·감정·키워드를 즉시 조회 — /api/me · /api/calendar · /api/diary/{date} 3개 엔드포인트 설계",
           points: [
             "DiaryCalendar.jsx: 월별 달력 UI, 일기가 작성된 날짜에 금색 점 표시로 기록 현황 시각화",
             "날짜 클릭 → /api/diary/{date} 호출로 해당 날짜 편지·감정·키워드 목록 즉시 조회",
@@ -785,7 +945,8 @@ export const PROJECTS: ProjectData[] = [
         },
         {
           title: "APScheduler — 경량 스케줄러 선택 이유",
-          description: "Celery + Redis 대신 APScheduler를 선택한 핵심 이유는 단일 프로세스 내 통합 — 브로커·워커 인프라 없이 FastAPI lifespan에 직접 내장하여 운영 복잡도를 최소화",
+          description:
+            "Celery + Redis 대신 APScheduler를 선택한 핵심 이유는 단일 프로세스 내 통합 — 브로커·워커 인프라 없이 FastAPI lifespan에 직접 내장하여 운영 복잡도를 최소화",
           points: [
             "개인 프로젝트 규모에서 Redis + Celery 스택은 오버엔지니어링 — APScheduler로 동일 기능을 단일 프로세스에서 구현",
             "SQLiteJobStore로 예약 정보 영속화, 서버 재시작 시 스케줄 자동 복구 — 별도 메시지 큐 없이 durability 확보",
