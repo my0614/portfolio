@@ -186,6 +186,11 @@ export const PROJECTS: ProjectData[] = [
     ],
     sections: {
       arch: "/projects/CS_자동화프로세스.png",
+      result: [
+        "CS 담당자가 단순 반복 문의에서 벗어나 클레임·환불 등 고부가가치 업무에 집중할 수 있는 운영 환경 구축",
+        "Shopby·Sellmate 등 이종 API를 단일 인터페이스로 통합하여 신규 판매 채널 연동 및 확장 용이성 확보",
+        "자동화된 응답 로직을 통해 상담원 간 응답 편차를 줄이고 일관된 고객 응대 품질 제공",
+      ],
       flow: [
         {
           title: "배송 문의 일괄 수집",
@@ -222,8 +227,8 @@ export const PROJECTS: ProjectData[] = [
           description:
             "주문(Shopby) · 배송(Sellmate) 분리 API를 동시 연동. API 인증 정보(systemkey, mallkey, auth token)는 코드에서 분리해 JSON config 파일로 관리",
           points: [
-            "Shopby API: 문의 목록 조회(/inquiries) → 주문 상세 조회(/orders) → 답변 등록(/inquiries/{id}/answer)",
-            "Sellmate API: 주문 조회(/order) → 상품 옵션 조회(/products, variants_id 추출) → 입고예정일 조회(/stock-schedule)",
+            "Shopby API: 문의 목록 조회 → 주문 상세 조회 → 답변 등록 순으로 처리",
+            "Sellmate API: 주문 조회 → 상품 옵션 조회 → 입고예정일 조회 순으로 처리",
             "두 API 응답 매칭 → 상품코드·송장번호 조합으로 케이스 판단 후 자동 응답 생성",
             "API 인증 정보(systemkey, mallkey, auth token)를 코드에서 분리하여 JSON config 파일로 관리",
           ],
