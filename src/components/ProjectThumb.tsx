@@ -10,8 +10,8 @@ const ACCENTS: Record<string, string> = {
 };
 
 const COMPANY_LOGOS: Record<string, string> = {
-  '(주)무무즈':    '/projects/무무즈로고.jpg',
-  '한컴인스페이스': '/projects/한컴인스페이스로고.png',
+  '(주)무무즈':    '/projects/moomooz-logo.jpg',
+  '한컴인스페이스': '/projects/hancom-logo.png',
 };
 
 interface Props {

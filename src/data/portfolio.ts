@@ -176,7 +176,7 @@ export const PROJECTS: ProjectData[] = [
     summary: "반복적인 배송 문의로 인해 상담 인력이 단순 응대에 집중되는 문제를 해결하고자 구축한 CS 자동화 시스템. 주문 정보를 기반으로 문의를 자동 분류·응답하여 고객 응답 시간을 단축하고 상담 인력이 고부가가치 업무에 집중할 수 있도록 지원했습니다.",
     thumb: "/projects/cs-main.png",
     image: { src: "/projects/cs-main.png", caption: "CS 문의 자동화 시스템 개요" },
-    image2: { src: "/projects/CS_자동화프로세스.png", caption: "CS 문의 자동화 프로세스" },
+    image2: { src: "/projects/cs-process.png", caption: "CS 문의 자동화 프로세스" },
     tags: ["Shopby API", "Sellmate API", "Batch", "Python"],
     year: "2025.12 ~ 2026.03",
     metrics: [
@@ -185,7 +185,7 @@ export const PROJECTS: ProjectData[] = [
       { value: "24/7", label: "무중단 운영" },
     ],
     sections: {
-      arch: "/projects/CS_자동화프로세스.png",
+      arch: "/projects/cs-process.png",
       result: [
         "CS 담당자가 단순 반복 문의에서 벗어나 클레임·환불 등 고부가가치 업무에 집중할 수 있는 운영 환경 구축",
         "Shopby·Sellmate 등 이종 API를 단일 인터페이스로 통합하여 신규 판매 채널 연동 및 확장 용이성 확보",
