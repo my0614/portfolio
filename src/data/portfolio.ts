@@ -740,13 +740,6 @@ export const PROJECTS: ProjectData[] = [
             "asyncio 스케줄러가 30분 주기로 복약·병원·식사·수면·물·일지 6종 알람을 스캔하여 적시에 푸시 알림 발송",
         },
       ],
-      intent: [
-        "복약 불이행으로 인한 치료 실패·부작용이 고령자·만성질환자에게 반복적으로 발생",
-        "기존 복약 앱은 단순 알림 수준 — 개인 맞춤 건강 리스크 감지는 없음",
-        "처방봉투 사진 한 장으로 복약 스케줄 자동 등록, 수동 입력 단계 제거",
-        "복약 이행률·약물 안전도·환경 지수를 통합 분석해 사전 건강 리스크 감지",
-        "AI Agent가 MCP로 실시간 건강 데이터를 직접 조회 — 단순 알림을 넘어 관리 플랫폼으로",
-      ],
       tech: [
         {
           title: "FastMCP 기반 건강 데이터 MCP 서버",
@@ -831,9 +824,9 @@ export const PROJECTS: ProjectData[] = [
       caption: "QR 카드 저장 · 발송 날짜 및 채널 선택",
     },
     tags: [
-      "Azure Speech",
       "Azure OpenAI GPT-4o",
       "LangChain",
+      "Azure Speech",
       "RAG",
       "FastAPI",
       "APScheduler",
@@ -877,13 +870,6 @@ export const PROJECTS: ProjectData[] = [
           description:
             "APScheduler가 지정한 날짜에 카카오 알림톡·Discord·이메일 중 선택한 채널로 편지를 자동 발송",
         },
-      ],
-      intent: [
-        "바쁜 일상 속에서 감정과 생각을 기록하고 되돌아볼 기회 부족",
-        "기존 일기 서비스는 텍스트 작성 부담이 크고 기록 보관에만 집중",
-        "음성 기록만으로 AI가 미래의 나에게 보내는 편지 자동 생성",
-        "TTS 기반 편지 낭독 및 QR 카드 저장으로 특별한 회고 경험 제공",
-        "지정한 날짜에 카카오톡·Discord·이메일로 자동 전달하여 과거와 미래의 나를 연결",
       ],
       tech: [
         {

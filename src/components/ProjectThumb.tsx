@@ -57,7 +57,7 @@ export default function ProjectThumb({ project, style, className }: Props) {
     );
   }
 
-  const tags = project.tags.slice(0, 2);
+  const tags = project.tags.slice(0, 3);
   return (
     <div
       className={className}
