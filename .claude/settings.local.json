@@ -33,7 +33,28 @@
       "Bash(git *)",
       "Bash(kill 98940)",
       "Bash(curl -s \"https://github-contributions-api.jogruber.de/v4/my0614?y=last\")",
-      "Bash(CLAUDE_CODE_TMPDIR=/tmp grep *)"
+      "Bash(CLAUDE_CODE_TMPDIR=/tmp grep *)",
+      "Bash(grep -v \"^--$\")",
+      "Bash(curl *)",
+      "WebFetch(domain:www.mykim.site)",
+      "Bash(grep -v \"^$\")",
+      "Bash(xargs ls)",
+      "Bash(echo \"PID=$!\")",
+      "Bash(xargs grep -l \"createGlobalStyle\\\\|styled\\\\|css\\\\`\")",
+      "Bash(xargs ls -1)",
+      "Bash(python3 -m json.tool)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "Bash(npx vercel *)",
+      "Read(//Users/kimminyoung/.local/share/com.vercel.cli/**)",
+      "Read(//Users/kimminyoung/.config/vercel/**)",
+      "Read(//Users/kimminyoung/**)",
+      "Bash(xargs '-I{}' sh -c 'hash=$\\(echo {} | cut -d\" \" -f1\\); git show $hash:src/data/portfolio.ts 2>/dev/null | grep -l \"UAV\\\\|EO.IR\\\\|센트리\" && echo $hash')",
+      "Bash(xargs -I {} sh -c 'git show {}:src/data/portfolio.ts 2>/dev/null | grep -q \"UAV\\\\|센트리\\\\|EO/IR\" && echo {}')",
+      "Bash(xargs -I '{}' sh -c 'result=$\\(git show {}:src/data/portfolio.ts 2>/dev/null | grep -i \"UAV\\\\|센트리\\\\|EO.IR\"\\); if [ -n \"$result\" ]; then echo \"FOUND IN: {}\"; echo \"$result\" | head -3; fi')",
+      "Bash(python3 -c \"import reportlab; print\\('reportlab OK'\\)\")",
+      "Bash(python3 -c \"import weasyprint; print\\('weasyprint OK'\\)\")",
+      "Bash(python3 *)"
     ]
   }
 }
