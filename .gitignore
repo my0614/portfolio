@@ -7,3 +7,5 @@ dist/
 .env*.local
 .vercel
 *.pdf
+!/public/projects/김민영_이력서.pdf
+!/public/resume.pdf
