@@ -204,6 +204,9 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
+        "등록 작업 시간 4시간+ → 2분 달성",
+        "작업 시간 99%↓ 단축",
+        "파트너사 신청부터 메일 발송까지 전 과정 무인 자동화",
         "파트너사 계정별 결과 파일 메일 발송 자동화로 누락·오입력 리스크 제거",
         "별도 메일링 SaaS·인프라 도입 없이 Google Workspace만으로 자동화 파이프라인 구현",
       ],
@@ -236,6 +239,9 @@ export const PROJECTS: ProjectData[] = [
     sections: {
       arch: "/projects/cs-process.png",
       result: [
+        "CS 문의 1/3 자동 처리",
+        "응답 지연 시간 80%↓ 감소",
+        "주말·야간 포함 24/7 무중단 운영",
         "CS 담당자가 단순 반복 문의에서 벗어나 클레임·환불 등 고부가가치 업무에 집중할 수 있는 운영 환경 구축",
         "Shopby·Sellmate 등 이종 API를 단일 인터페이스로 통합하여 신규 판매 채널 연동 및 확장 용이성 확보",
         "자동화된 응답 로직을 통해 상담원 간 응답 편차를 줄이고 일관된 고객 응대 품질 제공",
@@ -428,6 +434,9 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
+        "객체 탐지 mAP 61% → 75% 달성",
+        "네트워크 세팅 시간 2시간+ → 1분으로 단축",
+        "KTL 시험 성적서 발급",
         "Faster R-CNN 선정 (Precision 95%, ~12.5 FPS) — 4종 모델 비교 평가 후 오탐 최소화 기준으로 채택",
         "데이터셋 2,000장 → 6,000~7,000장 확장, 저조도·빛번짐·Occlusion 실환경 이슈 3건 원인별 대응",
         "RGB/Depth 동기화 기반 실시간 3D 좌표 복원 — GCS에서 위협 객체 위치를 3D 포인터로 확인",
@@ -511,6 +520,9 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
+        "EO/IR 도메인별 모델 분리 학습으로 주야간 탐지 성능 최적화",
+        "RTSP 6채널 실시간 병렬 처리",
+        "Kubernetes 파드 기반 운영으로 단일 장애 격리",
         "EO/IR 환경별 최적화로 주야간 모두에서 안정적인 탐지 성능 확보, IR 오탐 발생 빈도 감소",
         "소형 UAV 탐지율 향상 및 미탐 케이스 감소, 원거리 소형 객체에 대한 모델 탐지 신뢰도 개선",
         "6개 파드 병렬 처리로 복수 카메라 실시간 탐지 환경 구현, 단일 파드 장애 시에도 나머지 채널 정상 운영",
@@ -674,6 +686,9 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       result: [
+        "지원 모델 수 3개 → 20개 이상으로 확장",
+        "신규 모델 온보딩 1~2주 → 1일 이내로 단축",
+        "전 컴포넌트 Kubernetes 파드 기반 운영",
         "멀티 GPU OOM 장애 제거, 학습 대기 하루 이상 → Redis 큐 자동 순차 처리로 해소",
         "라벨링 결과 COCO·YOLO 포맷 export + 자동 라벨링(Pre-annotation) 연계로 라벨링 사이클 단축",
         "학습 완료 weights PyTorch(.pt) · TensorFlow(.pb) · ONNX(.onnx) 3포맷 export 지원",
@@ -793,6 +808,9 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       expect: [
+        "11개 도메인 · 15테이블 DDD 설계",
+        "3단계 멀티 레이어 캐시 구현",
+        "FastMCP 기반 AI Agent 연동",
         "복약 관리 디지털화로 고령자·만성질환자의 자가 건강 관리 접근성 향상",
         "복약 이행률 개선을 통한 치료 효과 증대 및 의료비 절감 가능성 확보",
         "건강 데이터 누적 기반의 개인화 리포트로 환자-의사 간 진료 커뮤니케이션 효율화",
@@ -930,6 +948,7 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
         {
+          
           title: "APScheduler — 경량 스케줄러 선택 이유",
           description:
             "Celery + Redis 대신 APScheduler를 선택한 핵심 이유는 단일 프로세스 내 통합 — 브로커·워커 인프라 없이 FastAPI lifespan에 직접 내장하여 운영 복잡도를 최소화",
@@ -941,6 +960,9 @@ export const PROJECTS: ProjectData[] = [
         },
       ],
       expect: [
+        "Azure Speech · OpenAI 통합 연동",
+        "카카오·Discord·메일 3채널 자동 발송",
+        "TTS AI 편지 낭독 기능 구현",
         "카카오 OAuth 2.0 소셜 로그인 도입으로 자체 인증 구현 없이 보안 인증 처리 — 회원가입 마찰 제거 및 개발 공수 절감",
         "APScheduler + SQLiteJobStore 조합으로 Redis·Celery 없이 예약 발송 durability 확보 — 단일 프로세스로 운영 인프라 최소화",
         "알림톡 미수신 시 SMS 자동 대체 발송으로 발송 신뢰성 확보, 채널별 에러 이력 기록으로 장애 추적 가능",

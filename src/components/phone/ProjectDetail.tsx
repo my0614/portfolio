@@ -114,22 +114,6 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
           </div>
         )}
 
-        <div className="divider" style={{ marginTop: 18 }} />
-
-        {/* metrics */}
-        <div className="pad" style={{ paddingTop: 26, paddingBottom: 28 }}>
-          <SectionHead label="IMPACT" title="핵심 성과" />
-          <div className="metric-row">
-            {pr.metrics.map((m, i) => (
-              <div key={i} className="metric">
-                <div className={'mv' + (i === 0 ? ' accent' : '')}>{m.value}</div>
-                {m.from && <div className="mfrom">{m.from}</div>}
-                <div className="ml">{m.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {(s.result ?? s.expect ?? []).length > 0 && (
           <>
             <div className="divider" />
