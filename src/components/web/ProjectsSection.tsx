@@ -168,22 +168,6 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
 
         <ImageGallery images={[pr.image, ...(pr.image2 ? [pr.image2] : []), ...(pr.image3 ? [pr.image3] : []), ...(pr.image4 ? [pr.image4] : [])]} />
 
-        <div className="dt-section">
-          <div className="dt-sec-head">
-            <div className="dt-sec-eyebrow">IMPACT</div>
-            <div className="dt-sec-title">핵심 성과</div>
-          </div>
-          <div className="dt-metrics">
-            {pr.metrics.map((m, i) => (
-              <div className="dt-metric" key={i}>
-                <div className="mv">{m.value}</div>
-                {m.from && <div className="mfrom">{m.from}</div>}
-                <div className="ml">{m.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {(s.result ?? s.expect ?? []).length > 0 && (
           <div className="dt-section">
             <div className="dt-sec-head">
