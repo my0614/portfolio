@@ -83,7 +83,7 @@ export const PROFILE: ProfileData = {
       category: "Framework",
       skills: ["PyTorch", "Flask", "FastAPI", "Label Studio", "MLflow"],
     },
-    { category: "Database", skills: ["PostgreSQL", "Redis"] },
+    { category: "Database", skills: ["PostgreSQL", "Redis", "Vector DB"] },
     { category: "Infra", skills: ["Docker", "Kubernetes"] },
     { category: "Cloud", skills: ["Azure", "AWS EC2"] },
     {
