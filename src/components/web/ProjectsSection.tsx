@@ -174,6 +174,17 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
               <div className="dt-sec-eyebrow">RESULT</div>
               <div className="dt-sec-title">{s.expect ? '기대 효과' : '성과'}</div>
             </div>
+            {pr.metrics.length > 0 && (
+              <div className="dt-metrics" style={{ marginBottom: 24 }}>
+                {pr.metrics.map((m, i) => (
+                  <div className="dt-metric" key={i}>
+                    <div className="mv">{m.value}</div>
+                    {m.from && <div className="mfrom">{m.from}</div>}
+                    <div className="ml">{m.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="dt-result">
               {(s.result ?? s.expect ?? []).map((t, i) => (
                 <div className="dt-result-row" key={i}>

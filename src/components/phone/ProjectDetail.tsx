@@ -119,6 +119,17 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
             <div className="divider" />
             <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
               <SectionHead label="RESULT" title={s.expect ? '기대 효과' : '성과'} />
+              {pr.metrics.length > 0 && (
+                <div className="metric-row" style={{ marginBottom: 20 }}>
+                  {pr.metrics.map((m, i) => (
+                    <div key={i} className="metric">
+                      <div className={'mv' + (i === 0 ? ' accent' : '')}>{m.value}</div>
+                      {m.from && <div className="mfrom">{m.from}</div>}
+                      <div className="ml">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {(s.result ?? s.expect ?? []).map((t, i) => (
                   <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
