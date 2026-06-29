@@ -57,8 +57,9 @@ export const PROFILE: ProfileData = {
   roleShort: "ML / MLOps",
   photo: "/profile.png",
   intro: [
-    "다양한 영상 데이터를 기반으로 AI 서비스를 개발해온 ML Engineer입니다. RealSense 카메라, 드론 영상, 항공 영상, RTSP 스트리밍 데이터를 활용하여 데이터 수집·가공, 객체 탐지 모델 개발, 학습 환경 구축, 배포 및 운영까지 End-to-End ML Pipeline을 구축하며 실제 서비스에 적용한 경험을 보유하고 있습니다.",
-    "이와 함께 Azure OpenAI GPT-4o, LangChain LCEL, ChromaDB 기반의 RAG 시스템을 설계·구현하며 생성형 AI 서비스 개발 경험도 쌓았습니다. 영상 AI 분야에서 축적한 실무 경험을 기반으로 LLM 기술을 접목하여 실제 문제를 해결하는 AI 서비스를 만드는 데 강점을 가지고 있습니다.",
+    "이커머스 도메인에서 데이터 파이프라인 구축부터 모델 학습·서빙·인프라 운영까지 End-to-End를 직접 담당해온 5년 차 ML 엔지니어입니다.",
+    "RealSense 카메라, 드론 영상, 항공 영상, RTSP 영상 등 다양한 영상 데이터를 다루며 데이터 수집부터 모델 개발, 배포·운영까지 이어지는 End-to-End ML 파이프라인 구축에 강점을 가지고 있습니다.",
+    "Azure OpenAI GPT-4o API 연동 및 LangChain LCEL 기반 RAG 파이프라인을 직접 설계·구현한 경험이 있습니다. ChromaDB 벡터 스토어와 HuggingFace 임베딩을 활용한 개인화 RAG 시스템, 감정 분석·편지 생성을 위한 프롬프트 엔지니어링까지 LLM 서비스 개발 전반을 경험했습니다.",
   ],
   systemInfo: [
     ["Location", "Seoul, South Korea"],
@@ -68,28 +69,14 @@ export const PROFILE: ProfileData = {
   ],
   skills: [
     { category: "Language", skills: ["Python", "C"] },
-    {
-      category: "AI",
-      skills: [
-        "LLM",
-        "RAG",
-        "LangChain",
-        "Azure OpenAI",
-        "Prompt Engineering",
-      ],
-    },
-    {
-      category: "Vision",
-      skills: ["YOLOv5", "Faster R-CNN", "RetinaNet", "MMDetection", "MambaCD"],
-    },
-    {
-      category: "Framework",
-      skills: ["PyTorch", "Flask", "FastAPI", "Label Studio", "MLflow"],
-    },
-    { category: "DB", skills: ["PostgreSQL", "Redis", "Vector DB"] },
+    { category: "NLP/LLM", skills: ["LLM", "RAG", "Azure OpenAI", "Prompt Engineering"] },
+    { category: "Vision", skills: ["YOLOv5", "Faster R-CNN", "RetinaNet", "MMDetection", "MambaCD"] },
+    { category: "AI Framework", skills: ["PyTorch", "LangChain"] },
+    { category: "Backend", skills: ["Flask", "FastAPI"] },
+    { category: "DB", skills: ["PostgreSQL", "Redis", "ChromaDB(Vector DB)"] },
     { category: "Infra", skills: ["Docker", "Kubernetes"] },
     { category: "Cloud", skills: ["Azure", "AWS EC2"] },
-    { category: "Else", skills: ["Git", "Jira"] },
+    { category: "Else", skills: ["Git", "Jira", "Label Studio", "MLflow"] },
   ],
   contact: [
     {
