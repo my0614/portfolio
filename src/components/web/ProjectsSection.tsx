@@ -5,6 +5,78 @@ import { Icon } from '@/components/phone/Icon';
 import { useReveal } from './hooks';
 import ProjectThumb from '@/components/ProjectThumb';
 
+function WebTechAccordion({ tech }: { tech: any[] }) {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="dt-tech">
+      {tech.map((t, i) => {
+        const isOpen = open === i;
+        return (
+          <div key={i} style={{ border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden' }}>
+            <button
+              onClick={() => setOpen(isOpen ? null : i)}
+              style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', padding: '18px 20px', display: 'flex', gap: 12, alignItems: 'center', textAlign: 'left' }}
+            >
+              <span className="dt-tech-num" style={{ flex: 'none' }}>{String(i + 1).padStart(2, '0')}</span>
+              <div className="dt-tech-title" style={{ flex: 1 }}>{t.title}</div>
+              <span style={{ flex: 'none', color: 'var(--text-3)', transition: 'transform .2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                <Icon name="chevDown" size={18} stroke={2.2} />
+              </span>
+            </button>
+            {isOpen && (
+              <div style={{ padding: '0 20px 20px', borderTop: '1px solid var(--border)' }}>
+                <p className="dt-tech-desc" style={{ marginTop: 16 }}>{t.description}</p>
+                {t.points && (
+                  <div className="dt-tech-points">
+                    {t.points.map((pt: string, j: number) => (
+                      <div className="dt-point" key={j}>
+                        <Icon name="check" size={17} stroke={2.4} />
+                        <span>{pt}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {t.images && (
+                  <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {t.images.map((img: any, k: number) => (
+                      <div key={k}>
+                        <div className="dt-hero-img" style={{ marginTop: 0 }}><img src={img.src} alt="" /></div>
+                        {img.caption && <div className="dt-cap">{img.caption}</div>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {t.table && (
+                  <div style={{ marginTop: 20, borderRadius: 16, overflow: 'hidden', border: '1px solid var(--border)' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                      <thead>
+                        <tr style={{ background: 'var(--bg-gray)' }}>
+                          {t.table.headers.map((h: string, k: number) => (
+                            <th key={k} style={{ padding: '11px 16px', fontSize: 12, fontWeight: 700, color: 'var(--text-3)', letterSpacing: '.06em', textTransform: 'uppercase', textAlign: k === 0 ? 'left' : 'center', borderBottom: '1px solid var(--border)' }}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {t.table.rows.map((row: any, k: number) => (
+                          <tr key={k} style={{ background: row.highlight ? 'var(--accent-bg)' : 'transparent', borderBottom: k < t.table.rows.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                            {row.cells.map((cell: string, j: number) => (
+                              <td key={j} style={{ padding: '11px 16px', fontSize: 14, fontWeight: j === 0 ? 700 : 400, textAlign: j === 0 ? 'left' : 'center', color: row.highlight ? 'var(--accent)' : j === row.cells.length - 1 ? 'var(--text-3)' : 'var(--text-2)' }}>{cell}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function ImageGallery({ images }: { images: { src: string; caption?: string }[] }) {
   const [current, setCurrent] = useState(0);
 
@@ -260,65 +332,7 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
             <div className="dt-sec-eyebrow">HOW</div>
             <div className="dt-sec-title">핵심 기술</div>
           </div>
-          <div className="dt-tech">
-            {s.tech.map((t, i) => (
-              <div className="dt-tech-card" key={i}>
-                <div className="dt-tech-top">
-                  <span className="dt-tech-num">{String(i + 1).padStart(2, '0')}</span>
-                  <div className="dt-tech-title">{t.title}</div>
-                </div>
-                <p className="dt-tech-desc">{t.description}</p>
-                {t.points && (
-                  <div className="dt-tech-points">
-                    {t.points.map((pt, j) => (
-                      <div className="dt-point" key={j}>
-                        <Icon name="check" size={17} stroke={2.4} />
-                        <span>{pt}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {t.images && (
-                  <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    {t.images.map((img, k) => (
-                      <div key={k}>
-                        <div className="dt-hero-img" style={{ marginTop: 0 }}><img src={img.src} alt="" /></div>
-                        {img.caption && <div className="dt-cap">{img.caption}</div>}
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {t.table && (
-                  <div style={{ marginTop: 20, borderRadius: 16, overflow: 'hidden', border: '1px solid var(--border)' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                      <thead>
-                        <tr style={{ background: 'var(--bg-gray)' }}>
-                          {t.table.headers.map((h, k) => (
-                            <th key={k} style={{ padding: '11px 16px', fontSize: 12, fontWeight: 700, color: 'var(--text-3)', letterSpacing: '.06em', textTransform: 'uppercase', textAlign: k === 0 ? 'left' : 'center', borderBottom: '1px solid var(--border)' }}>{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {t.table.rows.map((row, k) => (
-                          <tr key={k} style={{ background: row.highlight ? 'var(--accent-bg)' : 'transparent', borderBottom: k < t.table!.rows.length - 1 ? '1px solid var(--border)' : 'none' }}>
-                            {row.cells.map((cell, j) => (
-                              <td key={j} style={{
-                                padding: '11px 16px',
-                                fontSize: 14,
-                                fontWeight: j === 0 ? 700 : 400,
-                                textAlign: j === 0 ? 'left' : 'center',
-                                color: row.highlight ? 'var(--accent)' : j === row.cells.length - 1 ? 'var(--text-3)' : 'var(--text-2)',
-                              }}>{cell}</td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          <WebTechAccordion tech={s.tech} />
         </div>
 
         {pr.link && (
