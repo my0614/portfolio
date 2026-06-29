@@ -1,10 +1,93 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { PROJECTS } from '@/data/portfolio';
 import { AppBar } from './AppBar';
 import { Avatar } from './Avatar';
 import { Icon } from './Icon';
 import { useScrolled, useReveal } from './hooks';
+
+function TechAccordion({ tech }: { tech: any[] }) {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
+      <SectionHead label="HOW" title="핵심 기술" />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {tech.map((t, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={i} style={{ border: '1px solid var(--border)', borderRadius: 16, overflow: 'hidden' }}>
+              <button
+                onClick={() => setOpen(isOpen ? null : i)}
+                style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', padding: '16px 18px', display: 'flex', gap: 10, alignItems: 'center', textAlign: 'left' }}
+              >
+                <span style={{ flex: 'none', fontSize: 13, fontWeight: 800, color: 'var(--accent)', fontFamily: 'ui-monospace, monospace' }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div style={{ flex: 1, fontSize: 15, fontWeight: 700, color: 'var(--text)', lineHeight: 1.4, letterSpacing: '-0.01em' }}>{t.title}</div>
+                <span style={{ flex: 'none', color: 'var(--text-3)', transition: 'transform .2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                  <Icon name="chevDown" size={18} stroke={2.2} />
+                </span>
+              </button>
+              {isOpen && (
+                <div style={{ padding: '0 18px 18px', borderTop: '1px solid var(--border)' }}>
+                  <p style={{ fontSize: 13.5, lineHeight: 1.6, color: 'var(--text-2)', marginTop: 14 }}>{t.description}</p>
+                  {t.points && (
+                    <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {t.points.map((pt: string, j: number) => (
+                        <div key={j} style={{ display: 'flex', gap: 8 }}>
+                          <span style={{ flex: 'none', marginTop: 3, color: 'var(--accent)' }}>
+                            <Icon name="check" size={15} stroke={2.6} />
+                          </span>
+                          <span style={{ fontSize: 13, lineHeight: 1.55, color: 'var(--text-2)' }}>{pt}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {t.images && (
+                    <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                      {t.images.map((img: any, k: number) => (
+                        <div key={k}>
+                          <div style={{ borderRadius: 16, overflow: 'hidden', background: 'var(--bg-gray)' }}>
+                            <img src={img.src} alt="" style={{ width: '100%', display: 'block' }} />
+                          </div>
+                          {img.caption && (
+                            <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 6, textAlign: 'center' }}>{img.caption}</div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {t.table && (
+                    <div style={{ marginTop: 14, borderRadius: 14, overflow: 'hidden', border: '1px solid var(--border)' }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                        <thead>
+                          <tr style={{ background: 'var(--bg-gray)' }}>
+                            {t.table.headers.map((h: string, k: number) => (
+                              <th key={k} style={{ padding: '9px 12px', fontSize: 11, fontWeight: 700, color: 'var(--text-3)', letterSpacing: '.05em', textAlign: k === 0 ? 'left' : 'center', borderBottom: '1px solid var(--border)' }}>{h}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {t.table.rows.map((row: any, k: number) => (
+                            <tr key={k} style={{ background: row.highlight ? 'var(--accent-bg)' : 'transparent', borderBottom: k < t.table.rows.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                              {row.cells.map((cell: string, j: number) => (
+                                <td key={j} style={{ padding: '9px 12px', fontSize: 12.5, fontWeight: j === 0 ? 700 : 400, textAlign: j === 0 ? 'left' : 'center', color: row.highlight ? 'var(--accent)' : j === row.cells.length - 1 ? 'var(--text-3)' : 'var(--text-2)' }}>{cell}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 interface SectionHeadProps {
   label: string;
@@ -210,76 +293,7 @@ export function ProjectDetail({ id, goBack }: ProjectDetailProps) {
         <div className="divider" />
 
         {/* tech */}
-        <div className="pad" style={{ paddingTop: 28, paddingBottom: 28 }}>
-          <SectionHead label="HOW" title="핵심 기술" />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {s.tech.map((t, i) => (
-              <div key={i} style={{ border: '1px solid var(--border)', borderRadius: 16, padding: '18px 18px 16px' }}>
-                <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <span style={{ flex: 'none', fontSize: 13, fontWeight: 800, color: 'var(--accent)', fontFamily: 'ui-monospace, monospace', marginTop: 1 }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <div style={{ fontSize: 15.5, fontWeight: 700, color: 'var(--text)', lineHeight: 1.4, letterSpacing: '-0.01em' }}>{t.title}</div>
-                </div>
-                <p style={{ fontSize: 13.5, lineHeight: 1.6, color: 'var(--text-2)', marginTop: 10, paddingLeft: 23 }}>{t.description}</p>
-                {t.points && (
-                  <div style={{ marginTop: 12, paddingLeft: 23, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {t.points.map((pt, j) => (
-                      <div key={j} style={{ display: 'flex', gap: 8 }}>
-                        <span style={{ flex: 'none', marginTop: 3, color: 'var(--accent)' }}>
-                          <Icon name="check" size={15} stroke={2.6} />
-                        </span>
-                        <span style={{ fontSize: 13, lineHeight: 1.55, color: 'var(--text-2)' }}>{pt}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {t.images && (
-                  <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    {t.images.map((img, k) => (
-                      <div key={k}>
-                        <div style={{ borderRadius: 16, overflow: 'hidden', background: 'var(--bg-gray)' }}>
-                          <img src={img.src} alt="" style={{ width: '100%', display: 'block' }} />
-                        </div>
-                        {img.caption && (
-                          <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 6, textAlign: 'center' }}>{img.caption}</div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {t.table && (
-                  <div style={{ marginTop: 14, borderRadius: 14, overflow: 'hidden', border: '1px solid var(--border)' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                      <thead>
-                        <tr style={{ background: 'var(--bg-gray)' }}>
-                          {t.table.headers.map((h, k) => (
-                            <th key={k} style={{ padding: '9px 12px', fontSize: 11, fontWeight: 700, color: 'var(--text-3)', letterSpacing: '.05em', textAlign: k === 0 ? 'left' : 'center', borderBottom: '1px solid var(--border)' }}>{h}</th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {t.table.rows.map((row, k) => (
-                          <tr key={k} style={{ background: row.highlight ? 'var(--accent-bg)' : 'transparent', borderBottom: k < t.table!.rows.length - 1 ? '1px solid var(--border)' : 'none' }}>
-                            {row.cells.map((cell, j) => (
-                              <td key={j} style={{
-                                padding: '9px 12px',
-                                fontSize: 12.5,
-                                fontWeight: j === 0 ? 700 : 400,
-                                textAlign: j === 0 ? 'left' : 'center',
-                                color: row.highlight ? 'var(--accent)' : j === row.cells.length - 1 ? 'var(--text-3)' : 'var(--text-2)',
-                              }}>{cell}</td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
+        <TechAccordion tech={s.tech} />
 
 
         {pr.link && (
