@@ -59,7 +59,7 @@ export const PROFILE: ProfileData = {
   intro: [
     "이커머스 도메인에서 데이터 파이프라인 구축부터 모델 학습·서빙·인프라 운영까지 End-to-End를 직접 담당해온 5년 차 ML 엔지니어입니다.",
     "RealSense 카메라, 드론 영상, 항공 영상, RTSP 영상 등 다양한 영상 데이터를 다루며 데이터 수집부터 모델 개발, 배포·운영까지 이어지는 End-to-End ML 파이프라인 구축에 강점을 가지고 있습니다.",
-    "Azure OpenAI GPT-4o API 연동 및 LangChain LCEL 기반 RAG 파이프라인을 직접 설계·구현한 경험이 있습니다. ChromaDB 벡터 스토어와 HuggingFace 임베딩을 활용한 개인화 RAG 시스템, 감정 분석·편지 생성을 위한 프롬프트 엔지니어링까지 LLM 서비스 개발 전반을 실 서비스 수준에서 경험했습니다.",
+    "Azure OpenAI GPT-4o API 연동 및 LangChain LCEL 기반 RAG 파이프라인을 직접 설계·구현한 경험이 있습니다. ChromaDB 벡터 스토어와 HuggingFace 임베딩을 활용한 개인화 RAG 시스템, 감정 분석·편지 생성을 위한 프롬프트 엔지니어링까지 LLM 서비스 개발 전반을 경험했습니다.",
   ],
   systemInfo: [
     ["Location", "Seoul, South Korea"],
@@ -70,26 +70,27 @@ export const PROFILE: ProfileData = {
   skills: [
     { category: "Language", skills: ["Python", "C"] },
     {
-      category: "LLM/AI",
+      category: "AI",
       skills: [
+        "LLM",
+        "RAG",
         "LangChain",
         "Azure OpenAI",
-        "RAG",
         "ChromaDB",
         "Prompt Engineering",
       ],
     },
     {
+      category: "Vision",
+      skills: ["YOLOv5", "Faster R-CNN", "RetinaNet", "MMDetection", "MambaCD"],
+    },
+    {
       category: "Framework",
       skills: ["PyTorch", "Flask", "FastAPI", "Label Studio", "MLflow"],
     },
-    { category: "Database", skills: ["PostgreSQL", "Redis", "Vector DB"] },
+    { category: "DB", skills: ["PostgreSQL", "Redis", "Vector DB"] },
     { category: "Infra", skills: ["Docker", "Kubernetes"] },
     { category: "Cloud", skills: ["Azure", "AWS EC2"] },
-    {
-      category: "Models",
-      skills: ["YOLOv5", "Faster R-CNN", "RetinaNet", "MMDetection", "MambaCD"],
-    },
     { category: "Else", skills: ["Git", "Jira"] },
   ],
   contact: [
