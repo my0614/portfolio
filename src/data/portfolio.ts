@@ -76,7 +76,6 @@ export const PROFILE: ProfileData = {
         "RAG",
         "LangChain",
         "Azure OpenAI",
-        "ChromaDB",
         "Prompt Engineering",
       ],
     },
