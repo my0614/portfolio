@@ -43,7 +43,7 @@ export function HomeScreen({ openProject, goTab }: HomeScreenProps) {
               </div>
             </div>
           </div>
-          <p className="body rise" style={{ animationDelay: '.16s', marginTop: 20 }}>{PROFILE.intro[0]}</p>
+          <p className="body rise" style={{ animationDelay: '.16s', marginTop: 20 }}>{PROFILE.introShort}</p>
         </div>
 
         <div className="divider" />

@@ -20,7 +20,7 @@ export function Hero() {
             안녕하세요,<br />{PROFILE.role.split(' · ')[0]} 개발자<br /><span className="accent">{PROFILE.name}</span>입니다
           </h1>
           <p className="hero-role reveal" style={{ transitionDelay: '.1s' }}>{PROFILE.role}</p>
-          <p className="hero-intro reveal" style={{ transitionDelay: '.14s' }}>{PROFILE.intro[0]}</p>
+          <p className="hero-intro reveal" style={{ transitionDelay: '.14s' }}>{PROFILE.introShort}</p>
           <div className="hero-cta reveal" style={{ transitionDelay: '.18s' }}>
             <a className="btn btn-primary" href="#projects">
               프로젝트 보기 <Icon name="arrow" size={18} stroke={2.2} />

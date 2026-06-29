@@ -44,6 +44,7 @@ export type ProfileData = {
   role: string;
   roleShort: string;
   photo: string;
+  introShort: string;
   intro: string[];
   systemInfo: [string, string][];
   skills: { category: string; skills: string[] }[];
@@ -56,6 +57,7 @@ export const PROFILE: ProfileData = {
   role: "MLOps/Backend · MLOps 개발자",
   roleShort: "ML / MLOps",
   photo: "/profile.png",
+  introShort: "이커머스 도메인에서 데이터 파이프라인 구축부터 모델 학습·서빙·인프라 운영까지 End-to-End를 직접 담당해온 5년 차 ML 엔지니어입니다.",
   intro: [
     "다양한 영상 데이터를 기반으로 AI 서비스를 개발해온 ML Engineer입니다. RealSense 카메라, 드론 영상, 항공 영상, RTSP 스트리밍 데이터를 활용하여 데이터 수집·가공, 객체 탐지 모델 개발, 학습 환경 구축, 배포 및 운영까지 End-to-End ML Pipeline을 구축하며 실제 서비스에 적용한 경험을 보유하고 있습니다.",
     "이와 함께 Azure OpenAI GPT-4o, LangChain LCEL, ChromaDB 기반의 RAG 시스템을 설계·구현하며 생성형 AI 서비스 개발 경험도 쌓았습니다. 영상 AI 분야에서 축적한 실무 경험을 기반으로 LLM 기술을 접목하여 실제 문제를 해결하는 AI 서비스를 만드는 데 강점을 가지고 있습니다.",
