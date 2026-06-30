@@ -95,194 +95,166 @@ export const PROFILE: ProfileData = {
 
 export const PROJECTS: ProjectData[] = [
   {
-    id: "hotdeal",
+    id: "dflow",
     type: "company",
-    title: "핫딜 자동화 시스템",
-    company: "(주)무무즈",
-    initial: "무",
+    title: "사내 MLOps 플랫폼 DFLOW",
+    company: "한컴인스페이스",
+    initial: "한",
     summary:
-      "단독 최저가 상품을 빠르게 발굴하고 경쟁사보다 먼저 프로모션을 진행하기 위해 구축한 핫딜 운영 자동화 시스템. 파트너사 신청부터 상품 선정, 등록, 결과 메일 발송까지의 업무를 자동화하여 운영 시간을 단축하고, 더 많은 핫딜을 안정적으로 운영할 수 있는 환경을 구축했습니다.",
-    thumb: "/projects/hotdeal-app.png",
-    image: {
-      src: "/projects/hotdeal-app.png",
-      caption: "무무즈 핫딜 오픈 화면",
-    },
-    link: "https://moomooz.co.kr/product/hotdeal",
+      "AI 모델 개발 과정에서 반복적으로 발생하는 데이터 라벨링, 학습 환경 구축, GPU 자원 관리, 성능 검증, 모델 배포 준비 과정을 표준화하기 위해 통합 MLOps 플랫폼을 구축했습니다. 데이터셋 관리부터 학습 작업 스케줄링, 학습 추적, 성능 평가, ONNX 모델 추출까지 End-to-End 파이프라인을 제공하여 개발 효율성과 모델 품질 관리 체계를 강화했습니다.",
+    thumb: "/projects/dflow0.png",
+    image: { src: "/projects/dflow0.png", caption: "사내 MLOps 플랫폼 DFLOW" },
     tags: [
-      "OAuth 2.0",
-      "Google Sheets API",
-      "Gmail API",
-      "Shopby API",
-      "AWS EC2",
-      "Bitbucket Pipelines",
-      "Cron",
-      "Python",
+      "MMDetection",
+      "MMYOLO",
+      "GOD",
+      "Redis",
+      "K8s",
+      "PyTorch",
+      "Docker",
+      "PostgreSQL",
+      "ONNX",
     ],
-    year: "2025.12 ~ 2026.03",
+    year: "2022 ~ 2024",
     metrics: [
-      { value: "2분", label: "등록 작업 시간", from: "4시간+" },
-      { value: "99%↓", label: "작업 시간 단축" },
-      { value: "무인", label: "전 과정 자동화" },
+      { value: "20+", label: "지원 모델 수", from: "3개" },
+      { value: "1일", label: "신규 모델 온보딩", from: "1~2주" },
+      { value: "K8s", label: "전 컴포넌트 파드 운영" },
     ],
     sections: {
-      arch: "/projects/hotdeal_ar.png",
+      arch: "/projects/dflow_ar2.png",
       flow: [
         {
-          title: "파트너사 핫딜 신청 집계",
+          title: "데이터셋 Import 및 버전 관리",
           description:
-            "파트너사가 Google Spreadsheet에 신청 상품을 입력하면 배치가 신청 목록을 자동 수집",
+            "외부 스토리지·로컬에서 이미지·영상 데이터를 플랫폼으로 업로드. " +
+            "데이터셋 단위로 버전을 관리하여 학습 간 데이터 추적 가능",
         },
         {
-          title: "Shopby API 상품 매칭 및 랭킹 선별",
+          title: "라벨링 작업 진행",
           description:
-            "신청 상품을 Shopby API로 매칭하여 할인율·가격 경쟁력·재고 수량 기반 동적 스코어링으로 상위 200개 자동 선별",
+            "Label Studio 기반 웹 라벨링 환경에서 Bounding Box·Polygon 등 어노테이션 작업. " +
+            "학습 완료된 weight로 자동 라벨링(Pre-annotation)을 적용해 반복 작업 시간 단축. " +
+            "완료된 라벨링 결과는 COCO·YOLO 등 포맷으로 Export 가능",
         },
         {
-          title: "핫딜 자동 등록",
+          title: "모델 선택 및 학습 작업 등록",
           description:
-            "선별된 상품을 Shopby 핫딜 등록 API로 자동 등록, 수동 입력 없이 전 과정 완결",
+            "GOD · MMDetection · MMYOLO 중 모델과 프레임워크를 선택하고 학습 파라미터(epoch, batch size, lr 등)를 UI에서 입력. " +
+            "작업은 Redis BRPOP 기반 큐에 적재되어 GPU 가용 시점에 순차 처리",
         },
         {
-          title: "파트너사별 결과 메일 자동 발송",
+          title: "학습 실행 및 실시간 상태 모니터링",
           description:
-            "계정별 결과 파일 자동 생성 후 Gmail API로 개별 발송, BCC 처리로 수신자 정보 노출 차단",
+            "K8s 파드로 학습 작업 실행. UI에서 Connected → Preparing → Training 상태를 실시간으로 확인하고, " +
+            "에러 발생 시 로그를 즉시 확인 가능. MLflow로 학습별 하이퍼파라미터·loss·메트릭 자동 기록",
         },
         {
-          title: "Slack 실행 결과 알림",
+          title: "성능 지표 시각화 및 모델 비교",
           description:
-            "배치 완료 후 정상·실패 건수 요약을 Slack Webhook으로 자동 발송, 오류 발생 시 즉시 알림",
+            "학습 완료 후 Precision · Recall · mAP 등 성능 지표를 대시보드에서 시각화. " +
+            "학습 간 성능 그래프를 비교하여 최적 모델 선정",
+        },
+        {
+          title: "Weights Export",
+          description:
+            "선정된 모델의 weight를 PyTorch(.pt) · TensorFlow(.pb) · ONNX(.onnx) 3가지 포맷으로 변환·추출. " +
+            "추출된 모델은 배포 파이프라인 또는 자동 라벨링 Pre-annotation으로 즉시 활용 가능",
         },
       ],
       tech: [
         {
-          title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
+          title:
+            "GOD(General Object Detection): YOLO · Faster R-CNN · RetinaNet ML 백엔드 직접 구현 — MMDetection · MMYOLO와 동일한 공통 인터페이스로 추상화",
           description:
-            "Shopby API로 신청 상품 자동 매칭, 당회차 실제 등록 상품 비율 기반 동적 가중치 스코어링으로 상위 200개 자동 선별",
+            "GOD · MMDetection · MMYOLO 프레임워크별로 상이한 학습 인터페이스를 " +
+            "단일 공통 구조로 추상화. 신규 모델 추가 시 인터페이스 재구현 없이 config 교체만으로 온보딩",
           points: [
-            "고정 기준값 대신 회차별 실제 데이터를 반영한 동적 스코어링으로 상위 200개 자동 선별",
-            "할인율·가격 경쟁력·재고 수량 3개 지표를 당회차 실제 등록 상품 비율 기반으로 가중치 산정",
-            "Shopby API 연동으로 신청 상품의 상품명·상품번호 자동 매칭",
-            "신청 집계부터 선별까지 Spreadsheet 내에서 완결, 별도 DB 없이 운영",
+            "YOLO · Faster R-CNN · RetinaNet 등 모델별 상이한 인터페이스 → 공통 추상화 레이어 설계",
+            "GOD · MMDetection · MMYOLO 3개 프레임워크를 단일 ML 백엔드 인터페이스로 통합",
+            "전이학습·초기학습 선택, 학습 파라미터 주입을 공통 API로 표준화",
+            "신규 모델 온보딩: 코드 수정 없이 config 파일 교체만으로 처리, 1~2주 → 1일 이내",
+            "지원 모델 수 3개 → 20개 이상으로 확장",
           ],
         },
         {
-          title: "OAuth 2.0 — Google Spreadsheet · Gmail 통합 자동화",
+          title: "Redis BRPOP 기반 학습 작업 큐",
           description:
-            "InstalledAppFlow 기반 OAuth 2.0으로 Gmail · Sheets · Drive 3개 API를 단일 토큰으로 인증, " +
-            "Refresh Token 자동 재발급으로 배치 실행 중 인증 단절 없는 무중단 파이프라인 구축",
+            "DB 폴링 race condition → Redis BRPOP 원자적 연산으로 해결, Redis Hash로 job 상태·GPU·에러 로그 중앙 관리",
           points: [
-            "Gmail · Sheets · Drive 멀티 스코프를 단일 credential로 통합 인증",
-            "Refresh Token 만료 감지 → 자동 재발급 로직으로 새벽 배치 중 인증 단절 방지",
-            "MIMEMultipart 기반 발송 모듈 직접 설계 — HTML 템플릿 치환 · CID 인라인 이미지 · 파일 첨부 단일 클래스로 캡슐화",
-            "BCC 일괄 발송으로 파트너사 간 수신자 정보 노출 차단",
+            "BRPOP: 원자적 pop으로 race condition 없는 작업 분배 보장",
+            "Redis Hash: job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API",
+            "작업 실패 시 에러 메시지 저장으로 디버깅 가능한 구조 확보",
+          ],
+          images: [
+            {
+              src: "/projects/dflow-training-ui.png",
+              caption: "모델 학습 상태 관리 (Connected → Preparing → Training)",
+            },
+            {
+              src: "/projects/dflow_error.png",
+              caption: "학습 작업 에러 로그 확인",
+            },
           ],
         },
         {
-          title: "AWS EC2 + cron 실행 환경 및 CI/CD",
+          title: "실시간 학습 모니터링 및 사용자 기능",
           description:
-            "EC2에서 cron 배치 자동 실행, Bitbucket Pipelines로 push → 테스트 → EC2 배포 완전 자동화",
+            "학습 진행률·버전·성능 지표를 실시간으로 시각화하고, " +
+            "자동 라벨링·모델 비교·프로젝트 접근 제어 등 end-to-end 사용자 기능 제공",
           points: [
-            "AWS EC2에서 Python 코드 실행, cron으로 새벽 배치 자동 스케줄링",
-            "Bitbucket Pipelines: push → 테스트 → 빌드 → EC2 배포 자동화",
-            "브랜치별 배포 환경 분리 (dev / prod)",
-            "cron 실행 중 오류 발생 시 Slack Incoming Webhook으로 즉시 알림 발송",
-            "배치 완료 후 정상·실패 건수 요약 메시지 Slack Incoming Webhook으로 자동 발송 → MD·개발팀이 스케줄링 실행 결과 실시간 확인 가능",
+            "학습 완료 weight로 자동 라벨링 실행 — 수동 라벨링 비용 절감 및 재학습 사이클 단축",
+            "학습 진행률 실시간 표시 (Connected → Preparing → Training 상태 관리)",
+            "학습 결과 성능 지표(mAP · Loss 등) 그래프 시각화 대시보드 제공",
+            "원하는 성능 지표 선택 후 모델 간 수치 비교 기능",
+            "버전 관리: 학습 이력·파라미터·성능 지표를 버전별로 기록·조회",
+            "프로젝트별 그룹 생성 + 비밀번호 인증 기반 접근 제어로 다중 프로젝트 환경 데이터 격리 지원",
+          ],
+          images: [
+            {
+              src: "/projects/dflow_predict.png",
+              caption: "학습 완료 weight 기반 자동 라벨링",
+            },
+            {
+              src: "/projects/dflow-performance.png",
+              caption: "모델 성능 평가 대시보드",
+            },
+          ],
+        },
+        {
+          title: "nvidia-smi 기반 GPU 동적 분배",
+          description:
+            "job 처리 전 nvidia-smi로 가용 메모리 체크 → 모델 요구량 비교 후 GPU 할당, 조건 미충족 시 재큐잉으로 OOM 제거",
+          points: [
+            "nvidia-smi --query-gpu로 가용 메모리 실시간 조회",
+            "모델 config에 min_gpu_memory 정의, Worker가 조건 검증 후 GPU 할당",
+            "멀티 GPU OOM 장애 제거, 안정적 동시 학습 지원",
+          ],
+        },
+        {
+          title: "사용자 입력 기반 config 자동 생성 파이프라인",
+          description:
+            "사용자가 UI에서 입력한 학습 파라미터·모델·데이터셋 정보를 받아 " +
+            "프레임워크별 공통 config 파일을 자동 생성·수정 후 학습 실행까지 연결하는 파이프라인 구현",
+          points: [
+            "사용자 입력(모델 선택·파라미터·데이터셋·전이학습 여부)을 API로 수신",
+            "수신 정보 기반으로 MMDetection · MMYOLO · GOD 공통 config 자동 생성·수정",
+            "config 완성 → Redis 큐 등록 → Worker 학습 실행까지 자동 연결",
+            "학습 완료 후 weights 다운로드 및 ONNX 변환 기능 제공",
+          ],
+          images: [
+            {
+              src: "/projects/dflow_addmodel.png",
+              caption: "모델 선택 및 학습 파라미터 입력 UI",
+            },
           ],
         },
       ],
       result: [
-        "파트너사 계정별 결과 파일 메일 발송 자동화로 누락·오입력 리스크 제거",
-        "별도 메일링 SaaS·인프라 도입 없이 Google Workspace만으로 자동화 파이프라인 구현",
-      ],
-    },
-  },
-  {
-    id: "cs",
-    type: "company",
-    title: "CS 문의 자동화",
-    company: "(주)무무즈",
-    initial: "무",
-    summary:
-      "반복적인 배송 문의로 인해 상담 인력이 단순 응대에 집중되는 문제를 해결하고자 구축한 CS 자동화 시스템. 주문 정보를 기반으로 문의를 자동 분류·응답하여 고객 응답 시간을 단축하고 상담 인력이 고부가가치 업무에 집중할 수 있도록 지원했습니다.",
-    thumb: "/projects/cs-main.png",
-    image: {
-      src: "/projects/cs-main.png",
-      caption: "CS 문의 자동화 시스템 개요",
-    },
-    image2: {
-      src: "/projects/cs-process.png",
-      caption: "CS 문의 자동화 프로세스",
-    },
-    tags: ["Shopby API", "Sellmate API", "Batch", "Python"],
-    year: "2025.12 ~ 2026.03",
-    metrics: [
-      { value: "1/3", label: "문의 자동 처리" },
-      { value: "80%↓", label: "응답 지연 시간" },
-      { value: "24/7", label: "무중단 운영" },
-    ],
-    sections: {
-      arch: "/projects/cs-process.png",
-      result: [
-        "CS 담당자가 단순 반복 문의에서 벗어나 클레임·환불 등 고부가가치 업무에 집중할 수 있는 운영 환경 구축",
-        "Shopby·Sellmate 등 이종 API를 단일 인터페이스로 통합하여 신규 판매 채널 연동 및 확장 용이성 확보",
-        "자동화된 응답 로직을 통해 상담원 간 응답 편차를 줄이고 일관된 고객 응대 품질 제공",
-      ],
-      flow: [
-        {
-          title: "배송 문의 일괄 수집",
-          description:
-            "cron 스케줄러가 1시간 주기로 Shopby API를 통해 미처리 배송 문의 목록을 자동 수집",
-        },
-        {
-          title: "주문·배송 상태 조회",
-          description:
-            "Shopby(주문)·Sellmate(배송) 이중 API를 호출해 상품코드·송장번호·입고예정일 정보를 매칭",
-        },
-        {
-          title: "케이스 분기 판단",
-          description:
-            "상품코드·송장번호 유무 조합으로 3가지 케이스 분기, 자동 처리 불가 케이스는 담당자 플래그로 분리",
-        },
-        {
-          title: "템플릿 자동 선택 및 답변 등록",
-          description:
-            "케이스에 맞는 HTML 템플릿을 자동 선택 후 Shopby answer API로 답변 등록, 주말·야간 포함 24/7 무중단 처리",
-        },
-      ],
-      tech: [
-        {
-          title: "이중 API 응답 기반 케이스 분기 설계",
-          description:
-            "Shopby(주문) · Sellmate(재고/배송) 두 API 응답을 매칭하여 상품코드·송장번호 유무 조합으로 3가지 케이스를 분기, 케이스별 HTML 템플릿을 자동 선택해 Shopby answer API로 등록",
-          points: [
-            "상품코드 X / 송장번호 O → 1-2일 내 출고 안내 템플릿",
-            "상품코드 O / 송장번호 O → 입고예정일 안내 템플릿 (남대문/리오더)",
-            "상품코드 O / 송장번호 X → 기본 배송 안내 템플릿",
-            "두 조건 모두 없는 케이스는 자동 처리 제외 → 담당자 플래그 분리, 오답 발송 차단",
-            "입고예정일 데이터 유효성 검증 — 과거 날짜 등록된 케이스 감지 시 기본 배송 안내로 자동 fallback",
-          ],
-        },
-        {
-          title: "Shopby / Sellmate API 이중 연동",
-          description:
-            "주문(Shopby) · 배송(Sellmate) 분리 API를 동시 연동. API 인증 정보(systemkey, mallkey, auth token)는 코드에서 분리해 JSON config 파일로 관리",
-          points: [
-            "Shopby API: 문의 목록 조회 → 주문 상세 조회 → 답변 등록 순으로 처리",
-            "Sellmate API: 주문 조회 → 상품 옵션 조회 → 입고예정일 조회 순으로 처리",
-            "두 API 응답 매칭 → 상품코드·송장번호 조합으로 케이스 판단 후 자동 응답 생성",
-            "API 인증 정보(systemkey, mallkey, auth token)를 코드에서 분리하여 JSON config 파일로 관리",
-          ],
-        },
-        {
-          title: "배치 스케줄러 기반 자동 처리",
-          description:
-            "웹훅 대신 주기 배치로 미처리 문의 일괄 조회, 주말·야간 포함 24/7 무중단 자동 처리",
-          points: [
-            "cron 기반 스케줄러로 1시간 주기 배송 문의 일괄 수집 및 자동 응답 처리",
-            "배송 상태 데이터 주기적 갱신으로 응답 정확도 유지",
-            "주말·비업무 시간 포함 24/7 무중단 운영",
-          ],
-        },
+        "멀티 GPU OOM 장애 제거, 학습 대기 하루 이상 → Redis 큐 자동 순차 처리로 해소",
+        "라벨링 결과 COCO·YOLO 포맷 export + 자동 라벨링(Pre-annotation) 연계로 라벨링 사이클 단축",
+        "학습 완료 weights PyTorch(.pt) · TensorFlow(.pb) · ONNX(.onnx) 3포맷 export 지원",
+        "데이터 import → 라벨링 → 학습 → 성능 평가 → weights export 전 과정 단일 플랫폼에서 완결",
       ],
     },
   },
@@ -505,166 +477,194 @@ export const PROJECTS: ProjectData[] = [
     },
   },
   {
-    id: "dflow",
+    id: "hotdeal",
     type: "company",
-    title: "사내 MLOps 플랫폼 DFLOW",
-    company: "한컴인스페이스",
-    initial: "한",
+    title: "핫딜 자동화 시스템",
+    company: "(주)무무즈",
+    initial: "무",
     summary:
-      "AI 모델 개발 과정에서 반복적으로 발생하는 데이터 라벨링, 학습 환경 구축, GPU 자원 관리, 성능 검증, 모델 배포 준비 과정을 표준화하기 위해 통합 MLOps 플랫폼을 구축했습니다. 데이터셋 관리부터 학습 작업 스케줄링, 학습 추적, 성능 평가, ONNX 모델 추출까지 End-to-End 파이프라인을 제공하여 개발 효율성과 모델 품질 관리 체계를 강화했습니다.",
-    thumb: "/projects/dflow0.png",
-    image: { src: "/projects/dflow0.png", caption: "사내 MLOps 플랫폼 DFLOW" },
+      "단독 최저가 상품을 빠르게 발굴하고 경쟁사보다 먼저 프로모션을 진행하기 위해 구축한 핫딜 운영 자동화 시스템. 파트너사 신청부터 상품 선정, 등록, 결과 메일 발송까지의 업무를 자동화하여 운영 시간을 단축하고, 더 많은 핫딜을 안정적으로 운영할 수 있는 환경을 구축했습니다.",
+    thumb: "/projects/hotdeal-app.png",
+    image: {
+      src: "/projects/hotdeal-app.png",
+      caption: "무무즈 핫딜 오픈 화면",
+    },
+    link: "https://moomooz.co.kr/product/hotdeal",
     tags: [
-      "MMDetection",
-      "MMYOLO",
-      "GOD",
-      "Redis",
-      "K8s",
-      "PyTorch",
-      "Docker",
-      "PostgreSQL",
-      "ONNX",
+      "OAuth 2.0",
+      "Google Sheets API",
+      "Gmail API",
+      "Shopby API",
+      "AWS EC2",
+      "Bitbucket Pipelines",
+      "Cron",
+      "Python",
     ],
-    year: "2022 ~ 2024",
+    year: "2025.12 ~ 2026.03",
     metrics: [
-      { value: "20+", label: "지원 모델 수", from: "3개" },
-      { value: "1일", label: "신규 모델 온보딩", from: "1~2주" },
-      { value: "K8s", label: "전 컴포넌트 파드 운영" },
+      { value: "2분", label: "등록 작업 시간", from: "4시간+" },
+      { value: "99%↓", label: "작업 시간 단축" },
+      { value: "무인", label: "전 과정 자동화" },
     ],
     sections: {
-      arch: "/projects/dflow_ar2.png",
+      arch: "/projects/hotdeal_ar.png",
       flow: [
         {
-          title: "데이터셋 Import 및 버전 관리",
+          title: "파트너사 핫딜 신청 집계",
           description:
-            "외부 스토리지·로컬에서 이미지·영상 데이터를 플랫폼으로 업로드. " +
-            "데이터셋 단위로 버전을 관리하여 학습 간 데이터 추적 가능",
+            "파트너사가 Google Spreadsheet에 신청 상품을 입력하면 배치가 신청 목록을 자동 수집",
         },
         {
-          title: "라벨링 작업 진행",
+          title: "Shopby API 상품 매칭 및 랭킹 선별",
           description:
-            "Label Studio 기반 웹 라벨링 환경에서 Bounding Box·Polygon 등 어노테이션 작업. " +
-            "학습 완료된 weight로 자동 라벨링(Pre-annotation)을 적용해 반복 작업 시간 단축. " +
-            "완료된 라벨링 결과는 COCO·YOLO 등 포맷으로 Export 가능",
+            "신청 상품을 Shopby API로 매칭하여 할인율·가격 경쟁력·재고 수량 기반 동적 스코어링으로 상위 200개 자동 선별",
         },
         {
-          title: "모델 선택 및 학습 작업 등록",
+          title: "핫딜 자동 등록",
           description:
-            "GOD · MMDetection · MMYOLO 중 모델과 프레임워크를 선택하고 학습 파라미터(epoch, batch size, lr 등)를 UI에서 입력. " +
-            "작업은 Redis BRPOP 기반 큐에 적재되어 GPU 가용 시점에 순차 처리",
+            "선별된 상품을 Shopby 핫딜 등록 API로 자동 등록, 수동 입력 없이 전 과정 완결",
         },
         {
-          title: "학습 실행 및 실시간 상태 모니터링",
+          title: "파트너사별 결과 메일 자동 발송",
           description:
-            "K8s 파드로 학습 작업 실행. UI에서 Connected → Preparing → Training 상태를 실시간으로 확인하고, " +
-            "에러 발생 시 로그를 즉시 확인 가능. MLflow로 학습별 하이퍼파라미터·loss·메트릭 자동 기록",
+            "계정별 결과 파일 자동 생성 후 Gmail API로 개별 발송, BCC 처리로 수신자 정보 노출 차단",
         },
         {
-          title: "성능 지표 시각화 및 모델 비교",
+          title: "Slack 실행 결과 알림",
           description:
-            "학습 완료 후 Precision · Recall · mAP 등 성능 지표를 대시보드에서 시각화. " +
-            "학습 간 성능 그래프를 비교하여 최적 모델 선정",
-        },
-        {
-          title: "Weights Export",
-          description:
-            "선정된 모델의 weight를 PyTorch(.pt) · TensorFlow(.pb) · ONNX(.onnx) 3가지 포맷으로 변환·추출. " +
-            "추출된 모델은 배포 파이프라인 또는 자동 라벨링 Pre-annotation으로 즉시 활용 가능",
+            "배치 완료 후 정상·실패 건수 요약을 Slack Webhook으로 자동 발송, 오류 발생 시 즉시 알림",
         },
       ],
       tech: [
         {
-          title:
-            "GOD(General Object Detection): YOLO · Faster R-CNN · RetinaNet ML 백엔드 직접 구현 — MMDetection · MMYOLO와 동일한 공통 인터페이스로 추상화",
+          title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
           description:
-            "GOD · MMDetection · MMYOLO 프레임워크별로 상이한 학습 인터페이스를 " +
-            "단일 공통 구조로 추상화. 신규 모델 추가 시 인터페이스 재구현 없이 config 교체만으로 온보딩",
+            "Shopby API로 신청 상품 자동 매칭, 당회차 실제 등록 상품 비율 기반 동적 가중치 스코어링으로 상위 200개 자동 선별",
           points: [
-            "YOLO · Faster R-CNN · RetinaNet 등 모델별 상이한 인터페이스 → 공통 추상화 레이어 설계",
-            "GOD · MMDetection · MMYOLO 3개 프레임워크를 단일 ML 백엔드 인터페이스로 통합",
-            "전이학습·초기학습 선택, 학습 파라미터 주입을 공통 API로 표준화",
-            "신규 모델 온보딩: 코드 수정 없이 config 파일 교체만으로 처리, 1~2주 → 1일 이내",
-            "지원 모델 수 3개 → 20개 이상으로 확장",
+            "고정 기준값 대신 회차별 실제 데이터를 반영한 동적 스코어링으로 상위 200개 자동 선별",
+            "할인율·가격 경쟁력·재고 수량 3개 지표를 당회차 실제 등록 상품 비율 기반으로 가중치 산정",
+            "Shopby API 연동으로 신청 상품의 상품명·상품번호 자동 매칭",
+            "신청 집계부터 선별까지 Spreadsheet 내에서 완결, 별도 DB 없이 운영",
           ],
         },
         {
-          title: "Redis BRPOP 기반 학습 작업 큐",
+          title: "OAuth 2.0 — Google Spreadsheet · Gmail 통합 자동화",
           description:
-            "DB 폴링 race condition → Redis BRPOP 원자적 연산으로 해결, Redis Hash로 job 상태·GPU·에러 로그 중앙 관리",
+            "InstalledAppFlow 기반 OAuth 2.0으로 Gmail · Sheets · Drive 3개 API를 단일 토큰으로 인증, " +
+            "Refresh Token 자동 재발급으로 배치 실행 중 인증 단절 없는 무중단 파이프라인 구축",
           points: [
-            "BRPOP: 원자적 pop으로 race condition 없는 작업 분배 보장",
-            "Redis Hash: job 상태·GPU 번호·에러 로그 중앙 관리 → 실시간 상태 API",
-            "작업 실패 시 에러 메시지 저장으로 디버깅 가능한 구조 확보",
-          ],
-          images: [
-            {
-              src: "/projects/dflow-training-ui.png",
-              caption: "모델 학습 상태 관리 (Connected → Preparing → Training)",
-            },
-            {
-              src: "/projects/dflow_error.png",
-              caption: "학습 작업 에러 로그 확인",
-            },
+            "Gmail · Sheets · Drive 멀티 스코프를 단일 credential로 통합 인증",
+            "Refresh Token 만료 감지 → 자동 재발급 로직으로 새벽 배치 중 인증 단절 방지",
+            "MIMEMultipart 기반 발송 모듈 직접 설계 — HTML 템플릿 치환 · CID 인라인 이미지 · 파일 첨부 단일 클래스로 캡슐화",
+            "BCC 일괄 발송으로 파트너사 간 수신자 정보 노출 차단",
           ],
         },
         {
-          title: "실시간 학습 모니터링 및 사용자 기능",
+          title: "AWS EC2 + cron 실행 환경 및 CI/CD",
           description:
-            "학습 진행률·버전·성능 지표를 실시간으로 시각화하고, " +
-            "자동 라벨링·모델 비교·프로젝트 접근 제어 등 end-to-end 사용자 기능 제공",
+            "EC2에서 cron 배치 자동 실행, Bitbucket Pipelines로 push → 테스트 → EC2 배포 완전 자동화",
           points: [
-            "학습 완료 weight로 자동 라벨링 실행 — 수동 라벨링 비용 절감 및 재학습 사이클 단축",
-            "학습 진행률 실시간 표시 (Connected → Preparing → Training 상태 관리)",
-            "학습 결과 성능 지표(mAP · Loss 등) 그래프 시각화 대시보드 제공",
-            "원하는 성능 지표 선택 후 모델 간 수치 비교 기능",
-            "버전 관리: 학습 이력·파라미터·성능 지표를 버전별로 기록·조회",
-            "프로젝트별 그룹 생성 + 비밀번호 인증 기반 접근 제어로 다중 프로젝트 환경 데이터 격리 지원",
-          ],
-          images: [
-            {
-              src: "/projects/dflow_predict.png",
-              caption: "학습 완료 weight 기반 자동 라벨링",
-            },
-            {
-              src: "/projects/dflow-performance.png",
-              caption: "모델 성능 평가 대시보드",
-            },
-          ],
-        },
-        {
-          title: "nvidia-smi 기반 GPU 동적 분배",
-          description:
-            "job 처리 전 nvidia-smi로 가용 메모리 체크 → 모델 요구량 비교 후 GPU 할당, 조건 미충족 시 재큐잉으로 OOM 제거",
-          points: [
-            "nvidia-smi --query-gpu로 가용 메모리 실시간 조회",
-            "모델 config에 min_gpu_memory 정의, Worker가 조건 검증 후 GPU 할당",
-            "멀티 GPU OOM 장애 제거, 안정적 동시 학습 지원",
-          ],
-        },
-        {
-          title: "사용자 입력 기반 config 자동 생성 파이프라인",
-          description:
-            "사용자가 UI에서 입력한 학습 파라미터·모델·데이터셋 정보를 받아 " +
-            "프레임워크별 공통 config 파일을 자동 생성·수정 후 학습 실행까지 연결하는 파이프라인 구현",
-          points: [
-            "사용자 입력(모델 선택·파라미터·데이터셋·전이학습 여부)을 API로 수신",
-            "수신 정보 기반으로 MMDetection · MMYOLO · GOD 공통 config 자동 생성·수정",
-            "config 완성 → Redis 큐 등록 → Worker 학습 실행까지 자동 연결",
-            "학습 완료 후 weights 다운로드 및 ONNX 변환 기능 제공",
-          ],
-          images: [
-            {
-              src: "/projects/dflow_addmodel.png",
-              caption: "모델 선택 및 학습 파라미터 입력 UI",
-            },
+            "AWS EC2에서 Python 코드 실행, cron으로 새벽 배치 자동 스케줄링",
+            "Bitbucket Pipelines: push → 테스트 → 빌드 → EC2 배포 자동화",
+            "브랜치별 배포 환경 분리 (dev / prod)",
+            "cron 실행 중 오류 발생 시 Slack Incoming Webhook으로 즉시 알림 발송",
+            "배치 완료 후 정상·실패 건수 요약 메시지 Slack Incoming Webhook으로 자동 발송 → MD·개발팀이 스케줄링 실행 결과 실시간 확인 가능",
           ],
         },
       ],
       result: [
-        "멀티 GPU OOM 장애 제거, 학습 대기 하루 이상 → Redis 큐 자동 순차 처리로 해소",
-        "라벨링 결과 COCO·YOLO 포맷 export + 자동 라벨링(Pre-annotation) 연계로 라벨링 사이클 단축",
-        "학습 완료 weights PyTorch(.pt) · TensorFlow(.pb) · ONNX(.onnx) 3포맷 export 지원",
-        "데이터 import → 라벨링 → 학습 → 성능 평가 → weights export 전 과정 단일 플랫폼에서 완결",
+        "파트너사 계정별 결과 파일 메일 발송 자동화로 누락·오입력 리스크 제거",
+        "별도 메일링 SaaS·인프라 도입 없이 Google Workspace만으로 자동화 파이프라인 구현",
+      ],
+    },
+  },
+  {
+    id: "cs",
+    type: "company",
+    title: "CS 문의 자동화",
+    company: "(주)무무즈",
+    initial: "무",
+    summary:
+      "반복적인 배송 문의로 인해 상담 인력이 단순 응대에 집중되는 문제를 해결하고자 구축한 CS 자동화 시스템. 주문 정보를 기반으로 문의를 자동 분류·응답하여 고객 응답 시간을 단축하고 상담 인력이 고부가가치 업무에 집중할 수 있도록 지원했습니다.",
+    thumb: "/projects/cs-main.png",
+    image: {
+      src: "/projects/cs-main.png",
+      caption: "CS 문의 자동화 시스템 개요",
+    },
+    image2: {
+      src: "/projects/cs-process.png",
+      caption: "CS 문의 자동화 프로세스",
+    },
+    tags: ["Shopby API", "Sellmate API", "Batch", "Python"],
+    year: "2025.12 ~ 2026.03",
+    metrics: [
+      { value: "1/3", label: "문의 자동 처리" },
+      { value: "80%↓", label: "응답 지연 시간" },
+      { value: "24/7", label: "무중단 운영" },
+    ],
+    sections: {
+      arch: "/projects/cs-process.png",
+      result: [
+        "CS 담당자가 단순 반복 문의에서 벗어나 클레임·환불 등 고부가가치 업무에 집중할 수 있는 운영 환경 구축",
+        "Shopby·Sellmate 등 이종 API를 단일 인터페이스로 통합하여 신규 판매 채널 연동 및 확장 용이성 확보",
+        "자동화된 응답 로직을 통해 상담원 간 응답 편차를 줄이고 일관된 고객 응대 품질 제공",
+      ],
+      flow: [
+        {
+          title: "배송 문의 일괄 수집",
+          description:
+            "cron 스케줄러가 1시간 주기로 Shopby API를 통해 미처리 배송 문의 목록을 자동 수집",
+        },
+        {
+          title: "주문·배송 상태 조회",
+          description:
+            "Shopby(주문)·Sellmate(배송) 이중 API를 호출해 상품코드·송장번호·입고예정일 정보를 매칭",
+        },
+        {
+          title: "케이스 분기 판단",
+          description:
+            "상품코드·송장번호 유무 조합으로 3가지 케이스 분기, 자동 처리 불가 케이스는 담당자 플래그로 분리",
+        },
+        {
+          title: "템플릿 자동 선택 및 답변 등록",
+          description:
+            "케이스에 맞는 HTML 템플릿을 자동 선택 후 Shopby answer API로 답변 등록, 주말·야간 포함 24/7 무중단 처리",
+        },
+      ],
+      tech: [
+        {
+          title: "이중 API 응답 기반 케이스 분기 설계",
+          description:
+            "Shopby(주문) · Sellmate(재고/배송) 두 API 응답을 매칭하여 상품코드·송장번호 유무 조합으로 3가지 케이스를 분기, 케이스별 HTML 템플릿을 자동 선택해 Shopby answer API로 등록",
+          points: [
+            "상품코드 X / 송장번호 O → 1-2일 내 출고 안내 템플릿",
+            "상품코드 O / 송장번호 O → 입고예정일 안내 템플릿 (남대문/리오더)",
+            "상품코드 O / 송장번호 X → 기본 배송 안내 템플릿",
+            "두 조건 모두 없는 케이스는 자동 처리 제외 → 담당자 플래그 분리, 오답 발송 차단",
+            "입고예정일 데이터 유효성 검증 — 과거 날짜 등록된 케이스 감지 시 기본 배송 안내로 자동 fallback",
+          ],
+        },
+        {
+          title: "Shopby / Sellmate API 이중 연동",
+          description:
+            "주문(Shopby) · 배송(Sellmate) 분리 API를 동시 연동. API 인증 정보(systemkey, mallkey, auth token)는 코드에서 분리해 JSON config 파일로 관리",
+          points: [
+            "Shopby API: 문의 목록 조회 → 주문 상세 조회 → 답변 등록 순으로 처리",
+            "Sellmate API: 주문 조회 → 상품 옵션 조회 → 입고예정일 조회 순으로 처리",
+            "두 API 응답 매칭 → 상품코드·송장번호 조합으로 케이스 판단 후 자동 응답 생성",
+            "API 인증 정보(systemkey, mallkey, auth token)를 코드에서 분리하여 JSON config 파일로 관리",
+          ],
+        },
+        {
+          title: "배치 스케줄러 기반 자동 처리",
+          description:
+            "웹훅 대신 주기 배치로 미처리 문의 일괄 조회, 주말·야간 포함 24/7 무중단 자동 처리",
+          points: [
+            "cron 기반 스케줄러로 1시간 주기 배송 문의 일괄 수집 및 자동 응답 처리",
+            "배송 상태 데이터 주기적 갱신으로 응답 정확도 유지",
+            "주말·비업무 시간 포함 24/7 무중단 운영",
+          ],
+        },
       ],
     },
   },
@@ -910,7 +910,6 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
         {
-          
           title: "APScheduler — 경량 스케줄러 선택 이유",
           description:
             "Celery + Redis 대신 APScheduler를 선택한 핵심 이유는 단일 프로세스 내 통합 — 브로커·워커 인프라 없이 FastAPI lifespan에 직접 내장하여 운영 복잡도를 최소화",
