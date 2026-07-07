@@ -788,6 +788,205 @@ export const PROJECTS: ProjectData[] = [
     },
   },
   {
+    id: "ppurine",
+    type: "team",
+    title: "쀼라인드",
+    subtitle: "부부·연인 관계 케어 AI 웹앱",
+    company: "Team Project",
+    initial: "쀼",
+    summary:
+      "부부·연인의 말하지 못한 속마음과 반복되는 갈등 패턴을 기록하면 AI가 감정을 분석하고, 거친 말투를 부드럽게 변환하고, 관계 회복 액션을 제안하는 관계 케어 웹앱. 5인 팀에서 DB·AI 분석 파이프라인을 담당해 LangChain 기반 RAG 상담 챗봇, pgvector 벡터 유사도 검색, LLM 구조화 분석까지 실제 운영을 가정한 데이터 설계를 맡았습니다.",
+    thumb: "/projects/ppurine_home.png",
+    image: {
+      src: "/projects/ppurine_home.png",
+      caption: "홈 대시보드 — 관계 상태를 한 화면에서 확인",
+    },
+    image2: {
+      src: "/projects/ppurine_record.png",
+      caption: "기록 → AI 감정 분석 — 이중 기록 구조 · 3종 입력",
+    },
+    image3: {
+      src: "/projects/ppurine_rag.png",
+      caption: "LangChain + Azure AI Search 기반 RAG 상담 챗봇",
+    },
+    image4: {
+      src: "/projects/ppurine_admin.png",
+      caption: "관리자 콘솔 — 운영 대시보드 (Research Preview)",
+    },
+    tags: [
+      "LangChain",
+      "pgvector",
+      "Azure OpenAI",
+      "Azure AI Search(RAG)",
+      "FastAPI",
+      "PostgreSQL",
+      "Azure AI Speech",
+      "Azure AI Vision(OCR)",
+      "Azure AI Language",
+      "Azure Content Safety",
+      "React",
+    ],
+    year: "2026.06 ~ 2026.07",
+    metrics: [
+      { value: "RAG", label: "LangChain 기반 법령·판례 상담 챗봇" },
+      { value: "pgvector", label: "임베딩 유사도 검색 — 추천·중복판별" },
+      { value: "81개", label: "LLM 구조화 분석 라벨", from: "14개 그룹" },
+    ],
+    sections: {
+      arch: "/projects/ppurine_ar.png",
+      flow: [
+        {
+          title: "3종 입력 수집 — 텍스트·음성·채팅 캡처",
+          description:
+            "텍스트 직접 입력, 음성 녹음(Azure AI Speech STT), 채팅 캡처 이미지(Blob Storage 원본 저장 후 OCR 텍스트 추출) 중 원하는 방식으로 기록. " +
+            "입력 방식과 무관하게 동일한 정규화 텍스트로 통합되어 이후 파이프라인은 하나의 흐름으로 처리",
+        },
+        {
+          title: "PII 탐지 및 개인정보 마스킹",
+          description:
+            "Azure AI Language로 이름·전화번호·주소 등 개인정보를 자동 탐지·마스킹. " +
+            "단, 남편·아내 등 관계어까지 지워지면 부부 갈등 분석의 핵심 맥락이 사라지므로 관계어는 보존하는 마스킹 경계 기준을 별도 수립",
+        },
+        {
+          title: "LLM 감정·원인·패턴 구조화 분석",
+          description:
+            "Azure OpenAI가 감정·갈등 원인·반복 패턴·숨은 욕구를 14개 그룹 · 81개 라벨 JSON Schema 강제 포맷으로 구조화 추출. " +
+            "자유 문장이 아닌 정형 데이터로 저장해 DB 집계·리포트 신뢰성 확보",
+        },
+        {
+          title: "pgvector 유사도 검증 후 DB 반영",
+          description:
+            "정규화 텍스트를 임베딩해 최근 5분 이내 동일 사용자 기록과 pgvector 코사인 유사도를 비교, 80% 이상이면 기존 기록을 업데이트, " +
+            "미만이면 신규 저장으로 분기해 감정 통계·리포트 데이터 오염을 방지",
+        },
+        {
+          title: "위험도별 분기 — RAG 상담 · CTA · 커뮤니티",
+          description:
+            "위험 신호 감지 시 자가점검·공식 상담기관 CTA를 우선 노출, 법률·제도 질문은 LangChain 기반 RAG 챗봇으로, " +
+            "일반 기록은 리포트·커뮤니티 흐름으로 React Web App에 제공",
+        },
+      ],
+      tech: [
+        {
+          title: "LangChain + Azure AI Search 기반 RAG 상담 챗봇",
+          description:
+            "가사소송법·양육비 관련 법령과 최근 20년 이혼 재산분할·양육비 대법원 판례를 Azure AI Search로 벡터 검색하고, " +
+            "LangChain으로 리트리버·프롬프트·LLM을 체인으로 엮어 근거를 명시한 상담 응답을 생성하는 RAG 파이프라인을 설계",
+          points: [
+            "LangChain 체인 구성: 질문 → AI Search 리트리버로 관련 법령·판례 검색 → 프롬프트에 근거 주입 → GPT가 출처를 명시해 답변 생성",
+            "응답 분기 설계: 일반 관계 상담은 GPT 공감·정리 응답, 위험 신호는 Safety Card + 상담기관 CTA 우선, 법률·제도 질문만 RAG로 전환",
+            "법률 자문이 아닌 '정보 제공' 범위로 한정하고 RAG 실패 시 안전한 fallback을 둬 전문가 판단을 대신하는 것처럼 보이는 리스크 차단",
+            "QA 중 같은 답변이 반복되는 RAG 미호출 이슈를 발견 — 법률성 고민에만 RAG를 연결하는 rule을 추가해 해결",
+          ],
+          images: [
+            {
+              src: "/projects/ppurine_rag.png",
+              caption: "RAG 상담 챗봇 — 법령·판례 근거 기반 답변",
+            },
+          ],
+        },
+        {
+          title: "pgvector 기반 벡터 유사도 검색 — 유사 고민 추천 · 중복 저장 판별",
+          description:
+            "PostgreSQL에 pgvector 확장을 적용해 별도 벡터 DB 인프라 없이 커뮤니티 유사 고민 추천과 감정 기록 중복 저장 판별을 " +
+            "동일 DB에서 임베딩 유사도 검색으로 처리하는 구조를 설계",
+          points: [
+            "커뮤니티 게시글을 임베딩으로 변환해 pgvector 코사인 유사도로 나와 가장 비슷한 상황의 공감 글을 우선 노출",
+            "키워드 매칭의 한계(표현은 달라도 감정·상황 맥락이 유사한 글을 못 찾는 문제)를 임베딩 유사도 검색으로 해결",
+            "감정 기록도 정규화 텍스트를 임베딩해 최근 5분 이내 동일 사용자 기록과 유사도 80% 이상이면 기존 기록을 업데이트 — 별도 캐시·큐 없이 PostgreSQL 하나로 추천·중복판별 두 기능을 모두 처리",
+          ],
+          images: [
+            {
+              src: "/projects/ppurine_community.png",
+              caption: "pgvector 유사도 기반 비슷한 고민 추천 커뮤니티",
+            },
+          ],
+        },
+        {
+          title: "LLM 감정 분석 파이프라인 — 14그룹 81라벨 JSON Schema 구조화",
+          description:
+            "Azure OpenAI가 감정·갈등 원인·반복 패턴·숨은 욕구를 자유 문장이 아닌 14개 그룹 · 81개 라벨의 JSON Schema 강제 포맷으로 " +
+            "구조화 추출하도록 프롬프트와 스키마를 설계",
+          points: [
+            "Gottman 4대 파괴 대화 패턴(비난·방어·경멸·담쌓기) + PHQ-9 척도를 라벨 판단 기준으로 결합해 도메인 전문성 반영",
+            "emotion·cause·pattern·risk 등 필수 필드와 enum 값을 JSON Schema로 강제해 LLM 응답의 필드 누락·중복·포맷 깨짐을 방지하고 DB에 안정적으로 저장",
+            "위험 신호(risk) 필드를 감정 라벨과 분리해 안전 개입 로직이 감정 분석 로직에 흔들리지 않도록 독립 설계",
+          ],
+          images: [
+            {
+              src: "/projects/ppurine_schema.png",
+              caption: "14개 그룹 · 81개 라벨 JSON Schema",
+            },
+          ],
+        },
+        {
+          title: "공식 기관 데이터 기반 갈등 원인 통합 라벨 설계",
+          description:
+            "라벨을 임의로 만들지 않고 통계청·여성가족부·가족센터·가정법률상담소 4개 기관의 갈등 원인 분류 기준을 교차 비교해, " +
+            "공식 통계 근거와 앱 UX 요구를 모두 반영한 통합 갈등 라벨 체계를 설계",
+          points: [
+            "4개 공식 기관 분류 항목을 표로 정리해 겹치는 항목과 기관별 고유 항목을 구분",
+            "통계청 이혼 사유 비중(성격·가치관 차이 45.2% 등)을 라벨 우선순위 산정 근거로 활용",
+            "온보딩에서 선택한 관계 상태(연애·신혼·기혼-자녀없음·기혼-자녀있음)에 따라 노출되는 고민 항목을 다르게 분기",
+          ],
+          table: {
+            headers: ["갈등 원인", "통계청", "여가부 조사", "가족센터", "가정법률상담소"],
+            rows: [
+              {
+                cells: ["성격·가치관 차이", "O (45.2%)", "O", "O", "O"],
+                highlight: true,
+              },
+              { cells: ["경제·소비 갈등", "O (10.2%)", "O", "-", "O"] },
+              { cells: ["시댁·처가 갈등", "O (7.4%)", "O", "-", "O"] },
+              { cells: ["외도·신뢰 손상", "O (7.0%)", "-", "-", "O"] },
+              { cells: ["신체·정신 학대", "O (3.6%)", "-", "O", "O"] },
+              { cells: ["의사소통 단절", "-", "O", "O", "-"] },
+            ],
+          },
+        },
+        {
+          title: "PostgreSQL + Blob Storage 이원화 데이터 모델 설계",
+          description:
+            "사용자 정보·감정 기록 메타데이터·분석 결과·커뮤니티 글 등 구조적 데이터는 PostgreSQL(RDBMS)에, " +
+            "음성 파일·채팅 캡처 이미지·원본 입력 파일 등 비정형 데이터는 Azure Blob Storage에 분리 저장하는 데이터 모델을 설계",
+          points: [
+            "구조적 데이터와 비정형 데이터 저장소를 분리해 RDBMS 부하를 줄이고 원본 파일은 객체 스토리지 특성에 맞게 관리",
+            "감정 기록·분석 결과·커뮤니티 데이터를 도메인별 테이블로 분리해 관리자 콘솔의 집계·모니터링 쿼리 확장에 대비",
+            "기록 ID·분석 버전·생성 시각을 기준으로 분석 결과를 관리해 재분석 시에도 데이터가 중복 누적되지 않도록 방지",
+          ],
+        },
+        {
+          title: "상용화 준비 — Responsible AI 검증 지표 · 관리자 콘솔 · 수익화 정책",
+          description:
+            "MVP 시연에서 끝나지 않고 실제 운영 가능한 서비스로 이어지도록 AI 파이프라인 품질·윤리 검증 지표, " +
+            "원문을 노출하지 않는 관리자 콘솔, 감정 데이터를 오남용하지 않는 수익화 정책까지 설계",
+          points: [
+            "PII 마스킹 성공률·위험 콘텐츠 차단률·JSON 생성 성공률·OCR·STT 성공률·평균 응답시간을 운영 검증 지표로 정의",
+            "관리자 콘솔은 감정 기록 원문을 노출하지 않고 익명 요약·위험 플래그만으로 안전 신호를 검토하도록 설계 (Research Preview)",
+            "감정 기록·AI 분석 결과 기반 광고 타겟팅은 금지하고, 기념일 등 맥락 기반 개인화 광고만 허용하는 수익화 정책 수립",
+            "B2C 개인 구독 → B2B 기업 복지 → B2G 공공 연계로 이어지는 단계적 확장 로드맵과 Azure 클라우드 비용 효율화(예산 60만 원 중 10만 원 사용)로 상용화 가능성 확보",
+          ],
+          images: [
+            {
+              src: "/projects/ppurine_admin_safety.png",
+              caption: "관리자 콘솔 — 원문 비공개 감정 안전 모니터링 · 기관 연계",
+            },
+          ],
+        },
+      ],
+      result: [
+        "22개 핵심 화면·기능, LangChain·pgvector·Azure OpenAI를 엮은 81라벨 AI 분석 파이프라인을 기획 → 구현 → Azure 연동 → 교차 검증까지 완주",
+        "PII 마스킹 이후 100% 분석·게시 처리 — 개인정보 노출 없이 감정 데이터를 분석할 수 있는 구조 확보",
+        "전체 예산 약 60만 원 중 약 10만 원(16.7%) 사용 — MVP 검증 비용을 예산 내에서 안정적으로 관리",
+      ],
+      expect: [
+        "LLM → NLP/sLLM(KoBERT 등) 전환으로 비용 절감 및 실시간성 확보",
+        "19+ 성인 인증, 비밀도감 기반 커머스(선물 추천) 연동 등 상용화 고도화",
+        "B2C 개인 구독 → B2B 기업 복지 → B2G 공공 연계로 이어지는 단계적 확장 로드맵 수립",
+      ],
+    },
+  },
+  {
     id: "dear-me",
     type: "personal",
     title: "Dear Me,",
