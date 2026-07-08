@@ -54,7 +54,19 @@
       "Bash(xargs -I '{}' sh -c 'result=$\\(git show {}:src/data/portfolio.ts 2>/dev/null | grep -i \"UAV\\\\|센트리\\\\|EO.IR\"\\); if [ -n \"$result\" ]; then echo \"FOUND IN: {}\"; echo \"$result\" | head -3; fi')",
       "Bash(python3 -c \"import reportlab; print\\('reportlab OK'\\)\")",
       "Bash(python3 -c \"import weasyprint; print\\('weasyprint OK'\\)\")",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(vercel --version)",
+      "Bash(vercel *)",
+      "Bash(open *)",
+      "Bash(grep -iE \"\\\\.\\(ts|tsx|json|md\\)$\")",
+      "Bash(mkdir -p /private/tmp/claude-501/-Users-kimminyoung-Desktop-desktop-portfolio-studio-main/19f532a4-179f-457b-881b-e53fe7d55b7a/scratchpad/ppurine_pages)",
+      "Bash(pdftoppm -png -r 150 -f 1 -l 51 \"결과보고서_1팀_애스파\\(쀼라인드\\)_v0.93_20260706.pdf\" /private/tmp/claude-501/-Users-kimminyoung-Desktop-desktop-portfolio-studio-main/19f532a4-179f-457b-881b-e53fe7d55b7a/scratchpad/ppurine_pages/page)",
+      "Bash(cp /private/tmp/claude-501/-Users-kimminyoung-Desktop-desktop-portfolio-studio-main/19f532a4-179f-457b-881b-e53fe7d55b7a/scratchpad/ppurine_pages/page-01.png /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/public/projects/ppurine0.png)",
+      "Bash(cp /private/tmp/claude-501/-Users-kimminyoung-Desktop-desktop-portfolio-studio-main/19f532a4-179f-457b-881b-e53fe7d55b7a/scratchpad/ppurine_pages/page-13.png /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/public/projects/ppurine_ar.png)",
+      "Bash(cp /private/tmp/claude-501/-Users-kimminyoung-Desktop-desktop-portfolio-studio-main/19f532a4-179f-457b-881b-e53fe7d55b7a/scratchpad/ppurine_pages/page-14.png /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/public/projects/ppurine_flow.png)",
+      "Bash(cp /private/tmp/claude-501/-Users-kimminyoung-Desktop-desktop-portfolio-studio-main/19f532a4-179f-457b-881b-e53fe7d55b7a/scratchpad/ppurine_pages/page-28.png /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/public/projects/ppurine_label.png)",
+      "Bash(cp /private/tmp/claude-501/-Users-kimminyoung-Desktop-desktop-portfolio-studio-main/19f532a4-179f-457b-881b-e53fe7d55b7a/scratchpad/ppurine_pages/page-29.png /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/public/projects/ppurine_schema.png)",
+      "Bash(pkill -f \"npm run dev\")"
     ]
   }
 }
