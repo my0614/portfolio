@@ -268,6 +268,27 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
           </div>
         )}
 
+        {s.verification && (
+          <div className="dt-section">
+            <div className="dt-sec-head">
+              <div className="dt-sec-eyebrow">SAFETY</div>
+              <div className="dt-sec-title">{s.verification.title}</div>
+              {s.verification.description && (
+                <p className="dt-sec-desc">{s.verification.description}</p>
+              )}
+            </div>
+            <div className="dt-stat-grid">
+              {s.verification.stats.map((st, i) => (
+                <div className="dt-stat" key={i}>
+                  <div className="dt-stat-v">{st.value}</div>
+                  <div className="dt-stat-l">{st.label}</div>
+                  {st.category && <div className="dt-stat-c">{st.category}</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {s.intent && s.intent.length > 0 && (
           <div className="dt-section">
             <div className="dt-sec-head">
@@ -324,27 +345,6 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
               <div className="dt-sec-title">아키텍처</div>
             </div>
             <div className="dt-arch"><img src={s.arch} alt="아키텍처 다이어그램" /></div>
-          </div>
-        )}
-
-        {s.verification && (
-          <div className="dt-section">
-            <div className="dt-sec-head">
-              <div className="dt-sec-eyebrow">SAFETY</div>
-              <div className="dt-sec-title">{s.verification.title}</div>
-              {s.verification.description && (
-                <p className="dt-sec-desc">{s.verification.description}</p>
-              )}
-            </div>
-            <div className="dt-stat-grid">
-              {s.verification.stats.map((st, i) => (
-                <div className="dt-stat" key={i}>
-                  <div className="dt-stat-v">{st.value}</div>
-                  <div className="dt-stat-l">{st.label}</div>
-                  {st.category && <div className="dt-stat-c">{st.category}</div>}
-                </div>
-              ))}
-            </div>
           </div>
         )}
 

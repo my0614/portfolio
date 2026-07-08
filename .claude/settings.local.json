@@ -73,7 +73,8 @@
       "Read(//tmp/**)",
       "Bash(rm -f /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/_tmp_shot.mjs /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/_tmp_shot2.mjs /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/_tmp_shot3.mjs /tmp/step1.png /tmp/step2.png /tmp/step3.png /tmp/step4.png /tmp/step4-dark.png)",
       "Bash(pkill -f \"next dev -p 3401\")",
-      "Bash(lsof -i :3000 -sTCP:LISTEN -t)"
+      "Bash(lsof -i :3000 -sTCP:LISTEN -t)",
+      "Bash(lsof -i :3401 -sTCP:LISTEN -t)"
     ]
   }
 }

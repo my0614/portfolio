@@ -73,6 +73,7 @@ export const PROFILE: ProfileData = {
     ["Location", "Seoul, South Korea"],
     ["Experience", "5년차"],
     ["Specialization", "ML/MLOps · Computer Vision"],
+    ["Education", "마이크로소프트 AI 10기 수료 중"],
     ["Status", "Open for opportunities"],
   ],
   skills: [
