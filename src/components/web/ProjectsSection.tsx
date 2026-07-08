@@ -240,11 +240,11 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
 
         <ImageGallery images={[pr.image, ...(pr.image2 ? [pr.image2] : []), ...(pr.image3 ? [pr.image3] : []), ...(pr.image4 ? [pr.image4] : [])]} />
 
-        {(s.result ?? s.expect ?? []).length > 0 && (
+        {s.result && s.result.length > 0 && (
           <div className="dt-section">
             <div className="dt-sec-head">
               <div className="dt-sec-eyebrow">RESULT</div>
-              <div className="dt-sec-title">{s.expect ? '기대 효과' : '성과'}</div>
+              <div className="dt-sec-title">성과</div>
             </div>
             {pr.metrics.length > 0 && (
               <div className="dt-metrics" style={{ marginBottom: 24 }}>
@@ -258,7 +258,35 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
               </div>
             )}
             <div className="dt-result">
-              {(s.result ?? s.expect ?? []).map((t, i) => (
+              {s.result.map((t, i) => (
+                <div className="dt-result-row" key={i}>
+                  <Icon name="check" size={20} stroke={2.4} />
+                  <p>{t}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {s.expect && s.expect.length > 0 && (
+          <div className="dt-section">
+            <div className="dt-sec-head">
+              <div className="dt-sec-eyebrow">EXPECT</div>
+              <div className="dt-sec-title">기대 효과</div>
+            </div>
+            {!s.result && pr.metrics.length > 0 && (
+              <div className="dt-metrics" style={{ marginBottom: 24 }}>
+                {pr.metrics.map((m, i) => (
+                  <div className="dt-metric" key={i}>
+                    <div className="mv">{m.value}</div>
+                    {m.from && <div className="mfrom">{m.from}</div>}
+                    <div className="ml">{m.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="dt-result">
+              {s.expect.map((t, i) => (
                 <div className="dt-result-row" key={i}>
                   <Icon name="check" size={20} stroke={2.4} />
                   <p>{t}</p>
