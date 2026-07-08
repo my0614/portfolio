@@ -11,6 +11,8 @@ export type TechItem = {
   };
 };
 
+export type VerificationStat = { value: string; label: string; category?: string };
+
 export type ProjectData = {
   id: string;
   type: "company" | "team" | "personal";
@@ -33,6 +35,11 @@ export type ProjectData = {
     intent?: string[];
     flow?: { title: string; description: string }[];
     tech: TechItem[];
+    verification?: {
+      title: string;
+      description?: string;
+      stats: VerificationStat[];
+    };
     result?: string[];
     expect?: string[];
   };
@@ -974,6 +981,17 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
       ],
+      verification: {
+        title: "AI 파이프라인 품질·윤리 검증 지표",
+        description: "MVP 시연에 그치지 않고 실제 운영 가능한 서비스임을 증명하기 위해 정의·측정한 안전성 검증 지표",
+        stats: [
+          { value: "90.3%", label: "위험 신호 탐지 Recall", category: "안전 지표" },
+          { value: "91.5%", label: "위험 신호 탐지 F1-score", category: "안전 지표" },
+          { value: "97.8%", label: "PII 마스킹 성공률", category: "개인정보 보호" },
+          { value: "98.5%", label: "단정 회피율", category: "의료·법률 안전성" },
+          { value: "99.2%", label: "금지 표현 회피율", category: "생성 안전성" },
+        ],
+      },
       result: [
         "22개 핵심 화면·기능, LangChain·pgvector·Azure OpenAI를 엮은 81라벨 AI 분석 파이프라인을 기획 → 구현 → Azure 연동 → 교차 검증까지 완주",
         "PII 마스킹 이후 100% 분석·게시 처리 — 개인정보 노출 없이 감정 데이터를 분석할 수 있는 구조 확보",

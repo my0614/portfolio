@@ -327,6 +327,27 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
           </div>
         )}
 
+        {s.verification && (
+          <div className="dt-section">
+            <div className="dt-sec-head">
+              <div className="dt-sec-eyebrow">SAFETY</div>
+              <div className="dt-sec-title">{s.verification.title}</div>
+              {s.verification.description && (
+                <p className="dt-sec-desc">{s.verification.description}</p>
+              )}
+            </div>
+            <div className="dt-stat-grid">
+              {s.verification.stats.map((st, i) => (
+                <div className="dt-stat" key={i}>
+                  <div className="dt-stat-v">{st.value}</div>
+                  <div className="dt-stat-l">{st.label}</div>
+                  {st.category && <div className="dt-stat-c">{st.category}</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="dt-section">
           <div className="dt-sec-head">
             <div className="dt-sec-eyebrow">HOW</div>

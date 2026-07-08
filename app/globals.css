@@ -266,6 +266,7 @@ section { position: relative; }
 .dt-sec-head { margin-bottom: 28px; }
 .dt-sec-eyebrow { font-size: 12.5px; font-weight: 800; letter-spacing: .07em; color: var(--accent); margin-bottom: 8px; }
 .dt-sec-title { font-size: 27px; font-weight: 800; letter-spacing: -0.03em; }
+.dt-sec-desc { font-size: 15px; color: var(--text-2); line-height: 1.65; margin-top: 12px; }
 
 .dt-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .dt-metric { background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 18px; padding: 26px 24px; }
@@ -289,6 +290,12 @@ section { position: relative; }
 .dt-point { display: flex; gap: 10px; }
 .dt-point svg { flex: none; margin-top: 2px; color: var(--accent); }
 .dt-point span { font-size: 14.5px; line-height: 1.55; color: var(--text-2); }
+
+.dt-stat-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.dt-stat { background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 16px; padding: 18px 16px; }
+.dt-stat-v { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--accent); }
+.dt-stat-l { font-size: 13px; font-weight: 700; color: var(--text); margin-top: 10px; line-height: 1.4; }
+.dt-stat-c { font-size: 12px; color: var(--text-3); margin-top: 4px; }
 
 .dt-arch { background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 20px; padding: 28px; }
 .dt-result { display: flex; flex-direction: column; gap: 16px; }
@@ -370,6 +377,7 @@ textarea.field { line-height: 1.55; }
   .proj-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .dt-metrics { grid-template-columns: 1fr; }
+  .dt-stat-grid { grid-template-columns: repeat(2, 1fr); }
   .nav-links { display: none; }
   .nav-hamburger { display: grid; }
   .sec-title { font-size: 30px; }
