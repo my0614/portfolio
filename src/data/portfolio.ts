@@ -73,7 +73,7 @@ export const PROFILE: ProfileData = {
     ["Location", "Seoul, South Korea"],
     ["Experience", "5년차"],
     ["Specialization", "ML/MLOps · Computer Vision"],
-    ["Education", "마이크로소프트 AI 10기 수료 중"],
+    ["Education", "마이크로소프트 AI School 10기 수료 중"],
     ["Status", "Open for opportunities"],
   ],
   skills: [
@@ -677,6 +677,115 @@ export const PROJECTS: ProjectData[] = [
     },
   },
   {
+    id: "eyakmeoyak",
+    type: "team",
+    title: "이약머약 — AI 알약 식별 서비스",
+    subtitle: "Azure Custom Vision 기반 알약 식별 서비스",
+    company: "MS AI School 10기 | Team 4 U",
+    initial: "이",
+    summary:
+      "사진 한 장으로 알약을 식별해 약물 정보·DUR 상호작용·도핑 금지 여부까지 즉시 제공하는 Azure Custom Vision 기반 서비스. 약 이름이나 전문 용어를 몰라도 사용할 수 있도록 설계해 고령자·정보 취약 계층의 복약 안전성을 높였습니다.",
+    thumb: "/projects/eyak_main.png",
+    image: {
+      src: "/projects/eyak_main.png",
+      caption: "이약머약 — 사진 한 장으로 알아내는 안전한 복약 가이드",
+    },
+    image2: {
+      src: "/projects/eyak_2.png",
+      caption: "알약 이미지 업로드 — AI 분석 화면",
+    },
+    image3: {
+      src: "/projects/eyak_1.png",
+      caption: "모양·색상·제형·카테고리로 알약 검색",
+    },
+    image4: {
+      src: "/projects/eyak_3.png",
+      caption: "이약머약 즐겨찾기 화면",
+    },
+    link: "https://eyakmeoyak.koreacentral.cloudapp.azure.com/",
+    tags: ["Python", "FastAPI", "PostgreSQL", "Azure Custom Vision", "Azure SDK", "Azure VM", "Nginx"],
+    year: "2026.05.08 ~ 2026.05.20",
+    metrics: [
+      { value: "97%", label: "모델 성능지표 평균", from: "Recall 기준" },
+      { value: "2.4초", label: "AI 분석 평균 응답" },
+      { value: "90종", label: "알약 분류 클래스" },
+    ],
+    sections: {
+      flow: [
+        {
+          title: "알약 사진 업로드",
+          description:
+            "사용자가 알약 사진 한 장을 촬영·업로드 — 약 이름이나 전문 용어를 몰라도 바로 조회 가능",
+        },
+        {
+          title: "Azure Custom Vision 분류",
+          description:
+            "색상·모양·각인을 종합 분석하는 Custom Vision 모델이 90종 중 알약을 식별",
+        },
+        {
+          title: "FastAPI 비동기 예측 연동",
+          description:
+            "Azure Python SDK로 Custom Vision 예측 API 호출, 평균 2.4초 내 결과 수신",
+        },
+        {
+          title: "약물 정보·DUR·도핑 여부 제공",
+          description:
+            "식별된 알약의 성분·용법 정보와 병용금기(DUR), 도핑 금지 성분 여부를 함께 즉시 안내",
+        },
+      ],
+      tech: [
+        {
+          title: "Azure Custom Vision 알약 90종 분류 모델",
+          description:
+            "색상·모양·각인을 종합 분석하는 엔터프라이즈급 이미지 분류 모델 구축, 처방 통계·판매량 기반으로 핵심 90종 선별",
+          points: [
+            "처방 통계·판매량 기반으로 핵심 90종만 선별 수집해 클라우드 비용 절감 및 모델 실용성 향상",
+            "학습 데이터 3,773개로 90종 분류 모델 학습, 성능지표 평균 97% 달성",
+            "자동 크롤링 대신 수동 크롤링으로 전환해 단종·구형 디자인 이미지 등 오염 데이터 제거",
+          ],
+        },
+        {
+          title: "실사용 환경 대응 — 배경 제거·증강 전략 재설계",
+          description:
+            "공공 데이터만으로 학습할 때 발생하는 도메인 갭을 배경 제거 전처리와 Background Augmentation으로 해소",
+          points: [
+            "배경 제거 전처리 + Background Augmentation으로 탁자·손바닥 등 실사용 환경 재학습",
+            "회전 범위 -45°~45° → -10°~10° 축소, 복합 증강(원근·노이즈·가림) 제거로 각인·형태 보존",
+            "Recall 기준치 이하 취약 클래스 7종은 맞춤 증강을 별도 적용해 재현율 상향 평준화",
+          ],
+        },
+        {
+          title: "Azure SDK 기반 FastAPI 비동기 예측 연동",
+          description:
+            "Azure Python SDK로 Custom Vision 예측 API를 FastAPI 비동기 엔드포인트에 통합해 평균 응답 2.4초 확보",
+          points: [
+            "Azure Python SDK Custom Vision 예측 API를 FastAPI 비동기 엔드포인트와 통합",
+            "AI 분석 평균 2.4초, 전체 응답 3초 이내로 사용자 체감 대기 시간 최소화",
+          ],
+        },
+        {
+          title: "Azure VM 올인원 배포",
+          description: "Azure VM(Korea Central) 단일 서버에 FastAPI + PostgreSQL + Nginx 올인원 배포",
+          points: [
+            "Nginx 리버스 프록시로 외부 트래픽 처리 및 보안 강화",
+            "단일 VM 환경에서 2주 내 기획·학습·배포 풀스택 완성",
+          ],
+        },
+      ],
+      result: [
+        "Azure Custom Vision 모델 성능지표 평균 97% 달성 — 학습 데이터 3,773개, 분류 클래스 90종",
+        "Azure SDK 기반 예측 API 연동으로 AI 분석 평균 2.4초, 전체 응답 3초 이내 확보",
+        "약 이름을 몰라도 사진 한 장으로 DUR·도핑·병용금기까지 제공하는 고령자 친화 서비스를 2주 내 기획→학습→배포까지 완성",
+      ],
+      expect: [
+        "처방전 OCR 연동으로 약 봉투 없이도 복약 관리까지 확장 가능",
+        "약국 5~10곳 파일럿 도입 후 피드백 기반 개선으로 실사용 검증 확대",
+        "약국 SaaS 월 구독, 보험사 파트너십, 요양원 월정액 등 B2B 수익 모델과 결합해 서비스 확장성 확보",
+        "Flutter 크로스플랫폼 앱 출시로 접근성을 높여 더 많은 고령자·정보 취약 계층에게 복약 안전 지원",
+      ],
+    },
+  },
+  {
     id: "pillcare",
     type: "team",
     title: "PillCare",
@@ -1004,145 +1113,6 @@ export const PROJECTS: ProjectData[] = [
         "B2C→B2B→B2G→B2B2C로 접점을 넓혀 개인을 넘어 기업 복지·공공기관·보험사까지 아우르는 관계 케어 인프라로 자리매김, 사회적 임팩트 확대",
         "화해 선물 추천·갈등 키워드 트렌드 리포트 등 데이터 기반 신사업으로 광고 외 매출원을 다각화해 안정적 수익 구조 확보",
         "앱스토어 정식 등록으로 접근 장벽을 낮춰 더 많은 부부·연인이 언제든 서비스에 접근 가능",
-      ],
-    },
-  },
-  {
-    id: "dear-me",
-    type: "personal",
-    title: "Dear Me,",
-    subtitle: "AI 음성 타임캡슐",
-    company: "Personal Project",
-    initial: "D",
-    summary:
-      "바쁜 일상 속에서 쉽게 잊히는 감정과 순간들을 기록하고 미래의 자신에게 전달하기 위해 개발한 서비스. 음성으로 남긴 하루의 이야기를 AI가 편지 형태로 재구성하고, TTS를 통해 미래의 내가 직접 듣는 듯한 타임캡슐 경험을 제공합니다.",
-    thumb: "/projects/Dearme0.png",
-    image: { src: "/projects/Dearme0.png", caption: "Dear Me 서비스 소개" },
-    image2: {
-      src: "/projects/Dearme1.png",
-      caption: "음성 녹음 메인 화면 · AI 비밀 친구 채팅",
-    },
-    image3: {
-      src: "/projects/Dearme2.png",
-      caption: "감정 분석 결과 · GPT-4o 생성 편지",
-    },
-    image4: {
-      src: "/projects/Dearme3.png",
-      caption: "QR 카드 저장 · 발송 날짜 및 채널 선택",
-    },
-    tags: [
-      "Azure OpenAI GPT-4o",
-      "LangChain",
-      "Azure Speech",
-      "RAG",
-      "FastAPI",
-      "React",
-      "Python",
-    ],
-    year: "2026.06",
-    metrics: [
-      { value: "Azure", label: "Speech · OpenAI 연동" },
-      { value: "3채널", label: "카카오·Discord·메일" },
-      { value: "TTS", label: "AI 편지 낭독" },
-    ],
-    sections: {
-      arch: "/projects/dearme_ar.png",
-      flow: [
-        {
-          title: "음성 녹음 → STT 텍스트 변환",
-          description:
-            "사용자가 음성으로 하루를 기록하면 Azure Speech STT가 실시간으로 텍스트로 변환",
-        },
-        {
-          title: "감정 분석 · 키워드 추출",
-          description:
-            "GPT-4o가 음성 텍스트에서 감정 상태·핵심 키워드를 분석하여 오늘의 감정 리포트 생성",
-        },
-        {
-          title: "RAG로 과거 일기 컨텍스트 주입",
-          description:
-            "ChromaDB에서 과거 일기 유사도 검색(k=3) → 검색 결과를 프롬프트에 주입해 서사적 맥락이 담긴 개인화 편지 생성",
-        },
-        {
-          title: "TTS 편지 낭독 · QR 카드 저장",
-          description:
-            "GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독, QR 카드로 저장하여 미래의 나에게 전달할 타임캡슐 완성",
-        },
-        {
-          title: "발송 날짜 예약 · 멀티채널 자동 전달",
-          description:
-            "APScheduler가 지정한 날짜에 카카오 알림톡·Discord·이메일 중 선택한 채널로 편지를 자동 발송",
-        },
-      ],
-      tech: [
-        {
-          title:
-            "LangChain LCEL + RAG — LLM 서비스 상용화 및 개인화 파이프라인",
-          description:
-            "Azure OpenAI GPT-4o를 단발성 API 호출이 아닌 STT→감정분석→RAG 컨텍스트 주입→편지 생성→TTS로 이어지는 End-to-End 실서비스 파이프라인으로 통합. LangChain LCEL로 프롬프트·LLM·파서를 선언형 체인으로 구성하고 RAG 리트리버를 결합하여 사용자별 맥락이 반영된 응답을 생성하는 구조를 직접 설계",
-          points: [
-            "LangChain LCEL 체인 설계: ChatPromptTemplate | AzureChatOpenAI | StrOutputParser — 프롬프트·LLM·파서를 선언형 체인으로 구성, 각 컴포넌트 독립 교체 가능",
-            "RAG 파이프라인: ChromaDB에 과거 일기를 벡터 저장 → 유사도 검색(k=3) → 프롬프트 컨텍스트 동적 주입으로 감정 흐름 반영",
-            "프롬프트 엔지니어링: 감정·맥락·발송 채널 정보를 컨텍스트로 결합해 개인화 편지 생성",
-          ],
-        },
-        {
-          title: "Azure Speech SDK — STT · TTS 파이프라인",
-          description:
-            "Azure Speech STT로 음성 녹음 → 텍스트 변환, GPT-4o가 생성한 편지를 Azure Speech TTS로 낭독 — 입력부터 출력까지 음성 End-to-End",
-          points: [
-            "STT → GPT-4o → TTS 단일 파이프라인으로 음성 입출력 완결",
-            "Azure Speech STT: 음성 녹음 스트림을 실시간으로 텍스트 변환",
-            "Azure Speech TTS: 생성된 편지를 자연스러운 음성으로 합성·재생",
-          ],
-        },
-        {
-          title: "Azure OpenAI GPT-4o — 감정 분석 및 편지 생성",
-          description:
-            "STT 변환 텍스트에서 감정·맥락을 추출하고 '미래의 나에게' 형식의 편지 자동 생성",
-          points: [
-            "편지 생성: 감정과 맥락을 바탕으로 미래의 나에게 보내는 편지 형식으로 작성",
-            "감정 분석: 음성 텍스트에서 감정 상태·핵심 키워드 추출",
-            "지정 발송일·채널(카카오톡·Discord·이메일)을 컨텍스트에 반영한 개인화 메시지",
-          ],
-        },
-        {
-          title: "카카오 OAuth 2.0 · 알림톡 연동",
-          description:
-            "카카오 OAuth 2.0 소셜 로그인으로 별도 회원가입 없이 인증 처리, 카카오 알림톡 비즈니스 API로 지정 날짜에 편지 자동 발송",
-          points: [
-            "카카오 OAuth 2.0: 인가 코드 흐름으로 액세스 토큰 발급 → /v2/user/me 호출로 사용자 프로필 조회 → users 테이블 저장 후 세션 관리",
-            "카카오 알림톡: 비즈니스 채널 연동 후 템플릿 기반 메시지로 편지 내용 발송 — 카카오톡 미설치 환경에서도 SMS 대체 발송",
-            "채널별 발송 로직 분리 (알림톡·Discord Webhook·이메일) — 실패 시 채널 이력에 에러 상태 기록",
-          ],
-        },
-        {
-          title: "일기 캘린더 · 날짜별 조회 REST API",
-          description:
-            "DiaryCalendar.jsx 월별 달력에 작성일을 금색 점으로 시각화, 날짜 클릭 시 그날 편지·감정·키워드를 즉시 조회 — /api/me · /api/calendar · /api/diary/{date} 3개 엔드포인트 설계",
-          points: [
-            "DiaryCalendar.jsx: 월별 달력 UI, 일기가 작성된 날짜에 금색 점 표시로 기록 현황 시각화",
-            "날짜 클릭 → /api/diary/{date} 호출로 해당 날짜 편지·감정·키워드 목록 즉시 조회",
-            "헤더 유저바: 닉네임 뱃지 + 캘린더 버튼 + 로그아웃 우측 상단 고정",
-            "/api/me: 세션 기반 로그인 유저 정보 반환",
-            "/api/calendar: 월별 날짜별 일기 건수 반환 → 달력 금색 점 렌더링에 활용",
-            "/api/diary/{date}: 특정 날짜 일기 목록 반환 → 날짜별 상세 조회 지원",
-          ],
-        },
-        {
-          title: "APScheduler — 경량 스케줄러 선택 이유",
-          description:
-            "Celery + Redis 대신 APScheduler를 선택한 핵심 이유는 단일 프로세스 내 통합 — 브로커·워커 인프라 없이 FastAPI lifespan에 직접 내장하여 운영 복잡도를 최소화",
-          points: [
-            "개인 프로젝트 규모에서 Redis + Celery 스택은 오버엔지니어링 — APScheduler로 동일 기능을 단일 프로세스에서 구현",
-            "SQLiteJobStore로 예약 정보 영속화, 서버 재시작 시 스케줄 자동 복구 — 별도 메시지 큐 없이 durability 확보",
-            "발송 빈도가 최대 1일 1회 수준으로 낮아 경량 스케줄러로 처리량 충분, FastAPI lifespan 이벤트에 통합하여 앱 생명주기와 동기화",
-          ],
-        },
-      ],
-      expect: [
-        "LangChain LCEL + RAG 기반 STT → 감정 분석 → 개인화 편지 생성 → TTS End-to-End 파이프라인을 Azure 단일 스택으로 설계·구현",
-        "LLM을 단발 API 호출이 아닌 인증·예약 발송·멀티채널이 결합된 운영 가능한 서비스 구조로 구축",
       ],
     },
   },

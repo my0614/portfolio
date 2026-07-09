@@ -1,7 +1,8 @@
 import pkg from '../node_modules/playwright-core/index.js';
+import { fileURLToPath } from 'node:url';
 const { chromium } = pkg;
 
-const OUTPUT = new URL('../public/projects/포트폴리오_김민영.pdf', import.meta.url).pathname;
+const OUTPUT = fileURLToPath(new URL('../public/projects/김민영_포트폴리오.pdf', import.meta.url));
 
 const browser = await chromium.launch({
   executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',

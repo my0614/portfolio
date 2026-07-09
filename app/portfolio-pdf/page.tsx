@@ -74,7 +74,7 @@ export default function PortfolioPDF() {
             <InfoRow k="EMAIL" v="premierckim@gmail.com" />
             <InfoRow k="GITHUB" v="github.com/my0614" />
             <InfoRow k="BASE" v="Seoul, Korea" />
-            <InfoRow k="CAREER" v="한컴인스페이스 · 4년 3개월" />
+            <InfoRow k="CAREER" v="5년차" />
           </div>
           <div>
             <SmallLabel>SKILLS</SmallLabel>
