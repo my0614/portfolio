@@ -83,7 +83,14 @@
       "Bash(npm init *)",
       "Bash(./node_modules/.bin/tsc --noEmit)",
       "Bash(npx -y -p typescript tsc --noEmit -p .)",
-      "Bash(pdfinfo public/projects/김민영_포트폴리오.pdf)"
+      "Bash(pdfinfo public/projects/김민영_포트폴리오.pdf)",
+      "Bash(pdftotext -layout public/projects/김민영_포트폴리오.pdf -)",
+      "Bash(awk '/id: \"eyakmeoyak\"/,/id: \"pillcare\"/' src/data/portfolio.ts)",
+      "Bash(awk '/id: \"pillcare\"/,/id: \"ppurine\"/' src/data/portfolio.ts)",
+      "Bash(awk '/id: \"ppurine\"/,/id: \"dear-me\"|^\\\\];$/' src/data/portfolio.ts)",
+      "Bash(awk '/id: \"eyakmeoyak\"/,/id: \"dear-me\"|^\\\\];$/' src/data/portfolio.ts)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(pdfinfo /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/public/projects/김민영_포트폴리오.pdf)"
     ]
   }
 }

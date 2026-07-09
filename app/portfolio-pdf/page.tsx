@@ -87,15 +87,17 @@ export default function PortfolioPDF() {
           </div>
         </div>
 
-        <div style={{ marginTop: "40px" }}>
-          <h2 style={{ fontSize: "28px", fontWeight: 900, color: BLUE, margin: "0 0 4px" }}>Projects</h2>
-          <hr style={{ border: "none", borderTop: "2px solid #111", margin: 0 }} />
-        </div>
       </div>
 
       {/* ── PROJECTS ── */}
-      {PROJECTS.map((proj) => (
-        <div key={proj.id} className="page-break">
+      <div className="page-break">
+        <h2 style={{ fontSize: "28px", fontWeight: 900, color: BLUE, margin: "0 0 4px" }}>Projects</h2>
+        <hr style={{ border: "none", borderTop: "2px solid #111", margin: 0 }} />
+      </div>
+      {PROJECTS.map((proj) => {
+        const techList = proj.type === "company" ? proj.sections.tech : proj.sections.tech.slice(0, 3);
+        return (
+        <div key={proj.id} className={["drone", "cs", "eyakmeoyak"].includes(proj.id) ? "page-break" : undefined} style={{ marginTop: "48px" }}>
           {/* 헤더 */}
           <div className="no-break">
             <h2 style={{ fontSize: "24px", fontWeight: 900, margin: "0 0 6px" }}>{proj.title}</h2>
@@ -134,7 +136,7 @@ export default function PortfolioPDF() {
           <div className="no-break" style={{ marginBottom: "20px" }}>
             <p style={{ fontSize: "11px", color: "#999", fontWeight: 600, margin: "0 0 8px" }}>역할</p>
             <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
-              {proj.sections.tech.map((t, i) => (
+              {techList.map((t, i) => (
                 <li key={i} style={{ fontSize: "12px", fontWeight: 600, marginBottom: "5px", paddingLeft: "2px" }}>
                   {t.title.split("—")[0].split(":")[0].trim()}
                 </li>
@@ -163,7 +165,9 @@ export default function PortfolioPDF() {
           </div>
 
           {/* 기술 상세 */}
-          {proj.sections.tech.map((t, i) => (
+          {techList.map((t, i) => {
+            const points = proj.type === "company" ? t.points : t.points?.slice(0, 2);
+            return (
             <div key={i} className="no-break" style={{ marginBottom: "16px" }}>
               <p style={{ fontWeight: 700, fontSize: "13px", margin: "0 0 7px" }}>{t.title}</p>
               <div style={{ border: "1px solid #e5e5e5", borderRadius: "6px", overflow: "hidden", fontSize: "12px" }}>
@@ -173,31 +177,31 @@ export default function PortfolioPDF() {
                   </div>
                   <div style={{ padding: "8px 12px", color: "#444", lineHeight: 1.7 }}>{t.description}</div>
                 </div>
-                {t.points && t.points.length > 0 && (
+                {points && points.length > 0 && (
                   <div style={{ display: "grid", gridTemplateColumns: "56px 1fr", borderTop: "1px solid #dbeafe" }}>
                     <div style={{ background: BLUE_LIGHT, padding: "8px", color: BLUE, fontWeight: 700, fontSize: "10px", borderRight: "1px solid #dbeafe" }}>
                       해결
                     </div>
                     <div style={{ padding: "8px 12px" }}>
                       <ul style={{ margin: 0, paddingLeft: "14px" }}>
-                        {t.points.map((pt, j) => (
+                        {points.map((pt, j) => (
                           <li key={j} style={{ color: "#333", marginBottom: "2px", lineHeight: 1.65 }}>{pt}</li>
                         ))}
                       </ul>
                     </div>
                   </div>
                 )}
-                {t.images && t.images.length > 0 && (
-                  <div style={{ display: "flex", gap: "8px", padding: "8px 12px", borderTop: "1px solid #e5e5e5" }}>
+                {proj.type === "company" && t.images && t.images.length > 0 && (
+                  <div style={{ display: "flex", gap: "12px", padding: "12px", borderTop: "1px solid #e5e5e5" }}>
                     {t.images.map((img, j) => (
                       <div key={j} style={{ flex: "1 1 0" }}>
                         <img
                           src={img.src}
                           alt={img.caption ?? ""}
-                          style={{ width: "100%", maxHeight: "110px", borderRadius: "4px", objectFit: "contain" }}
+                          style={{ width: "100%", maxHeight: "320px", borderRadius: "6px", objectFit: "contain" }}
                         />
                         {img.caption && (
-                          <p style={{ fontSize: "10px", color: "#888", margin: "2px 0 0", textAlign: "center" }}>{img.caption}</p>
+                          <p style={{ fontSize: "10.5px", color: "#888", margin: "4px 0 0", textAlign: "center" }}>{img.caption}</p>
                         )}
                       </div>
                     ))}
@@ -227,7 +231,8 @@ export default function PortfolioPDF() {
                 )}
               </div>
             </div>
-          ))}
+            );
+          })}
 
           {/* 결과 */}
           {proj.sections.result && proj.sections.result.length > 0 && (
@@ -240,10 +245,11 @@ export default function PortfolioPDF() {
             </div>
           )}
         </div>
-      ))}
+        );
+      })}
 
       {/* ── Education & Certs ── */}
-      <div className="page-break">
+      <div style={{ marginTop: "48px" }}>
         <h2 style={{ fontSize: "28px", fontWeight: 900, margin: "0 0 4px" }}>
           Education<span style={{ color: BLUE }}>·</span>Certifications
         </h2>
@@ -287,9 +293,12 @@ export default function PortfolioPDF() {
 }
 
 function ProjectImages({ proj }: { proj: (typeof PROJECTS)[0] }) {
-  const arch = proj.sections.arch;
+  const isCompany = proj.type === "company";
+  const arch = isCompany ? proj.sections.arch : undefined;
   const main = proj.image;
-  const extra = [proj.image2, proj.image3, proj.image4].filter(Boolean) as { src: string; caption?: string }[];
+  const extra = isCompany
+    ? ([proj.image2, proj.image3, proj.image4].filter(Boolean) as { src: string; caption?: string }[])
+    : [];
 
   if (proj.id === "uav") return null;
 
@@ -314,7 +323,7 @@ function ProjectImages({ proj }: { proj: (typeof PROJECTS)[0] }) {
               <img
                 src={main.src}
                 alt={main.caption ?? ""}
-                style={{ width: "100%", maxHeight: "150px", objectFit: "contain", borderRadius: "6px" }}
+                style={{ width: "100%", maxHeight: isCompany ? "150px" : "300px", objectFit: "contain", borderRadius: "6px" }}
               />
               {main.caption && (
                 <p style={{ fontSize: "10px", color: "#999", textAlign: "center", margin: "2px 0 0" }}>{main.caption}</p>
