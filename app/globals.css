@@ -94,6 +94,7 @@ img { display: block; max-width: 100%; }
   padding: 9px 14px; border-radius: 10px; transition: color .2s, background .2s;
 }
 .nav-links a:hover { color: var(--text); background: var(--bg-gray); }
+.dl-menu-item:hover { background: var(--bg-gray); }
 .nav-actions { display: flex; align-items: center; gap: 10px; }
 .icon-toggle {
   width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 11px;

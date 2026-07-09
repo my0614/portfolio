@@ -8,4 +8,6 @@ dist/
 .vercel
 *.pdf
 !/public/projects/김민영_이력서.pdf
+!/public/projects/김민영_이력서_result.pdf
+!/public/projects/김민영_포트폴리오.pdf
 !/public/resume.pdf
