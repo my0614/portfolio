@@ -80,7 +80,9 @@
       "Read(//Applications/Google Chrome.app/Contents/MacOS/**)",
       "Bash(pkill -f \"next dev -p 3001\")",
       "Bash(ps -p 19746 -o pid,command)",
-      "Bash(npm init *)"
+      "Bash(npm init *)",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(npx -y -p typescript tsc --noEmit -p .)"
     ]
   }
 }

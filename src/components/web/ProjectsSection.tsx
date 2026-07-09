@@ -140,8 +140,8 @@ function ImageGallery({ images }: { images: { src: string; caption?: string }[] 
   );
 }
 
-type FilterKey = 'all' | 'company' | 'team' | 'personal';
-const SEGS: [FilterKey, string][] = [['all', '전체'], ['company', '회사'], ['team', '팀'], ['personal', '개인']];
+type FilterKey = 'all' | 'company' | 'team';
+const SEGS: [FilterKey, string][] = [['all', '전체'], ['company', '회사'], ['team', '팀']];
 
 function ProjectCard({ pr, onOpen, idx }: { pr: ProjectData; onOpen: (id: string) => void; idx: number }) {
   return (
@@ -212,7 +212,7 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
         <div style={{ maxWidth: 860, margin: '0 auto', width: '100%', padding: '0 24px', display: 'flex', alignItems: 'center', height: '100%', position: 'relative' }}>
           <span className="dt-title">{pr.title}</span>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-            {pr.link && (
+            {pr.link && pr.id !== 'eyakmeoyak' && (
               <a className="btn btn-ghost btn-sm" href={pr.link} target="_blank" rel="noreferrer">
                 <Icon name="link" size={16} /> 서비스
               </a>

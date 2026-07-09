@@ -9,8 +9,8 @@ interface ProjectsScreenProps {
   openProject: (id: string) => void;
 }
 
-type FilterKey = 'all' | 'company' | 'team' | 'personal';
-const SEGS: [FilterKey, string][] = [['all', '전체'], ['company', '회사'], ['team', '팀'], ['personal', '개인']];
+type FilterKey = 'all' | 'company' | 'team';
+const SEGS: [FilterKey, string][] = [['all', '전체'], ['company', '회사'], ['team', '팀']];
 
 export function ProjectsScreen({ openProject }: ProjectsScreenProps) {
   const [ref, scrolled] = useScrolled(20);
