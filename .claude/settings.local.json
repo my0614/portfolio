@@ -82,7 +82,8 @@
       "Bash(ps -p 19746 -o pid,command)",
       "Bash(npm init *)",
       "Bash(./node_modules/.bin/tsc --noEmit)",
-      "Bash(npx -y -p typescript tsc --noEmit -p .)"
+      "Bash(npx -y -p typescript tsc --noEmit -p .)",
+      "Bash(pdfinfo public/projects/김민영_포트폴리오.pdf)"
     ]
   }
 }

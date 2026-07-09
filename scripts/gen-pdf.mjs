@@ -14,8 +14,14 @@ await page.pdf({
   path: OUTPUT,
   format: 'A4',
   printBackground: true,
-  displayHeaderFooter: false,
-  margin: { top: '12mm', bottom: '12mm', left: '0', right: '0' },
+  displayHeaderFooter: true,
+  headerTemplate: '<span></span>',
+  footerTemplate: `
+    <div style="width:100%; font-size:9px; font-family:-apple-system,BlinkMacSystemFont,sans-serif; color:#999; text-align:center;">
+      <span class="pageNumber"></span> / <span class="totalPages"></span>
+    </div>
+  `,
+  margin: { top: '12mm', bottom: '16mm', left: '0', right: '0' },
 });
 
 await browser.close();
