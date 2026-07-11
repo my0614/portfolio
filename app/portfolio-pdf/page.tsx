@@ -97,7 +97,7 @@ export default function PortfolioPDF() {
       {PROJECTS.map((proj) => {
         const techList = proj.type === "company" ? proj.sections.tech : proj.sections.tech.slice(0, 3);
         return (
-        <div key={proj.id} className={["drone", "cs", "eyakmeoyak"].includes(proj.id) ? "page-break" : undefined} style={{ marginTop: "48px" }}>
+        <div key={proj.id} className={["drone", "cs", "eyakmeoyak", "ppurine"].includes(proj.id) ? "page-break" : undefined} style={{ marginTop: "48px" }}>
           {/* 헤더 */}
           <div className="no-break">
             <h2 style={{ fontSize: "24px", fontWeight: 900, margin: "0 0 6px" }}>{proj.title}</h2>
@@ -247,41 +247,6 @@ export default function PortfolioPDF() {
         </div>
         );
       })}
-
-      {/* ── Education & Certs ── */}
-      <div style={{ marginTop: "48px" }}>
-        <h2 style={{ fontSize: "28px", fontWeight: 900, margin: "0 0 4px" }}>
-          Education<span style={{ color: BLUE }}>·</span>Certifications
-        </h2>
-        <hr style={{ border: "none", borderTop: "2px solid #111", margin: "0 0 20px" }} />
-
-        {[
-          { name: "고려사이버대학교", sub: "대학교(학사) · AI·데이터과학부 전공", period: "2022.02. ~ 2026.02. · 졸업" },
-          { name: "대덕소프트웨어마이스터고등학교", sub: "고등학교 · 임베디드SW과", period: "2019.03. ~ 2022.02. · 졸업" },
-        ].map((edu, i) => (
-          <div key={i} className="no-break">
-            <p style={{ fontWeight: 700, fontSize: "14px", margin: "0 0 2px" }}>{edu.name}</p>
-            <p style={{ color: "#555", fontSize: "12px", margin: 0 }}>{edu.sub}</p>
-            <p style={{ color: "#888", fontSize: "11px", margin: "0 0 12px" }}>{edu.period}</p>
-            <hr style={{ border: "none", borderTop: "1px solid #e5e5e5", margin: "0 0 14px" }} />
-          </div>
-        ))}
-
-        {[
-          { name: "데이터분석 준전문가(ADsP)", date: "2024.11.", org: "한국데이터산업진흥원" },
-          { name: "정보처리기능사", date: "2019.06.", org: "한국산업인력공단" },
-          { name: "컴퓨터활용능력 2급", date: "2017.09.", org: "대한상공회의소" },
-          { name: "ITQ 마스터 자격증", date: "2017.08.", org: "한국생산성본부" },
-        ].map((cert, i) => (
-          <div key={i} className="no-break" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
-            <div>
-              <p style={{ fontWeight: 700, fontSize: "13px", margin: "0 0 1px" }}>{cert.name}</p>
-              <p style={{ color: "#666", fontSize: "11px", margin: 0 }}>합격 · {cert.org}</p>
-            </div>
-            <span style={{ fontSize: "11px", color: "#888", whiteSpace: "nowrap", marginLeft: "12px" }}>{cert.date}</span>
-          </div>
-        ))}
-      </div>
 
       {/* FOOTER */}
       <div style={{ marginTop: "40px", paddingTop: "12px", borderTop: "1px solid #e5e5e5", display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#999" }}>
