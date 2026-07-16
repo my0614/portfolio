@@ -5,7 +5,7 @@ import { useReveal } from './hooks';
 
 type FilterKey = 'all' | BlogCategory;
 
-export function BlogSection() {
+export function BlogSection({ onOpen }: { onOpen: (id: string) => void }) {
   const [filter, setFilter] = useState<FilterKey>('all');
   const ref = useReveal();
   const shown = BLOG_POSTS.filter(p => filter === 'all' ? true : p.category === filter);
@@ -33,18 +33,24 @@ export function BlogSection() {
           <div className="blog-grid">
             {shown.map(post => {
               const cat = BLOG_CATEGORIES.find(c => c.key === post.category);
-              return (
-                <a
-                  key={post.id}
-                  href={post.link ?? '#'}
-                  target={post.link ? '_blank' : undefined}
-                  rel={post.link ? 'noreferrer' : undefined}
-                  className="blog-card"
-                >
+              const card = (
+                <>
                   {cat && <span className="blog-cat-tag">{cat.label}</span>}
                   <h3 className="blog-card-title">{post.title}</h3>
                   <p className="blog-card-excerpt">{post.excerpt}</p>
                   <span className="blog-card-date">{post.date}</span>
+                </>
+              );
+              if (post.content) {
+                return (
+                  <button key={post.id} className="blog-card" onClick={() => onOpen(post.id)}>
+                    {card}
+                  </button>
+                );
+              }
+              return (
+                <a key={post.id} href={post.link ?? '#'} target={post.link ? '_blank' : undefined} rel={post.link ? 'noreferrer' : undefined} className="blog-card">
+                  {card}
                 </a>
               );
             })}

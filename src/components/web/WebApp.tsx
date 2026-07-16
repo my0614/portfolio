@@ -5,11 +5,13 @@ import { Hero } from './Hero';
 import { ProjectsSection, ProjectDetailWeb } from './ProjectsSection';
 import { AboutSection } from './AboutSection';
 import { BlogSection } from './BlogSection';
+import { BlogDetailWeb } from './BlogDetailWeb';
 import { ContactSection, Footer } from './ContactSection';
 
 export function WebApp() {
   const [theme, setTheme] = useState('light');
   const [detail, setDetail] = useState<string | null>(null);
+  const [postDetail, setPostDetail] = useState<string | null>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem('portfolio-theme');
@@ -35,6 +37,18 @@ export function WebApp() {
     if (history.state?.detail) history.back();
   }, []);
 
+  const openPost = useCallback((id: string) => {
+    setPostDetail(id);
+    document.body.style.overflow = 'hidden';
+    history.pushState({ post: id }, '', '?post=' + id);
+  }, []);
+
+  const closePost = useCallback(() => {
+    setPostDetail(null);
+    document.body.style.overflow = '';
+    if (history.state?.post) history.back();
+  }, []);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const projectId = params.get('project');
@@ -42,13 +56,24 @@ export function WebApp() {
       setDetail(projectId);
       document.body.style.overflow = 'hidden';
     }
+    const postId = params.get('post');
+    if (postId) {
+      setPostDetail(postId);
+      document.body.style.overflow = 'hidden';
+    }
 
     const onPopState = (e: PopStateEvent) => {
       if (e.state?.detail) {
         setDetail(e.state.detail);
+        setPostDetail(null);
+        document.body.style.overflow = 'hidden';
+      } else if (e.state?.post) {
+        setPostDetail(e.state.post);
+        setDetail(null);
         document.body.style.overflow = 'hidden';
       } else {
         setDetail(null);
+        setPostDetail(null);
         document.body.style.overflow = '';
       }
     };
@@ -63,11 +88,12 @@ export function WebApp() {
         <Hero />
         <AboutSection />
         <ProjectsSection onOpen={openProject} />
-        <BlogSection />
+        <BlogSection onOpen={openPost} />
         <ContactSection />
       </main>
       <Footer />
       {detail && <ProjectDetailWeb id={detail} onClose={closeProject} />}
+      {postDetail && <BlogDetailWeb id={postDetail} onClose={closePost} />}
     </>
   );
 }
