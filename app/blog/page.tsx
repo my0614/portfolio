@@ -1,4 +1,5 @@
 import { BlogListPage } from "@/components/web/BlogListPage";
+import { getAllPosts } from "@/lib/blog";
 
 export const metadata = {
   title: "블로그 | 김민영",
@@ -6,5 +7,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <BlogListPage />;
+  return <BlogListPage posts={getAllPosts()} />;
 }

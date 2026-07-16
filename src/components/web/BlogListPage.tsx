@@ -1,18 +1,19 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { BLOG_CATEGORIES, BLOG_POSTS, BlogCategory } from '@/data/blog';
+import { BLOG_CATEGORIES } from '@/data/blog';
+import type { BlogCategory, BlogPost } from '@/data/blog';
 import { Nav } from './Nav';
 import { Footer } from './ContactSection';
 import { useReveal, useTheme } from './hooks';
 
 type FilterKey = 'all' | BlogCategory;
 
-export function BlogListPage() {
+export function BlogListPage({ posts }: { posts: BlogPost[] }) {
   const [theme, toggleTheme] = useTheme();
   const [filter, setFilter] = useState<FilterKey>('all');
   const ref = useReveal();
-  const shown = BLOG_POSTS.filter(p => filter === 'all' ? true : p.category === filter);
+  const shown = posts.filter(p => filter === 'all' ? true : p.category === filter);
 
   return (
     <>

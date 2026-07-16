@@ -1,30 +1,38 @@
 import React from 'react';
-import { BLOG_CATEGORIES, BlogBlock, BlogPost } from '@/data/blog';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import type { Element } from 'hast';
+import { BLOG_CATEGORIES } from '@/data/blog';
+import type { BlogPost } from '@/data/blog';
 import { CodeBlock } from './CodeBlock';
 
-function Block({ block }: { block: BlogBlock }) {
-  if (block.type === 'heading') return <h2 className="blog-block-heading">{block.text}</h2>;
-  if (block.type === 'subheading') return <h3 className="blog-block-subheading">{block.text}</h3>;
-  if (block.type === 'paragraph') return <p className="blog-block-paragraph">{block.text}</p>;
-  if (block.type === 'quote') return <blockquote className="blog-quote">{block.text}</blockquote>;
-  if (block.type === 'term') {
-    return (
-      <div className="blog-term">
-        <div className="blog-term-name">{block.name}</div>
-        <p className="blog-term-desc">{block.description}</p>
-      </div>
-    );
-  }
-  if (block.type === 'list') {
-    const Tag = block.ordered ? 'ol' : 'ul';
-    return (
-      <Tag className="blog-list">
-        {block.items.map((item, i) => <li key={i}>{item}</li>)}
-      </Tag>
-    );
-  }
-  return <CodeBlock code={block.code} />;
+function extractText(node: Element): string {
+  return node.children
+    .map((child) => (child.type === 'text' ? child.value : 'children' in child ? extractText(child) : ''))
+    .join('');
 }
+
+type WithNode<P> = P & { node?: Element };
+
+const components = {
+  h2: ({ node, ...props }: WithNode<React.ComponentProps<'h2'>>) => <h2 className="blog-block-heading" {...props} />,
+  h3: ({ node, ...props }: WithNode<React.ComponentProps<'h3'>>) => <h3 className="blog-block-subheading" {...props} />,
+  p: ({ node, ...props }: WithNode<React.ComponentProps<'p'>>) => <p className="blog-block-paragraph" {...props} />,
+  blockquote: ({ node, ...props }: WithNode<React.ComponentProps<'blockquote'>>) => <blockquote className="blog-quote" {...props} />,
+  ul: ({ node, ...props }: WithNode<React.ComponentProps<'ul'>>) => <ul className="blog-list" {...props} />,
+  ol: ({ node, ...props }: WithNode<React.ComponentProps<'ol'>>) => <ol className="blog-list" {...props} />,
+  table: ({ node, ...props }: WithNode<React.ComponentProps<'table'>>) => (
+    <div className="blog-table-wrap"><table className="blog-table" {...props} /></div>
+  ),
+  img: ({ node, ...props }: WithNode<React.ComponentProps<'img'>>) => <img className="blog-img" {...props} />,
+  a: ({ node, ...props }: WithNode<React.ComponentProps<'a'>>) => <a target="_blank" rel="noreferrer" {...props} />,
+  pre: ({ node }: WithNode<{}>) => {
+    const codeNode = node?.children.find((c): c is Element => c.type === 'element' && c.tagName === 'code');
+    const code = codeNode ? extractText(codeNode).replace(/\n$/, '') : '';
+    return <CodeBlock code={code} />;
+  },
+  code: ({ node, ...props }: WithNode<React.ComponentProps<'code'>>) => <code className="inline-code" {...props} />,
+};
 
 export function BlogPostBody({ post }: { post: BlogPost }) {
   const cat = BLOG_CATEGORIES.find(c => c.key === post.category);
@@ -35,7 +43,9 @@ export function BlogPostBody({ post }: { post: BlogPost }) {
       <div className="blog-card-date" style={{ marginTop: 10 }}>{post.date}</div>
       <p className="dt-summary">{post.excerpt}</p>
       <div className="dt-section" style={{ marginTop: 40 }}>
-        {post.content?.map((block, i) => <Block key={i} block={block} />)}
+        <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+          {post.content}
+        </ReactMarkdown>
       </div>
     </>
   );

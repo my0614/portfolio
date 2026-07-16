@@ -268,6 +268,13 @@ section { position: relative; }
 .tok-self { color: #9cdcfe; }
 .blog-list { margin-top: 14px; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; }
 .blog-list li { font-size: 15px; line-height: 1.7; color: var(--text-2); padding-left: 4px; }
+.inline-code { background: var(--bg-gray); color: var(--accent-dark); padding: 2px 6px; border-radius: 5px; font-size: 0.9em; font-family: ui-monospace, monospace; }
+.blog-img { max-width: 100%; border-radius: 16px; margin-top: 18px; display: block; }
+.blog-table-wrap { margin-top: 18px; overflow-x: auto; border-radius: 14px; border: 1px solid var(--border); }
+.blog-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.blog-table th { text-align: left; padding: 11px 16px; background: var(--bg-gray); font-weight: 700; color: var(--text-3); border-bottom: 1px solid var(--border); }
+.blog-table td { padding: 11px 16px; border-bottom: 1px solid var(--border-soft); color: var(--text-2); }
+.blog-table tr:last-child td { border-bottom: none; }
 
 /* ===== detail overlay ===== */
 .detail {
