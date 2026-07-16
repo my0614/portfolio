@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BLOG_CATEGORIES, BLOG_POSTS, BlogBlock } from '@/data/blog';
 import { Icon } from '@/components/phone/Icon';
+import { CodeBlock } from './CodeBlock';
 
 function Block({ block }: { block: BlogBlock }) {
   if (block.type === 'heading') return <h2 className="blog-block-heading">{block.text}</h2>;
@@ -24,7 +25,7 @@ function Block({ block }: { block: BlogBlock }) {
       </Tag>
     );
   }
-  return <pre className="blog-code">{block.code}</pre>;
+  return <CodeBlock code={block.code} />;
 }
 
 export function BlogDetailWeb({ id, onClose }: { id: string; onClose: () => void }) {
