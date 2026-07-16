@@ -1,5 +1,20 @@
 'use client';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
+
+export function useTheme() {
+  const [theme, setTheme] = useState('light');
+  useEffect(() => {
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved) setTheme(saved);
+  }, []);
+  const toggleTheme = useCallback(() => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
+  }, [theme]);
+  return [theme, toggleTheme] as const;
+}
 
 let __revealProbe: boolean | null = null;
 function transitionsTick() {

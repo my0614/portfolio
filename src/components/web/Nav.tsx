@@ -30,16 +30,16 @@ export function Nav({ theme, toggleTheme }: NavProps) {
   return (
     <nav className={'nav' + (scrolled ? ' scrolled' : '')}>
       <div className="container">
-        <a className="nav-brand" href="#top" onClick={closeMenu}>
+        <a className="nav-brand" href="/" onClick={closeMenu}>
           <span className="dot" />
           {PROFILE.name}
           <span style={{ color: 'var(--text-4)', fontWeight: 600, fontSize: 14 }}>.dev</span>
         </a>
         <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#projects">프로젝트</a>
-          <a href="#blog">블로그</a>
-          <a href="#contact">Contact</a>
+          <a href="/#about">About</a>
+          <a href="/#projects">프로젝트</a>
+          <a href="/blog">블로그</a>
+          <a href="/#contact">Contact</a>
         </div>
         <div className="nav-actions">
           <button
@@ -64,10 +64,10 @@ export function Nav({ theme, toggleTheme }: NavProps) {
         </div>
       </div>
       <div className={'nav-mobile' + (menuOpen ? ' open' : '')}>
-        <a href="#about" onClick={closeMenu}>About</a>
-        <a href="#projects" onClick={closeMenu}>프로젝트</a>
-        <a href="#blog" onClick={closeMenu}>블로그</a>
-        <a href="#contact" onClick={closeMenu}>Contact</a>
+        <a href="/#about" onClick={closeMenu}>About</a>
+        <a href="/#projects" onClick={closeMenu}>프로젝트</a>
+        <a href="/blog" onClick={closeMenu}>블로그</a>
+        <a href="/#contact" onClick={closeMenu}>Contact</a>
       </div>
     </nav>
   );
