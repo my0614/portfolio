@@ -5,13 +5,23 @@ import { Icon } from '@/components/phone/Icon';
 
 function Block({ block }: { block: BlogBlock }) {
   if (block.type === 'heading') return <h2 className="blog-block-heading">{block.text}</h2>;
+  if (block.type === 'subheading') return <h3 className="blog-block-subheading">{block.text}</h3>;
   if (block.type === 'paragraph') return <p className="blog-block-paragraph">{block.text}</p>;
+  if (block.type === 'quote') return <blockquote className="blog-quote">{block.text}</blockquote>;
   if (block.type === 'term') {
     return (
       <div className="blog-term">
         <div className="blog-term-name">{block.name}</div>
         <p className="blog-term-desc">{block.description}</p>
       </div>
+    );
+  }
+  if (block.type === 'list') {
+    const Tag = block.ordered ? 'ol' : 'ul';
+    return (
+      <Tag className="blog-list">
+        {block.items.map((item, i) => <li key={i}>{item}</li>)}
+      </Tag>
     );
   }
   return <pre className="blog-code">{block.code}</pre>;

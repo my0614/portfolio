@@ -242,11 +242,15 @@ section { position: relative; }
 
 .blog-block-heading { font-size: 23px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-top: 44px; }
 .blog-block-heading:first-child { margin-top: 0; }
+.blog-block-subheading { font-size: 16.5px; font-weight: 800; color: var(--text); margin-top: 28px; }
 .blog-block-paragraph { font-size: 15.5px; line-height: 1.7; color: var(--text-2); margin-top: 14px; }
+.blog-quote { margin-top: 16px; padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--bg-soft); border-radius: 0 12px 12px 0; font-size: 15px; line-height: 1.7; color: var(--text-2); font-style: italic; }
 .blog-term { margin-top: 18px; padding: 18px 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg-soft); }
 .blog-term-name { font-size: 15px; font-weight: 800; color: var(--accent-dark); font-family: ui-monospace, monospace; }
 .blog-term-desc { font-size: 14.5px; line-height: 1.65; color: var(--text-2); margin-top: 8px; }
 .blog-code { margin-top: 18px; padding: 20px 22px; border-radius: 16px; background: var(--bg-gray); color: var(--text-2); font-size: 13.5px; line-height: 1.7; font-family: ui-monospace, monospace; white-space: pre-wrap; overflow-x: auto; }
+.blog-list { margin-top: 14px; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; }
+.blog-list li { font-size: 15px; line-height: 1.7; color: var(--text-2); padding-left: 4px; }
 
 /* ===== detail overlay ===== */
 .detail {
