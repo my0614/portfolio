@@ -6,7 +6,7 @@ order: 1
 excerpt: "드론 RGB-D 카메라에서 RGB·Depth 프레임을 동적 slop으로 동기화하고, 픽셀 좌표를 핀홀 카메라 모델로 실거리·드론 좌표계로 변환하는 과정과 검증 과정에서 짚어본 의문점을 코드와 함께 정리합니다."
 ---
 
-## 배경: 카메라가 본 객체를 드론의 3D 좌표로 바꿔야 했다
+## 카메라가 본 객체를 드론의 3D 좌표로 바꿔야 했다
 
 드론에 달린 RGB-D 카메라(RealSense 계열)로 사람·화재·부상자 같은 객체를 탐지하는 프로젝트였다. 탐지 자체는 RGB 이미지 한 장이면 되지만, 그 객체가 드론으로부터 "어느 방향으로 몇 미터 떨어져 있는지"를 구하려면 같은 순간의 Depth 이미지가 같이 필요하다. 이게 세 가지 문제로 나뉜다.
 
@@ -14,7 +14,7 @@ excerpt: "드론 RGB-D 카메라에서 RGB·Depth 프레임을 동적 slop으로
 2. 짝지은 프레임에서 탐지된 픽셀 좌표의 depth 값을 실제 거리(미터)로 바꿔야 한다
 3. 카메라 기준 좌표를 드론 기준 좌표로 변환해야 한다
 
-## RGB-Depth 프레임 매칭: ApproximateTimeSynchronizer
+## ApproximateTimeSynchronizer로 프레임 매칭하기
 
 RGB와 Depth는 서로 다른 토픽으로, 서로 다른 타이밍에 들어온다. 정확히 같은 타임스탬프를 가진 쌍이 오는 게 아니라서 ROS의 message_filters.ApproximateTimeSynchronizer로 "타임스탬프가 어느 정도 가까운" 메시지끼리 묶었다.
 
