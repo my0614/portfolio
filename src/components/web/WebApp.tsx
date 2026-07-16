@@ -4,6 +4,7 @@ import { Nav } from './Nav';
 import { Hero } from './Hero';
 import { ProjectsSection, ProjectDetailWeb } from './ProjectsSection';
 import { AboutSection } from './AboutSection';
+import { BlogSection } from './BlogSection';
 import { ContactSection, Footer } from './ContactSection';
 
 export function WebApp() {
@@ -62,6 +63,7 @@ export function WebApp() {
         <Hero />
         <AboutSection />
         <ProjectsSection onOpen={openProject} />
+        <BlogSection />
         <ContactSection />
       </main>
       <Footer />

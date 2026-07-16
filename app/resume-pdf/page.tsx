@@ -168,9 +168,9 @@ const MISC_PROJECTS: MiscItem[] = [
     tags: ["Python", "PyTorch", "Flask", "Docker"],
   },
   {
-    title: "국가 보안기관 위성영상 AI 플랫폼",
-    desc: "TCD 변화탐지 모델 학습 수행",
-    tags: ["UNet", "DeepUNet", "AttentionUNet", "HRNet"],
+    title: "해운대 익수자(물놀이 안전사고) 탐지",
+    desc: "해변 CCTV 영상 기반 물에 빠진 사람 실시간 탐지 모델 학습 수행",
+    tags: ["YOLO"],
   },
   {
     title: "태양 흑점 탐지",
@@ -178,9 +178,9 @@ const MISC_PROJECTS: MiscItem[] = [
     tags: ["UNet", "DeepUNet"],
   },
   {
-    title: "해운대 익수자(물놀이 안전사고) 탐지",
-    desc: "해변 CCTV 영상 기반 물에 빠진 사람 실시간 탐지 모델 학습 수행",
-    tags: ["YOLO"],
+    title: "국가 보안기관 위성영상 AI 플랫폼",
+    desc: "TCD 변화탐지 모델 학습 수행",
+    tags: ["UNet", "DeepUNet", "AttentionUNet", "HRNet"],
   },
 ];
 
@@ -230,7 +230,7 @@ const ACTIVITY_GROUPS: ActivityGroup[] = [
       {
         title: "쀼라인드 — 부부·연인 관계 케어 AI 웹앱",
         period: "2차 프로젝트 1위 · 5인 팀 DB/AI 분석 파이프라인 담당 · 2026.06 ~ 2026.07",
-        desc: "LangChain·Azure AI Search 기반 RAG 상담 챗봇과 pgvector 유사도 검색·LLM 감정 분석 구조화(14개 그룹 81개 라벨)를 구현한 부부·연인 관계 케어 AI 웹앱",
+        desc: "Azure AI Search 관리형 RAG 인프라 위에서 검색 트리거·scope 엄격도·폴백 전략을 응답 유형별로 설계한 오케스트레이션 레이어와 pgvector 유사도 검색·LLM 감정 분석 구조화(14개 그룹 81개 라벨)를 구현한 부부·연인 관계 케어 AI 웹앱",
       },
       {
         title: "Dear me,",
@@ -350,7 +350,7 @@ export default function ResumePDF() {
       {/* ── 프로젝트 ── */}
       <SectionTitle>프로젝트</SectionTitle>
       {JOBS.map((job, ji) => (
-        <div key={job.company}>
+        <div key={job.company} className={job.company === "(주)무무즈" ? "page-break" : undefined}>
           <p
             className="no-break"
             style={{
@@ -365,37 +365,41 @@ export default function ResumePDF() {
             {job.company}
           </p>
 
-          {job.projects.map((proj, pi) => (
-            <ProjectCard key={proj.title} proj={proj} first={pi === 0} />
-          ))}
+          <div style={{ paddingLeft: "16px" }}>
+            {job.projects.map((proj, pi) => (
+              <ProjectCard key={proj.title} proj={proj} first={pi === 0} />
+            ))}
 
-          {job.company === "한컴인스페이스" && (
-            <div className="no-break" style={{ marginTop: "14px" }}>
-              <p style={{ margin: "0 0 6px", fontSize: "11px", fontWeight: 700 }}>그 외 모델 학습·서빙 경험</p>
-              <ul style={{ margin: 0, paddingLeft: "16px" }}>
-                {MISC_PROJECTS.map((m) => (
-                  <li key={m.title} style={{ marginBottom: "6px", color: "#444" }}>
-                    <b style={{ color: "#222" }}>{m.title}</b>
-                    {m.period && <span style={{ color: "#999" }}> ({m.period})</span>} — {m.desc}
-                    {m.tags && <span style={{ color: "#999", fontSize: "9px" }}> ({m.tags.join(" · ")})</span>}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+            {job.company === "한컴인스페이스" && (
+              <div className="no-break" style={{ marginTop: "14px" }}>
+                <p style={{ margin: "0 0 6px", fontSize: "11px", fontWeight: 700 }}>그 외 모델 학습·서빙 경험</p>
+                <ul style={{ margin: 0, paddingLeft: "16px" }}>
+                  {MISC_PROJECTS.map((m) => (
+                    <li key={m.title} style={{ marginBottom: "6px", color: "#444" }}>
+                      <b style={{ color: "#222" }}>{m.title}</b>
+                      {m.period && <span style={{ color: "#999" }}> ({m.period})</span>} — {m.desc}
+                      {m.tags && <span style={{ color: "#999", fontSize: "9px" }}> ({m.tags.join(" · ")})</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       ))}
 
       {/* ── 기술 스택 ── */}
       <Section title="기술 스택">
-        {SKILLS.map((cat) => (
-          <p key={cat.category} style={{ margin: "0 0 4px" }}>
-            <span style={{ display: "inline-block", width: "88px", color: "#888", fontWeight: 700, fontSize: "9.5px" }}>
-              {cat.category}
-            </span>
-            <span style={{ color: "#333" }}>{cat.skills.join(" · ")}</span>
-          </p>
-        ))}
+        <div style={{ paddingLeft: "16px" }}>
+          {SKILLS.map((cat) => (
+            <p key={cat.category} style={{ margin: "0 0 4px" }}>
+              <span style={{ display: "inline-block", width: "88px", color: "#888", fontWeight: 700, fontSize: "9.5px" }}>
+                {cat.category}
+              </span>
+              <span style={{ color: "#333" }}>{cat.skills.join(" · ")}</span>
+            </p>
+          ))}
+        </div>
       </Section>
 
       {/* ── 학력 ── */}

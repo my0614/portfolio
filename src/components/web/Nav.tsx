@@ -38,6 +38,7 @@ export function Nav({ theme, toggleTheme }: NavProps) {
         <div className="nav-links">
           <a href="#about">About</a>
           <a href="#projects">프로젝트</a>
+          <a href="#blog">블로그</a>
           <a href="#contact">Contact</a>
         </div>
         <div className="nav-actions">
@@ -65,6 +66,7 @@ export function Nav({ theme, toggleTheme }: NavProps) {
       <div className={'nav-mobile' + (menuOpen ? ' open' : '')}>
         <a href="#about" onClick={closeMenu}>About</a>
         <a href="#projects" onClick={closeMenu}>프로젝트</a>
+        <a href="#blog" onClick={closeMenu}>블로그</a>
         <a href="#contact" onClick={closeMenu}>Contact</a>
       </div>
     </nav>
