@@ -330,14 +330,15 @@ export const PROJECTS: ProjectData[] = [
         {
           title: "모델 비교 평가 및 Faster R-CNN 선정",
           description:
-            "Faster R-CNN · YOLOv5 · YOLOv7 · RetinaNet 4종을 Precision·추론 속도 기준으로 비교 평가. " +
-            "드론 실시간 영상 추론 환경에서 오탐이 미탐보다 치명적인 프로젝트 특성상 Precision을 최우선 기준으로 삼아 Faster R-CNN 최종 선정.",
+            "Faster R-CNN · YOLOv5 · YOLOv7 · RetinaNet 4종을 Precision·추론 속도·객체 크기 변화 대응력 기준으로 비교 평가. " +
+            "드론 실시간 영상 추론 환경에서 오탐이 미탐보다 치명적인 프로젝트 특성상 Precision을 최우선 기준으로 삼았고, " +
+            "촬영 고도·줌 배율에 따라 객체 크기가 크게 달라지는 드론 영상 특성상 크기 변화 대응 안정성까지 종합해 Faster R-CNN을 최종 선정.",
           points: [
             "평가 기준 1 — 오탐률: 위협 오인식은 현장 대응 오류로 직결 → Precision 최우선",
             "평가 기준 2 — 추론 속도: 드론 탑재 엣지 환경에서 실시간 처리 가능 여부 검증",
             "YOLOv5 · YOLOv7 탈락: 속도(~80 / ~59 FPS)는 우수하나 Precision 58~59%로 오탐률이 허용 기준 초과",
-            "RetinaNet 탈락: Precision 96.8%로 수치상 최고이나 ~17 FPS로 실시간 처리 임계치 미달",
-            "Faster R-CNN 선정: Precision 95%, ~12.5 FPS로 정밀도·실시간성 모두 임계치 충족. RetinaNet과 Precision 차이는 1.8%p로 근소하나, 속도 요건을 충족하는 모델 중 가장 높은 Precision 달성으로 최종 선정",
+            "RetinaNet 탈락: Precision 96.8%로 수치상 최고였지만, 촬영 고도·줌에 따라 객체 크기가 크게 달라지는 드론 영상에서 작은 객체 탐지가 상대적으로 불안정해 최종 제외",
+            "Faster R-CNN 선정: Precision 95%로 RetinaNet과 근소한 차이(1.8%p)였지만, RPN 기반 2-stage 구조 특성상 크기 변화가 큰 객체에서도 더 안정적으로 탐지해 최종 선정",
           ],
           table: {
             headers: ["모델", "Precision", "FPS", "결과"],
@@ -435,9 +436,9 @@ export const PROJECTS: ProjectData[] = [
             "수신 스트림의 도메인(EO·IR)에 따라 각각 최적화된 YOLO 모델로 라우팅, 도메인 혼용 없이 독립 추론",
         },
         {
-          title: "실시간 UAV 탐지 및 추적",
+          title: "실시간 UAV 탐지 및 센트리 카메라 추적",
           description:
-            "도메인별 YOLO 모델이 프레임 단위로 소형 UAV를 탐지, 탐지 결과를 추적 알고리즘과 연계해 연속적인 객체 추적 수행",
+            "도메인별 YOLO 모델이 프레임 단위로 소형 UAV를 탐지, 탐지된 방향으로 센트리 카메라가 자동으로 움직여 대상을 지속적으로 추적",
         },
         {
           title: "탐지 결과 모니터링 시스템 전송",
@@ -971,9 +972,9 @@ export const PROJECTS: ProjectData[] = [
             "자유 문장이 아닌 정형 데이터로 저장해 DB 집계·리포트 신뢰성 확보",
         },
         {
-          title: "pgvector 유사도 검증 후 DB 반영",
+          title: "중복 기록 판별 후 DB 반영",
           description:
-            "정규화 텍스트를 임베딩해 최근 5분 이내 동일 사용자 기록과 pgvector 코사인 유사도를 비교, 80% 이상이면 기존 기록을 업데이트, " +
+            "정규화 텍스트의 문자열 유사도(difflib.SequenceMatcher)를 최근 5분 이내 동일 사용자 기록과 비교, 80% 이상이면 기존 기록을 업데이트, " +
             "미만이면 신규 저장으로 분기해 감정 통계·리포트 데이터 오염을 방지",
         },
         {
@@ -1004,14 +1005,14 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
         {
-          title: "pgvector 기반 벡터 유사도 검색 — 유사 고민 추천 · 중복 저장 판별",
+          title: "pgvector 벡터 검색과 문자열 유사도 판별 — 유사 고민 추천 · 중복 저장 판별",
           description:
-            "PostgreSQL에 pgvector 확장을 적용해 별도 벡터 DB 인프라 없이 커뮤니티 유사 고민 추천과 감정 기록 중복 저장 판별을 " +
-            "동일 DB에서 임베딩 유사도 검색으로 처리하는 구조를 설계",
+            "PostgreSQL에 pgvector 확장을 적용해 별도 벡터 DB 인프라 없이 커뮤니티 유사 고민 추천을 임베딩 유사도 검색으로 처리하고, " +
+            "감정 기록 중복 판별은 같은 DB 안에서 문자열 유사도(difflib.SequenceMatcher) 비교로 가볍게 처리하는 구조를 설계",
           points: [
             "커뮤니티 게시글을 임베딩으로 변환해 pgvector 코사인 유사도로 나와 가장 비슷한 상황의 공감 글을 우선 노출",
             "키워드 매칭의 한계(표현은 달라도 감정·상황 맥락이 유사한 글을 못 찾는 문제)를 임베딩 유사도 검색으로 해결",
-            "감정 기록도 정규화 텍스트를 임베딩해 최근 5분 이내 동일 사용자 기록과 유사도 80% 이상이면 기존 기록을 업데이트 — 별도 캐시·큐 없이 PostgreSQL 하나로 추천·중복판별 두 기능을 모두 처리",
+            "감정 기록 중복 판별은 정규화 텍스트의 문자열 유사도(difflib.SequenceMatcher)를 최근 5분 이내 동일 사용자 기록과 비교해 80% 이상이면 기존 기록을 업데이트 — 임계값은 초기 구현 시 정한 값을 그대로 사용, 별도 캐시·큐 없이 PostgreSQL 하나로 추천·중복판별 두 기능을 모두 처리",
           ],
           images: [
             {
