@@ -505,6 +505,7 @@ export const PROJECTS: ProjectData[] = [
       "Gmail API",
       "Shopby API",
       "AWS EC2",
+      "BigQuery",
       "Bitbucket Pipelines",
       "Cron",
       "Python",
@@ -524,9 +525,9 @@ export const PROJECTS: ProjectData[] = [
             "파트너사가 Google Spreadsheet에 신청 상품을 입력하면 배치가 신청 목록을 자동 수집",
         },
         {
-          title: "Shopby API 상품 매칭 및 랭킹 선별",
+          title: "Shopby API·BigQuery 연계 상품 매칭 및 랭킹 선별",
           description:
-            "신청 상품을 Shopby API로 매칭하여 할인율·가격 경쟁력·재고 수량 기반 동적 스코어링으로 상위 200개 자동 선별",
+            "Shopby API와 BigQuery를 연계해 상품번호·상품명 등 운영 데이터를 검증·매핑하고, 할인율·가격 경쟁력·재고 수량 기반 동적 스코어링으로 상위 200개 자동 선별",
         },
         {
           title: "핫딜 자동 등록",
@@ -546,14 +547,14 @@ export const PROJECTS: ProjectData[] = [
       ],
       tech: [
         {
-          title: "Google Spreadsheet 내 상품 매칭 및 랭킹 알고리즘",
+          title: "Shopby API·BigQuery 연계 상품 매칭 및 랭킹 알고리즘",
           description:
-            "Shopby API로 신청 상품 자동 매칭, 당회차 실제 등록 상품 비율 기반 동적 가중치 스코어링으로 상위 200개 자동 선별",
+            "Shopby API와 BigQuery를 연계해 상품번호·상품명 등 운영 데이터를 검증·매핑하고, 당회차 실제 등록 상품 비율 기반 동적 가중치 스코어링으로 상위 200개 상품을 자동 선별 및 등록하는 End-to-End 자동화 파이프라인 구축",
           points: [
             "고정 기준값 대신 회차별 실제 데이터를 반영한 동적 스코어링으로 상위 200개 자동 선별",
             "할인율·가격 경쟁력·재고 수량 3개 지표를 당회차 실제 등록 상품 비율 기반으로 가중치 산정",
-            "Shopby API 연동으로 신청 상품의 상품명·상품번호 자동 매칭",
-            "신청 집계부터 선별까지 Spreadsheet 내에서 완결, 별도 DB 없이 운영",
+            "Shopby API·BigQuery 연계로 신청 상품의 상품명·상품번호 등 운영 데이터 검증·매핑",
+            "신청 접수·현황 관리는 Spreadsheet로 운영하고, 상품 데이터 검증·매핑은 BigQuery에 저장된 운영 데이터를 연계해 처리",
           ],
         },
         {
