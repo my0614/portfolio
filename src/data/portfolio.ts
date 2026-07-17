@@ -82,7 +82,7 @@ export const PROFILE: ProfileData = {
     { category: "Vision", skills: ["YOLOv5", "Faster R-CNN", "RetinaNet", "MMDetection", "MambaCD"] },
     { category: "AI Framework", skills: ["PyTorch", "LangChain"] },
     { category: "Backend", skills: ["Flask", "FastAPI"] },
-    { category: "DB", skills: ["PostgreSQL", "Redis", "ChromaDB(Vector DB)"] },
+    { category: "DB", skills: ["PostgreSQL", "Redis", "ChromaDB(Vector DB)", "BigQuery"] },
     { category: "Infra", skills: ["Docker", "Kubernetes"] },
     { category: "Cloud", skills: ["Azure", "AWS EC2"] },
     { category: "Else", skills: ["Git", "Jira", "Label Studio", "MLflow"] },

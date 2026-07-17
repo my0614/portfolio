@@ -190,7 +190,7 @@ const SKILLS = [
   { category: "Vision", skills: ["YOLOv5", "Faster R-CNN", "RetinaNet", "MMDetection", "MambaCD"] },
   { category: "AI Framework", skills: ["PyTorch"] },
   { category: "Backend", skills: ["FastAPI", "Flask"] },
-  { category: "DB", skills: ["PostgreSQL", "Redis", "ChromaDB", "pgvector"] },
+  { category: "DB", skills: ["PostgreSQL", "Redis", "ChromaDB", "pgvector", "BigQuery"] },
   { category: "Infra/Cloud", skills: ["Docker", "Kubernetes", "Azure", "AWS EC2"] },
   { category: "Else", skills: ["Git", "Jira", "Label Studio", "MLflow"] },
 ];
