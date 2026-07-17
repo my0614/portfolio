@@ -1,5 +1,5 @@
 ---
-title: "캐시를 세 겹(L1/L2/L3)으로 나눈 이유"
+title: "캐시를 세 겹으로 나눴다"
 category: mlops
 date: "2026-07-16"
 order: 0
