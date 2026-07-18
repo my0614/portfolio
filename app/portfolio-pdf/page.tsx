@@ -41,16 +41,32 @@ export default function PortfolioPDF() {
 
       {/* ── COVER ── */}
       <div>
-        <p style={{ fontSize: "10px", letterSpacing: "0.2em", color: "#999", fontWeight: 600, margin: "0 0 12px" }}>
-          P O R T F O L I O
-        </p>
-        <h1 style={{ fontSize: "48px", fontWeight: 900, lineHeight: 1.05, margin: "0 0 14px" }}>
-          ML / MLOps<span style={{ color: BLUE }}>.</span>
-        </h1>
-        <p style={{ fontSize: "14px", color: "#555", fontWeight: 600, margin: "0 0 28px" }}>
-          ML 모델 개발 / MLOps 개발자
-        </p>
-        <hr style={{ border: "none", borderTop: "1px solid #e5e5e5", margin: "0 0 24px" }} />
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "24px" }}>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: "10px", letterSpacing: "0.2em", color: "#999", fontWeight: 600, margin: "0 0 12px" }}>
+              P O R T F O L I O
+            </p>
+            <h1 style={{ fontSize: "48px", fontWeight: 900, lineHeight: 1.05, margin: "0 0 14px" }}>
+              ML / MLOps<span style={{ color: BLUE }}>.</span>
+            </h1>
+            <p style={{ fontSize: "14px", color: "#555", fontWeight: 600, margin: 0 }}>
+              ML 모델 개발 / MLOps 개발자
+            </p>
+          </div>
+          <img
+            src={PROFILE.photo}
+            alt={PROFILE.name}
+            style={{
+              width: "96px",
+              height: "96px",
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "1px solid #e5e5e5",
+              flexShrink: 0,
+            }}
+          />
+        </div>
+        <hr style={{ border: "none", borderTop: "1px solid #e5e5e5", margin: "24px 0" }} />
 
         <NarrativeSection title="여러 모델, 하나의 안정적인 구조">
           위성영상·드론영상·EO/IR 영상 등 도메인 특성에 맞춰 CNN 계열과 Transformer 계열 모델을 함께 다뤄왔습니다.
