@@ -1,6 +1,6 @@
 ---
 title: "ISMS-P로 읽는 JWT 인증/인가"
-category: study
+category: mlops
 order: -3
 excerpt: "ISMS-P의 인증/접근통제/암호화 통제항목을 실제 프로젝트의 JWT 로그인 코드에 그대로 대입해 감사(audit)해보고, JWT 구조·Access/Refresh Token 차이까지 코드와 함께 정리합니다."
 ---

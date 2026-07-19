@@ -1,6 +1,6 @@
 ---
 title: "IaC로 읽는 dflow 쿠버네티스 매니페스트"
-category: study
+category: mlops
 order: -4
 excerpt: "Kubernetes YAML을 IaC의 원칙(선언적 정의, 재조정 루프, 멱등성)으로 읽고, 실제 dflow 배포 매니페스트가 그 원칙을 어디까지 지키고 있는지 감사(audit)해본 기록입니다."
 ---
