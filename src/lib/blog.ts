@@ -12,7 +12,6 @@ function readPost(id: string): BlogPost {
     id,
     title: data.title,
     category: data.category,
-    date: data.date,
     excerpt: data.excerpt,
     order: data.order ?? 0,
     content,

@@ -46,7 +46,6 @@ export function BlogListPage({ posts }: { posts: BlogPost[] }) {
                       {cat && <span className="blog-cat-tag">{cat.label}</span>}
                       <h3 className="blog-card-title">{post.title}</h3>
                       <p className="blog-card-excerpt">{post.excerpt}</p>
-                      <span className="blog-card-date">{post.date}</span>
                     </Link>
                   );
                 })}

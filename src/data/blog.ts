@@ -11,7 +11,6 @@ export type BlogPost = {
   id: string;
   title: string;
   category: BlogCategory;
-  date: string;
   excerpt: string;
   order: number;
   content: string;

@@ -40,8 +40,7 @@ export function BlogPostBody({ post }: { post: BlogPost }) {
     <>
       {cat && <span className="blog-cat-tag">{cat.label}</span>}
       <h1 className="dt-title-lg" style={{ marginTop: 14 }}>{post.title}</h1>
-      <div className="blog-card-date" style={{ marginTop: 10 }}>{post.date}</div>
-      <p className="dt-summary">{post.excerpt}</p>
+      <p className="dt-summary" style={{ marginTop: 14 }}>{post.excerpt}</p>
       <div className="dt-section" style={{ marginTop: 40 }}>
         <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
           {post.content}
