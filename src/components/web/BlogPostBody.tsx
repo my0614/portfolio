@@ -5,6 +5,7 @@ import type { Element } from 'hast';
 import { BLOG_CATEGORIES } from '@/data/blog';
 import type { BlogPost } from '@/data/blog';
 import { CodeBlock } from './CodeBlock';
+import { MermaidDiagram } from './MermaidDiagram';
 
 function extractText(node: Element): string {
   return node.children
@@ -29,6 +30,11 @@ const components = {
   pre: ({ node }: WithNode<{}>) => {
     const codeNode = node?.children.find((c): c is Element => c.type === 'element' && c.tagName === 'code');
     const code = codeNode ? extractText(codeNode).replace(/\n$/, '') : '';
+    const className = codeNode?.properties?.className;
+    const classes = Array.isArray(className) ? className.map(String) : [];
+    if (classes.includes('language-mermaid')) {
+      return <MermaidDiagram code={code} />;
+    }
     return <CodeBlock code={code} />;
   },
   code: ({ node, ...props }: WithNode<React.ComponentProps<'code'>>) => <code className="inline-code" {...props} />,

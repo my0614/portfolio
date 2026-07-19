@@ -272,6 +272,9 @@ section { position: relative; }
 .inline-code { background: var(--bg-gray); color: var(--accent-dark); padding: 2px 6px; border-radius: 5px; font-size: 0.9em; font-family: ui-monospace, monospace; }
 .blog-img { max-width: 100%; border-radius: 16px; margin-top: 18px; display: block; }
 .blog-table-wrap { margin-top: 18px; overflow-x: auto; border-radius: 14px; border: 1px solid var(--border); }
+.mermaid-diagram { margin-top: 18px; padding: 20px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); overflow-x: auto; display: flex; justify-content: center; }
+.mermaid-diagram svg { max-width: 100%; }
+.mermaid-loading { margin-top: 18px; padding: 40px; border-radius: 14px; border: 1px dashed var(--border); text-align: center; color: var(--text-3); font-size: 14px; }
 .blog-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .blog-table th { text-align: left; padding: 11px 16px; background: var(--bg-gray); font-weight: 700; color: var(--text-3); border-bottom: 1px solid var(--border); }
 .blog-table td { padding: 11px 16px; border-bottom: 1px solid var(--border-soft); color: var(--text-2); }
