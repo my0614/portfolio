@@ -1,6 +1,6 @@
 ---
 title: "쿠버네티스 멀티테넌시는 격리 수준을 고르는 문제다"
-category: study
+category: mlops
 order: -7
 excerpt: "여러 팀이 클러스터 하나를 나눠 쓸 때 Namespace만으로는 부족한 이유와, ResourceQuota·NetworkPolicy·RBAC로 리소스·네트워크·권한을 각각 격리해야 하는 이유를 정리합니다."
 ---

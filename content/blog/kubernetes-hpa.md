@@ -1,6 +1,6 @@
 ---
 title: "HPA는 Pod 개수를 어떻게 자동으로 조절하나"
-category: study
+category: mlops
 order: -8
 excerpt: "HPA가 Deployment의 replicas 값을 대신 조정하는 방식, desiredReplicas를 계산하는 식, 급격한 스케일링을 막는 stabilization window, 그리고 VPA·Cluster Autoscaler와의 차이를 정리합니다."
 ---
