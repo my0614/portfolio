@@ -12,8 +12,12 @@ type FilterKey = 'all' | BlogCategory;
 export function BlogListPage({ posts }: { posts: BlogPost[] }) {
   const [theme, toggleTheme] = useTheme();
   const [filter, setFilter] = useState<FilterKey>('all');
+  const [query, setQuery] = useState('');
   const ref = useReveal();
-  const shown = posts.filter(p => filter === 'all' ? true : p.category === filter);
+  const q = query.trim().toLowerCase();
+  const shown = posts
+    .filter(p => filter === 'all' ? true : p.category === filter)
+    .filter(p => q === '' ? true : (p.title + p.excerpt + p.content).toLowerCase().includes(q));
 
   return (
     <>
@@ -35,8 +39,27 @@ export function BlogListPage({ posts }: { posts: BlogPost[] }) {
               </div>
             </div>
 
+            <div className="blog-search reveal">
+              <svg className="blog-search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                className="blog-search-input"
+                type="text"
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="제목이나 내용으로 검색"
+                aria-label="블로그 글 검색"
+              />
+            </div>
+
             {shown.length === 0 ? (
-              <div className="blog-empty reveal">아직 작성된 글이 없어요. 곧 첫 글을 올릴 예정이에요.</div>
+              <div className="blog-empty reveal">
+                {posts.length === 0
+                  ? '아직 작성된 글이 없어요. 곧 첫 글을 올릴 예정이에요.'
+                  : '검색 결과가 없어요. 다른 검색어로 시도해 보세요.'}
+              </div>
             ) : (
               <div className="blog-grid">
                 {shown.map(post => {

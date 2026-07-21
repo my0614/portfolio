@@ -228,6 +228,15 @@ section { position: relative; }
 .proj-more { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14.5px; font-weight: 700; margin-top: 22px; }
 
 /* ===== blog ===== */
+.blog-search { position: relative; margin-bottom: 24px; }
+.blog-search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-4); pointer-events: none; }
+.blog-search-input {
+  width: 100%; padding: 14px 17px 14px 44px; font-size: 15px; font-family: inherit;
+  border-radius: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--text);
+  outline: none; transition: border-color .2s;
+}
+.blog-search-input:focus { border-color: var(--accent); }
+.blog-search-input::placeholder { color: var(--text-4); }
 .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .blog-card {
   display: block; width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 22px;
