@@ -52,6 +52,28 @@ flowchart LR
 - `terraform apply` — plan에서 계산한 변경 사항을 실제로 클라우드에 적용하고, 그 결과를 State 파일에 반영한다.
 - `terraform destroy` — 코드로 관리 중인 리소스를 전부 삭제한다.
 
+## apply가 내부적으로 실행되는 과정
+
+위 워크플로우는 CLI 명령 관점이고, `plan`/`apply` 내부에서는 실제로 아래 순서로 처리된다.
+
+```mermaid
+flowchart TD
+    HCL["HCL 코드"] --> GRAPH["리소스 간 참조로 의존성 그래프(DAG) 구성"]
+    ST[("State 파일")] --> DIFF
+    RF["refresh: 실제 인프라 현재 상태 조회"] --> DIFF
+    GRAPH --> DIFF["목표 상태(코드) vs 현재 상태(State·실제 인프라) 비교"]
+    DIFF --> PLAN["추가·변경·삭제 계획 생성"]
+    PLAN --> EXEC["그래프 순서대로 실행\n(의존관계 없는 리소스는 병렬 처리)"]
+    EXEC --> API["Provider → 클라우드 API 호출"]
+    API --> INFRA[("실제 인프라에 반영")]
+    API --> ST2[("State 파일 갱신")]
+```
+
+1. 코드에 적힌 리소스 참조(`azurerm_storage_account.sa`가 `azurerm_resource_group.rg`를 참조하는 것처럼)를 바탕으로 의존성 그래프(DAG)를 만든다.
+2. State에 남은 마지막 상태, `refresh`로 다시 조회한 실제 인프라 상태, 코드에 선언된 목표 상태 — 이 세 가지를 비교해 diff를 계산한다. `plan`이 보여주는 결과가 바로 이 diff다.
+3. `apply`는 이 diff를 그래프 순서대로 처리한다. 서로 의존하지 않는 리소스는 병렬로 동시에 만들고(예: 아래 예제에 리소스 그룹이 하나 더 있었다면 둘은 동시에 생성됐을 것), 의존 관계가 있는 리소스만 순서를 지켜서 처리한다.
+4. 각 리소스는 Provider를 거쳐 실제 클라우드 API 호출로 이어지고, 성공할 때마다 그 결과가 바로 State 파일에 반영된다. 중간에 하나가 실패해도 그 시점까지 처리된 리소스는 State에 남기 때문에, 다음 `apply`는 처음부터 다시 하지 않고 실패한 지점부터 이어간다.
+
 ## 코드 예제
 
 Azure에 리소스 그룹과 스토리지 계정을 만드는 간단한 예제다.

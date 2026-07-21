@@ -1,12 +1,20 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Nav } from './Nav';
 import { Footer } from './ContactSection';
 import { useTheme } from './hooks';
 
 export function BlogPostPage({ children }: { children: React.ReactNode }) {
   const [theme, toggleTheme] = useTheme();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') router.push('/blog'); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [router]);
 
   return (
     <>
