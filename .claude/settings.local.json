@@ -93,7 +93,20 @@
       "Bash(pdfinfo /Users/kimminyoung/Desktop/desktop-portfolio-studio-main/public/projects/김민영_포트폴리오.pdf)",
       "Bash(pdftotext -layout \"public/projects/김민영_이력서.pdf\" -)",
       "Bash(lsof -i :3001 -sTCP:LISTEN)",
-      "Bash(xargs -r kill)"
+      "Bash(xargs -r kill)",
+      "Bash(grep -o \"정리$\" /tmp/blog-post3.html)",
+      "Bash(kill 4167)",
+      "WebFetch(domain:www.youtube.com)",
+      "Bash(sort -t: -k3 -n)",
+      "Bash(lsof -i :3000 -sTCP:LISTEN)",
+      "Bash(ps -p 73366 -o command=)",
+      "Bash(ps -p 73366 -o pid,ppid,command=)",
+      "Bash(ps -p 73364 -o pid,ppid,command=)",
+      "Bash(kill 73338)",
+      "Bash(ps -p 73338 -o pid=)",
+      "Bash(awk '-F: ' '{print $NF, $0}')",
+      "Bash(xargs -I{} sh -c 'echo \"== {} ==\"; grep \"^title:\" {}')",
+      "Bash(sort -t: -k2 -n)"
     ]
   }
 }
