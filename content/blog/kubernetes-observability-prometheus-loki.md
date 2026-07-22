@@ -48,7 +48,19 @@ spec:
       interval: 15s
 ```
 
-이렇게 선언하면 Prometheus가 `app: dflow-app` 라벨을 가진 Service를 찾아서 15초마다 `/metrics` 엔드포인트를 긁는다. 수집된 데이터는 PromQL이라는 쿼리 언어로 조회한다.
+이렇게 선언하면 Prometheus가 `app: dflow-app` 라벨을 가진 Service를 찾아서 15초마다 `/metrics` 엔드포인트를 긁는다.
+
+이 ServiceMonitor를 손으로 `kubectl apply`하는 대신 ArgoCD로 git 저장소 상태와 클러스터 상태를 동기화하도록 관리하고 있다. 매니페스트를 커밋하면 ArgoCD가 그 변경을 감지해서 클러스터에 그대로 반영한다.
+
+![ArgoCD Applications 목록에서 api-server 앱이 Healthy·Synced 상태인 화면](/blog/kubernetes-observability-prometheus-loki/argocd-applications-list.png)
+
+api-server용 ServiceMonitor와 알림 규칙(PrometheusRule)을 추가하는 커밋을 푸시하면, ArgoCD가 이를 감지해 자동으로 동기화한다.
+
+![ArgoCD Application Details Tree에서 api-server 앱이 svc·deploy·pod와 함께 servicemonitor·prometheusrule 리소스로 동기화된 화면](/blog/kubernetes-observability-prometheus-loki/argocd-application-tree.png)
+
+트리 뷰를 보면 `api-server` 애플리케이션 아래 실제 워크로드(svc·deploy·rs·pod)뿐 아니라 방금 추가한 `servicemonitor`(api-server)와 `prometheusrule`(api-server-alerts)까지 하나의 Git 커밋으로 함께 배포된 걸 확인할 수 있다. 관측 설정 자체도 애플리케이션 매니페스트와 같은 방식으로 버전 관리·배포된다는 뜻이다.
+
+수집된 데이터는 PromQL이라는 쿼리 언어로 조회한다.
 
 ```promql
 # 최근 5분간 Pod가 재시작된 횟수
@@ -78,6 +90,10 @@ Prometheus의 PromQL과 Loki의 LogQL이 문법을 의도적으로 비슷하게 
 
 Grafana는 그 자체로 데이터를 수집하지 않고, Prometheus와 Loki를 각각 데이터 소스로 등록해서 하나의 대시보드에서 같이 보여준다. 여기서 중요한 건 **같은 라벨(예: `pod`, `app`)로 메트릭 그래프와 로그를 나란히 배치할 수 있다는 점**이다. CPU 그래프에서 튀는 지점을 확인하고, 바로 옆 로그 패널에서 같은 시간대의 로그를 필터링해서 보는 식의 조사가 한 화면에서 끝난다.
 
+![Grafana의 Kubernetes / Networking / Pod 대시보드](/blog/kubernetes-observability-prometheus-loki/grafana-dashboard-search.png)
+
+실제로는 `Dashboards > Kubernetes / Networking / Pod`처럼 미리 만들어둔 대시보드에서 `namespace`·`pod` 라벨만 바꿔가며 필요한 파드를 바로 조회하는 식으로 쓴다.
+
 ## 장애가 나면 실제로 이렇게 조사한다
 
 전체 흐름을 그리면 이렇다.
@@ -99,7 +115,18 @@ flowchart LR
 예를 들어 특정 파드가 반복적으로 재시작되는 상황이라면 아래 순서로 조사한다.
 
 1. **Alertmanager가 먼저 알린다.** Prometheus에 `increase(kube_pod_container_status_restarts_total[5m]) > 3` 같은 알림 규칙을 걸어두면, 조건을 만족하는 순간 Alertmanager가 Slack으로 알림을 보낸다. 사람이 대시보드를 계속 들여다보지 않아도 이상 신호를 먼저 받는다.
+
+    실제로 노드를 하나 강제로 NotReady 상태로 만들고 감시 컴포넌트(kube-state-metrics·Prometheus·Alertmanager)를 장애 대상 노드가 아닌 곳에 고정 배치해서 알림 파이프라인이 설계값대로 동작하는지 실측해본 적이 있다.
+
+    ![NotReady 발생부터 Alertmanager 알림·자동 해제까지의 실측 타임라인](/blog/kubernetes-observability-prometheus-loki/alertmanager-timeline-experiment.png)
+
+    `for: 5m`로 걸어둔 규칙 기준으로 NotReady 감지(+43초) → 알림 pending 시작(+1분13초) → firing 전환 및 Alertmanager 도달(+6분22초, 설계값과 거의 일치) → 복구 후 51초 만에 알림 자동 해제까지, Prometheus `query_range`로 조회한 원본 시계열로 전 구간을 확인할 수 있었다.
+
 2. **Grafana에서 메트릭으로 범위를 좁힌다.** 해당 파드의 메모리·CPU 그래프를 보고, 재시작 직전에 메모리가 limit에 붙어 OOMKilled 됐는지, 아니면 다른 패턴인지를 먼저 확인한다.
+
+    ![Grafana에서 특정 파드의 네트워크 대역폭을 좁혀서 보는 화면](/blog/kubernetes-observability-prometheus-loki/grafana-pod-bandwidth.png)
+
+    이런 식으로 `pod` 라벨을 특정 파드 하나로 좁혀두면, 재시작 전후로 트래픽·메모리 패턴이 어떻게 바뀌었는지를 한눈에 비교할 수 있다.
 3. **Loki에서 그 시간대 로그를 확인한다.** `{pod="dflow-app-xxxxx"}` 라벨로 좁혀서, 재시작 직전 몇 분간 무슨 에러가 찍혔는지 본다. 파드가 이미 사라졌어도 Loki에는 그 파드가 살아있던 동안의 로그가 라벨과 함께 그대로 남아있다.
 4. **원인을 확정하고 대응한다.** 메모리 누수라면 limit 조정이나 코드 수정, 특정 요청 패턴이 원인이면 그 요청을 차단하거나 재시도 로직을 손본다.
 

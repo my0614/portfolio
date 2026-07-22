@@ -106,7 +106,13 @@
       "Bash(ps -p 73338 -o pid=)",
       "Bash(awk '-F: ' '{print $NF, $0}')",
       "Bash(xargs -I{} sh -c 'echo \"== {} ==\"; grep \"^title:\" {}')",
-      "Bash(sort -t: -k2 -n)"
+      "Bash(sort -t: -k2 -n)",
+      "Bash(grep -rn \"public/blog\\\\|/blog/\\\\[slug\\\\]\\\\|params.slug\\\\|blog/\\\\${\" app/blog)",
+      "Bash(mkdir -p \"public/blog/kubernetes-observability-prometheus-loki\")",
+      "Bash(mv \"public/projects/grafana.png\" \"public/blog/kubernetes-observability-prometheus-loki/grafana-pod-bandwidth.png\")",
+      "Bash(mv \"public/projects/grafana2.png\" \"public/blog/kubernetes-observability-prometheus-loki/grafana-dashboard-search.png\")",
+      "Bash(mv \"public/projects/장애대응.png\" \"public/blog/kubernetes-observability-prometheus-loki/alertmanager-timeline-experiment.png\")",
+      "Bash(awk -F: '{print $3, $1}')"
     ]
   }
 }
