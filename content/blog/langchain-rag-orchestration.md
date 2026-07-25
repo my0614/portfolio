@@ -1,5 +1,5 @@
 ---
-title: "LangChain은 정확히 뭘 오케스트레이션하는 도구인가"
+title: "LangChain은 정확히 무엇을 오케스트레이션하는가"
 category: llm
 order: -23
 excerpt: "LangChain을 '프롬프트에 LLM 붙이는 라이브러리'로만 보면 놓치는 부분이 있습니다. 쀼라인드 RAG 상담 챗봇에서 '언제 검색을 트리거할지, 얼마나 엄격하게 근거를 요구할지'를 LangChain으로 어떻게 설계했는지 코드와 함께 정리합니다."

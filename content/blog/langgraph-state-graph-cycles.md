@@ -1,5 +1,5 @@
 ---
-title: "LangGraph는 LangChain 체인이 못 푸는 뭘 풀려고 나왔나"
+title: "LangGraph는 LangChain 체인의 어떤 한계를 풀어주는가"
 category: study
 order: -24
 excerpt: "LCEL 파이프(|)는 한 방향으로만 흐르는 DAG라 '루프'를 못 만듭니다. LangGraph가 State·Node·Edge로 순환과 조건 분기를 어떻게 표현하는지, 에이전트 루프 예제로 개념을 정리합니다."

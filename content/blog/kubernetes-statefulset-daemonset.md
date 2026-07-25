@@ -1,5 +1,5 @@
 ---
-title: "StatefulSet과 DaemonSet은 Deployment와 뭐가 다른가 — 그리고 왜 그 대가를 치르는가"
+title: "StatefulSet과 DaemonSet은 Deployment와 뭐가 다른가"
 category: mlops
 order: -22
 excerpt: "Deployment로 충분하지 않은 두 가지 워크로드, StatefulSet(고유 정체성이 필요한 파드)과 DaemonSet(노드마다 하나씩 떠야 하는 파드)이 각각 무엇을 위해 존재하는지, 그리고 그 대가로 실제 장애 실험에서 어떤 트레이드오프가 드러났는지 정리합니다."
