@@ -20,7 +20,9 @@ export function WebApp() {
   const closeProject = useCallback(() => {
     setDetail(null);
     document.body.style.overflow = '';
-    if (history.state?.detail) history.back();
+    if (window.location.search) {
+      history.replaceState(null, '', window.location.pathname);
+    }
   }, []);
 
   useEffect(() => {

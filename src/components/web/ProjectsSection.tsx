@@ -384,7 +384,7 @@ function ProjectDetailWeb({ id, onClose }: ProjectDetailWebProps) {
           <WebTechAccordion tech={s.tech} />
         </div>
 
-        {pr.link && (
+        {pr.link && pr.id !== 'eyakmeoyak' && (
           <div style={{ marginTop: 56 }}>
             <a className="btn btn-primary" href={pr.link} target="_blank" rel="noreferrer">
               실제 서비스 보기 <Icon name="arrow" size={18} stroke={2.2} />
