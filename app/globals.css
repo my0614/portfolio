@@ -71,6 +71,7 @@ body {
   overflow-x: hidden;
 }
 a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
 img { display: block; max-width: 100%; }
 ::selection { background: var(--accent-bg); color: var(--accent-dark); }
 
@@ -380,10 +381,10 @@ section { position: relative; }
 .skill-group-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .skill-group-row .sg-label { font-size: 11px; font-weight: 800; color: var(--text-4); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; min-width: 80px; }
 .info-list { display: flex; flex-direction: column; gap: 0; }
-.info-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; }
-.info-row .ik { font-size: 12.5px; color: var(--text-4); font-weight: 600; font-family: ui-monospace, monospace; white-space: nowrap; }
+.info-row { display: flex; align-items: center; gap: 10px; padding: 13px 0; }
+.info-row .ik { font-size: 14px; color: var(--text-3); font-weight: 600; font-family: ui-monospace, monospace; white-space: nowrap; }
 .info-row .ik-line { flex: 1; height: 1px; background: var(--border-soft); }
-.info-row .iv { font-size: 13px; color: var(--text-2); font-weight: 600; white-space: nowrap; }
+.info-row .iv { font-size: 16px; color: var(--text); font-weight: 700; white-space: nowrap; }
 
 /* ===== github contributions ===== */
 .gh-contrib { display: flex; flex-direction: column; gap: 8px; }

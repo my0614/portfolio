@@ -1113,13 +1113,13 @@ export const PROJECTS: ProjectData[] = [
     tags: [
       "FastAPI",
       "Next.js",
+      "JWT",
+      "Azure OpenAI",
       "PostgreSQL",
       "SQLAlchemy",
       "Alembic",
-      "Azure OpenAI",
-      "Azure Container Apps",
       "Azure Blob Storage",
-      "JWT",
+      "Azure Container Apps",
     ],
     year: "2026.07 ~ 진행중",
     metrics: [
@@ -1178,16 +1178,6 @@ export const PROJECTS: ProjectData[] = [
           ],
         },
         {
-          title: "FastAPI BackgroundTasks 순차 실행 함정 — asyncio.gather로 병렬화",
-          description:
-            "반복문 안에서 BackgroundTasks를 여러 번 호출하면 병렬이 아니라 순차로 실행된다는 걸 Starlette 소스 추적으로 확인하고 재설계",
-          points: [
-            "월 단위 반찬 추천 생성이 5주치를 순차 처리해 매번 4분 25초 소요되던 문제 발견",
-            "원인: BackgroundTasks가 등록된 작업을 하나씩 await로 순회 실행 — 반복 호출은 병렬이 아니라 큐잉",
-            "주별 생성 작업을 asyncio.gather로 묶어 진짜 병렬 실행으로 전환, 4분 25초 → 62초로 단축",
-          ],
-        },
-        {
           title: "잔반 분석 YOLO-seg 모델 — 자동 라벨링부터 학습 데이터 구축까지 직접 구축",
           description:
             "잔반율 계산에 쓰이는 YOLO-seg 학습 데이터를 자체 파이프라인으로 준비 — SAM2 자동 마스크 생성으로 라벨링 부담을 줄이고, 폴리곤 좌표를 보존하는 증강으로 학습 데이터를 확장",
@@ -1197,6 +1187,16 @@ export const PROJECTS: ProjectData[] = [
             "coco_to_yolo.py — Roboflow COCO export를 YOLO-seg 라벨로 변환, category id를 0-index로 리매핑하고 classes.txt 별도 기록",
             "augment.py — Albumentations로 이미지·폴리곤 좌표를 함께 변환(SafeRotate 등), 클리핑으로 점 3개 미만·면적 0에 가까워진 폴리곤은 자동 스킵해 깨진 라벨 방지",
             "완성된 데이터셋은 Azure Blob Storage에 스테이징, 서빙 코드(FastAPI)와는 독립된 domain 폴더로 분리해 API 배포 이미지에서 제외",
+          ],
+        },
+        {
+          title: "FastAPI BackgroundTasks 순차 실행 함정 — asyncio.gather로 병렬화",
+          description:
+            "반복문 안에서 BackgroundTasks를 여러 번 호출하면 병렬이 아니라 순차로 실행된다는 걸 Starlette 소스 추적으로 확인하고 재설계",
+          points: [
+            "월 단위 반찬 추천 생성이 5주치를 순차 처리해 매번 4분 25초 소요되던 문제 발견",
+            "원인: BackgroundTasks가 등록된 작업을 하나씩 await로 순회 실행 — 반복 호출은 병렬이 아니라 큐잉",
+            "주별 생성 작업을 asyncio.gather로 묶어 진짜 병렬 실행으로 전환, 4분 25초 → 62초로 단축",
           ],
         },
         {
