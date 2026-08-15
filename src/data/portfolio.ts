@@ -1096,4 +1096,130 @@ export const PROJECTS: ProjectData[] = [
       ],
     },
   },
+  {
+    id: "grandfood",
+    type: "team",
+    title: "그랜드푸드",
+    subtitle: "돌봄시설·지자체 대상 AI 반찬 구독 & 건강 모니터링 플랫폼",
+    company: "GrandFood Team",
+    initial: "그",
+    summary:
+      "어르신 반찬 구독과 보호자·시설·지자체 관리 체계를 하나의 서비스로 묶은 B2C·B2G 플랫폼. Azure OpenAI 기반 개인 맞춤 반찬 추천, GPU 추론 서버 연동 잔반 분석, 이상신호 알림·TTS 안부확인으로 건강을 모니터링하고, 어르신 본인·보호자·시설 담당자·지자체 최종관리자까지 성격이 다른 4종 주체를 하나의 JWT 체계로 묶은 인증/인가 구조를 설계했습니다. 백엔드 설계·개발을 총괄하고 관리자 웹·사용자·보호자 앱 2종 프론트엔드를 팀원들과 공동 개발했습니다.",
+    thumb: "/projects/grandfood-mark.svg",
+    image: {
+      src: "/projects/grandfood-icon.svg",
+      caption: "그랜드푸드 브랜드 마크 — 실제 서비스 화면은 준비 중입니다.",
+    },
+    tags: [
+      "FastAPI",
+      "Next.js",
+      "PostgreSQL",
+      "SQLAlchemy",
+      "Alembic",
+      "Azure OpenAI",
+      "Azure Container Apps",
+      "Azure Blob Storage",
+      "JWT",
+    ],
+    year: "2026.07 ~ 진행중",
+    metrics: [
+      { value: "62초", label: "월 단위 반찬 추천 배치", from: "4분 25초" },
+      { value: "4종", label: "역할별 JWT 인증 주체", from: "1종 토큰 체계" },
+      { value: "SAM2", label: "자동 라벨링 기반 잔반분석 YOLO-seg 학습" },
+    ],
+    sections: {
+      flow: [
+        {
+          title: "지자체·시설 등록 및 담당자 계정 발급",
+          description:
+            "최종관리자가 관리자 웹에서 지자체·시설 코드를 생성하고, 소속·직책에 따라 담당자 계정(AccessLevel 6종)을 발급 — 회원가입 신청도 같은 화면에서 승인",
+        },
+        {
+          title: "어르신 온보딩 — QR 초대",
+          description:
+            "담당자가 대상자를 등록하면 QR 초대로 보호자·어르신 본인 앱 온보딩 진입, 생활정보·건강 프로필 설문으로 개인화 데이터 수집",
+        },
+        {
+          title: "Azure OpenAI 기반 반찬 추천",
+          description:
+            "건강 프로필·복약 규칙·구독 주기를 바탕으로 LLM이 후보 반찬의 적합도를 판정하고, 결정론적 스케줄러가 이번 주 배송별로 반찬을 배분",
+        },
+        {
+          title: "식사 인증 사진 업로드 → 잔반 분석",
+          description:
+            "식전·식후 사진을 SAS URL로 외부 팀의 GPU 추론 서버(YOLO)에 전달, 잔반율을 계산해 섭취 기록·영양 로그로 환산",
+        },
+        {
+          title: "이상신호 감지 → 알림·TTS 안부확인 → 보호자 대시보드",
+          description:
+            "영양 미달·잔반 과다를 감지해 알림을 발송하고 24시간 무응답 시 담당자에게 에스컬레이션, 별도로 TTS 안부확인 콜을 스케줄링해 보호자 앱에서 통합 조회",
+        },
+      ],
+      tech: [
+        {
+          title: "역할 4종을 하나의 JWT 체계로 묶은 인증/인가 설계",
+          description:
+            "보호자·어르신 본인·시설 담당자·지자체 최종관리자까지 성격이 다른 4종 로그인 주체를 토큰 형식은 하나로 통일하고, actor_type 클레임과 FastAPI dependency로 구분",
+          points: [
+            "로그인 엔드포인트는 3개(guardians/users/staff)로 나누되 토큰 발급 함수는 하나 — sub와 actor_type 클레임만으로 주체 판별",
+            "여러 주체가 동시에 호출 가능해야 하는 엔드포인트(어르신 사진 업로드 등)는 Depends 체이닝 대신 ElderAppCaller 통합 dependency로 분기",
+            "담당자(staff) 내부 권한은 AccessLevel 6종을 3단계 스코프로 묶고, '어디까지 보이는가(스코프)'와 '뭘 할 수 있는가(액션 권한)'를 다른 축으로 분리",
+            "권한 계산 실패 시 기본값은 항상 더 좁은 쪽(빈 리스트)으로 fail-safe, 401 응답에 missing_token/token_expired/token_invalid 코드를 실어 프론트의 재로그인 오탐 방지",
+          ],
+        },
+        {
+          title: "Azure OpenAI 기반 반찬 추천 — LLM 판정 + 결정론적 스케줄러 2단계 설계",
+          description:
+            "LLM이 반찬 적합도만 판정하고, 실제 배송별 배분은 순수 Python 스케줄러가 담당해 동일 입력에 항상 동일 결과가 나오도록 설계",
+          points: [
+            "1단계: Azure OpenAI structured outputs(json_schema, strict=True)로 후보 반찬을 recommended/caution/avoid로 판정, 후보 id 밖 응답 원천 차단",
+            "2단계: BanchanDeliveryScheduler가 판정 결과를 이번 주 배송 횟수만큼 라운드로빈 배분 — LLM 응답이 아니라 이 단계가 결과의 결정성을 보장",
+            "알레르기 규칙은 LLM에 보내기 전 코드에서 제외, 비선호 음식은 컨텍스트로만 전달해 다운웨이트",
+          ],
+        },
+        {
+          title: "FastAPI BackgroundTasks 순차 실행 함정 — asyncio.gather로 병렬화",
+          description:
+            "반복문 안에서 BackgroundTasks를 여러 번 호출하면 병렬이 아니라 순차로 실행된다는 걸 Starlette 소스 추적으로 확인하고 재설계",
+          points: [
+            "월 단위 반찬 추천 생성이 5주치를 순차 처리해 매번 4분 25초 소요되던 문제 발견",
+            "원인: BackgroundTasks가 등록된 작업을 하나씩 await로 순회 실행 — 반복 호출은 병렬이 아니라 큐잉",
+            "주별 생성 작업을 asyncio.gather로 묶어 진짜 병렬 실행으로 전환, 4분 25초 → 62초로 단축",
+          ],
+        },
+        {
+          title: "잔반 분석 YOLO-seg 모델 — 자동 라벨링부터 학습 데이터 구축까지 직접 구축",
+          description:
+            "잔반율 계산에 쓰이는 YOLO-seg 학습 데이터를 자체 파이프라인으로 준비 — SAM2 자동 마스크 생성으로 라벨링 부담을 줄이고, 폴리곤 좌표를 보존하는 증강으로 학습 데이터를 확장",
+          points: [
+            "네이버 이미지 크롤링(naver_image_downloader.py)으로 반찬별 원본 이미지 수집",
+            "SAM2AutomaticMaskGenerator로 자동 세그멘테이션 마스크 생성 후 Roboflow에서 COCO 포맷으로 정제·보완",
+            "coco_to_yolo.py — Roboflow COCO export를 YOLO-seg 라벨로 변환, category id를 0-index로 리매핑하고 classes.txt 별도 기록",
+            "augment.py — Albumentations로 이미지·폴리곤 좌표를 함께 변환(SafeRotate 등), 클리핑으로 점 3개 미만·면적 0에 가까워진 폴리곤은 자동 스킵해 깨진 라벨 방지",
+            "완성된 데이터셋은 Azure Blob Storage에 스테이징, 서빙 코드(FastAPI)와는 독립된 domain 폴더로 분리해 API 배포 이미지에서 제외",
+          ],
+        },
+        {
+          title: "SAS URL 기반 GPU 추론 서버 이미지 전달",
+          description:
+            "외부 팀이 운영하는 GPU 추론 서버(YOLO 잔반 분석)에 사진을 넘길 때 계정 키 대신 시간 제한·권한 범위가 있는 SAS URL로 전달",
+          points: [
+            "계정 키 공유 대신 만료 시간·허용 작업이 한정된 SAS URL 발급으로 최소 권한 원칙 적용",
+            "식전/식후 사진을 Blob Storage에 저장 후 SAS URL만 GPU 서버에 전달, 원본 저장소 접근 권한은 공유하지 않음",
+          ],
+        },
+      ],
+      result: [
+        "3개 레포(백엔드·관리자 웹·사용자 앱) 전체를 PR 리뷰 기반으로 운영하며 백엔드 설계·개발 총괄",
+        "역할 4종 JWT 인증 구조, LLM 반찬 추천 결정론적 설계, BackgroundTasks 병렬화 등 실제로 겪은 구조적 문제를 블로그로 정리해 팀 지식으로 남김",
+        "Web App → Container App 배포 전환 과정에서 '빌드 성공 = 배포 완료'가 아닌 함정을 사전에 파악해 무중단 마이그레이션",
+      ],
+      expect: [
+        "Azure Notification Hubs 연동으로 알림·TTS 안부확인을 로깅 스텁이 아닌 실제 push/SMS/카카오 발송으로 전환",
+        "JWT/세션 인증이 붙은 보호자 대시보드 API에 소유권 검증(자기 소속 대상자인지) 추가",
+        "ORDERS 기반 실제 배송일 스케줄링 연동으로 반찬 추천을 배송 횟수가 아닌 요일 단위 캘린더로 고도화",
+        "시설 담당자용 프리미엄 건강 리포트 confirm 엔드포인트 추가로 초안→확정 흐름 완성",
+      ],
+    },
+  },
 ];

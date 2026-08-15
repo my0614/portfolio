@@ -8,11 +8,13 @@ const ACCENTS: Record<string, string> = {
   dflow:     '#06b6d4',
   pillcare:  '#0ea5e9',
   'dear-me': '#818cf8',
+  grandfood: '#B96843',
 };
 
 const COMPANY_LOGOS: Record<string, string> = {
   '(주)무무즈':    '/projects/moomooz-logo.jpg',
   '한컴인스페이스': '/projects/hancom-logo.png',
+  'GrandFood Team': '/projects/grandfood-mark.svg',
 };
 
 interface Props {
