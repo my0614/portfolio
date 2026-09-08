@@ -10,7 +10,7 @@ excerpt: "EKS 관측 플랫폼, KEDA/Karpenter 오토스케일링, 장애 대응
 
 ## SRE의 정의
 
-**SRE(Site Reliability Engineering)**는 Google이 2000년대 초반에 만든 개념으로, 만든 사람인 Ben Treynor Sloss의 정의가 가장 자주 인용된다.
+**SRE**(Site Reliability Engineering)는 Google이 2000년대 초반에 만든 개념으로, 만든 사람인 Ben Treynor Sloss의 정의가 가장 자주 인용된다.
 
 > "SRE is what happens when you ask a software engineer to design an operations team."
 > (소프트웨어 엔지니어에게 운영팀을 설계해보라고 시키면 나오는 결과물이 SRE다.)

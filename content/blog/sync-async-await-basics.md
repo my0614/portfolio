@@ -45,7 +45,7 @@ flowchart TD
 | Promise | `readFile(path).then(data => ...).catch(err => ...)` | 중첩은 풀리지만 `.then()` 체이닝이 길어지면 여전히 읽기 번거로움 |
 | async/await | `const data = await readFile(path)` | Promise를 동기 코드처럼 순서대로 읽고 쓸 수 있게 하는 문법 |
 
-async/await는 새로운 비동기 모델이 아니라 **Promise 위에 얹은 문법(syntactic sugar)**이다. `await`는 Promise가 처리(resolve/reject)될 때까지 해당 `async` 함수의 실행만 일시 정지시키고, 그 사이 다른 코드(이벤트 루프의 다른 작업)는 계속 실행된다. 스레드를 막는 동기의 blocking과는 다르다.
+async/await는 새로운 비동기 모델이 아니라 **Promise 위에 얹은 문법**(syntactic sugar)이다. `await`는 Promise가 처리(resolve/reject)될 때까지 해당 `async` 함수의 실행만 일시 정지시키고, 그 사이 다른 코드(이벤트 루프의 다른 작업)는 계속 실행된다. 스레드를 막는 동기의 blocking과는 다르다.
 
 ```javascript
 // Promise 체이닝

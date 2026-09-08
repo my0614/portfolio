@@ -49,7 +49,7 @@ kubectl describe node <node-name>
 ### 재발 방지
 
 - **PodDisruptionBudget**과 **다중 replica + anti-affinity**로, 노드 하나가 죽어도 서비스가 완전히 끊기지 않게 분산해둔다.
-- 클라우드 노드 풀의 **자동 복구(auto-repair)**를 켜서 사람이 개입하기 전에 노드가 교체되도록 한다.
+- 클라우드 노드 풀의 **자동 복구**(auto-repair)를 켜서 사람이 개입하기 전에 노드가 교체되도록 한다.
 - Alertmanager에 `kube_node_status_condition{condition="Ready", status="true"} == 0` 같은 규칙을 걸어 노드 상태 변화를 사람이 대시보드를 보기 전에 먼저 안다.
 
 ### 실제로 겪은 사례: 감시탑이 감시 대상과 함께 무너지다

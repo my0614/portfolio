@@ -5,7 +5,7 @@ order: -22
 excerpt: "Deployment로 충분하지 않은 두 가지 워크로드, StatefulSet(고유 정체성이 필요한 파드)과 DaemonSet(노드마다 하나씩 떠야 하는 파드)이 각각 무엇을 위해 존재하는지, 그리고 그 대가로 실제 장애 실험에서 어떤 트레이드오프가 드러났는지 정리합니다."
 ---
 
-[Pod, Deployment, Service 글](/blog/kubernetes-pod-deployment-service)에서 봤듯, Deployment는 "Pod가 죽으면 아무 노드에나 새로 하나 띄워서 개수만 맞추면 된다"는 전제 위에 서 있다. 이 전제가 성립하려면 Pod들이 서로 **완전히 교체 가능(interchangeable)** 해야 한다 — 어떤 Pod가 죽어도 상관없고, 새 Pod는 어디에 떠도 상관없어야 한다. 그런데 실제 클러스터를 운영하다 보면 이 전제가 깨지는 워크로드가 둘 있다. **"이 파드는 다른 파드로 대체할 수 없다"**는 것과 **"이 파드는 모든 노드에 하나씩 있어야 한다"**는 것. 각각 StatefulSet과 DaemonSet이 다루는 문제다.
+[Pod, Deployment, Service 글](/blog/kubernetes-pod-deployment-service)에서 봤듯, Deployment는 "Pod가 죽으면 아무 노드에나 새로 하나 띄워서 개수만 맞추면 된다"는 전제 위에 서 있다. 이 전제가 성립하려면 Pod들이 서로 **완전히 교체 가능(interchangeable)** 해야 한다 — 어떤 Pod가 죽어도 상관없고, 새 Pod는 어디에 떠도 상관없어야 한다. 그런데 실제 클러스터를 운영하다 보면 이 전제가 깨지는 워크로드가 둘 있다. "**이 파드는 다른 파드로 대체할 수 없다**"는 것과 "**이 파드는 모든 노드에 하나씩 있어야 한다**"는 것. 각각 StatefulSet과 DaemonSet이 다루는 문제다.
 
 ## StatefulSet — 교체 가능하지 않은 파드
 

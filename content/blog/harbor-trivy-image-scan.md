@@ -17,7 +17,7 @@ excerpt: "Harbor와 Trivy를 연동해 취약점 있는 이미지의 Pull을 차
 | 하는 일 | 이미지 저장·버전 관리·프로젝트 단위 RBAC·정책 적용 | 이미지 레이어를 열어서 OS 패키지·언어 의존성의 CVE 대조 |
 | 혼자 할 수 있는 일 | 이미지를 저장하고 내려준다 (취약점은 모른다) | 이미지 하나를 스캔해서 리포트를 뱉는다 (저장·정책은 모른다) |
 
-Harbor는 "이미지 창고"고 Trivy는 "그 창고에 들어오는 물건을 검수하는 사람"이다. Harbor는 이 검수를 자체적으로 하지 않고, **스캐너 어댑터(Scanner Adapter)**라는 표준 인터페이스를 열어두고 Trivy를 그 안에 꽂아 넣는 구조를 택했다.
+Harbor는 "이미지 창고"고 Trivy는 "그 창고에 들어오는 물건을 검수하는 사람"이다. Harbor는 이 검수를 자체적으로 하지 않고, **스캐너 어댑터**(Scanner Adapter)라는 표준 인터페이스를 열어두고 Trivy를 그 안에 꽂아 넣는 구조를 택했다.
 
 ```mermaid
 sequenceDiagram
@@ -72,7 +72,7 @@ curl -X PUT "https://harbor.internal/api/v2.0/projects/dflow" \
 
 정책을 걸어놓고 안심하고 있었는데, 실제로 취약한 이미지를 push해서 확인해보니 **Pull이 그냥 됐다.** 정책이 있는데 왜 안 걸리는지 원인을 추적했다.
 
-원인은 이미지를 빌드하는 방식에 있었다. Docker buildx(BuildKit)는 기본 설정에서 이미지를 빌드할 때 provenance(SLSA 출처 증명)와 SBOM attestation을 자동으로 함께 만든다. 이렇게 만든 이미지는 하나의 매니페스트가 아니라 **manifest list(멀티 아키텍처 인덱스)**로 push된다 — 실제 이미지 매니페스트와 attestation용 매니페스트가 인덱스 하나 아래 자식으로 묶이는 구조다.
+원인은 이미지를 빌드하는 방식에 있었다. Docker buildx(BuildKit)는 기본 설정에서 이미지를 빌드할 때 provenance(SLSA 출처 증명)와 SBOM attestation을 자동으로 함께 만든다. 이렇게 만든 이미지는 하나의 매니페스트가 아니라 **manifest list**(멀티 아키텍처 인덱스)로 push된다 — 실제 이미지 매니페스트와 attestation용 매니페스트가 인덱스 하나 아래 자식으로 묶이는 구조다.
 
 ```mermaid
 graph TD

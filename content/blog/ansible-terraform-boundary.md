@@ -37,7 +37,7 @@ flowchart LR
 
 ## Ansible이 하는 일: 인벤토리 → 플레이북
 
-Ansible은 두 가지로 구성된다. **인벤토리(inventory)**는 "어떤 서버들을 대상으로 할 것인가" 목록이고, **플레이북(playbook)**은 "그 서버들에 무엇을 할 것인가"를 순서대로 적은 YAML이다. Terraform이 만든 EC2의 IP를 인벤토리에 넣는 것부터 시작한다.
+Ansible은 두 가지로 구성된다. **인벤토리**(inventory)는 "어떤 서버들을 대상으로 할 것인가" 목록이고, **플레이북**(playbook)은 "그 서버들에 무엇을 할 것인가"를 순서대로 적은 YAML이다. Terraform이 만든 EC2의 IP를 인벤토리에 넣는 것부터 시작한다.
 
 ```ini
 # inventory.ini
@@ -94,7 +94,7 @@ Ansible은 두 가지로 구성된다. **인벤토리(inventory)**는 "어떤 �
       creates: /etc/kubernetes/admin.conf   # 이미 초기화됐으면 재실행하지 않음
 ```
 
-여기서 눈여겨볼 건 `creates: /etc/kubernetes/admin.conf`다. Ansible 태스크는 기본적으로 **멱등성(idempotency)**을 지향한다 — 같은 플레이북을 몇 번을 다시 실행해도 결과가 같아야 한다. `admin.conf`가 이미 있으면(=이미 초기화됐으면) `kubeadm init`을 다시 실행하지 않는다. `swapoff -a`처럼 그 자체로 멱등하지 않은 명령은 `changed_when`이나 조건을 걸어 반복 실행 시에도 안전하게 만든다. Terraform이 State 파일로 "지금 상태 vs 선언된 상태"를 비교해 멱등성을 보장하는 것과 같은 목표를, Ansible은 각 태스크 단위의 조건과 `creates`/`changed_when` 같은 옵션으로 구현한다.
+여기서 눈여겨볼 건 `creates: /etc/kubernetes/admin.conf`다. Ansible 태스크는 기본적으로 **멱등성**(idempotency)을 지향한다 — 같은 플레이북을 몇 번을 다시 실행해도 결과가 같아야 한다. `admin.conf`가 이미 있으면(=이미 초기화됐으면) `kubeadm init`을 다시 실행하지 않는다. `swapoff -a`처럼 그 자체로 멱등하지 않은 명령은 `changed_when`이나 조건을 걸어 반복 실행 시에도 안전하게 만든다. Terraform이 State 파일로 "지금 상태 vs 선언된 상태"를 비교해 멱등성을 보장하는 것과 같은 목표를, Ansible은 각 태스크 단위의 조건과 `creates`/`changed_when` 같은 옵션으로 구현한다.
 
 ## Ansible은 파드를 직접 다루지 않는다
 
@@ -124,7 +124,7 @@ Ansible은 두 가지로 구성된다. **인벤토리(inventory)**는 "어떤 �
       # 전부 K8s 컨트롤러의 일이다.
 ```
 
-즉 Ansible과 K8s의 관계는 "Ansible이 파드를 다룬다"가 아니라, **"Ansible이 K8s API에 리소스 생성을 요청하고, K8s가 그 리소스를 실제로 실행 상태로 만든다"**는 위임 구조다.
+즉 Ansible과 K8s의 관계는 "Ansible이 파드를 다룬다"가 아니라, "**Ansible이 K8s API에 리소스 생성을 요청하고, K8s가 그 리소스를 실제로 실행 상태로 만든다**"는 위임 구조다.
 
 ## Terraform vs Ansible 한눈에 비교
 

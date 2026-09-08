@@ -3,11 +3,36 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { BLOG_CATEGORIES } from '@/data/blog';
 import type { BlogCategory, BlogPost } from '@/data/blog';
+import { Icon } from '@/components/phone/Icon';
 import { Nav } from './Nav';
 import { Footer } from './ContactSection';
 import { useReveal, useTheme } from './hooks';
 
 type FilterKey = 'all' | BlogCategory;
+
+// 한글 기술 글 기준 대략적인 체감 속도(분당 500자)로 어림한 읽기 시간
+function readMinutes(content: string) {
+  return Math.max(1, Math.round(content.length / 500));
+}
+
+// 대표 시리즈 카드는 골라 읽을 수 있게 요약까지, 일반 목록 카드는 제목 위주로 간결하게
+function BlogCard({ post, step }: { post: BlogPost; step?: number }) {
+  const cat = BLOG_CATEGORIES.find(c => c.key === post.category);
+  return (
+    <Link href={`/blog/${post.id}`} className={step ? 'blog-card blog-featured-card' : 'blog-card'}>
+      <div className="blog-card-meta">
+        <span>
+          {step && <span className="blog-featured-step">{step}</span>}
+          {cat && <span className="blog-cat-tag">{cat.label}</span>}
+        </span>
+        <span className="blog-card-read">{readMinutes(post.content)}분 읽기</span>
+      </div>
+      <h3 className="blog-card-title">{post.title}</h3>
+      {step && <p className="blog-card-excerpt">{post.excerpt}</p>}
+      <span className="blog-card-foot">읽어보기 <Icon name="arrow" size={14} stroke={2.4} /></span>
+    </Link>
+  );
+}
 
 export function BlogListPage({ posts }: { posts: BlogPost[] }) {
   const [theme, toggleTheme] = useTheme();
@@ -61,17 +86,9 @@ export function BlogListPage({ posts }: { posts: BlogPost[] }) {
               <div className="blog-featured reveal">
                 <div className="blog-featured-label">대표 시리즈 — EFK 관측 플랫폼에서 SRE까지</div>
                 <div className="blog-featured-grid">
-                  {featured.map((post, i) => {
-                    const cat = BLOG_CATEGORIES.find(c => c.key === post.category);
-                    return (
-                      <Link key={post.id} href={`/blog/${post.id}`} className="blog-card blog-featured-card">
-                        <span className="blog-featured-step">{i + 1}</span>
-                        {cat && <span className="blog-cat-tag">{cat.label}</span>}
-                        <h3 className="blog-card-title">{post.title}</h3>
-                        <p className="blog-card-excerpt">{post.excerpt}</p>
-                      </Link>
-                    );
-                  })}
+                  {featured.map((post, i) => (
+                    <BlogCard key={post.id} post={post} step={i + 1} />
+                  ))}
                 </div>
               </div>
             )}
@@ -84,16 +101,9 @@ export function BlogListPage({ posts }: { posts: BlogPost[] }) {
               </div>
             ) : (
               <div className="blog-grid">
-                {shown.map(post => {
-                  const cat = BLOG_CATEGORIES.find(c => c.key === post.category);
-                  return (
-                    <Link key={post.id} href={`/blog/${post.id}`} className="blog-card">
-                      {cat && <span className="blog-cat-tag">{cat.label}</span>}
-                      <h3 className="blog-card-title">{post.title}</h3>
-                      <p className="blog-card-excerpt">{post.excerpt}</p>
-                    </Link>
-                  );
-                })}
+                {shown.map(post => (
+                  <BlogCard key={post.id} post={post} />
+                ))}
               </div>
             )}
           </div>

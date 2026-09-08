@@ -51,7 +51,7 @@ result = app.invoke({"messages": [user_message]})
 
 트레이싱이 "무슨 일이 일어났는가"를 보여준다면, 평가(Evaluation)는 "그 결과가 괜찮은가"를 판단하는 영역이다. 이게 전통적인 소프트웨어 테스트와 근본적으로 다른 지점이 있다.
 
-일반적인 단위 테스트는 `assert result == expected`처럼 정답이 하나로 고정돼 있다. 그런데 LLM이 생성한 답변은 표현이 매번 달라질 수 있어서, 문자열이 정확히 같은지 비교하는 방식으로는 "틀렸다"고 잘못 판정하는 경우가 대부분이다. 그래서 LangSmith의 평가는 보통 **LLM 자신에게 판단을 맡기는 방식(LLM-as-judge)**을 쓴다.
+일반적인 단위 테스트는 `assert result == expected`처럼 정답이 하나로 고정돼 있다. 그런데 LLM이 생성한 답변은 표현이 매번 달라질 수 있어서, 문자열이 정확히 같은지 비교하는 방식으로는 "틀렸다"고 잘못 판정하는 경우가 대부분이다. 그래서 LangSmith의 평가는 보통 **LLM 자신에게 판단을 맡기는 방식**(LLM-as-judge)을 쓴다.
 
 ```python
 from langsmith.evaluation import evaluate
