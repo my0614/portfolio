@@ -1,7 +1,8 @@
 ---
 title: "KEDA와 Karpenter — 큐가 쌓이면 파드가 늘고, 파드가 밀리면 노드가 생긴다"
-category: mlops
+category: infra
 order: -35
+featured: true
 excerpt: "HPA는 CPU·메모리 기준이라 0으로 못 줄이고 큐 길이 같은 이벤트에 직접 반응하지 못합니다. KEDA가 이벤트 소스(RabbitMQ 큐 등)를 보고 파드를 0↔N으로 조절하고, Karpenter가 그렇게 늘어난 파드에 맞춰 노드를 즉석에서 프로비저닝하는 구조를, RabbitMQ 기반 inference-worker를 예로 정리합니다."
 ---
 

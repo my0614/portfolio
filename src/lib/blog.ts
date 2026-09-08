@@ -14,6 +14,7 @@ function readPost(id: string): BlogPost {
     category: data.category,
     excerpt: data.excerpt,
     order: data.order ?? 0,
+    featured: data.featured ?? false,
     content,
   };
 }

@@ -1,6 +1,6 @@
 ---
 title: "Harbor + Trivy로 취약한 이미지의 Pull 자체를 막아본 이야기"
-category: mlops
+category: security
 order: -21
 excerpt: "Harbor와 Trivy를 연동해 취약점 있는 이미지의 Pull을 차단하는 정책을 구성하고, Docker buildx의 attestation이 만드는 manifest list가 그 정책을 실제로는 우회한다는 걸 발견해 고친 과정, Jenkins CI에 스캔 완료를 폴링해 연동한 방법까지 정리합니다."
 ---

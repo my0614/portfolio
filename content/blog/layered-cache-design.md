@@ -1,6 +1,6 @@
 ---
 title: "캐시를 세 겹으로 나눴다"
-category: mlops
+category: infra
 date: "2026-07-16"
 order: 0
 excerpt: "LLM 호출·Redis·영구 DB를 원본까지의 거리로 나눈 L1/L2/L3 캐시 설계와, 계층을 나눠도 원본 로직이 여러 진입점에 흩어져 있으면 반쪽짜리라는 걸 깨달은 과정을 코드와 함께 정리합니다."

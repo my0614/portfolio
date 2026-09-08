@@ -1,7 +1,9 @@
-export type BlogCategory = "mlops" | "vision" | "llm" | "study";
+export type BlogCategory = "infra" | "security" | "mlops" | "vision" | "llm" | "study";
 
 export const BLOG_CATEGORIES: { key: BlogCategory; label: string }[] = [
-  { key: "mlops", label: "MLOps · 인프라" },
+  { key: "infra", label: "인프라" },
+  { key: "security", label: "보안" },
+  { key: "mlops", label: "MLOps" },
   { key: "vision", label: "Computer Vision" },
   { key: "llm", label: "LLM · RAG" },
   { key: "study", label: "스터디" },
@@ -13,5 +15,6 @@ export type BlogPost = {
   category: BlogCategory;
   excerpt: string;
   order: number;
+  featured: boolean;
   content: string;
 };

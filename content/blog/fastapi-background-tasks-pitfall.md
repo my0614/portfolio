@@ -1,6 +1,6 @@
 ---
 title: "반찬 추천 한 달치가 왜 매번 4분 넘게 걸렸을까"
-category: mlops
+category: infra
 order: -31
 excerpt: "FastAPI BackgroundTasks를 반복문 안에서 여러 번 호출했더니 5주치 백그라운드 작업이 병렬이 아니라 순차로 돌고 있었다. Starlette 소스를 열어 원인을 확인하고, asyncio.gather로 묶어 4분 25초를 62초로 줄인 과정을 정리합니다."
 ---

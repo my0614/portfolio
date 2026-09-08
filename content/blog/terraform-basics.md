@@ -1,6 +1,6 @@
 ---
 title: "IaC란 무엇이고, 왜 Terraform을 쓰는가"
-category: mlops
+category: infra
 order: -12
 excerpt: "수동으로 인프라를 만들 때 생기는 문제에서 출발해 IaC(Infrastructure as Code)의 개념, Terraform이 선언적 IaC 도구로서 갖는 특징과 실제 사용 이유, 그리고 init/plan/apply 워크플로우와 기본 코드 예제까지 정리합니다."
 ---

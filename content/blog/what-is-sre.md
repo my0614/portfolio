@@ -1,7 +1,8 @@
 ---
 title: "SRE란 무엇인가 — 왜 필요한가"
-category: mlops
+category: infra
 order: -37
+featured: true
 excerpt: "EKS 관측 플랫폼, KEDA/Karpenter 오토스케일링, 장애 대응 같은 걸 만들다 보면 \"이거 결국 SRE 아니야?\"라는 질문에 닿습니다. SRE가 정확히 무엇이고, 왜 전통적인 Dev/Ops 구조로는 부족해서 등장했는지, Google SRE 책의 정의를 기준으로 정리합니다."
 ---
 

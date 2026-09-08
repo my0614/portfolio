@@ -1,7 +1,8 @@
 ---
 title: "EKS 2개로 관측 플랫폼 만들기 — Terraform, Cilium, EFK, Prometheus, ArgoCD"
-category: mlops
+category: infra
 order: -34
+featured: true
 excerpt: "dev 클러스터의 로그·지표를 별도 ops 클러스터로 모으는 hub-and-spoke 관측 플랫폼을 Terraform으로 처음부터 만들면서 겪은 것들. Cilium overlay가 EKS admission webhook을 깨뜨린 이유, LB Controller webhook 순서 문제, ArgoCD의 Synced≠Healthy, 그리고 finalizer가 teardown을 막는 지옥까지 삽질 위주로 정리합니다."
 ---
 

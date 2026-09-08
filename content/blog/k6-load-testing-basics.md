@@ -1,6 +1,6 @@
 ---
-title: "k6로 부하테스트는 어떻게 설계하고 읽는가"
-category: mlops
+title: "평소엔 멀쩡하던 API가 왜 무너지는가 — k6 부하테스트 설계와 지표 읽기"
+category: infra
 order: -27
 excerpt: "부하테스트 도구로 k6를 선택하는 이유, VU·iteration·executor 같은 핵심 개념, checks와 thresholds의 차이, 그리고 http_req_duration p95 같은 지표를 어떻게 읽고 CI에 붙이는지 정리합니다."
 ---

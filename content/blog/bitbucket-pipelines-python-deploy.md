@@ -1,6 +1,6 @@
 ---
 title: "Bitbucket Pipelines로 Python 배치 프로젝트 배포 자동화하기"
-category: mlops
+category: infra
 order: -13
 excerpt: "핫딜 자동화 프로젝트의 반복적인 수동 배포 문제를 Bitbucket Pipelines 3단계(검증-빌드-배포)와 AWS S3, CodeDeploy 조합으로 자동화한 기록입니다. 스텝 간 컨테이너 격리, artifacts/caches, trigger: manual로 배포 시점을 분리한 이유, appspec.yml과의 책임 분리까지 정리합니다."
 ---

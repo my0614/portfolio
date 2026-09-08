@@ -1,6 +1,6 @@
 ---
-title: "Jenkins는 CI/CD 파이프라인을 어떻게 코드로 관리하나"
-category: mlops
+title: "클릭으로 만든 파이프라인은 재현이 안 된다 — Jenkinsfile로 코드화하기"
+category: infra
 order: -11
 excerpt: "Jenkins의 Controller-Agent 구조, Jenkinsfile로 파이프라인을 코드화하는 방식, Webhook과 Polling 트리거의 차이를 정리합니다."
 ---

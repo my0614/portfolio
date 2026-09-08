@@ -1,6 +1,6 @@
 ---
 title: "ALB와 NLB는 어디서 갈리는가"
-category: mlops
+category: infra
 order: -22
 excerpt: "L7 로드밸런싱과 L4 로드밸런싱이 각각 무엇을 책임지고 무엇을 포기하는지, 그리고 그 개념의 AWS 구현체인 ALB와 NLB가 어디서 갈리는지 비교하고, VPC 두 개를 Peering으로 붙인 관측 플랫폼에서 dev→ops 트래픽을 왜 ALB가 아니라 내부 NLB로 연결했는지 실제 Terraform 코드 한 조각과 함께 정리합니다."
 ---

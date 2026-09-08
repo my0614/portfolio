@@ -1,6 +1,6 @@
 ---
-title: "Azure Web App과 Container App은 무엇이 다른가"
-category: mlops
+title: "Azure에 컨테이너를 올릴 때 Web App과 Container App, 뭘 골라야 할까"
+category: infra
 order: -29
 excerpt: "Web App(App Service)은 ACR webhook으로 자동 재배포되지만, Container App은 리비전 기반이라 이미지를 한 번 수동으로 넣어두면 이후 :latest가 갱신돼도 새 리비전을 만들지 않습니다. 두 배포 모델이 정확히 어떻게 다른지, 그리고 Container App에 실제로 자동 배포를 붙이는 방법을 정리합니다."
 ---

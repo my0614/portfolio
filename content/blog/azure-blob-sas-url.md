@@ -1,6 +1,6 @@
 ---
-title: "SAS URL이란 무엇이고, 계정 키 대신 왜 써야 할까"
-category: mlops
+title: "계정 키 하나 유출되면 스토리지 전체가 뚫린다 — SAS URL로 권한 좁히기"
+category: security
 order: -32
 excerpt: "Azure Blob Storage의 SAS URL이 계정 키와 어떻게 다르고 어떤 원리로 접근을 제한하는지, 그리고 외부 팀이 운영하는 GPU 추론 서버에 사진을 넘겨야 하는 상황에서 왜 계정 키 대신 이 방식을 택했는지 정리합니다."
 ---

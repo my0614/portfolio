@@ -1,6 +1,6 @@
 ---
 title: "Kafka vs RabbitMQ vs Redis: 셋 다 '메시지를 넘긴다'는데 뭐가 다른가"
-category: mlops
+category: infra
 order: -17
 excerpt: "Kafka·RabbitMQ·Redis는 모두 서비스 사이에서 메시지를 주고받는 데 쓰이지만, 저장 모델과 전달 보장 방식이 근본적으로 다릅니다. 로그 기반 vs 브로커 기반 vs 인메모리라는 설계 차이에서 출발해, 처리량·순서 보장·재생 가능 여부를 비교하고 실제로 어떤 상황에 무엇을 골라야 하는지 코드와 함께 정리합니다."
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes 관측 스택: Prometheus·Loki·Grafana로 장애를 어떻게 보고 대응하나"
-category: mlops
+category: infra
 order: -16
 excerpt: "파드가 죽으면 로그도 같이 사라지는 Kubernetes 환경에서 왜 별도의 관측(Observability) 스택이 필요한지부터, Prometheus·Loki·Grafana·Alertmanager가 각각 무엇을 책임지는지, 그리고 실제 장애 대응 시나리오를 코드/쿼리 예제와 함께 정리합니다."
 ---

@@ -18,6 +18,9 @@ export function BlogListPage({ posts }: { posts: BlogPost[] }) {
   const shown = posts
     .filter(p => filter === 'all' ? true : p.category === filter)
     .filter(p => q === '' ? true : (p.title + p.excerpt + p.content).toLowerCase().includes(q));
+  // posts is sorted by order ascending (newest first) — reverse so the series reads oldest → newest
+  const featured = posts.filter(p => p.featured).slice().reverse();
+  const showFeatured = filter === 'all' && q === '' && featured.length > 0;
 
   return (
     <>
@@ -53,6 +56,25 @@ export function BlogListPage({ posts }: { posts: BlogPost[] }) {
                 aria-label="블로그 글 검색"
               />
             </div>
+
+            {showFeatured && (
+              <div className="blog-featured reveal">
+                <div className="blog-featured-label">대표 시리즈 — EFK 관측 플랫폼에서 SRE까지</div>
+                <div className="blog-featured-grid">
+                  {featured.map((post, i) => {
+                    const cat = BLOG_CATEGORIES.find(c => c.key === post.category);
+                    return (
+                      <Link key={post.id} href={`/blog/${post.id}`} className="blog-card blog-featured-card">
+                        <span className="blog-featured-step">{i + 1}</span>
+                        {cat && <span className="blog-cat-tag">{cat.label}</span>}
+                        <h3 className="blog-card-title">{post.title}</h3>
+                        <p className="blog-card-excerpt">{post.excerpt}</p>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {shown.length === 0 ? (
               <div className="blog-empty reveal">

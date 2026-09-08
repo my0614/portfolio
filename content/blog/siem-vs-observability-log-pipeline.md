@@ -1,7 +1,8 @@
 ---
 title: "로그는 이미 모으고 있는데, 그럼 SIEM은 뭐가 다른가"
-category: mlops
+category: security
 order: -36
+featured: true
 excerpt: "fluent-bit → Elasticsearch → Kibana로 관측(Observability) 스택을 만들고 나면 \"이거 SIEM이랑 뭐가 달라?\"라는 질문을 받게 됩니다. 둘 다 로그를 모으지만 목적, 데이터 모델, 보존 정책, 그 위에 얹는 로직이 다릅니다. SIEM이 실제로 하는 일(수집·정규화·상관분석·탐지·대응)을 정리하고, 이미 있는 EFK 스택에 최소한의 SIEM 기능을 얹는다면 어디를 손대야 하는지, Sigma 탐지 규칙 예시와 함께 남깁니다."
 ---
 

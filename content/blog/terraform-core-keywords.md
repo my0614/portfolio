@@ -1,6 +1,6 @@
 ---
 title: "테라폼 핵심 키워드 6가지: resource, provider, variable, output, module, backend"
-category: mlops
+category: infra
 order: -14
 excerpt: "Terraform HCL을 이루는 6가지 핵심 블록 — resource, provider, variable, output, module, backend — 을 각각 무엇을 위한 것이고 왜 필요한지 코드 예제와 함께 정리하고, 마지막엔 하나의 예제로 전부 이어 붙여 봅니다."
 ---

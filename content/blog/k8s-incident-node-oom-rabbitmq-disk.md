@@ -1,6 +1,6 @@
 ---
 title: "K8s에서 자주 만나는 장애 4가지: 노드 다운, OOMKilled, RabbitMQ, 디스크풀"
-category: mlops
+category: infra
 order: -19
 excerpt: "노드가 죽고, 파드가 OOMKilled로 재시작되고, RabbitMQ가 막히고, 디스크가 꽉 차는 상황은 원인과 증상이 서로 다르다. 각 장애가 왜 발생하고 어떻게 감지·진단·대응하는지를 정리하고, 실제 클러스터에 장애를 주입해 실측한 카오스 엔지니어링 실험 결과로 검증한다."
 ---

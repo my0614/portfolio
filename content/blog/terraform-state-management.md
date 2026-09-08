@@ -1,6 +1,6 @@
 ---
 title: "테라폼 State는 왜 신경 써서 관리해야 하나"
-category: mlops
+category: infra
 order: -10
 excerpt: "Terraform이 State 파일로 실제 인프라를 추적하는 이유, 로컬 State가 팀 작업에서 깨지는 지점, 그리고 원격 백엔드와 State Locking으로 이를 해결하는 방법을 정리합니다."
 ---

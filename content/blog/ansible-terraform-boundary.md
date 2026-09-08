@@ -1,6 +1,6 @@
 ---
 title: "Terraform과 Ansible은 어디서 역할이 나뉘는가"
-category: mlops
+category: infra
 order: -18
 excerpt: "Terraform으로 EC2를 띄운 뒤 그 위에 Kubernetes 클러스터를 구성하려면 결국 Ansible이 필요해집니다. Terraform이 '클라우드가 뭘 아는가'를 담당한다면 Ansible은 '그 서버들이 뭘 하고 있는가'를 담당한다는 경계선을 기준으로, kubeadm 클러스터 구성 플레이북과 파드를 직접 다루지 않는다는 점까지 코드와 함께 정리합니다."
 ---

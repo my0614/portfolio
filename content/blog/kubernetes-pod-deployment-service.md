@@ -1,6 +1,6 @@
 ---
-title: "쿠버네티스 Pod, Deployment, Service는 각각 무엇이 다른가"
-category: mlops
+title: "쿠버네티스를 처음 배울 때 가장 헷갈리는 세 계층 — Pod, Deployment, Service"
+category: infra
 order: -6
 excerpt: "Pod·Deployment·Service가 각각 어떤 문제를 책임지는지, 무엇을 관리하고 무엇을 관리하지 않는지 차이를 정리합니다."
 ---

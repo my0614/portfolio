@@ -1,6 +1,6 @@
 ---
-title: "RabbitMQ는 메시지를 어떻게 안전하게 넘기나"
-category: mlops
+title: "메시지가 사라지거나 두 번 처리되면 안 될 때 — RabbitMQ 기본기"
+category: infra
 order: -15
 excerpt: "동기 호출이 시스템을 결합시키는 문제에서 출발해, RabbitMQ의 Producer-Exchange-Queue-Consumer 구조, 4가지 Exchange 타입, Redis 큐와의 차이, 그리고 실제 라벨링 작업 큐에 붙인다면 어떤 모습이 될지 시나리오까지 코드 예제와 함께 정리합니다."
 ---
