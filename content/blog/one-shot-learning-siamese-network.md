@@ -1,7 +1,6 @@
 ---
 title: "Zero-shot, One-shot, Few-shot으로 문제를 나눴다"
 category: study
-date: "2026-07-18"
 order: -1
 excerpt: "클래스당 예시를 몇 개 확보할 수 있는가로 문제를 나누고, Siamese Network와 에피소드 학습으로 '분류' 대신 '비교'를 학습하는 방식을 코드와 함께 정리합니다."
 ---

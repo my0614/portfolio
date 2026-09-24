@@ -1,7 +1,6 @@
 ---
 title: "ROS에서 RGB-Depth 프레임 매칭과 픽셀 → 실거리 변환 구현하기"
 category: vision
-date: "2026-07-16"
 order: 1
 excerpt: "드론 RGB-D 카메라에서 RGB·Depth 프레임을 동적 slop으로 동기화하고, 픽셀 좌표를 핀홀 카메라 모델로 실거리·드론 좌표계로 변환하는 과정과 검증 과정에서 짚어본 의문점을 코드와 함께 정리합니다."
 ---

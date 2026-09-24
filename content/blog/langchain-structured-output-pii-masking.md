@@ -1,7 +1,6 @@
 ---
 title: "LangChain Structured Output으로 개인정보 마스킹 직접 구현해보기"
 category: llm
-date: "2026-07-16"
 order: 3
 excerpt: "부부·연인 상담 커뮤니티 글을 저장하기 전 개인정보를 가리려고 LangChain structured output으로 직접 구현해본 과정과, 두 겹의 폴백·한계를 코드와 함께 정리합니다."
 ---

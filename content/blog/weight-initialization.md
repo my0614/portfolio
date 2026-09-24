@@ -1,7 +1,6 @@
 ---
 title: "딥러닝 스터디 — Weight Initialization"
 category: study
-date: "2026-07-19"
 order: -2
 excerpt: "가중치를 어떻게 초기화하느냐에 따라 학습이 시작되기도 전에 activation이 사라지거나 폭발할 수 있다는 것을, Xavier·He 초기화를 직접 비교한 실험으로 확인하고 정리합니다."
 ---

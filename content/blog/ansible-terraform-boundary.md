@@ -25,7 +25,7 @@ flowchart LR
         SG["보안그룹/서브넷"] --> EC2["EC2 인스턴스"]
         S3["S3 backend (State)"] -.추적.-> EC2
     end
-    EC2 -->|SSH inventory| AN["Ansible"]
+    EC2 -->|SSH inventory| AN
     subgraph AN["Ansible"]
         direction TB
         OS["OS 세팅: swap off, containerd, kubelet"] --> INIT["kubeadm init/join"]

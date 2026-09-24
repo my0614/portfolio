@@ -1,7 +1,6 @@
 ---
 title: "딥러닝 스터디 — Cost Function과 Activation Function"
 category: study
-date: "2026-07-16"
 order: 4
 excerpt: "MSE·MAE·Cross Entropy 등 손실 함수와 Sigmoid·ReLU·GELU 등 활성화 함수를 정리하고, Loss와 Cost의 차이·Gradient Descent가 필요한 이유까지 짚어봅니다."
 ---
@@ -10,10 +9,10 @@ excerpt: "MSE·MAE·Cross Entropy 등 손실 함수와 Sigmoid·ReLU·GELU 등 �
 
 데이터의 실제값과 예측값 사이의 오차를 줄이기 위한 함수. Cost Function이 없으면 모델이 더 나은 방향으로 학습을 진행할 수 없다.
 
-- **MSE (Mean Squared Error)** — 오차값에 제곱을 더해 오차를 더 크게 벌리도록 만든다. 회귀 문제에서 많이 사용된다.
+- **MSE (Mean Squared Error)** — 오차를 제곱하여 평균 낸 값. 오차가 클수록 그 값이 더 크게 부풀려져 반영된다. 회귀 문제에서 많이 사용된다.
 - **MAE (Mean Absolute Error)** — 오차를 절대값으로 계산해 이상치에 덜 민감하고 직관적이다.
 - **Binary Cross Entropy** — 이진 분류에서 많이 사용되고, 오차에 더 큰 패널티를 주는 형식이다.
-- **Cross Entropy** — 다중 클래스 분류에서 많이 사용하고, YOLO·ResNet·CNN 같은 모델에서 자주 쓰인다.
+- **Cross Entropy** — 다중 클래스 분류에서 많이 사용되는 손실 함수로, YOLO·ResNet 같은 분류·검출 모델 학습에 자주 쓰인다.
 
 ```
 Cost Function과 Loss Function 차이

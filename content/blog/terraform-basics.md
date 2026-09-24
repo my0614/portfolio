@@ -63,7 +63,7 @@ flowchart TD
     RF["refresh: 실제 인프라 현재 상태 조회"] --> DIFF
     GRAPH --> DIFF["목표 상태(코드) vs 현재 상태(State·실제 인프라) 비교"]
     DIFF --> PLAN["추가·변경·삭제 계획 생성"]
-    PLAN --> EXEC["그래프 순서대로 실행\n(의존관계 없는 리소스는 병렬 처리)"]
+    PLAN --> EXEC["그래프 순서대로 실행<br/>(의존관계 없는 리소스는 병렬 처리)"]
     EXEC --> API["Provider → 클라우드 API 호출"]
     API --> INFRA[("실제 인프라에 반영")]
     API --> ST2[("State 파일 갱신")]

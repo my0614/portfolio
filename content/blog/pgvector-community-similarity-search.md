@@ -1,7 +1,6 @@
 ---
 title: "PGVector로 커뮤니티 글 유사 검색(RAG의 Retrieval) 직접 구현해보기"
 category: llm
-date: "2026-07-16"
 order: 2
 excerpt: "태그 검색의 한계를 pgvector 기반 임베딩 유사도 검색으로 풀어본 과정 — 동기/비동기 드라이버 충돌, 실패 허용 인덱싱, 자기 자신 제외 처리까지 코드와 함께 정리합니다."
 ---
